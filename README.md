@@ -5,9 +5,9 @@ Awesome project description
 
 ## Team
 
-Product Owner: 
-Scrum Master: 
-Development Team Members: 
+Product Owner: Pranay Sangani
+Scrum Master: Kevin Primat
+Development Team Members: Tole Liberman, Scott Rice, Richard VanBreemen
 
 ## Table of Contents
 
