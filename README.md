@@ -2,6 +2,7 @@
 
 ## Project Name
 Awesome project description
+
 ## Team
 
 Product Owner: 
