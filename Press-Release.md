@@ -1,34 +1,26 @@
 # strangeLightning
-## Heading
+Check out the name [brainstorming page](https://github.com/StrangeLightning/strangeLightning/wiki/Name-brainstorming)
 
-Name the product in a way the reader (i.e. your target customers) will understand.
-
-### Sub-Heading
-
-Describe who the market for the product is and what benefit they get. One sentence only underneath the title. 
+## Who this is for
+The product is for all consumers, who benefit from a visualized product before purchase.
 
 ## Summary
-
-Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good. 
+Intuitive 3D shopping experience.
 
 ## Problem
-
-Describe the problem your product solves. 
+Modern shopping websites have taken all the fun out of the process. As technology evolves,
+a fun, interative online presence is needed to recreate the awesome mall experience.
 
 ## Solution
-
-Describe how your product elegantly solves the problem. 
-
+Cloud Mall allows users to conveniently browse a large selection of online products, visualized in 3D, 
+and seemlessly integrated with newly recommended products, to create a revolutionary shopping experience.
 
 ## Quote from You
-
-A quote from a spokesperson in your company. ""
-How to Get Started
+"You will love the shopping experience as much as the product."
 
 ## Describe how easy it is to get started.
-Customer Quote
+"__WEBSITE NAME HERE__ provides an intuitive and fun way to shop for my favorite products."
 
-Provide a quote from a hypothetical customer that describes how they experienced the benefit. ""
-Closing and Call to Action
+## Enjoy the future of online shopping today 
 
-Wrap it up and give pointers where the reader should go next. 
+To get started, visit __URL__HERE__!
