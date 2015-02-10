@@ -19,8 +19,8 @@ and seemlessly integrated with newly recommended products, to create a revolutio
 "You will love the shopping experience as much as the product."
 
 ## Describe how easy it is to get started.
-"__WEBSITE NAME HERE__ provides an intuitive and fun way to shop for my favorite products."
+"_WEBSITE NAME HERE_ provides an intuitive and fun way to shop for my favorite products."
 
 ## Enjoy the future of online shopping today 
 
-To get started, visit __URL__HERE__!
+To get started, visit _URL_HERE_!
