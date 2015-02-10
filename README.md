@@ -1,7 +1,7 @@
 # strangeLightning
 ## Heading
 
-Name the product in a way the reader (i.e. your target customers) will understand. MathForLife
+Name the product in a way the reader (i.e. your target customers) will understand.
 
 ### Sub-Heading
 
