@@ -1,4 +1,4 @@
-// Generated on 2015-02-10 using generator-angular-fullstack 2.0.13
+// Generated on 2015-02-11 using generator-angular-fullstack 2.0.13
 'use strict';
 
 module.exports = function (grunt) {
@@ -300,7 +300,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       options: {
         // This should be the name of your apps angular module
-        module: 'thesisApp',
+        module: 'strangeLightningApp',
         htmlmin: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,
