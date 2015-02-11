@@ -1,13 +1,18 @@
 # strangeLightning
 
-## Project Name
+## <insertProjectName>
 Awesome project description
 
 ## Team
 
-Product Owner: Pranay Sangani
-Scrum Master: Kevin Primat
-Development Team Members: Tole Liberman, Scott Rice, Richard VanBreemen
+Product Owner:
+* Pranay Sangani
+Scrum Master: 
+* Kevin Primat
+Development Team Members:
+* Tole Liberman
+* Scott Rice
+* Richard VanBreemen
 
 ## Table of Contents
 
@@ -36,13 +41,15 @@ Installing Dependencies
 
 From within the root directory:
 
+```BASH
 sudo npm install -g bower
 npm install
 bower install
+```
 Roadmap
 
 View the project roadmap here
 
 Contributing
 
-See CONTRIBUTING.md for contribution guidelines.
+See [CONTRIBUTING.md](#CONTRIBUTING.md) for contribution guidelines.
