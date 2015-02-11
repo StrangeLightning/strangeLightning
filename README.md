@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/strangelightning/strangelightning.png?label=ready&title=Ready)](https://waffle.io/strangelightning/strangelightning)
 # strangeLightning
 
 ## <insertProjectName>
