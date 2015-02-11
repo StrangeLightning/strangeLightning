@@ -1,7 +1,8 @@
 # strangeLightning
 
 ## <insertProjectName>
-Awesome project description
+Intuitive 3D shopping experience.
+TODO: Add a more extensive project description.
 
 ## Team
 
