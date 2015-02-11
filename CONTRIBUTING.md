@@ -71,7 +71,7 @@
 
 1. Update your local master.
 
-      `$ git pull upstream dev`
+      `$ git pull upstream master`
 
       _if pull requests have been accepted to development while yours
       was pending, please repeat step 5 to sync your fork with fire-devil developent branch_
