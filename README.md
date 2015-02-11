@@ -12,9 +12,9 @@ Scrum Master:
 * Kevin Primat
 
 Development Team Members:
-* Tole Liberman
-* Scott Rice
-* Richard VanBreemen
+* Angular Master: Tole Liberman
+* Search Master: Scott Rice
+* 3D Master: Richard VanBreemen
 
 ## Table of Contents
 
