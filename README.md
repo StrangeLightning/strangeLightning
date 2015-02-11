@@ -1,4 +1,5 @@
 # strangeLightning
+[![Stories in Ready](https://badge.waffle.io/strangelightning/strangelightning.svg?label=ready&title=Ready)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning)
 
 ## <insertProjectName>
 Intuitive 3D shopping experience.
