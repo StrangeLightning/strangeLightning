@@ -3,7 +3,7 @@
 
 ## <insertProjectName>
 Intuitive 3D shopping experience.
-TODO: Add a more extensive project description.
+_TODO: Add a more extensive project description._
 
 ## Team
 
