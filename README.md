@@ -7,8 +7,10 @@ Awesome project description
 
 Product Owner:
 * Pranay Sangani
+
 Scrum Master: 
 * Kevin Primat
+
 Development Team Members:
 * Tole Liberman
 * Scott Rice
