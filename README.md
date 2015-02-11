@@ -51,7 +51,7 @@ bower install
 
 ## Roadmap
 
-View the project roadmap here
+View the project roadmap [here](https://github.com/StrangeLightning/strangeLightning/wiki/Roadmap)
 
 ## Contributing
 
