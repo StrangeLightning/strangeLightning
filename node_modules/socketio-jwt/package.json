@@ -1,0 +1,64 @@
+{
+  "name": "socketio-jwt",
+  "version": "2.3.5",
+  "description": "authenticate socket.io connections using JWTs",
+  "main": "lib/index.js",
+  "keywords": [
+    "socket",
+    "socket.io",
+    "jwt"
+  ],
+  "author": {
+    "name": "José F. Romaniello",
+    "email": "jfromaniello@gmail.com",
+    "url": "http://joseoncode.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/auth0/socketio-jwt.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "jsonwebtoken": "~1.1.1",
+    "xtend": "~2.1.2"
+  },
+  "devDependencies": {
+    "connect": "~2.7.11",
+    "express": "~3.1.2",
+    "mocha": "~1.17.0",
+    "passport-local": "~0.1.6",
+    "request": "~2.19.0",
+    "should": "~1.2.2",
+    "socket.io": "^1.0.4",
+    "socket.io-client": "^1.0.4"
+  },
+  "gitHead": "c7485e3804d7266aa872531b42232bcdfa649393",
+  "bugs": {
+    "url": "https://github.com/auth0/socketio-jwt/issues"
+  },
+  "homepage": "https://github.com/auth0/socketio-jwt",
+  "_id": "socketio-jwt@2.3.5",
+  "_shasum": "6696281459c39fcbbaf50a0587ea49a428b042f8",
+  "_from": "socketio-jwt@^2.0.2",
+  "_npmVersion": "1.4.14",
+  "_npmUser": {
+    "name": "jfromaniello",
+    "email": "jfromaniello@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "jfromaniello",
+      "email": "jfromaniello@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "6696281459c39fcbbaf50a0587ea49a428b042f8",
+    "tarball": "http://registry.npmjs.org/socketio-jwt/-/socketio-jwt-2.3.5.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/socketio-jwt/-/socketio-jwt-2.3.5.tgz",
+  "readme": "ERROR: No README data found!"
+}
