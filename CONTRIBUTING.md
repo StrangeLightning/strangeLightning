@@ -1,111 +1,92 @@
 # Contributing
 
-## General Workflow
+#To Start Working
 
-1. Fork the dev branch of the StrangeLightning repository.
-1. From your personal fork, create a new branch for the specific issue that you are working on
-1. Make commits to your feature branch. If the issue you are working on is logged in our Issues, prefix each commit with the issue number in parenthesis:
-  - "(#1) Fixed [some-issue] with [some feature]."
-1. When you're ready to make a pull request with your new feature or fix, please ensure the following before submitting:
-  - If you are adding a new feature, make sure to have meaningful tests in the feature.spec.js file.
-  - Run 'grunt test' from the command line and make sure all tests are passing.
-  - Follow the style guide, located here: [STYLE-GUIDE.md](STYLE-GUIDE.md).
-  - Include a relevant and meaninful description of your changes, include screen shots if appropriate.
-  - Submit a [pull request][] to the dev branch of StrangeLightning.
-1. Your pull request will be reviewed by two other team members, the first will provide a 'thumbs up' (':+1:') if there isn't any comment, and the second will merge in the request. The point of code reviews is to help keep the codebase clean and of high quality and, equally as important, to help you grow as a programmer. If your code reviewer requests you make a change you don't understand, ask them why.
-1. Fix any issues raised by your code reviewer and push your fixes/changes to the appropriate branch on your personal fork.
-1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
+1. Fork the repo.
 
-## Detailed Workflow
+1. Clone to local computer.
 
-### Fork the repo
+1. Add upstream remote
 
-Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
+   `$ git remote add upstream https://github.com/StrangeLightning/strangeLightning.git`
 
-```
-git remote add upstream https://github.com/StrangeLightning/strangeLightning.git
-```
+1. Checkout the dev branch, if not there already
 
-### Checkout the dev branch, if not there already
+   These commands will help you do this:
 
-These commands will help you do this:
+   ``` bash
 
-``` bash
+   # Creates your branch and brings you there
+   git checkout -b `dev`
+   ```
 
-# Creates your branch and brings you there
-git checkout -b `dev`
-```
+1. Add and commit to your feature branch. (don't push)
 
-### Make commits to your feature branch. 
+   Prefix each commit with the issue number
+    - (#2) Added a new feature
 
-Prefix each commit with the issue number
-  - (#2) Added a new feature
+   `$git add .`
+   `$git commit -m '(#2) short description of changes made'`
 
-#### Commit Message Guidelines
+   #### Commit Message Guidelines
 
-- Commit messages should be written in the present tense; e.g. "Fix continuous
-  integration script".
-- The first line of your commit message should be a brief summary of what the
-  commit changes. Aim for about 70 characters max. Remember: This is a summary,
-  not a detailed description of everything that changed.
-- If you want to explain the commit in more depth, following the first line should
-  be a blank line and then a more detailed description of the commit. This can be
-  as detailed as you want, so dig into details here and keep the first line short.
+   - Commit messages should be written in the present tense; e.g. "(#2) Fix continuous
+    integration script".
+   - The first line of your commit message should be a brief summary of what the
+    commit changes. Aim for about 70 characters max. Remember: This is a summary,
+    not a detailed description of everything that changed.
+   - If you want to explain the commit in more depth, following the first line should
+    be a blank line and then a more detailed description of the commit. This can be
+    as detailed as you want, so dig into details here and keep the first line short.
 
-### Merge upstream changes into your branch
+1. Add upstream commits to feature branch (make sure you are on feature branch).
 
-Once you are done making changes, you can begin the process of getting
-your code merged into the main repo. Step 1 is to merge upstream
-changes to the dev branch into yours by running this command
-from your branch:
+   `$ git pull --rebase upstream dev`
 
-```
-git pull upstream dev
-```
+   _If there is a merge conflict, resolve the conflicts and proceed. Squash all outstanding commits into one._
 
-If there are conflicting changes, git will start yelling at you part way
-through the merging process. Git will pause merging to allow you to sort
-out the conflicts. You do this the same way you solve merge conflicts,
-by checking all of the files git says have been changed in both histories
-and picking the versions you want. Be aware that these changes will show
-up in your pull request, so try and incorporate upstream changes as much
-as possible.
+   `$git --rebase -i HEAD~4 continue`
+   `$git add .`
 
-Once you are done fixing conflicts for a specific commit, run:
+   _After merge conflicts resolves/no conflicts originally._
 
-```
-git commit -m '<YOUR_MESSAGE>'
-```
+   `$git push origin dev`
 
-Once, you'll have entered your message in quotes, the merging process will continue.
-Once you are done fixing all conflicts you should run the existing tests to make sure
-you didn’t break anything, then run your new tests (there are new tests, right?) and
-make sure they work also.
+1. Github Submission
 
-If merging broke anything, fix it, then repeat the above process until
-you get here again and nothing is broken and all the tests pass.
+      Go to GitHub and send pull request to the fire-devil organization branch.
 
-### Make a pull request
+      Please reference in the pull request comment the corresponding issue using the [supported keywords](https://help.github.com/articles/closing-issues-via-commit-messages/).
 
-Make a clear pull request from your fork and branch to the upstream dev
-branch, detailing exactly what changes you made and what feature this
-should add. The clearer your pull request is the faster you can get
-your changes incorporated into this repo.
+      For example: 'This closes #27 and closes #5.'
 
-At least one other person MUST give your changes a code review, and once
-they are satisfied they will merge your changes into upstream. Alternatively,
-they may have some requested changes. You should make more commits to your
-branch to fix these, then follow this process again from merging onwards.
+      At least two other person MUST give your changes a code review, and once
+      they are satisfied they will merge your changes into upstream. Alternatively,
+      they may have some requested changes. You should make more commits to your
+      branch to fix these, then follow this process again from merging onwards.
 
-Once you get back here, make a comment requesting further review and
-someone will look at your code again. If they like it, it will get merged,
-else, just repeat again.
+      Once you get back here, make a comment requesting further review and
+      someone will look at your code again. If they like it, it will get merged,
+      else, just repeat again.
 
-Thanks for contributing!
+      Thanks for contributing!
 
-If your pull request is merged, the changes will be visible automatically at [staging server] (http://staging.ihammer.org)
+1. Update your local master.
 
-### Guidelines
+      `$ git pull upstream dev`
+
+      _if pull requests have been accepted to development while yours
+      was pending, please repeat step 5 to sync your fork with fire-devil developent branch_
+
+      To start working on next feature
+
+1. Go to step 4.
+
+      #References
+
+      http://www.thumbtack.com/engineering/linear-git-history/
+
+### Additional Guidelines
 
 1. Uphold the current code standard:
     - Keep your code [DRY][].
@@ -132,5 +113,3 @@ This is just to help you organize your process
 
 If you follow all of these guidelines and make good changes, you should have
 no problem getting your changes merged in.
-
-
