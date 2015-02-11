@@ -52,4 +52,4 @@ View the project roadmap here
 
 Contributing
 
-See [CONTRIBUTING.md](#CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](https://github.com/StrangeLightning/strangeLightning/blob/master/CONTRIBUTING.md) for contribution guidelines.
