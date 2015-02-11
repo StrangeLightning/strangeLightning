@@ -19,14 +19,14 @@ Development Team Members:
 
 ## Table of Contents
 
-Usage
-Requirements
-Development
-Installing Dependencies
-Tasks
-Team
-Contributing
-Usage
+1. Usage
+1. Requirements
+1. Development
+1. Installing Dependencies
+1. Tasks
+1. Team
+1. Contributing
+1. Usage
 
 Some usage instructions
 Requirements
