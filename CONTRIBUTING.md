@@ -39,7 +39,7 @@
 
 1. Add upstream commits to feature branch (make sure you are on feature branch).
 
-   `$ git pull --rebase upstream dev`
+   `$ git pull --rebase upstream master`
 
    _If there is a merge conflict, resolve the conflicts and proceed. Squash all outstanding commits into one using --rebase -i._
 
