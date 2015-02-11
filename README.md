@@ -30,16 +30,15 @@ Usage
 Some usage instructions
 Requirements
 
-Node 0.10.x
-Redis 2.6.x
-Postgresql 9.1.x
-etc
-etc
-Development
+* Node 0.10.x
+* Redis 2.6.x
+* Postgresql 9.1.x
+* etc
+* etc
 
+## Development
 
-
-Installing Dependencies
+## Installing Dependencies
 
 From within the root directory:
 
@@ -48,10 +47,11 @@ sudo npm install -g bower
 npm install
 bower install
 ```
-Roadmap
+
+## Roadmap
 
 View the project roadmap here
 
-Contributing
+## Contributing
 
 See [CONTRIBUTING.md](https://github.com/StrangeLightning/strangeLightning/blob/master/CONTRIBUTING.md) for contribution guidelines.
