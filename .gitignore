@@ -2,5 +2,9 @@
 .DS_Store
 node_modules
 client/bower_components
+<<<<<<< HEAD
 client/index.html
 
+=======
+server/config/local.env.js
+>>>>>>> c0dbaf25c63646440f81a40bb266393e4dba83d5
