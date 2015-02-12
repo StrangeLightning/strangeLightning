@@ -1,4 +1,6 @@
-
+html, body {
+  height: 100%;
+}
 /**
  * Bootstrap Fonts
  */
