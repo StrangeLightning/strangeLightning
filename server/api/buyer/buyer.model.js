@@ -18,7 +18,6 @@ var BuyerSchema = new Schema({
   views: Array,
   pref: Array,
   data: {}
-
 });
 
 /**
