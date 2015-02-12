@@ -2,3 +2,5 @@
 .DS_Store
 node_modules
 client/bower_components
+client/index.html
+
