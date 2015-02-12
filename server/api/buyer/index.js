@@ -1,4 +1,4 @@
-'use strict';
+git'use strict';
 
 var express = require('express');
 var controller = require('./buyer.controller');
