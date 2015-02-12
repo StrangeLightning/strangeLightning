@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thesisApp')
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($location, $rootScope, $http, User, Vendor, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
       currentUser = User.get();
@@ -70,7 +70,6 @@ angular.module('thesisApp')
             return cb(err);
           }.bind(this)).$promise;
       },
-
       /**
        * Change password
        *
