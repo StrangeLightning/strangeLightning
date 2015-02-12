@@ -44,7 +44,7 @@
 
    _If there is a merge conflict, resolve the conflicts and proceed. Squash all outstanding commits into one using --rebase -i._
 
-   `$git rebase -i HEAD~4 --continue`
+   `$git rebase --continue`
    
    `$git add .`
 
