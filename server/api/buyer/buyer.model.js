@@ -6,25 +6,18 @@ var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var BuyerSchema = new Schema({
-  name: String,
-  email: { type: String, lowercase: true },
-  role: {
-    type: String,
-    default: 'buyer'
-  },
-  hashedPassword: String,
-  provider: String,
-  salt: String,
-  facebook: {},
-  twitter: {},
-  google: {},
-  github: {},
-  isVendor: Boolean,
-  isBuyer: Boolean,
-  ip: Number,
+  age,
   location: String,
-  data: {},
-  buyer: { type: Object}
+  moneySpent: Number,
+  frequency: Number,
+  products: Array,
+  recommendations: Array,
+  likes: Array,
+  gazes: Array,
+  friends: Array,
+  views: Array,
+  pref: Array,
+  data: {}
 
 });
 
