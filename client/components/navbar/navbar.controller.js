@@ -5,7 +5,9 @@ angular.module('thesisApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
-    }];
+    },
+    {'title': 'Showroom',
+      'link': '/showroom'}];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
