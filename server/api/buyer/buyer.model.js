@@ -4,15 +4,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
-var buyerSchema = require('../buyer/buyer.model');
-var vendorSchema = require('../vendor/vendor.model')
 
-var UserSchema = new Schema({
+var BuyerSchema = new Schema({
   name: String,
   email: { type: String, lowercase: true },
   role: {
     type: String,
-    default: 'user'
+    default: 'buyer'
   },
   hashedPassword: String,
   provider: String,
@@ -26,15 +24,14 @@ var UserSchema = new Schema({
   ip: Number,
   location: String,
   data: {},
-  buyer: [buyerSchema],
-  vendor: [vendorSchema]
+  buyer: { type: Object}
 
 });
 
 /**
  * Virtuals
  */
-UserSchema
+BuyerSchema
   .virtual('password')
   .set(function(password) {
     this._password = password;
@@ -46,7 +43,7 @@ UserSchema
   });
 
 // Public profile information
-UserSchema
+BuyerSchema
   .virtual('profile')
   .get(function() {
     return {
@@ -56,7 +53,7 @@ UserSchema
   });
 
 // Non-sensitive info we'll be putting in the token
-UserSchema
+BuyerSchema
   .virtual('token')
   .get(function() {
     return {
@@ -70,7 +67,7 @@ UserSchema
  */
 
 // Validate empty email
-UserSchema
+BuyerSchema
   .path('email')
   .validate(function(email) {
     if (authTypes.indexOf(this.provider) !== -1) return true;
@@ -78,7 +75,7 @@ UserSchema
   }, 'Email cannot be blank');
 
 // Validate empty password
-UserSchema
+BuyerSchema
   .path('hashedPassword')
   .validate(function(hashedPassword) {
     if (authTypes.indexOf(this.provider) !== -1) return true;
@@ -86,14 +83,14 @@ UserSchema
   }, 'Password cannot be blank');
 
 // Validate email is not taken
-UserSchema
+BuyerSchema
   .path('email')
   .validate(function(value, respond) {
     var self = this;
-    this.constructor.findOne({email: value}, function(err, user) {
+    this.constructor.findOne({email: value}, function(err, buyer) {
       if(err) throw err;
-      if(user) {
-        if(self.id === user.id) return respond(true);
+      if(buyer) {
+        if(self.id === buyer.id) return respond(true);
         return respond(false);
       }
       respond(true);
@@ -107,7 +104,7 @@ var validatePresenceOf = function(value) {
 /**
  * Pre-save hook
  */
-UserSchema
+BuyerSchema
   .pre('save', function(next) {
     if (!this.isNew) return next();
 
@@ -120,7 +117,7 @@ UserSchema
 /**
  * Methods
  */
-UserSchema.methods = {
+BuyerSchema.methods = {
   /**
    * Authenticate - check if the passwords are the same
    *
@@ -156,4 +153,4 @@ UserSchema.methods = {
   }
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Buyer', BuyerSchema);
