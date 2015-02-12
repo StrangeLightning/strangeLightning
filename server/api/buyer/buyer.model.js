@@ -6,7 +6,7 @@ var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var BuyerSchema = new Schema({
-  age,
+  age: String,
   location: String,
   moneySpent: Number,
   frequency: Number,
@@ -19,92 +19,6 @@ var BuyerSchema = new Schema({
   pref: Array,
   data: {}
 });
-
-/**
- * Virtuals
- */
-BuyerSchema
-  .virtual('password')
-  .set(function(password) {
-    this._password = password;
-    this.salt = this.makeSalt();
-    this.hashedPassword = this.encryptPassword(password);
-  })
-  .get(function() {
-    return this._password;
-  });
-
-// Public profile information
-BuyerSchema
-  .virtual('profile')
-  .get(function() {
-    return {
-      'name': this.name,
-      'role': this.role
-    };
-  });
-
-// Non-sensitive info we'll be putting in the token
-BuyerSchema
-  .virtual('token')
-  .get(function() {
-    return {
-      '_id': this._id,
-      'role': this.role
-    };
-  });
-
-/**
- * Validations
- */
-
-// Validate empty email
-BuyerSchema
-  .path('email')
-  .validate(function(email) {
-    if (authTypes.indexOf(this.provider) !== -1) return true;
-    return email.length;
-  }, 'Email cannot be blank');
-
-// Validate empty password
-BuyerSchema
-  .path('hashedPassword')
-  .validate(function(hashedPassword) {
-    if (authTypes.indexOf(this.provider) !== -1) return true;
-    return hashedPassword.length;
-  }, 'Password cannot be blank');
-
-// Validate email is not taken
-BuyerSchema
-  .path('email')
-  .validate(function(value, respond) {
-    var self = this;
-    this.constructor.findOne({email: value}, function(err, buyer) {
-      if(err) throw err;
-      if(buyer) {
-        if(self.id === buyer.id) return respond(true);
-        return respond(false);
-      }
-      respond(true);
-    });
-}, 'The specified email address is already in use.');
-
-var validatePresenceOf = function(value) {
-  return value && value.length;
-};
-
-/**
- * Pre-save hook
- */
-BuyerSchema
-  .pre('save', function(next) {
-    if (!this.isNew) return next();
-
-    if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1)
-      next(new Error('Invalid password'));
-    else
-      next();
-  });
 
 /**
  * Methods
