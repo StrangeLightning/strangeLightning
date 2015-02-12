@@ -1,6 +1,6 @@
 'use strict';
 
-var User = require('./user.model');
+var Buyer = require('./buyer.model.js');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -10,66 +10,66 @@ var validationError = function(res, err) {
 };
 
 /**
- * Get list of users
+ * Get list of buyers
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function (err, users) {
+  Buyer.find({}, '-salt -hashedPassword', function (err, buyers) {
     if(err) return res.send(500, err);
-    res.json(200, users);
+    res.json(200, buyers);
   });
 };
 
 /**
- * Creates a new user
+ * Creates a new buyer
  */
 exports.create = function (req, res, next) {
-  var newUser = new User(req.body);
-  newUser.provider = 'local';
-  newUser.role = 'user';
-  newUser.save(function(err, user) {
+  var newBuyer = new Buyer(req.body);
+  newBuyer.provider = 'local';
+  newBuyer.role = 'buyer';
+  newBuyer.save(function(err, buyer) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+    var token = jwt.sign({_id: buyer._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
   });
 };
 
 /**
- * Get a single user
+ * Get a single buyer
  */
 exports.show = function (req, res, next) {
-  var userId = req.params.id;
+  var buyerId = req.params.id;
 
-  User.findById(userId, function (err, user) {
+  Buyer.findById(buyerId, function (err, buyer) {
     if (err) return next(err);
-    if (!user) return res.send(401);
-    res.json(user.profile);
+    if (!buyer) return res.send(401);
+    res.json(buyer.profile);
   });
 };
 
 /**
- * Deletes a user
+ * Deletes a buyer
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err, user) {
+  Buyer.findByIdAndRemove(req.params.id, function(err, buyer) {
     if(err) return res.send(500, err);
     return res.send(204);
   });
 };
 
 /**
- * Change a users password
+ * Change a buyers password
  */
 exports.changePassword = function(req, res, next) {
-  var userId = req.user._id;
+  var buyerId = req.buyer._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
-      user.password = newPass;
-      user.save(function(err) {
+  Buyer.findById(buyerId, function (err, buyer) {
+    if(buyer.authenticate(oldPass)) {
+      buyer.password = newPass;
+      buyer.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
       });
@@ -83,13 +83,13 @@ exports.changePassword = function(req, res, next) {
  * Get my info
  */
 exports.me = function(req, res, next) {
-  var userId = req.user._id;
-  User.findOne({
-    _id: userId
-  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+  var buyerId = req.buyer._id;
+  Buyer.findOne({
+    _id: buyerId
+  }, '-salt -hashedPassword', function(err, buyer) { // don't ever give out the password or salt
     if (err) return next(err);
-    if (!user) return res.json(401);
-    res.json(user);
+    if (!buyer) return res.json(401);
+    res.json(buyer);
   });
 };
 

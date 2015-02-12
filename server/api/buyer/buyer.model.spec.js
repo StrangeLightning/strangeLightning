@@ -2,40 +2,40 @@
 
 var should = require('should');
 var app = require('../../app');
-var User = require('./user.model');
+var Buyer = require('./../buyer/buyer.model.js');
 
-var user = new User({
+var buyer = new Buyer({
   provider: 'local',
-  name: 'Fake User',
+  name: 'Fake Buyer',
   email: 'test@test.com',
   password: 'password'
 });
 
-describe('User Model', function() {
+describe('Buyer Model', function() {
   before(function(done) {
-    // Clear users before testing
-    User.remove().exec().then(function() {
+    // Clear buyers before testing
+    Buyer.remove().exec().then(function() {
       done();
     });
   });
 
   afterEach(function(done) {
-    User.remove().exec().then(function() {
+    Buyer.remove().exec().then(function() {
       done();
     });
   });
 
-  it('should begin with no users', function(done) {
-    User.find({}, function(err, users) {
-      users.should.have.length(0);
+  it('should begin with no buyers', function(done) {
+    Buyer.find({}, function(err, buyers) {
+      buyers.should.have.length(0);
       done();
     });
   });
 
-  it('should fail when saving a duplicate user', function(done) {
-    user.save(function() {
-      var userDup = new User(user);
-      userDup.save(function(err) {
+  it('should fail when saving a duplicate buyer', function(done) {
+    buyer.save(function() {
+      var buyerDup = new Buyer(buyer);
+      buyerDup.save(function(err) {
         should.exist(err);
         done();
       });
@@ -43,18 +43,18 @@ describe('User Model', function() {
   });
 
   it('should fail when saving without an email', function(done) {
-    user.email = '';
-    user.save(function(err) {
+    buyer.email = '';
+    buyer.save(function(err) {
       should.exist(err);
       done();
     });
   });
 
-  it("should authenticate user if password is valid", function() {
-    return user.authenticate('password').should.be.true;
+  it("should authenticate buyer if password is valid", function() {
+    return buyer.authenticate('password').should.be.true;
   });
 
-  it("should not authenticate user if password is invalid", function() {
-    return user.authenticate('blah').should.not.be.true;
+  it("should not authenticate buyer if password is invalid", function() {
+    return buyer.authenticate('blah').should.not.be.true;
   });
 });
