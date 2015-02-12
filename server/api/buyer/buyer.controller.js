@@ -1,6 +1,6 @@
 'use strict';
 
-var Vendor = require('./vendor.model');
+var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -10,66 +10,66 @@ var validationError = function(res, err) {
 };
 
 /**
- * Get list of vendors
+ * Get list of users
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  Vendor.find({}, '-salt -hashedPassword', function (err, vendors) {
+  User.find({}, '-salt -hashedPassword', function (err, users) {
     if(err) return res.send(500, err);
-    res.json(200, vendors);
+    res.json(200, users);
   });
 };
 
 /**
- * Creates a new vendor
+ * Creates a new user
  */
 exports.create = function (req, res, next) {
-  var newVendor = new Vendor(req.body);
-  newVendor.provider = 'local';
-  newVendor.role = 'vendor';
-  newVendor.save(function(err, vendor) {
+  var newUser = new User(req.body);
+  newUser.provider = 'local';
+  newUser.role = 'user';
+  newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: vendor._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
   });
 };
 
 /**
- * Get a single vendor
+ * Get a single user
  */
 exports.show = function (req, res, next) {
-  var vendorId = req.params.id;
+  var userId = req.params.id;
 
-  Vendor.findById(vendorId, function (err, vendor) {
+  User.findById(userId, function (err, user) {
     if (err) return next(err);
-    if (!vendor) return res.send(401);
-    res.json(vendor.profile);
+    if (!user) return res.send(401);
+    res.json(user.profile);
   });
 };
 
 /**
- * Deletes a vendor
+ * Deletes a user
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
-  Vendor.findByIdAndRemove(req.params.id, function(err, vendor) {
+  User.findByIdAndRemove(req.params.id, function(err, user) {
     if(err) return res.send(500, err);
     return res.send(204);
   });
 };
 
 /**
- * Change a vendors password
+ * Change a users password
  */
 exports.changePassword = function(req, res, next) {
-  var vendorId = req.vendor._id;
+  var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  Vendor.findById(vendorId, function (err, vendor) {
-    if(vendor.authenticate(oldPass)) {
-      vendor.password = newPass;
-      vendor.save(function(err) {
+  User.findById(userId, function (err, user) {
+    if(user.authenticate(oldPass)) {
+      user.password = newPass;
+      user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
       });
@@ -83,13 +83,13 @@ exports.changePassword = function(req, res, next) {
  * Get my info
  */
 exports.me = function(req, res, next) {
-  var vendorId = req.vendor._id;
-  Vendor.findOne({
-    _id: vendorId
-  }, '-salt -hashedPassword', function(err, vendor) { // don't ever give out the password or salt
+  var userId = req.user._id;
+  User.findOne({
+    _id: userId
+  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
-    if (!vendor) return res.json(401);
-    res.json(vendor);
+    if (!user) return res.json(401);
+    res.json(user);
   });
 };
 

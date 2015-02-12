@@ -3,6 +3,7 @@
 angular.module('thesisApp')
   .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
     $scope.user = {};
+    $scope.vendor = {};
     $scope.errors = {};
 
     $scope.register = function(form) {
@@ -12,7 +13,8 @@ angular.module('thesisApp')
         Auth.createUser({
           name: $scope.user.name,
           email: $scope.user.email,
-          password: $scope.user.password
+          password: $scope.user.password,
+          isVendor: $scope.vendor.isVendor ? true : false // if the vendor checkbox is checked
         })
         .then( function() {
           // Account created, redirect to home
