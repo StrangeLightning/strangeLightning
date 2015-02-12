@@ -24,6 +24,7 @@
     - (#2) Added a new feature
 
    `$git add .`
+   
    `$git commit -m '(#2) short description of changes made'`
 
    #### Commit Message Guidelines
