@@ -6,7 +6,7 @@ var local = {};
 try {
   local = require('./../local.env.js');
 } catch(err) {
-  console.log(err);
+  //do nothing
 }
 
 function requiredProcessEnv(name) {
