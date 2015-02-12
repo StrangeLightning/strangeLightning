@@ -2,6 +2,12 @@
 
 var path = require('path');
 var _ = require('lodash');
+var local = {};
+try {
+  local = require('./../local.env.js');
+} catch(err) {
+  console.log(err);
+}
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -42,20 +48,20 @@ var all = {
   },
 
   facebook: {
-    clientID:     process.env.FACEBOOK_ID || 'id',
-    clientSecret: process.env.FACEBOOK_SECRET || 'secret',
+    clientID:     process.env.FACEBOOK_ID || local.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET || local.FACEBOOK_SECRET,
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
   },
 
   twitter: {
-    clientID:     process.env.TWITTER_ID || 'id',
-    clientSecret: process.env.TWITTER_SECRET || 'secret',
+    clientID:     process.env.TWITTER_ID || local.TWITTER_ID,
+    clientSecret: process.env.TWITTER_SECRET || local.TWITTER_SECRET,
     callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
   },
 
   google: {
-    clientID:     process.env.GOOGLE_ID || 'id',
-    clientSecret: process.env.GOOGLE_SECRET || 'secret',
+    clientID:     process.env.GOOGLE_ID || local.GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_SECRET || local.GOOGLE_SECRET,
     callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
   }
 };

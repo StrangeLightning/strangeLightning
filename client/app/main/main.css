@@ -28,3 +28,21 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+.page-wrap {
+  min-height: 100%;
+}
+
+.page-wrap:after {
+  content: "";
+  display: block;
+  margin-bottom: -31px;
+}
+
+.site-footer, .page-wrap:after {
+  height: 0px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
