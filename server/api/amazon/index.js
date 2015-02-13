@@ -14,14 +14,13 @@ function test(req, res, next){
 	var opHelper = new OperationHelper({
 	    awsId:     config.amazon.clientID,
 	    awsSecret: config.amazon.clientSecret,
-	    assocId:   config.amazon.clientAccount
-	    // xml2jsOptions: an extra, optional, parameter for if you want to pass additional options for the xml2js module. (see https://github.com/Leonidas-from-XIV/node-xml2js#options) 
+	    assocId:   config.amazon.clientAccount 
 	});
 
 	opHelper.execute('ItemSearch', {
 	  'SearchIndex': 'Books',
 	  'Keywords': 'harry potter'
-	}, function(err, results) { // you can add a third parameter for the raw xml response, "results" here are currently parsed using xml2js 
+	}, function(err, results) {
 	    var r = JSON.stringify(results);
 	    console.log(r);
 	    res.end(r);
