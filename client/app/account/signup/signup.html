@@ -1,95 +1,52 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Sign up</h1>
+<div class="col-sm-12 col-md-5 col-md-offset-1">
+  <h3><p class="text-center">Sign Up</p></h3>
+  <form>
+    <div class="form-group">
+      <input type="email" class="form-control" id="email" placeholder="Email address">
     </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="register(form)" novalidate>
-
-        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
-                                            'has-error': form.name.$invalid && submitted }">
-          <label>Name</label>
-
-          <input type="text" name="name" class="form-control" ng-model="user.name"
-                 required/>
-          <p class="help-block" ng-show="form.name.$error.required && submitted">
-            A name is required
-          </p>
-        </div>
-
-        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
-                                            'has-error': form.email.$invalid && submitted }">
-          <label>Email</label>
-
-          <input type="email" name="email" class="form-control" ng-model="user.email"
-                 required
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.email.$error.email && submitted">
-            Doesn't look like a valid email.
-          </p>
-          <p class="help-block" ng-show="form.email.$error.required && submitted">
-            What's your email address?
-          </p>
-          <p class="help-block" ng-show="form.email.$error.mongoose">
-            {{ errors.email }}
-          </p>
-
-        </div>
-
-        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
-                                            'has-error': form.password.$invalid && submitted }">
-          <label>Password</label>
-
-          <input type="password" name="password" class="form-control" ng-model="user.password"
-                 ng-minlength="3"
-                 required
-                 mongoose-error/>
-          <p class="help-block"
-             ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
-            Password must be at least 3 characters.
-          </p>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-            {{ errors.password }}
-          </p>
-        </div>
-
-        <div>
-        <label> <input type="checkbox" name="password" ng-model="vendor.isVendor"/> I am a vendor </label>
-
-          <p class="help-block"
-             ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
-            Password must be at least 3 characters.
-          </p>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-            {{ errors.password }}
-          </p>
-        </div>
-
-        <br/>
-
-        <div>
-          <button class="btn btn-inverse btn-lg btn-login" type="submit">
-            Sign up
-          </button>
-          <a class="btn btn-default btn-lg btn-register" href="/login">
-            Login
-          </a>
-        </div>
-
-        <hr>
-        <div>
-          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-            <i class="fa fa-facebook"></i> Connect with Facebook
-          </a>
-          <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
-            <i class="fa fa-google-plus"></i> Connect with Google+
-          </a>
-          <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
-            <i class="fa fa-twitter"></i> Connect with Twitter
-          </a>
-        </div>
-      </form>
+    <div class="form-group">
+      <input type="text" class="form-control" id="firstname" placeholder="First Name">
     </div>
-  </div>
-  <hr>
+    <div class="form-group">
+      <input type="text" class="form-control" id="lastname" placeholder="Last Name">
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" id="password" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" id="passwordconfirmation" placeholder="Password Confirmation">
+    </div>
+  </form>
+</div>
+<span class="hidden-xs btn-separator"></span>
+<div class="col-sm-12 col-md-5">
+  <h3><p class="text-center">Billing Info</p></h3>
+  <form>
+    <div class="form-group">
+      <input type="text" class="form-control" id="fullname" placeholder="Full Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="creditcard" placeholder="Credit Card #">
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <input type="text" class="form-control" id="expdate" placeholder="Exp. Date">
+      </div>
+      <div class="form-group col-md-6">
+        <input type="text" class="form-control" id="ccv" placeholder="CCV">
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="address1" placeholder="Address #1">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="address2" placeholder="Address #2">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="postalcode" placeholder="Postal Code">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="country" placeholder="Country">
+    </div>
+  </form>
 </div>
