@@ -39,3 +39,46 @@ html, body {
     color: #000;
     padding: 0.2em 0;
 }
+
+/**
+ * Adds a separator line
+ */
+
+.btn-separator:after {
+    content: ' ';
+    display: block;
+    float: left;
+    opacity: 0.4;
+    background: #ADADAD;
+    margin: 20px 10px 20px;
+    height: 400px;
+    width: 1px;
+}
+
+/**
+ * Footer
+ */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+}
+
+/**
+ * Footer store button
+ */
+.store-btn {
+  margin-left: 15px;
+}
+
+/**
+ * Styling for the main border in the template
+ */
+.border {
+  margin: 20px;
+  height: 700px;
+  border-left: 1px solid #e2e2e2;
+  border-top: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
+}
