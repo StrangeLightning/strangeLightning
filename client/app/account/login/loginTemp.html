@@ -1,0 +1,56 @@
+<div class="col-md-6 col-md-offset-3" id="loginScreen">
+      <h4>Login</h4>
+
+      <div class="col-sm-10 border">
+
+        <!-- Local login starts -->
+        <form class="form" id="loginForm" name="form" ng-submit="login(form)" novalidate>
+
+       
+
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+            <input type="email" placeholder="E-mail address" name="email" class="form-control giveWidth" ng-model="user.email" required>
+          </div>
+          <p/>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+            <input type="password" placeholder="Password" name="password" class="form-control giveWidth" ng-model="user.password" required>
+          </div>
+
+          <div class="form-group has-error">
+            <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+               Please enter your email and password.
+            </p>
+            <p class="help-block" ng-show="form.email.$error.email && submitted">
+               Please enter a valid email.
+            </p>
+            <p class="help-block">{{ errors.other }}</p>
+          </div>
+
+          <div class="btn-group btn-group-justified giveWidthLogin" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default" type="submit">Login</button>
+            </div>
+            <div class="btn-group" role="group">
+              <a class="btn btn-default" href="/signup">
+                Register
+              </a>
+            </div>
+          </div>
+        </form>
+        <!-- Local login ends -->
+
+    </div>
+
+
+    <!--  <!-- Facebook button starts -->
+     <div  class="input-group" id="loginForm">
+       <span class="input-group-addon btn-facebook"><i class="fa fa-facebook fa-fw"></i></span>
+         <a class="form-control btn btn-facebook giveWidth" href="" ng-click="loginOauth('facebook')">
+         Sign in with Facebook
+       </a>
+     </div>
+     <!-- Facebook button ends --> -->
+
+     <p/>
