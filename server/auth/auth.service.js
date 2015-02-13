@@ -16,11 +16,18 @@ var validateJwt = expressJwt({ secret: config.secrets.session });
 function isAuthenticated() {
   return compose()
     // Validate jwt
+    // curl query
+    // curl --header "authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NGRkNTAxYjU5NzEwOWIwNTBhODYxMjciLCJpYXQiOjE0MjM3OTAxMDcwNzAsImV4cCI6MTQyMzgwODEwNzA3MH0.OXbf0mnATXtm_xXjKtVn-ENpFnY8_6_Js8Oug-orcmI" localhost:9000/api/users/kev
     .use(function(req, res, next) {
       // allow access_token to be passed through query parameter as well
       if(req.query && req.query.hasOwnProperty('access_token')) {
         req.headers.authorization = 'Bearer ' + req.query.access_token;
       }
+      console.log("in Auth", req.query, req.headers.authorization);
+      // if(!validateJwt(req, res, next)){
+      //   // console.log('sadf');
+      //   res.end('Improper Login Credentials. Please try to login again.')
+      // }
       validateJwt(req, res, next);
     })
     // Attach user to request

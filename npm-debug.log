@@ -1,0 +1,604 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/pio/Documents/cloudsphere/strangeLightning',
+5 verbose install   [ 'body-parser',
+5 verbose install     'coffee',
+5 verbose install     'composable-middleware',
+5 verbose install     'compression',
+5 verbose install     'connect-mongo',
+5 verbose install     'cookie-parser',
+5 verbose install     'ejs',
+5 verbose install     'errorhandler',
+5 verbose install     'express',
+5 verbose install     'express-jwt',
+5 verbose install     'express-session',
+5 verbose install     'jsonwebtoken',
+5 verbose install     'lodash',
+5 verbose install     'method-override',
+5 verbose install     'mongoose',
+5 verbose install     'morgan',
+5 verbose install     'node-apac',
+5 verbose install     'passport',
+5 verbose install     'passport-facebook',
+5 verbose install     'passport-google-oauth',
+5 verbose install     'passport-local',
+5 verbose install     'passport-twitter',
+5 verbose install     'serve-favicon',
+5 verbose install     'socket.io',
+5 verbose install     'socket.io-client',
+5 verbose install     'socketio-jwt',
+5 verbose install     'grunt',
+5 verbose install     'grunt-autoprefixer',
+5 verbose install     'grunt-wiredep',
+5 verbose install     'grunt-concurrent',
+5 verbose install     'grunt-contrib-clean',
+5 verbose install     'grunt-contrib-concat',
+5 verbose install     'grunt-contrib-copy',
+5 verbose install     'grunt-contrib-cssmin',
+5 verbose install     'grunt-contrib-htmlmin',
+5 verbose install     'grunt-contrib-imagemin',
+5 verbose install     'grunt-contrib-jshint',
+5 verbose install     'grunt-contrib-uglify',
+5 verbose install     'grunt-contrib-watch',
+5 verbose install     'grunt-google-cdn',
+5 verbose install     'grunt-newer',
+5 verbose install     'grunt-ng-annotate',
+5 verbose install     'grunt-rev',
+5 verbose install     'grunt-svgmin',
+5 verbose install     'grunt-usemin',
+5 verbose install     'grunt-env',
+5 verbose install     'grunt-node-inspector',
+5 verbose install     'grunt-nodemon',
+5 verbose install     'grunt-angular-templates',
+5 verbose install     'grunt-dom-munger',
+5 verbose install     'grunt-protractor-runner',
+5 verbose install     'grunt-asset-injector',
+5 verbose install     'grunt-karma',
+5 verbose install     'grunt-build-control',
+5 verbose install     'grunt-mocha-test',
+5 verbose install     'jit-grunt',
+5 verbose install     'time-grunt',
+5 verbose install     'grunt-express-server',
+5 verbose install     'grunt-open',
+5 verbose install     'open',
+5 verbose install     'jshint-stylish',
+5 verbose install     'connect-livereload',
+5 verbose install     'karma-ng-scenario',
+5 verbose install     'karma-firefox-launcher',
+5 verbose install     'karma-script-launcher',
+5 verbose install     'karma-html2js-preprocessor',
+5 verbose install     'karma-ng-jade2js-preprocessor',
+5 verbose install     'karma-jasmine',
+5 verbose install     'karma-chrome-launcher',
+5 verbose install     'requirejs',
+5 verbose install     'karma-requirejs',
+5 verbose install     'karma-coffee-preprocessor',
+5 verbose install     'karma-jade-preprocessor',
+5 verbose install     'karma-phantomjs-launcher',
+5 verbose install     'karma',
+5 verbose install     'karma-ng-html2js-preprocessor',
+5 verbose install     'supertest',
+5 verbose install     'should' ] ]
+6 info preinstall thesis@0.0.0
+7 verbose readDependencies using package.json deps
+8 verbose already installed skipping grunt-contrib-imagemin@~0.7.1 /Users/pio/Documents/cloudsphere/strangeLightning
+9 verbose already installed skipping grunt-contrib-jshint@~0.10.0 /Users/pio/Documents/cloudsphere/strangeLightning
+10 verbose already installed skipping grunt-contrib-uglify@~0.4.0 /Users/pio/Documents/cloudsphere/strangeLightning
+11 verbose already installed skipping grunt-contrib-watch@~0.6.1 /Users/pio/Documents/cloudsphere/strangeLightning
+12 verbose already installed skipping grunt-google-cdn@~0.4.0 /Users/pio/Documents/cloudsphere/strangeLightning
+13 verbose already installed skipping grunt-newer@~0.7.0 /Users/pio/Documents/cloudsphere/strangeLightning
+14 verbose already installed skipping grunt-ng-annotate@^0.2.3 /Users/pio/Documents/cloudsphere/strangeLightning
+15 verbose already installed skipping grunt-rev@~0.1.0 /Users/pio/Documents/cloudsphere/strangeLightning
+16 verbose already installed skipping grunt-svgmin@~0.4.0 /Users/pio/Documents/cloudsphere/strangeLightning
+17 verbose already installed skipping grunt-usemin@~2.1.1 /Users/pio/Documents/cloudsphere/strangeLightning
+18 verbose already installed skipping grunt-env@~0.4.1 /Users/pio/Documents/cloudsphere/strangeLightning
+19 verbose already installed skipping grunt-node-inspector@~0.1.5 /Users/pio/Documents/cloudsphere/strangeLightning
+20 verbose already installed skipping grunt-nodemon@~0.2.0 /Users/pio/Documents/cloudsphere/strangeLightning
+21 verbose already installed skipping grunt-angular-templates@^0.5.4 /Users/pio/Documents/cloudsphere/strangeLightning
+22 verbose already installed skipping grunt-dom-munger@^3.4.0 /Users/pio/Documents/cloudsphere/strangeLightning
+23 verbose already installed skipping grunt-protractor-runner@^1.1.0 /Users/pio/Documents/cloudsphere/strangeLightning
+24 verbose already installed skipping grunt-asset-injector@^0.1.0 /Users/pio/Documents/cloudsphere/strangeLightning
+25 verbose already installed skipping grunt-karma@~0.8.2 /Users/pio/Documents/cloudsphere/strangeLightning
+26 verbose cache add [ 'grunt-build-control@git+https://github.com/DaftMonk/grunt-build-control',
+26 verbose cache add   null ]
+27 verbose cache add name=undefined spec="grunt-build-control@git+https://github.com/DaftMonk/grunt-build-control" args=["grunt-build-control@git+https://github.com/DaftMonk/grunt-build-control",null]
+28 verbose parsed url { protocol: null,
+28 verbose parsed url   slashes: null,
+28 verbose parsed url   auth: null,
+28 verbose parsed url   host: null,
+28 verbose parsed url   port: null,
+28 verbose parsed url   hostname: null,
+28 verbose parsed url   hash: null,
+28 verbose parsed url   search: null,
+28 verbose parsed url   query: null,
+28 verbose parsed url   pathname: 'grunt-build-control@git+https://github.com/DaftMonk/grunt-build-control',
+28 verbose parsed url   path: 'grunt-build-control@git+https://github.com/DaftMonk/grunt-build-control',
+28 verbose parsed url   href: 'grunt-build-control@git+https://github.com/DaftMonk/grunt-build-control' }
+29 verbose already installed skipping grunt-mocha-test@~0.10.2 /Users/pio/Documents/cloudsphere/strangeLightning
+30 verbose already installed skipping jit-grunt@^0.5.0 /Users/pio/Documents/cloudsphere/strangeLightning
+31 verbose already installed skipping time-grunt@~0.3.1 /Users/pio/Documents/cloudsphere/strangeLightning
+32 verbose already installed skipping grunt-express-server@~0.4.17 /Users/pio/Documents/cloudsphere/strangeLightning
+33 verbose cache add name="grunt-build-control" spec="git+https://github.com/DaftMonk/grunt-build-control" args=["grunt-build-control","git+https://github.com/DaftMonk/grunt-build-control"]
+34 verbose parsed url { protocol: 'git+https:',
+34 verbose parsed url   slashes: true,
+34 verbose parsed url   auth: null,
+34 verbose parsed url   host: 'github.com',
+34 verbose parsed url   port: null,
+34 verbose parsed url   hostname: 'github.com',
+34 verbose parsed url   hash: null,
+34 verbose parsed url   search: null,
+34 verbose parsed url   query: null,
+34 verbose parsed url   pathname: '/DaftMonk/grunt-build-control',
+34 verbose parsed url   path: '/DaftMonk/grunt-build-control',
+34 verbose parsed url   href: 'git+https://github.com/DaftMonk/grunt-build-control' }
+35 verbose already installed skipping grunt-open@~0.2.3 /Users/pio/Documents/cloudsphere/strangeLightning
+36 verbose already installed skipping open@~0.0.4 /Users/pio/Documents/cloudsphere/strangeLightning
+37 silly lockFile 7e4d577b-com-DaftMonk-grunt-build-control https://github.com/DaftMonk/grunt-build-control
+38 verbose lock https://github.com/DaftMonk/grunt-build-control /Users/pio/.npm/7e4d577b-com-DaftMonk-grunt-build-control.lock
+39 verbose already installed skipping jshint-stylish@~0.1.5 /Users/pio/Documents/cloudsphere/strangeLightning
+40 verbose already installed skipping connect-livereload@~0.4.0 /Users/pio/Documents/cloudsphere/strangeLightning
+41 verbose addRemoteGit [ 'https://github.com/DaftMonk/grunt-build-control', 'master' ]
+42 verbose already installed skipping karma-ng-scenario@~0.1.0 /Users/pio/Documents/cloudsphere/strangeLightning
+43 verbose already installed skipping karma-firefox-launcher@~0.1.3 /Users/pio/Documents/cloudsphere/strangeLightning
+44 verbose already installed skipping karma-script-launcher@~0.1.0 /Users/pio/Documents/cloudsphere/strangeLightning
+45 verbose already installed skipping karma-html2js-preprocessor@~0.1.0 /Users/pio/Documents/cloudsphere/strangeLightning
+46 verbose already installed skipping karma-ng-jade2js-preprocessor@^0.1.2 /Users/pio/Documents/cloudsphere/strangeLightning
+47 verbose already installed skipping karma-jasmine@~0.1.5 /Users/pio/Documents/cloudsphere/strangeLightning
+48 verbose already installed skipping karma-chrome-launcher@~0.1.3 /Users/pio/Documents/cloudsphere/strangeLightning
+49 verbose already installed skipping requirejs@~2.1.11 /Users/pio/Documents/cloudsphere/strangeLightning
+50 verbose already installed skipping karma-requirejs@~0.2.1 /Users/pio/Documents/cloudsphere/strangeLightning
+51 verbose already installed skipping karma-coffee-preprocessor@~0.2.1 /Users/pio/Documents/cloudsphere/strangeLightning
+52 verbose already installed skipping karma-jade-preprocessor@0.0.11 /Users/pio/Documents/cloudsphere/strangeLightning
+53 verbose already installed skipping karma-phantomjs-launcher@~0.1.4 /Users/pio/Documents/cloudsphere/strangeLightning
+54 verbose already installed skipping karma@~0.12.9 /Users/pio/Documents/cloudsphere/strangeLightning
+55 verbose already installed skipping karma-ng-html2js-preprocessor@~0.1.0 /Users/pio/Documents/cloudsphere/strangeLightning
+56 verbose already installed skipping supertest@~0.11.0 /Users/pio/Documents/cloudsphere/strangeLightning
+57 verbose already installed skipping should@~3.3.1 /Users/pio/Documents/cloudsphere/strangeLightning
+58 verbose already installed skipping body-parser@~1.5.0 /Users/pio/Documents/cloudsphere/strangeLightning
+59 verbose cache add [ 'coffee@^1.0.0', null ]
+60 verbose cache add name=undefined spec="coffee@^1.0.0" args=["coffee@^1.0.0",null]
+61 verbose parsed url { protocol: null,
+61 verbose parsed url   slashes: null,
+61 verbose parsed url   auth: null,
+61 verbose parsed url   host: null,
+61 verbose parsed url   port: null,
+61 verbose parsed url   hostname: null,
+61 verbose parsed url   hash: null,
+61 verbose parsed url   search: null,
+61 verbose parsed url   query: null,
+61 verbose parsed url   pathname: 'coffee@^1.0.0',
+61 verbose parsed url   path: 'coffee@^1.0.0',
+61 verbose parsed url   href: 'coffee@^1.0.0' }
+62 verbose already installed skipping composable-middleware@^0.3.0 /Users/pio/Documents/cloudsphere/strangeLightning
+63 verbose cache add name="coffee" spec="^1.0.0" args=["coffee","^1.0.0"]
+64 verbose parsed url { protocol: null,
+64 verbose parsed url   slashes: null,
+64 verbose parsed url   auth: null,
+64 verbose parsed url   host: null,
+64 verbose parsed url   port: null,
+64 verbose parsed url   hostname: null,
+64 verbose parsed url   hash: null,
+64 verbose parsed url   search: null,
+64 verbose parsed url   query: null,
+64 verbose parsed url   pathname: '^1.0.0',
+64 verbose parsed url   path: '^1.0.0',
+64 verbose parsed url   href: '^1.0.0' }
+65 verbose addNamed [ 'coffee', '^1.0.0' ]
+66 verbose addNamed [ null, '>=1.0.0-0 <2.0.0-0' ]
+67 silly lockFile 4b4aa018-coffee-1-0-0 coffee@^1.0.0
+68 verbose lock coffee@^1.0.0 /Users/pio/.npm/4b4aa018-coffee-1-0-0.lock
+69 silly addNameRange { name: 'coffee', range: '>=1.0.0-0 <2.0.0-0', hasData: false }
+70 verbose git remote.origin.url https://github.com/DaftMonk/grunt-build-control
+71 verbose request where is /coffee
+72 verbose request registry https://registry.npmjs.org/
+73 verbose request id 5f9c7358b1b3c594
+74 verbose url raw /coffee
+75 verbose url resolving [ 'https://registry.npmjs.org/', './coffee' ]
+76 verbose url resolved https://registry.npmjs.org/coffee
+77 verbose request where is https://registry.npmjs.org/coffee
+78 info trying registry request attempt 1 at 11:23:23
+79 verbose etag "1AU5X8TO4JGDYFZ2N6MH1MPUO"
+80 http GET https://registry.npmjs.org/coffee
+81 verbose already installed skipping compression@~1.0.1 /Users/pio/Documents/cloudsphere/strangeLightning
+82 verbose already installed skipping connect-mongo@^0.4.1 /Users/pio/Documents/cloudsphere/strangeLightning
+83 verbose already installed skipping cookie-parser@~1.0.1 /Users/pio/Documents/cloudsphere/strangeLightning
+84 verbose already installed skipping ejs@~0.8.4 /Users/pio/Documents/cloudsphere/strangeLightning
+85 verbose already installed skipping errorhandler@~1.0.0 /Users/pio/Documents/cloudsphere/strangeLightning
+86 verbose already installed skipping express@~4.0.0 /Users/pio/Documents/cloudsphere/strangeLightning
+87 verbose already installed skipping express-jwt@^0.1.3 /Users/pio/Documents/cloudsphere/strangeLightning
+88 verbose already installed skipping express-session@~1.0.2 /Users/pio/Documents/cloudsphere/strangeLightning
+89 verbose already installed skipping jsonwebtoken@^0.3.0 /Users/pio/Documents/cloudsphere/strangeLightning
+90 verbose already installed skipping lodash@~2.4.1 /Users/pio/Documents/cloudsphere/strangeLightning
+91 verbose already installed skipping method-override@~1.0.0 /Users/pio/Documents/cloudsphere/strangeLightning
+92 verbose already installed skipping mongoose@~3.8.8 /Users/pio/Documents/cloudsphere/strangeLightning
+93 verbose already installed skipping morgan@~1.0.0 /Users/pio/Documents/cloudsphere/strangeLightning
+94 verbose cache add [ 'node-apac@~1.0.0', null ]
+95 verbose cache add name=undefined spec="node-apac@~1.0.0" args=["node-apac@~1.0.0",null]
+96 verbose parsed url { protocol: null,
+96 verbose parsed url   slashes: null,
+96 verbose parsed url   auth: null,
+96 verbose parsed url   host: null,
+96 verbose parsed url   port: null,
+96 verbose parsed url   hostname: null,
+96 verbose parsed url   hash: null,
+96 verbose parsed url   search: null,
+96 verbose parsed url   query: null,
+96 verbose parsed url   pathname: 'node-apac@~1.0.0',
+96 verbose parsed url   path: 'node-apac@~1.0.0',
+96 verbose parsed url   href: 'node-apac@~1.0.0' }
+97 verbose already installed skipping passport@~0.2.0 /Users/pio/Documents/cloudsphere/strangeLightning
+98 verbose cache add [ 'passport-facebook@latest', null ]
+99 verbose cache add name=undefined spec="passport-facebook@latest" args=["passport-facebook@latest",null]
+100 verbose parsed url { protocol: null,
+100 verbose parsed url   slashes: null,
+100 verbose parsed url   auth: null,
+100 verbose parsed url   host: null,
+100 verbose parsed url   port: null,
+100 verbose parsed url   hostname: null,
+100 verbose parsed url   hash: null,
+100 verbose parsed url   search: null,
+100 verbose parsed url   query: null,
+100 verbose parsed url   pathname: 'passport-facebook@latest',
+100 verbose parsed url   path: 'passport-facebook@latest',
+100 verbose parsed url   href: 'passport-facebook@latest' }
+101 verbose cache add [ 'passport-google-oauth@latest', null ]
+102 verbose cache add name=undefined spec="passport-google-oauth@latest" args=["passport-google-oauth@latest",null]
+103 verbose parsed url { protocol: null,
+103 verbose parsed url   slashes: null,
+103 verbose parsed url   auth: null,
+103 verbose parsed url   host: null,
+103 verbose parsed url   port: null,
+103 verbose parsed url   hostname: null,
+103 verbose parsed url   hash: null,
+103 verbose parsed url   search: null,
+103 verbose parsed url   query: null,
+103 verbose parsed url   pathname: 'passport-google-oauth@latest',
+103 verbose parsed url   path: 'passport-google-oauth@latest',
+103 verbose parsed url   href: 'passport-google-oauth@latest' }
+104 verbose already installed skipping passport-local@~0.1.6 /Users/pio/Documents/cloudsphere/strangeLightning
+105 verbose cache add [ 'passport-twitter@latest', null ]
+106 verbose cache add name=undefined spec="passport-twitter@latest" args=["passport-twitter@latest",null]
+107 verbose parsed url { protocol: null,
+107 verbose parsed url   slashes: null,
+107 verbose parsed url   auth: null,
+107 verbose parsed url   host: null,
+107 verbose parsed url   port: null,
+107 verbose parsed url   hostname: null,
+107 verbose parsed url   hash: null,
+107 verbose parsed url   search: null,
+107 verbose parsed url   query: null,
+107 verbose parsed url   pathname: 'passport-twitter@latest',
+107 verbose parsed url   path: 'passport-twitter@latest',
+107 verbose parsed url   href: 'passport-twitter@latest' }
+108 verbose already installed skipping serve-favicon@~2.0.1 /Users/pio/Documents/cloudsphere/strangeLightning
+109 verbose already installed skipping socket.io@^1.0.6 /Users/pio/Documents/cloudsphere/strangeLightning
+110 verbose already installed skipping socket.io-client@^1.0.6 /Users/pio/Documents/cloudsphere/strangeLightning
+111 verbose already installed skipping socketio-jwt@^2.0.2 /Users/pio/Documents/cloudsphere/strangeLightning
+112 verbose already installed skipping grunt@~0.4.4 /Users/pio/Documents/cloudsphere/strangeLightning
+113 verbose already installed skipping grunt-autoprefixer@~0.7.2 /Users/pio/Documents/cloudsphere/strangeLightning
+114 verbose already installed skipping grunt-wiredep@~1.8.0 /Users/pio/Documents/cloudsphere/strangeLightning
+115 verbose already installed skipping grunt-concurrent@~0.5.0 /Users/pio/Documents/cloudsphere/strangeLightning
+116 verbose already installed skipping grunt-contrib-clean@~0.5.0 /Users/pio/Documents/cloudsphere/strangeLightning
+117 verbose already installed skipping grunt-contrib-concat@~0.4.0 /Users/pio/Documents/cloudsphere/strangeLightning
+118 verbose already installed skipping grunt-contrib-copy@~0.5.0 /Users/pio/Documents/cloudsphere/strangeLightning
+119 verbose already installed skipping grunt-contrib-cssmin@~0.9.0 /Users/pio/Documents/cloudsphere/strangeLightning
+120 verbose already installed skipping grunt-contrib-htmlmin@~0.2.0 /Users/pio/Documents/cloudsphere/strangeLightning
+121 verbose cache add name="node-apac" spec="~1.0.0" args=["node-apac","~1.0.0"]
+122 verbose parsed url { protocol: null,
+122 verbose parsed url   slashes: null,
+122 verbose parsed url   auth: null,
+122 verbose parsed url   host: null,
+122 verbose parsed url   port: null,
+122 verbose parsed url   hostname: null,
+122 verbose parsed url   hash: null,
+122 verbose parsed url   search: null,
+122 verbose parsed url   query: null,
+122 verbose parsed url   pathname: '~1.0.0',
+122 verbose parsed url   path: '~1.0.0',
+122 verbose parsed url   href: '~1.0.0' }
+123 verbose addNamed [ 'node-apac', '~1.0.0' ]
+124 verbose addNamed [ null, '>=1.0.0-0 <1.1.0-0' ]
+125 silly lockFile 69534cb6-node-apac-1-0-0 node-apac@~1.0.0
+126 verbose lock node-apac@~1.0.0 /Users/pio/.npm/69534cb6-node-apac-1-0-0.lock
+127 verbose cache add name="passport-facebook" spec="latest" args=["passport-facebook","latest"]
+128 verbose parsed url { protocol: null,
+128 verbose parsed url   slashes: null,
+128 verbose parsed url   auth: null,
+128 verbose parsed url   host: null,
+128 verbose parsed url   port: null,
+128 verbose parsed url   hostname: null,
+128 verbose parsed url   hash: null,
+128 verbose parsed url   search: null,
+128 verbose parsed url   query: null,
+128 verbose parsed url   pathname: 'latest',
+128 verbose parsed url   path: 'latest',
+128 verbose parsed url   href: 'latest' }
+129 verbose addNamed [ 'passport-facebook', 'latest' ]
+130 verbose addNamed [ null, null ]
+131 silly lockFile 82ca5952-passport-facebook-latest passport-facebook@latest
+132 verbose lock passport-facebook@latest /Users/pio/.npm/82ca5952-passport-facebook-latest.lock
+133 verbose cache add name="passport-google-oauth" spec="latest" args=["passport-google-oauth","latest"]
+134 verbose parsed url { protocol: null,
+134 verbose parsed url   slashes: null,
+134 verbose parsed url   auth: null,
+134 verbose parsed url   host: null,
+134 verbose parsed url   port: null,
+134 verbose parsed url   hostname: null,
+134 verbose parsed url   hash: null,
+134 verbose parsed url   search: null,
+134 verbose parsed url   query: null,
+134 verbose parsed url   pathname: 'latest',
+134 verbose parsed url   path: 'latest',
+134 verbose parsed url   href: 'latest' }
+135 verbose addNamed [ 'passport-google-oauth', 'latest' ]
+136 verbose addNamed [ null, null ]
+137 silly lockFile 2c491da3-passport-google-oauth-latest passport-google-oauth@latest
+138 verbose lock passport-google-oauth@latest /Users/pio/.npm/2c491da3-passport-google-oauth-latest.lock
+139 verbose cache add name="passport-twitter" spec="latest" args=["passport-twitter","latest"]
+140 verbose parsed url { protocol: null,
+140 verbose parsed url   slashes: null,
+140 verbose parsed url   auth: null,
+140 verbose parsed url   host: null,
+140 verbose parsed url   port: null,
+140 verbose parsed url   hostname: null,
+140 verbose parsed url   hash: null,
+140 verbose parsed url   search: null,
+140 verbose parsed url   query: null,
+140 verbose parsed url   pathname: 'latest',
+140 verbose parsed url   path: 'latest',
+140 verbose parsed url   href: 'latest' }
+141 verbose addNamed [ 'passport-twitter', 'latest' ]
+142 verbose addNamed [ null, null ]
+143 silly lockFile d5de964c-passport-twitter-latest passport-twitter@latest
+144 verbose lock passport-twitter@latest /Users/pio/.npm/d5de964c-passport-twitter-latest.lock
+145 silly addNameRange { name: 'node-apac',
+145 silly addNameRange   range: '>=1.0.0-0 <1.1.0-0',
+145 silly addNameRange   hasData: false }
+146 info addNameTag [ 'passport-facebook', 'latest' ]
+147 info addNameTag [ 'passport-google-oauth', 'latest' ]
+148 info addNameTag [ 'passport-twitter', 'latest' ]
+149 verbose request where is /node-apac
+150 verbose request registry https://registry.npmjs.org/
+151 verbose url raw /node-apac
+152 verbose url resolving [ 'https://registry.npmjs.org/', './node-apac' ]
+153 verbose url resolved https://registry.npmjs.org/node-apac
+154 verbose request where is https://registry.npmjs.org/node-apac
+155 info trying registry request attempt 1 at 11:23:23
+156 http GET https://registry.npmjs.org/node-apac
+157 verbose request where is /passport-facebook
+158 verbose request registry https://registry.npmjs.org/
+159 verbose url raw /passport-facebook
+160 verbose url resolving [ 'https://registry.npmjs.org/', './passport-facebook' ]
+161 verbose url resolved https://registry.npmjs.org/passport-facebook
+162 verbose request where is https://registry.npmjs.org/passport-facebook
+163 info trying registry request attempt 1 at 11:23:24
+164 verbose etag "DC1H0EDRX1RVM55U0PCZXGGY5"
+165 http GET https://registry.npmjs.org/passport-facebook
+166 verbose request where is /passport-google-oauth
+167 verbose request registry https://registry.npmjs.org/
+168 verbose url raw /passport-google-oauth
+169 verbose url resolving [ 'https://registry.npmjs.org/', './passport-google-oauth' ]
+170 verbose url resolved https://registry.npmjs.org/passport-google-oauth
+171 verbose request where is https://registry.npmjs.org/passport-google-oauth
+172 info trying registry request attempt 1 at 11:23:24
+173 verbose etag "3AD36PY7JN7JEADRK6YWMRHRX"
+174 http GET https://registry.npmjs.org/passport-google-oauth
+175 verbose request where is /passport-twitter
+176 verbose request registry https://registry.npmjs.org/
+177 verbose url raw /passport-twitter
+178 verbose url resolving [ 'https://registry.npmjs.org/', './passport-twitter' ]
+179 verbose url resolved https://registry.npmjs.org/passport-twitter
+180 verbose request where is https://registry.npmjs.org/passport-twitter
+181 info trying registry request attempt 1 at 11:23:24
+182 verbose etag "8AN8QXSCDE7B5N7JJZHA1G7YA"
+183 http GET https://registry.npmjs.org/passport-twitter
+184 http 304 https://registry.npmjs.org/coffee
+185 silly registry.get cb [ 304,
+185 silly registry.get   { date: 'Fri, 13 Feb 2015 19:23:25 GMT',
+185 silly registry.get     server: 'Apache',
+185 silly registry.get     via: '1.1 varnish',
+185 silly registry.get     'last-modified': 'Fri, 13 Feb 2015 19:23:25 GMT',
+185 silly registry.get     'cache-control': 'max-age=60',
+185 silly registry.get     etag: '"1AU5X8TO4JGDYFZ2N6MH1MPUO"',
+185 silly registry.get     age: '13',
+185 silly registry.get     'x-served-by': 'cache-sjc3131-SJC',
+185 silly registry.get     'x-cache': 'HIT',
+185 silly registry.get     'x-cache-hits': '1',
+185 silly registry.get     'x-timer': 'S1423855405.152727,VS0,VE0',
+185 silly registry.get     vary: 'Accept',
+185 silly registry.get     'content-length': '0',
+185 silly registry.get     'keep-alive': 'timeout=10, max=50',
+185 silly registry.get     connection: 'Keep-Alive' } ]
+186 verbose etag https://registry.npmjs.org/coffee from cache
+187 http 304 https://registry.npmjs.org/passport-google-oauth
+188 silly registry.get cb [ 304,
+188 silly registry.get   { date: 'Fri, 13 Feb 2015 19:23:25 GMT',
+188 silly registry.get     server: 'Apache',
+188 silly registry.get     via: '1.1 varnish',
+188 silly registry.get     'last-modified': 'Fri, 13 Feb 2015 19:23:25 GMT',
+188 silly registry.get     'cache-control': 'max-age=60',
+188 silly registry.get     etag: '"3AD36PY7JN7JEADRK6YWMRHRX"',
+188 silly registry.get     age: '13',
+188 silly registry.get     'x-served-by': 'cache-sjc3134-SJC',
+188 silly registry.get     'x-cache': 'HIT',
+188 silly registry.get     'x-cache-hits': '1',
+188 silly registry.get     'x-timer': 'S1423855405.223561,VS0,VE0',
+188 silly registry.get     vary: 'Accept',
+188 silly registry.get     'content-length': '0',
+188 silly registry.get     'keep-alive': 'timeout=10, max=50',
+188 silly registry.get     connection: 'Keep-Alive' } ]
+189 verbose etag https://registry.npmjs.org/passport-google-oauth from cache
+190 http 304 https://registry.npmjs.org/passport-facebook
+191 silly registry.get cb [ 304,
+191 silly registry.get   { date: 'Fri, 13 Feb 2015 19:23:25 GMT',
+191 silly registry.get     server: 'Apache',
+191 silly registry.get     via: '1.1 varnish',
+191 silly registry.get     'last-modified': 'Fri, 13 Feb 2015 19:23:25 GMT',
+191 silly registry.get     'cache-control': 'max-age=60',
+191 silly registry.get     etag: '"DC1H0EDRX1RVM55U0PCZXGGY5"',
+191 silly registry.get     age: '13',
+191 silly registry.get     'x-served-by': 'cache-sjc3134-SJC',
+191 silly registry.get     'x-cache': 'HIT',
+191 silly registry.get     'x-cache-hits': '1',
+191 silly registry.get     'x-timer': 'S1423855405.224102,VS0,VE0',
+191 silly registry.get     vary: 'Accept',
+191 silly registry.get     'content-length': '0',
+191 silly registry.get     'keep-alive': 'timeout=10, max=50',
+191 silly registry.get     connection: 'Keep-Alive' } ]
+192 verbose etag https://registry.npmjs.org/passport-facebook from cache
+193 http 404 https://registry.npmjs.org/node-apac
+194 verbose headers { date: 'Fri, 13 Feb 2015 19:23:25 GMT',
+194 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+194 verbose headers   'content-type': 'application/json',
+194 verbose headers   'cache-control': 'max-age=0',
+194 verbose headers   'content-length': '52',
+194 verbose headers   'accept-ranges': 'bytes',
+194 verbose headers   via: '1.1 varnish',
+194 verbose headers   age: '0',
+194 verbose headers   'x-served-by': 'cache-sjc3121-SJC',
+194 verbose headers   'x-cache': 'MISS',
+194 verbose headers   'x-cache-hits': '0',
+194 verbose headers   'x-timer': 'S1423855405.223765,VS0,VE34',
+194 verbose headers   'keep-alive': 'timeout=10, max=50',
+194 verbose headers   connection: 'Keep-Alive' }
+195 silly registry.get cb [ 404,
+195 silly registry.get   { date: 'Fri, 13 Feb 2015 19:23:25 GMT',
+195 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+195 silly registry.get     'content-type': 'application/json',
+195 silly registry.get     'cache-control': 'max-age=0',
+195 silly registry.get     'content-length': '52',
+195 silly registry.get     'accept-ranges': 'bytes',
+195 silly registry.get     via: '1.1 varnish',
+195 silly registry.get     age: '0',
+195 silly registry.get     'x-served-by': 'cache-sjc3121-SJC',
+195 silly registry.get     'x-cache': 'MISS',
+195 silly registry.get     'x-cache-hits': '0',
+195 silly registry.get     'x-timer': 'S1423855405.223765,VS0,VE34',
+195 silly registry.get     'keep-alive': 'timeout=10, max=50',
+195 silly registry.get     connection: 'Keep-Alive' } ]
+196 silly lockFile 69534cb6-node-apac-1-0-0 node-apac@~1.0.0
+197 silly lockFile 69534cb6-node-apac-1-0-0 node-apac@~1.0.0
+198 silly addNameRange number 2 { name: 'coffee', range: '>=1.0.0-0 <2.0.0-0', hasData: true }
+199 silly addNameRange versions [ 'coffee', [ '0.1.0', '1.0.0' ] ]
+200 verbose addNamed [ 'coffee', '1.0.0' ]
+201 verbose addNamed [ '1.0.0', '1.0.0' ]
+202 silly lockFile 8e0d9103-coffee-1-0-0 coffee@1.0.0
+203 verbose lock coffee@1.0.0 /Users/pio/.npm/8e0d9103-coffee-1-0-0.lock
+204 http 304 https://registry.npmjs.org/passport-twitter
+205 silly registry.get cb [ 304,
+205 silly registry.get   { date: 'Fri, 13 Feb 2015 19:23:25 GMT',
+205 silly registry.get     server: 'Apache',
+205 silly registry.get     via: '1.1 varnish',
+205 silly registry.get     'last-modified': 'Fri, 13 Feb 2015 19:23:25 GMT',
+205 silly registry.get     'cache-control': 'max-age=60',
+205 silly registry.get     etag: '"8AN8QXSCDE7B5N7JJZHA1G7YA"',
+205 silly registry.get     age: '14',
+205 silly registry.get     'x-served-by': 'cache-sjc3128-SJC',
+205 silly registry.get     'x-cache': 'HIT',
+205 silly registry.get     'x-cache-hits': '1',
+205 silly registry.get     'x-timer': 'S1423855405.316748,VS0,VE0',
+205 silly registry.get     vary: 'Accept',
+205 silly registry.get     'content-length': '0',
+205 silly registry.get     'keep-alive': 'timeout=10, max=50',
+205 silly registry.get     connection: 'Keep-Alive' } ]
+206 verbose etag https://registry.npmjs.org/passport-twitter from cache
+207 verbose addNamed [ 'passport-google-oauth', '0.1.5' ]
+208 verbose addNamed [ '0.1.5', '0.1.5' ]
+209 silly lockFile 3fbba456-passport-google-oauth-0-1-5 passport-google-oauth@0.1.5
+210 verbose lock passport-google-oauth@0.1.5 /Users/pio/.npm/3fbba456-passport-google-oauth-0-1-5.lock
+211 verbose addNamed [ 'passport-facebook', '1.0.3' ]
+212 verbose addNamed [ '1.0.3', '1.0.3' ]
+213 silly lockFile 3e2a96bb-passport-facebook-1-0-3 passport-facebook@1.0.3
+214 verbose lock passport-facebook@1.0.3 /Users/pio/.npm/3e2a96bb-passport-facebook-1-0-3.lock
+215 silly lockFile 8e0d9103-coffee-1-0-0 coffee@1.0.0
+216 silly lockFile 8e0d9103-coffee-1-0-0 coffee@1.0.0
+217 verbose addNamed [ 'passport-twitter', '1.0.2' ]
+218 verbose addNamed [ '1.0.2', '1.0.2' ]
+219 silly lockFile 50fcdf9c-passport-twitter-1-0-2 passport-twitter@1.0.2
+220 verbose lock passport-twitter@1.0.2 /Users/pio/.npm/50fcdf9c-passport-twitter-1-0-2.lock
+221 silly lockFile 4b4aa018-coffee-1-0-0 coffee@^1.0.0
+222 silly lockFile 4b4aa018-coffee-1-0-0 coffee@^1.0.0
+223 silly lockFile 3fbba456-passport-google-oauth-0-1-5 passport-google-oauth@0.1.5
+224 silly lockFile 3fbba456-passport-google-oauth-0-1-5 passport-google-oauth@0.1.5
+225 silly lockFile 3e2a96bb-passport-facebook-1-0-3 passport-facebook@1.0.3
+226 silly lockFile 3e2a96bb-passport-facebook-1-0-3 passport-facebook@1.0.3
+227 silly lockFile 2c491da3-passport-google-oauth-latest passport-google-oauth@latest
+228 silly lockFile 2c491da3-passport-google-oauth-latest passport-google-oauth@latest
+229 silly lockFile 82ca5952-passport-facebook-latest passport-facebook@latest
+230 silly lockFile 82ca5952-passport-facebook-latest passport-facebook@latest
+231 silly lockFile 50fcdf9c-passport-twitter-1-0-2 passport-twitter@1.0.2
+232 silly lockFile 50fcdf9c-passport-twitter-1-0-2 passport-twitter@1.0.2
+233 silly lockFile d5de964c-passport-twitter-latest passport-twitter@latest
+234 silly lockFile d5de964c-passport-twitter-latest passport-twitter@latest
+235 info already installed passport-google-oauth@0.1.5
+236 info already installed passport-facebook@1.0.3
+237 info already installed passport-twitter@1.0.2
+238 verbose git fetch -a origin (https://github.com/DaftMonk/grunt-build-control)
+239 verbose git rev-list -n1 master 3d03ebbe49f8f963ef43c50af1084a15f56611fa
+240 verbose resolved git url git+https://github.com/DaftMonk/grunt-build-control#3d03ebbe49f8f963ef43c50af1084a15f56611fa
+241 verbose tar unpack /tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz
+242 silly lockFile 8e21a41b-0-862720547709614-tmp-tgz-unpack tar:///tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz-unpack
+243 verbose lock tar:///tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz-unpack /Users/pio/.npm/8e21a41b-0-862720547709614-tmp-tgz-unpack.lock
+244 silly lockFile fc04698a-404563-0-862720547709614-tmp-tgz tar:///tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz
+245 verbose lock tar:///tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz /Users/pio/.npm/fc04698a-404563-0-862720547709614-tmp-tgz.lock
+246 silly gunzTarPerm modes [ '755', '644' ]
+247 silly gunzTarPerm extractEntry
+248 silly gunzTarPerm modified mode [ '', 509, 493 ]
+249 silly gunzTarPerm extractEntry .gitignore
+250 silly gunzTarPerm modified mode [ '.gitignore', 436, 420 ]
+251 silly gunzTarPerm extractEntry .jshintrc
+252 silly gunzTarPerm modified mode [ '.jshintrc', 436, 420 ]
+253 silly gunzTarPerm extractEntry Gruntfile.js
+254 silly gunzTarPerm modified mode [ 'Gruntfile.js', 436, 420 ]
+255 silly gunzTarPerm extractEntry LICENSE
+256 silly gunzTarPerm modified mode [ 'LICENSE', 436, 420 ]
+257 silly gunzTarPerm extractEntry README.md
+258 silly gunzTarPerm modified mode [ 'README.md', 436, 420 ]
+259 silly gunzTarPerm extractEntry package.json
+260 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+261 silly gunzTarPerm extractEntry tasks/
+262 silly gunzTarPerm modified mode [ 'tasks/', 509, 493 ]
+263 silly gunzTarPerm extractEntry tasks/build_control.js
+264 silly gunzTarPerm modified mode [ 'tasks/build_control.js', 436, 420 ]
+265 silly gunzTarPerm extractEntry test/
+266 silly gunzTarPerm modified mode [ 'test/', 509, 493 ]
+267 silly gunzTarPerm extractEntry test/build_control_test.js
+268 silly gunzTarPerm modified mode [ 'test/build_control_test.js', 436, 420 ]
+269 silly gunzTarPerm extractEntry test/expected/
+270 silly gunzTarPerm modified mode [ 'test/expected/', 509, 493 ]
+271 silly gunzTarPerm extractEntry test/expected/custom_options
+272 silly gunzTarPerm modified mode [ 'test/expected/custom_options', 436, 420 ]
+273 silly gunzTarPerm extractEntry test/expected/default_options
+274 silly gunzTarPerm modified mode [ 'test/expected/default_options', 436, 420 ]
+275 silly gunzTarPerm extractEntry test/fixtures/
+276 silly gunzTarPerm modified mode [ 'test/fixtures/', 509, 493 ]
+277 silly gunzTarPerm extractEntry test/fixtures/123
+278 silly gunzTarPerm modified mode [ 'test/fixtures/123', 436, 420 ]
+279 silly gunzTarPerm extractEntry test/fixtures/testing
+280 silly gunzTarPerm modified mode [ 'test/fixtures/testing', 436, 420 ]
+281 silly lockFile 8e21a41b-0-862720547709614-tmp-tgz-unpack tar:///tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz-unpack
+282 silly lockFile 8e21a41b-0-862720547709614-tmp-tgz-unpack tar:///tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz-unpack
+283 silly lockFile fc04698a-404563-0-862720547709614-tmp-tgz tar:///tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz
+284 silly lockFile fc04698a-404563-0-862720547709614-tmp-tgz tar:///tmp/npm-21405-AzbGV0aN/1423855404563-0.862720547709614/tmp.tgz
+285 silly lockFile 7e4d577b-com-DaftMonk-grunt-build-control https://github.com/DaftMonk/grunt-build-control
+286 silly lockFile 7e4d577b-com-DaftMonk-grunt-build-control https://github.com/DaftMonk/grunt-build-control
+287 error 404 404 Not Found: node-apac
+287 error 404
+287 error 404 'node-apac' is not in the npm registry.
+287 error 404 You should bug the author to publish it
+287 error 404 It was specified as a dependency of 'thesis'
+287 error 404
+287 error 404 Maybe try 'npm search apac'
+287 error 404
+287 error 404 Note that you can also install from a
+287 error 404 tarball, folder, or http url, or git url.
+288 error System Darwin 14.0.0
+289 error command "node" "/usr/local/bin/npm" "install"
+290 error cwd /Users/pio/Documents/cloudsphere/strangeLightning
+291 error node -v v0.10.33
+292 error npm -v 1.4.28
+293 error code E404
+294 verbose exit [ 1, true ]
