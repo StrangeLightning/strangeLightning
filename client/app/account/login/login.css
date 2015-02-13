@@ -21,3 +21,16 @@
   background-color: #fafafa;
   border-color: #ccc;
 }
+
+h4 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.vertical-center {
+  margin-top: 20%;
+}
+
+.facebook{
+  background-color: #3b5998;
+  color: #f7f7f7;
+}
