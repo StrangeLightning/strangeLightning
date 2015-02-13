@@ -17,17 +17,6 @@ Development Team Members:
 * Search Master: Scott Rice
 * 3D Master: Richard VanBreemen
 
-## Development
-
-To install dependencies, from within the project root directory:
-
-```BASH
-sudo npm install -g bower
-npm install
-bower install
-grunt serve 
-```
-
 ## Testing
 ```BASH
 grunt test 
