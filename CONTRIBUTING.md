@@ -2,32 +2,33 @@
 
 1. Fork the repo.
 
-1. Clone to local computer.
+2. Clone to local computer.
 
-1. Add upstream remote
+3. Add upstream remote
 
    `$ git remote add upstream https://github.com/StrangeLightning/strangeLightning.git`
 
-1. Checkout the master branch, if not there already
 
-   These commands will help you do this:
+4. Checkout the master branch, if not there already
 
-   ``` bash
-   # Creates your branch and brings you there
-   git checkout `master`
-   ```
 
-1. Install dependencies
+5. Rebase 
+
+
+6. Install dependencies
 
       From within the project root directory:
       
       ```BASH
-      sudo npm install -g bower
+      sudo npm install -g bower (only do this once)
       npm install
       bower install
       grunt serve 
       ```
-1. Add and commit to your feature branch. (don't push)
+7.  Creates your branch and brings you there
+   git checkout -b `feature_branch`
+
+8. Add and commit to your feature branch. (don't push)
 
    Prefix each commit with the issue number
     - (#2) Added a new feature
@@ -47,7 +48,7 @@
     be a blank line and then a more detailed description of the commit. This can be
     as detailed as you want, so dig into details here and keep the first line short.
 
-1. Add upstream commits to feature branch (make sure you are on feature branch).
+9. Add upstream commits to feature branch (make sure you are on feature branch).
 
    `$ git pull --rebase upstream master`
 
@@ -59,9 +60,9 @@
 
    _After merge conflicts resolves/no conflicts originally._
 
-   `$git push origin dev`
+   `$git push origin feature_branch_you_worked_on`
 
-1. Github Submission
+10. Github Submission
 
       Go to GitHub and send pull request to the StrangeLightning organization branch.
 
@@ -80,13 +81,17 @@
 
       Thanks for contributing! Your changes will then be viewable on the [staging branch](http://staging.sphereable.com)
 
-1. Update your local master.
-
-      `$ git pull upstream master`
+11. Update your local master.
+      `$ git checkout master`
+      `$ git pull --rebase upstream master` 
 
       To start working on next feature
 
+<<<<<<< HEAD
 1. Repeat from step 4.
+=======
+12. Go to step 6.
+>>>>>>> changed contrib
 
 ### References
 
@@ -94,14 +99,14 @@
 
 ### Additional Guidelines
 
-1. Uphold the current code standard:
+ Uphold the current code standard:
     - Keep your code [DRY][].
     - Apply the [boy scout rule][].
     - Follow [STYLE-GUIDE.md](STYLE-GUIDE.md)
-1. Run the [tests][] before submitting a pull request.
-1. Tests are very, very important. Submit tests if your pull request contains
+ Run the [tests][] before submitting a pull request.
+ Tests are very, very important. Submit tests if your pull request contains
    new, testable behavior.
-1. Your pull request is comprised of a single ([squashed][]) commit.
+ Your pull request is comprised of a single ([squashed][]) commit.
 
 ## Checklist:
 
