@@ -17,11 +17,6 @@ Development Team Members:
 * Search Master: Scott Rice
 * 3D Master: Richard VanBreemen
 
-## Testing
-```BASH
-grunt test 
-```
-
 ## Roadmap
 
 View the project roadmap [here](https://github.com/StrangeLightning/strangeLightning/wiki/Roadmap).
@@ -29,3 +24,8 @@ View the project roadmap [here](https://github.com/StrangeLightning/strangeLight
 ## Contributing
 
 See [CONTRIBUTING.md](https://github.com/StrangeLightning/strangeLightning/blob/master/CONTRIBUTING.md) for contribution guidelines.
+
+## Running tests
+```BASH
+grunt test 
+```
