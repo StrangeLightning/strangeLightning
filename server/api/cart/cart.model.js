@@ -3,10 +3,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var ShoppingCartSchema = new Schema({
-  user: String,
+var CartSchema = new Schema({
+  name: String,
   items: String,
   active: Boolean
 });
 
-module.exports = mongoose.model('ShoppingCart', ShoppingCartSchema);
+module.exports = mongoose.model('Cart', CartSchema);

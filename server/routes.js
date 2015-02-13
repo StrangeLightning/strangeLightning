@@ -10,7 +10,7 @@ module.exports = function(app) {
 
   // Insert routes below
   app.use('/api/products', require('./api/amazon'));
-  app.use('/api/carts', require('./api/shoppingCart'));
+  app.use('/api/carts', require('./api/cart'));
   app.use('/api/products', require('./api/product'));
   app.use('/api/showrooms', require('./api/showroom'));
   app.use('/api/vendors', require('./api/vendor'));

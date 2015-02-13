@@ -4,21 +4,21 @@
 
 'use strict';
 
-var ShoppingCart = require('./shoppingCart.model');
+var Cart = require('./cart.model');
 
 exports.register = function(socket) {
-  ShoppingCart.schema.post('save', function (doc) {
+  Cart.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  ShoppingCart.schema.post('remove', function (doc) {
+  Cart.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('shoppingCart:save', doc);
+  socket.emit('cart:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('shoppingCart:remove', doc);
+  socket.emit('cart:remove', doc);
 }
