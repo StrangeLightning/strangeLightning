@@ -5,4 +5,4 @@ client/bower_components
 server/aws/aws.json
 client/index.html
 server/config/local.env.js
-
+npm-debug.log
