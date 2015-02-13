@@ -25,7 +25,7 @@ View the project roadmap [here](https://github.com/StrangeLightning/strangeLight
 
 See [CONTRIBUTING.md](https://github.com/StrangeLightning/strangeLightning/blob/master/CONTRIBUTING.md) for contribution guidelines.
 
-## Running tests
+## Running Tests
 ```BASH
 grunt test 
 ```
