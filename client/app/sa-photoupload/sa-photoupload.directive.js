@@ -7,10 +7,10 @@
 // so look at those repos for specifics about the below directive.
 
 
-angular.module('thesisApp')
-  .directive('saPhotoupload', function() {
+angular.module('badgerApp')
+  .directive('photoupload', function() {
     return {
-      templateUrl: 'app/sa-photoupload/sa-photoupload.html',
+      templateUrl: 'app/sa-photoupload/sa-sa-photoupload.html',
       restrict: 'EA',
       controller: function($scope, $http, $upload, $rootScope, Auth) {
         $scope.imageUploads = [];
