@@ -18,6 +18,16 @@
    git checkout -b `dev`
    ```
 
+1. Install dependencies
+
+      From within the project root directory:
+      
+      ```BASH
+      sudo npm install -g bower
+      npm install
+      bower install
+      grunt serve 
+      ```
 1. Add and commit to your feature branch. (don't push)
 
    Prefix each commit with the issue number
