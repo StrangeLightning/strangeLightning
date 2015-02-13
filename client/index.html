@@ -51,27 +51,6 @@
       </div>
     </div>
     <div ng-include="'components/navbar/navbar.html'"></div>
-
-
-
-
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '892312047480917',
-          xfbml      : true,
-          version    : 'v2.2'
-        });
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
     <!--[if lt IE 9]>
       <script src="bower_components/es5-shim/es5-shim.js"></script>
       <script src="bower_components/json3/lib/json3.min.js"></script>
