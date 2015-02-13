@@ -21,6 +21,11 @@ function isAuthenticated() {
       if(req.query && req.query.hasOwnProperty('access_token')) {
         req.headers.authorization = 'Bearer ' + req.query.access_token;
       }
+      console.log("in Auth", req.query, req.headers.authorization);
+      // if(!validateJwt(req, res, next)){
+      //   // console.log('sadf');
+      //   res.end('Improper Login Credentials. Please try to login again.')
+      // }
       validateJwt(req, res, next);
     })
     // Attach user to request
