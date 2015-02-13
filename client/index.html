@@ -45,10 +45,12 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ui-view="" class="page-wrap"></div>
-    <footer class="site-footer">
-      <div ng-include="'components/navbar/navbar.html'"></div>
-    </footer>
+    <div class="container-fluid border">
+      <div class="row">
+        <div ui-view></div>
+      </div>
+    </div>
+    <div ng-include="'components/navbar/navbar.html'"></div>
 
 
 
