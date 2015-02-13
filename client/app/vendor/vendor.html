@@ -1,3 +1,78 @@
-<div class="col-md-12">
-This is the vendor view.
+<div class="container">
+  <div class="row">
+    <h1>Account Settings</h1>
+    <hr>
+
+    <form class="form" name="profileForm" ng-submit="updateProfile(profileForm)">
+      <label><h3>Update Profile</h3></label>
+
+      <div class="form-group">
+        <label>What is Your Name?</label>
+        <input class="form-control has-warning" ng-model="user.name" name="name" required>
+        <span class="help-block" ng-show="profileForm.name.$error.required">Name cannot be blank.</span>
+      </div>
+
+      <div class="form-group">
+        <label>Where do you live?</label>
+        <input class="form-control has-warning" ng-model="user.location" name="location" required>
+        <span class="help-block" ng-show="profileForm.location.$error.required">Location cannot be blank.</span>
+      </div>
+
+      <div id="workerQuestions" ng-if="isWorker">
+        <div class="form-group">
+          <label>What are your skills/professions?</label>
+          <input class="form-control has-warning" ng-model="user.skills" name="skills" required>
+          <span class="help-block"
+                ng-show="profileForm.skills.$error.required">Skills/profession cannot be blank.</span>
+        </div>
+
+        <div class="form-group">
+          <label>What is your hourly rate?</label>
+          <input class="form-control has-warning" ng-model="user.hourly_rate" name="rate"
+                 ng-pattern="/(?=.)^\$?(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/" required>
+          <span class="help-block" ng-show="profileForm.rate.$error.pattern">Please enter a valid number.</span>
+          <span class="help-block" ng-show="profileForm.rate.$error.required">Hourly rate cannot be blank.</span>
+        </div>
+
+        <div class="form-group">
+          <label>Anything else you would like to say about your work?</label>
+          <textarea class="form-control" ng-model="user.summary"></textarea>
+        </div>
+
+      </div>
+
+      <photoupload></photoupload>
+
+      <p class="help-block"> {{ message }} </p>
+
+      <button class="btn btn-lg btn-primary" type="submit">Save Changes</button>
+      <hr>
+    </form>
+
+    <form class="form change-password" name="form" ng-submit="changePassword(form)" novalidate>
+      <label><h3>Change Password</h3></label>
+
+      <div class="form-group">
+        <label>Current Password</label>
+        <input type="password" name="password" class="form-control" ng-model="user.oldPassword">
+      </div>
+
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
+               ng-minlength="{{minPasswordLength}}">
+
+        <p class="help-block"
+           ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+          Password must be at least {{minPasswordLength}} characters.
+        </p>
+      </div>
+
+      <p class="help-block"> {{ message }} </p>
+
+      <button class="btn btn-lg btn-primary" type="submit">Change Password</button>
+    </form>
+
+
+  </div>
 </div>

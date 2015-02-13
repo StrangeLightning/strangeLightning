@@ -1,0 +1,17 @@
+<div class="row photo">
+  <div class="form-group">
+    <label for="photos">Select Image</label>
+    <input id="photos" type="file" class="btn" ng-file-select="onFileSelect($files)" multiple>
+    <div ng-repeat="file in files" class="container">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width:{{file.progress}}%;">
+          {{file.name}} : {{file.progress}}
+        </div>
+      </div>
+      <div ng-repeat="image in imageUploads" class="img-upload">
+        <img ng-src="{{image.location}}" class="profile-pic img-rounded">
+      </div>
+      <button class="btn btn-ttc" type="button" ng-click="abort($index)" ng-show="file.progress != 100">Abort</button>
+    </div>
+  </div>
+</div>
