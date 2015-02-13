@@ -8,14 +8,13 @@
 
    `$ git remote add upstream https://github.com/StrangeLightning/strangeLightning.git`
 
-1. Checkout the dev branch, if not there already
+1. Checkout the master branch, if not there already
 
    These commands will help you do this:
 
    ``` bash
-
    # Creates your branch and brings you there
-   git checkout -b `dev`
+   git checkout `master`
    ```
 
 1. Add and commit to your feature branch. (don't push)
@@ -80,11 +79,11 @@
 
       To start working on next feature
 
-1. Go to step 4.
+1. Repeat from step 4.
 
-      #References
+### References
 
-      http://www.thumbtack.com/engineering/linear-git-history/
+[Linear Git History](http://www.thumbtack.com/engineering/linear-git-history/)
 
 ### Additional Guidelines
 
