@@ -140,6 +140,22 @@ angular.module('thesisApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+      // Changes a user's profile fields (except password).
+      // Returns a {Promise}.
+      editProfile: function(userObject) {
+        return User.editProfile(userObject, function(user) {
+          return user;
+        }).$promise;
+      },
+
+      getImages: function(){
+        return currentUser.img_url;
+      },
+
+      setImages: function(imageUrls){
+        currentUser.img_url = imageUrls[0];
       }
     };
   });
