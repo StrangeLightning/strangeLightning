@@ -4,7 +4,7 @@ var path = require('path');
 var _ = require('lodash');
 var local = {};
 try {
-  local = require('./../local.env.js');
+  local = require('../../config/local.env.js');
 } catch(err) {
   //do nothing
 }
