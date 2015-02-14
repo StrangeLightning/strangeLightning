@@ -94,6 +94,20 @@ exports.me = function(req, res, next) {
 };
 
 /**
+ * Buy a product
+ */
+exports.buy = function(req, res, next) {
+  var buyerId = req.params.id;
+  User.findOne({
+    _id: buyerId
+  }, '-salt -hashedPassword', function(err, buyer) { // don't ever give out the password or salt
+    if (err) return next(err);
+    if (!buyer) return res.json(401);
+    res.json(buyer);
+  });
+};
+
+/**
  * Authentication callback
  */
 exports.authCallback = function(req, res, next) {

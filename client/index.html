@@ -32,6 +32,7 @@
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/cart/cart.css">
       <link rel="stylesheet" href="app/product/product.css">
       <link rel="stylesheet" href="app/showroom/showroom.css">
       <link rel="stylesheet" href="app/vendor/vendor.css">
@@ -51,7 +52,6 @@
       </div>
     </div>
     <div ng-include="'components/navbar/navbar.html'"></div>
-
     <!--[if lt IE 9]>
       <script src="bower_components/es5-shim/es5-shim.js"></script>
       <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -68,7 +68,7 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <!-- endbower -->
-      <script src="socket.io-client/socket.io.js"></script>
+      <script src="components/socket/socket.io.js"></script>
     <!-- endbuild -->
     <!-- build:js({.tmp,client}) app/app.js -->
       <script src="app/app.js"></script>
@@ -81,6 +81,8 @@
       <script src="app/admin/admin.js"></script>
       <script src="app/main/main.controller.js"></script>
       <script src="app/main/main.js"></script>
+      <script src="app/cart/cart.controller.js"></script>
+      <script src="app/cart/cart.js"></script>
       <script src="app/product/product.controller.js"></script>
       <script src="app/product/product.js"></script>
       <script src="app/showroom/showroom.controller.js"></script>

@@ -63,7 +63,7 @@
 
 1. Github Submission
 
-      Go to GitHub and send pull request to the fire-devil organization branch.
+      Go to GitHub and send pull request to the StrangeLightning organization branch.
 
       Please reference in the pull request comment the corresponding issue using the [supported keywords](https://help.github.com/articles/closing-issues-via-commit-messages/).
 
@@ -78,14 +78,11 @@
       someone will look at your code again. If they like it, it will get merged,
       else, just repeat again.
 
-      Thanks for contributing!
+      Thanks for contributing! Your changes will then be viewable on the [staging branch](http://staging.sphereable.com)
 
 1. Update your local master.
 
       `$ git pull upstream master`
-
-      _if pull requests have been accepted to development while yours
-      was pending, please repeat step 5 to sync your fork with fire-devil developent branch_
 
       To start working on next feature
 
