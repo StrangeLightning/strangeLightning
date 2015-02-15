@@ -2,17 +2,18 @@ html, body {
   height: 100%;
   overflow: hidden;
 }
+
 /**
  * Bootstrap Fonts
  */
 
 @font-face {
-    font-family: 'Glyphicons Halflings';
-    src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot');
-    src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
-    url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'),
-    url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
-    url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  font-family: 'Glyphicons Halflings';
+  src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot');
+  src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
 /**
@@ -20,14 +21,14 @@ html, body {
  */
 
 @font-face {
-    font-family: 'FontAwesome';
-    src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
-    src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
-    url('../bower_components/font-awesome/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
-    url('../bower_components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
-    url('../bower_components/font-awesome/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'FontAwesome';
+  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
+  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /**
@@ -35,10 +36,10 @@ html, body {
  */
 
 .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
 
 /**
@@ -46,14 +47,14 @@ html, body {
  */
 
 .btn-separator:after {
-    content: ' ';
-    display: block;
-    float: left;
-    opacity: 0.4;
-    background: #ADADAD;
-    margin: 20px 10px 20px;
-    height: 400px;
-    width: 1px;
+  content: ' ';
+  display: block;
+  float: left;
+  opacity: 0.4;
+  background: #ADADAD;
+  margin: 20px 10px 20px;
+  height: 400px;
+  width: 1px;
 }
 
 /**
@@ -64,6 +65,14 @@ html, body {
   bottom: 0;
   width: 100%;
   background-color: #f9f9f9;
+}
+
+.footer input {
+  margin-top: -12px;
+}
+
+.footer input .input-group-addon span {
+  margin-top: -100px;
 }
 
 /**
@@ -83,6 +92,17 @@ html, body {
   border-left: 1px solid #e2e2e2;
   border-top: 1px solid #e2e2e2;
   border-right: 1px solid #e2e2e2;
+  height: 90%;
+  border-bottom: 1px solid black;
+  background: -webkit-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* Standard syntax (must be last) */
+}
+
+#navbar-buttons {
+  margin-top: -12px;
+  margin-left: 20px;
 }
 
 .navcontainer ul{
