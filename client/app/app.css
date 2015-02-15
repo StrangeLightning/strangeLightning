@@ -1,6 +1,8 @@
 html, body {
   height: 100%;
   overflow: hidden;
+  min-height: 596px;
+  min-width: 980px;
 }
 
 /**
@@ -61,7 +63,7 @@ html, body {
  * Footer
  */
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -72,6 +74,8 @@ html, body {
 
 .footer input .input-group-addon span {
   margin-top: -100px;
+  z-index: 100;
+  background-color: white;
 }
 
 /**
@@ -103,8 +107,6 @@ html, body {
   float: center;
   display: inline;
   width: 1%;
-  float: none;
-  text-align: center;
 }
 
 .navcontainer ul li a {
