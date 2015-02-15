@@ -22,6 +22,7 @@ if(config.seedDB) { require('./server/config/seed'); }
 
 // Setup server
 var app = express();
+
 // var server = require('https').createServer(credentials, app);
 var server = require('http').createServer(app);
 var socketio = require('socket.io')(server, {
