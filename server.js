@@ -25,6 +25,7 @@ var app = express();
 
 // var server = require('https').createServer(credentials, app);
 var server = require('http').createServer(app);
+
 var socketio = require('socket.io')(server, {
   serveClient: (config.env === 'production') ? false : true,
   path: '/socket.io-client'
