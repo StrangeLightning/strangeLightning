@@ -62,12 +62,11 @@ html, body {
 .footer {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  background-color: #f9f9f9;
+  width: 100%;;
 }
 
 /**
- * Footer store button
+ * Footer store buttonv
  */
 .store-btn {
   margin-left: 15px;
@@ -77,9 +76,38 @@ html, body {
  * Styling for the main border in the template
  */
 .border {
-  margin: 20px;
-  height: 700px;
-  border-left: 1px solid #e2e2e2;
-  border-top: 1px solid #e2e2e2;
-  border-right: 1px solid #e2e2e2;
+  height: 90%;
+}
+
+.navcontainer ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.navcontainer ul li { 
+  float: center;
+  display: inline;
+  /*display: table-cell;*/
+  width: 1%;
+  float: none;
+  text-align: center;
+}
+
+.navcontainer ul li a {
+  text-decoration: none;
+  padding: 30px;
+  color: #000;
+  background-color: #fff;
+  font-weight: 600;
+}
+
+.navcontainer ul li a:hover {
+  text-decoration: none;
+  background: #A8DED8;
+  color: #ffffff;
+}
+
+#logo {
+  width: 80px;
 }

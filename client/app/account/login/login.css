@@ -27,10 +27,19 @@ h4 {
   margin-bottom: 50px;
 }
 .vertical-center {
-  margin-top: 20%;
+  margin-top: 10%;
 }
 
-.facebook{
+.facebook {
   background-color: #3b5998;
   color: #f7f7f7;
+}
+
+#loginBackground {
+  width: 50%;
+  min-width: 300px;
+  min-height: 200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #999;
 }
