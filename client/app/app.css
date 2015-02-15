@@ -92,17 +92,12 @@ html, body {
   border-left: 1px solid #e2e2e2;
   border-top: 1px solid #e2e2e2;
   border-right: 1px solid #e2e2e2;
-  height: 90%;
+  height: 81%;
   border-bottom: 1px solid black;
   background: -webkit-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* Standard syntax (must be last) */
-}
-
-#navbar-buttons {
-  margin-top: -12px;
-  margin-left: 20px;
 }
 
 .navcontainer ul{
@@ -114,7 +109,6 @@ html, body {
 .navcontainer ul li {
   float: center;
   display: inline;
-  /*display: table-cell;*/
   width: 1%;
   float: none;
   text-align: center;
@@ -136,4 +130,5 @@ html, body {
 
 #logo {
   width: 80px;
+  background: none;
 }
