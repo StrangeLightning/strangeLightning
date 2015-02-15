@@ -75,6 +75,7 @@ html, body {
 /**
  * Styling for the main border in the template
  */
+
 .border {
   height: 90%;
 }
@@ -85,7 +86,7 @@ html, body {
   list-style-type: none;
 }
 
-.navcontainer ul li { 
+.navcontainer ul li {
   float: center;
   display: inline;
   /*display: table-cell;*/
