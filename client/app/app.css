@@ -62,8 +62,7 @@ html, body {
 .footer {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  background-color: #f9f9f9;
+  width: 100%;;
 }
 
 /**
@@ -76,13 +75,9 @@ html, body {
 /**
  * Styling for the main border in the template
  */
-./*border {
-  margin: 20px;
-  height: 700px;
-  border-left: 1px solid #e2e2e2;
-  border-top: 1px solid #e2e2e2;
-  border-right: 1px solid #e2e2e2;
-}*/
+.border {
+  height: 90%;
+}
 
 .navcontainer ul{
   margin: 0;
@@ -91,59 +86,28 @@ html, body {
 }
 
 .navcontainer ul li { 
-  float: left;
+  float: center;
   display: inline;
-  display: table-cell;
-    width: 1%;
-    float: none;
-    text-align: center;
+  /*display: table-cell;*/
+  width: 1%;
+  float: none;
+  text-align: center;
 }
 
 .navcontainer ul li a {
-
   text-decoration: none;
   padding: 30px;
   color: #000;
   background-color: #fff;
+  font-weight: 600;
 }
 
 .navcontainer ul li a:hover {
   text-decoration: none;
-  padding: 30px;
   background: #A8DED8;
   color: #ffffff;
 }
 
-/*.navbar-simple .brand {
-  padding-top: 15px;
-  padding-bottom: 15px;
+#logo {
+  width: 80px;
 }
-.navbar-simple .navbar-inner {
-  background: #fff;
-  filter: none !important;
-  border-top: 1px solid rgba(0,0,0,0.2);
-}
-.navbar-simple .navbar-inner .nav {
-  float: left;
-}
-
-.navcontainer{
- padding: .2em 1em;
-   list-style-type: none;
-}
-
-.navbar-simple .navbar-inner .nav li a {
-  background: none;
-  color: #777;
-  font-size: 13px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  font-weight: 600;
-}
-.navbar-simple .navbar-inner .nav li a:hover {
-  background: #A8DED8;
-  color: #ffffff;
-}   
-.navbar-simple .navbar-inner .nav li.active a {
-  color: #000000;
-}*/
