@@ -33,3 +33,6 @@ See [CONTRIBUTING.md](https://github.com/StrangeLightning/strangeLightning/blob/
 ```BASH
 grunt test 
 ```
+
+## Throughput
+
