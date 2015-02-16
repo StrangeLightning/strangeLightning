@@ -13,9 +13,10 @@ var config = require('./server/config/environment');
 var https = require('https');
 var fs = require('fs');
 console.log(process.env.NODE_ENV);
+console.log()
 var credentials = {
-  key: process.env.NODE_ENV === 'production' ? fs.readFileSync('../shared/config/ssl.key', 'utf-8') : fs.readFileSync('./shared/config/ssl.key', 'utf-8'),
-  cert: process.env.NODE_ENV === 'production' ? fs.readFileSync('../shared/config/ssl.crt', 'utf-8') : fs.readFileSync('./shared/config/ssl.crt', 'utf-8')
+  key: process.env.KEY || fs.readFileSync('./shared/config/ssl.key', 'utf-8'),
+  cert: process.env.CRT || fs.readFileSync('./shared/config/ssl.crt', 'utf-8')
 };
 
 // Connect to database
