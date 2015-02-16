@@ -22,7 +22,7 @@ try {
     credentials.key = fs.readFileSync('./server/config/server.key', 'utf-8');
     credentials.cert = fs.readFileSync('./server/config/server.crt', 'utf-8');
   } catch(e) {
-    console.log(e);
+    //do nothing
   }
 }
 
