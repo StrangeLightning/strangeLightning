@@ -23,7 +23,7 @@ if(config.seedDB) { require('./server/config/seed'); }
 // Setup server
 var app = express();
 var serverHTTPS = require('https').createServer(credentials, app);
-// var serverHTTP = require('http').createServer(app);
+var serverHTTP = require('http').createServer(app);
 var socketio = require('socket.io')(serverHTTPS, {
   serveClient: (config.env === 'production') ? false : true,
   path: '/socket.io-client'
@@ -37,6 +37,10 @@ require('./server/routes')(app);
 
 // Start server HTTPS
 serverHTTPS.listen(config.port, config.ip, function () {
+  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+});
+
+serverHTTP.listen(80, config.ip, function () {
   // console.log(req.connection.encrypted?true:false);
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
