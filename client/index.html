@@ -21,7 +21,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <!-- endbower -->
     <!-- endbuild -->
@@ -46,33 +46,53 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
+
+
+
+<!-- 
+  --------------------------------------------------------
+  -                        Page                          -
+  --------------------------------------------------------
+ -->
+
     <div class="container-fluid">
       <div class="row">
         <a href="#">
           <img src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png" />
         </a>
         <div ui-view></div>
+
+
       </div>
+
+      <!-- 
+        --------------------------------------------------------
+        -                        Menu                          -
+        --------------------------------------------------------
+       -->
+
+       <nav class="navbar navbar-default navbar-fixed-bottom">
+         <div class="container">
+           <!-- Collect the nav links, forms, and other content for toggling -->
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             <ul class="nav navbar-nav">
+               <li><a href="#">SPHEREABLE</a></li>
+             </ul>
+             <div class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
+               <div class="input-group">
+                 <input type="text" class="form-control" placeholder="Search...">
+                 <span class="input-group-addon" id="basic-addon1">
+                   <span class="glyphicon glyphicon-search"></span>
+                 </span>
+               </div>
+             </div>
+           </div>
+         </div>
+       </nav>
+    
     </div>
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="#">SPHEREABLE</a></li>
-          </ul>
-          <div class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search...">
-              <span class="input-group-addon" id="basic-addon1">
-                <span class="glyphicon glyphicon-search"></span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+
+
     <!--[if lt IE 9]>
       <script src="bower_components/es5-shim/es5-shim.js"></script>
       <script src="bower_components/json3/lib/json3.min.js"></script>
