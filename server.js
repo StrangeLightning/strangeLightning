@@ -22,20 +22,25 @@ if(config.seedDB) { require('./server/config/seed'); }
 
 // Setup server
 var app = express();
-var server = require('https').createServer(credentials, app);
-// var server = require('http').createServer(app);
-var socketio = require('socket.io')(server, {
+var serverHTTPS = require('https').createServer(credentials, app);
+// var serverHTTP = require('http').createServer(app);
+var socketio = require('socket.io')(serverHTTPS, {
   serveClient: (config.env === 'production') ? false : true,
   path: '/socket.io-client'
 });
+app.all('*', function(req,res){
+	console.log('asdf');
+})
 require('./server/config/socketio')(socketio);
 require('./server/config/express')(app);
 require('./server/routes')(app);
 
-// Start server
-server.listen(config.port, config.ip, function () {
+// Start server HTTPS
+serverHTTPS.listen(config.port, config.ip, function () {
+  // console.log(req.connection.encrypted?true:false);
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
+
 
 // Expose app
 exports = module.exports = app;
