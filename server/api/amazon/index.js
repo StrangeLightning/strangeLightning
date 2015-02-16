@@ -17,14 +17,14 @@ function test(req, res, next){
 	});
 	console.log(config.amazon.clientID);
 	opHelper.execute('ItemSearch', {
-	  'Keywords': req.body.term,
-	  'SearchIndex': 'Blended',
-	  'ResponseGroup': 'Similarities,ItemIds,Images,Small'
-	}, function(err, results) {
-		console.log(results);
+		  'Keywords': req.body.term,
+		  'SearchIndex': 'Blended',
+		  'ResponseGroup': 'Similarities,ItemIds,Images,Small'
+		}, function(err, results) {
+			console.log(results);
 		// var r = results.ItemSearchResponse.Items[0].Item[0];
 	    // var r = JSON.stringify(results.ItemSearchResponse);
-	    res.end(JSON.stringify(results));
+	    	res.end(JSON.stringify(results));
 	 //    opHelper.execute('ItemLookup', {
 		//   'ItemId': r.Item[0].ASIN,
 		//   'ResponseGroup': 'Images'
