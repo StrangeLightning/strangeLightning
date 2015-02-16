@@ -84,7 +84,13 @@ html, body {
 /**
  * Styling for the main border in the template
  */
+
 .border {
+  margin: 20px;
+  height: 700px;
+  border-left: 1px solid #e2e2e2;
+  border-top: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
   height: 81%;
   border-bottom: 1px solid black;
   background: -webkit-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Safari 5.1 to 6.0 */

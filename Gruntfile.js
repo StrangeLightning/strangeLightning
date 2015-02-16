@@ -45,13 +45,13 @@ module.exports = function (grunt) {
       },
       prod: {
         options: {
-          script: 'dist/server/app.js'
+          script: 'dist/server.js'
         }
       }
     },
     open: {
       server: {
-        url: 'http://localhost:<%= express.options.port %>'
+        url: 'https://localhost'
       }
     },
     watch: {
@@ -186,7 +186,7 @@ module.exports = function (grunt) {
     // Use nodemon to run server in debug mode with an initial breakpoint
     nodemon: {
       debug: {
-        script: 'server/app.js',
+        script: 'server.js',
         options: {
           nodeArgs: ['--debug-brk'],
           env: {

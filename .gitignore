@@ -3,7 +3,12 @@
 node_modules
 client/bower_components
 client/index.html
+
+# ignore server config files
 server/config/local.env.js
+server/config/server.crt
+server/config/server.key
+
 npm-debug.log
 server.key
 server.crt

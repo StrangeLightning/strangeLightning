@@ -4,7 +4,7 @@ var path = require('path');
 var _ = require('lodash');
 var local = {};
 try {
-  local = require('./../local.env.js');
+  local = require('../../config/local.env.js');
 } catch(err) {
   //do nothing
 }
@@ -51,18 +51,6 @@ var all = {
     clientID:     process.env.FACEBOOK_ID || local.FACEBOOK_ID,
     clientSecret: process.env.FACEBOOK_SECRET || local.FACEBOOK_SECRET,
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
-  },
-
-  twitter: {
-    clientID:     process.env.TWITTER_ID || local.TWITTER_ID,
-    clientSecret: process.env.TWITTER_SECRET || local.TWITTER_SECRET,
-    callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
-  },
-
-  google: {
-    clientID:     process.env.GOOGLE_ID || local.GOOGLE_ID,
-    clientSecret: process.env.GOOGLE_SECRET || local.GOOGLE_SECRET,
-    callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
   },
 
   amazon: {
