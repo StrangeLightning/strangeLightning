@@ -33,6 +33,23 @@ module.exports = function (grunt) {
       client: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
+
+    mochacov: {
+      coverage: {
+        options: {
+          coveralls: true
+        }
+      },
+      test: {
+        options: {
+          reporter: 'spec'
+        }
+      },
+      options: {
+        files: 'test/*.js'
+      }
+    },
+
     express: {
       options: {
         port: process.env.PORT || 9000
@@ -494,6 +511,10 @@ module.exports = function (grunt) {
       }
     },
   });
+
+  // Use to see how much of code is being tested
+  grunt.registerTask('circleci', ['mochacov:coverage']);
+  grunt.registerTask('test', ['mochacov:test']);
 
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function () {
