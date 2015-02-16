@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 var config = require('./server/config/environment');
 var https = require('https');
 var fs = require('fs');
-var credentials = {key: fs.readFileSync(__dirname + '/shared/config/server.key', 'utf-8'), cert: fs.readFileSync(__dirname + '/shared/config/server.crt', 'utf-8')};
+var credentials = {key: fs.readFileSync('./shared/config/server.key', 'utf-8'), cert: fs.readFileSync('./shared/config/server.crt', 'utf-8')};
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
