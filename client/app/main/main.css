@@ -2,6 +2,10 @@
     margin: 20px 0;
 }
 
+#logo {
+  top: 10px;
+}
+
 #banner {
     border-bottom: none;
     margin-top: -20px;
