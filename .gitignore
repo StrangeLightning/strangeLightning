@@ -7,3 +7,4 @@ server/config/local.env.js
 npm-debug.log
 server.key
 server.crt
+shared
