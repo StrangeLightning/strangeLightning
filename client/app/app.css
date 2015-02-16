@@ -1,13 +1,16 @@
 html, body {
   height: 100%;
   overflow: hidden;
+  min-height: 596px;
+  min-width: 980px;
+  font-size: 16px;
 }
 
 /**
  * Bootstrap Fonts
  */
 
-@font-face {
+/*@font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot');
   src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
@@ -15,12 +18,12 @@ html, body {
   url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
   url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
-
+*/
 /**
  *Font Awesome Fonts
  */
 
-@font-face {
+/*@font-face {
   font-family: 'FontAwesome';
   src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
   src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
@@ -30,23 +33,21 @@ html, body {
   font-weight: normal;
   font-style: normal;
 }
-
+*/
 /**
  * App-wide Styles
  */
-
-.browsehappy {
-  margin: 0.2em 0;
+/*.browsehappy {
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
 }
-
+*/
 /**
  * Adds a separator line
  */
 
-.btn-separator:after {
+/*.btn-separator:after {
   content: ' ';
   display: block;
   float: left;
@@ -56,12 +57,12 @@ html, body {
   height: 400px;
   width: 1px;
 }
-
+*/
 /**
  * Footer
  */
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -72,6 +73,8 @@ html, body {
 
 .footer input .input-group-addon span {
   margin-top: -100px;
+  z-index: 100;
+  background-color: white;
 }
 
 /**
@@ -85,12 +88,15 @@ html, body {
  * Styling for the main border in the template
  */
 .border {
-  height: 81%;
-  border-bottom: 1px solid black;
+  /*height: 81%;*/
   background: -webkit-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* Standard syntax (must be last) */
+}
+
+.black {
+  color: #000;
 }
 
 .navcontainer ul{
@@ -99,12 +105,13 @@ html, body {
   list-style-type: none;
 }
 
+.btnWidth{
+  width: 250px
+}
+
 .navcontainer ul li {
   float: center;
   display: inline;
-  width: 1%;
-  float: none;
-  text-align: center;
 }
 
 .navcontainer ul li a {
@@ -118,10 +125,21 @@ html, body {
 .navcontainer ul li a:hover {
   text-decoration: none;
   background: #A8DED8;
-  color: #ffffff;
+  color: #fff;
+}
+
+#search {
+  color: #fff;
+  background-color: #111;
 }
 
 #logo {
+  position: fixed;
+  top: 25px;
+  left: 20px;
   width: 80px;
-  background: none;
+}
+
+#logo:hover {
+  top: 23px;
 }

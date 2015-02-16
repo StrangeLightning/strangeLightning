@@ -33,6 +33,23 @@ module.exports = function (grunt) {
       client: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
+
+    mochacov: {
+      coverage: {
+        options: {
+          coveralls: true
+        }
+      },
+      test: {
+        options: {
+          reporter: 'spec'
+        }
+      },
+      options: {
+        files: 'test/*.js'
+      }
+    },
+
     express: {
       options: {
         port: process.env.PORT || 9000
@@ -51,7 +68,7 @@ module.exports = function (grunt) {
     },
     open: {
       server: {
-        url: 'http://localhost:<%= express.options.port %>'
+        url: 'https://localhost:<%= express.options.port %>'
       }
     },
     watch: {
@@ -200,7 +217,7 @@ module.exports = function (grunt) {
             // opens browser on initial server start
             nodemon.on('config:update', function () {
               setTimeout(function () {
-                require('open')('http://localhost:8080/debug?port=5858');
+                require('open')('https://localhost:8080/debug?port=5858');
               }, 500);
             });
           }
@@ -494,6 +511,10 @@ module.exports = function (grunt) {
       }
     },
   });
+
+  // Use to see how much of code is being tested
+  grunt.registerTask('circleci', ['mochacov:coverage']);
+  grunt.registerTask('test', ['mochacov:test']);
 
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function () {
