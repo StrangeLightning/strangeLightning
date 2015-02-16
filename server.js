@@ -36,8 +36,7 @@ var serverHTTP = require('http').createServer(app);
 
 
 if (process.env.NODE_ENV === 'production') {
-  app.all('*', function(req, res) {
-  	console.log('asdf')
+  app.all('*', function(req, res, next) {
   	if (req.protocol !== 'https') {
   		res.redirect('https://sphereable.com');
   	}
