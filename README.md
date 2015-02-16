@@ -1,5 +1,5 @@
 # strangeLightning
-[![Stories In Progress](https://badge.waffle.io/strangelightning/strangelightning.svg?label=In%20Progress&title=In%20Progress)](http://waffle.io/strangelightning/strangelightning) [![Stories in Done](https://badge.waffle.io/strangelightning/strangelightning.svg?label=Done&title=Done)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning)
+[![Stories In Progress](https://badge.waffle.io/strangelightning/strangelightning.svg?label=In%20Progress&title=In%20Progress)](http://waffle.io/strangelightning/strangelightning) [![Stories in Done](https://badge.waffle.io/strangelightning/strangelightning.svg?label=done&title=Done)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning)
 
 ## Mission Statement
 To create an intuitive 3D shopping experience that smartly recommends products to users.
