@@ -34,9 +34,9 @@ var socketio = require('socket.io')(serverHTTPS, {
 });
 
 app.all('*', function(req, res, next){
-		if (!req.connection.encrypted) {res.redirect('https://sphereable.com')}
-		else {next();
-	}
+    if (!req.connection.encrypted) {res.redirect('https://sphereable.com')}
+    else {next();
+  }
 })
 require('./server/config/socketio')(socketio);
 require('./server/config/express')(app);
@@ -48,9 +48,9 @@ serverHTTPS.listen(process.env.NODE_ENV === 'production' ? 443 : config.port, co
 });
 
 if (process.env.NODE_ENV === 'production') {
-	serverHTTP.listen(80, config.ip, function () {
-    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-	});
+  serverHTTP.listen(80, config.ip, function () {
+  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  });
 }
 
 
