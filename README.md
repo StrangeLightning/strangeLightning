@@ -1,5 +1,5 @@
 # strangeLightning
-[![Stories in Ready](https://badge.waffle.io/strangelightning/strangelightning.svg?label=ready&title=Ready)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning)
+[![Stories In Progress](https://badge.waffle.io/strangelightning/strangelightning.svg?label=In%20Progress&title=In%20Progress)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning)
 
 ## Mission Statement
 To create an intuitive 3D shopping experience that smartly recommends products to users.
@@ -33,3 +33,7 @@ See [CONTRIBUTING.md](https://github.com/StrangeLightning/strangeLightning/blob/
 ```BASH
 grunt test 
 ```
+
+## Throughput
+
+[![Throughput Graph](https://graphs.waffle.io/strangelightning/strangelightning/throughput.svg)](https://waffle.io/strangelightning/strangelightning/metrics)
