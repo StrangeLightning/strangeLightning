@@ -18,6 +18,8 @@ function test(req, res, next){
 	console.log(config.amazon.clientID);
 	opHelper.execute('ItemSearch', {
 	  'Keywords': req.body.term,
+	  'SearchIndex': 'Blended',
+	  'ResponseGroup': 'Similarities,ItemIds'
 	}, function(err, results) {
 		console.log(results);
 		// var r = results.ItemSearchResponse.Items[0].Item[0];
