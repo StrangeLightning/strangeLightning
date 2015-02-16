@@ -1,0 +1,12 @@
+#product-container {
+  margin-top: 45px;
+}
+
+#product {
+  height: 300px;
+  overflow: scroll;
+}
+
+.close {
+  margin-right: 5px;
+}

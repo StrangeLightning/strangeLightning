@@ -53,18 +53,6 @@ var all = {
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
   },
 
-  twitter: {
-    clientID:     process.env.TWITTER_ID || local.TWITTER_ID,
-    clientSecret: process.env.TWITTER_SECRET || local.TWITTER_SECRET,
-    callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
-  },
-
-  google: {
-    clientID:     process.env.GOOGLE_ID || local.GOOGLE_ID,
-    clientSecret: process.env.GOOGLE_SECRET || local.GOOGLE_SECRET,
-    callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
-  },
-
   amazon: {
     clientID:     process.env.AMAZON_ID || local.AMAZON_ID,
     clientSecret: process.env.AMAZON_SECRET || local.AMAZON_SECRET,

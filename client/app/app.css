@@ -64,7 +64,14 @@ html, body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: #f9f9f9;
+}
+
+.footer input {
+  margin-top: -12px;
+}
+
+.footer input .input-group-addon span {
+  margin-top: -100px;
 }
 
 .footer input {
@@ -76,7 +83,7 @@ html, body {
 }
 
 /**
- * Footer store button
+ * Footer store buttonv
  */
 .store-btn {
   margin-left: 15px;
