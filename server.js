@@ -48,12 +48,18 @@ require('./server/routes')(app);
 
 
 if (process.env.NODE_ENV === 'production') {
+  app.all('*', function(req, res) {
+  	if (!req.connection.encrypted) {
+  		res.redirect('https://sphereable.com');
+  	}
+  });
   serverHTTPS.listen(443, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
   serverHTTP.listen(80, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
+
 }
 
 else if (process.env.NODE_ENV === 'development') {
