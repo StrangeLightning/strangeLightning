@@ -36,3 +36,4 @@ grunt test
 
 ## Throughput
 
+[![Throughput Graph](https://graphs.waffle.io/strangelightning/strangelightning/throughput.svg)](https://waffle.io/strangelightning/strangelightning/metrics)
