@@ -37,7 +37,6 @@ require('./server/routes')(app);
 
 // Start server HTTPS
 serverHTTPS.listen(config.port, config.ip, function () {
-  // console.log(req.connection.encrypted?true:false);
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
