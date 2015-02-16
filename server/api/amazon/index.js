@@ -9,21 +9,30 @@ var util = require('util'),
     OperationHelper = require('apac').OperationHelper;
  
 function test(req, res, next){
-	console.log(config.amazon);
-	console.log(config.amazon.clientID, "asdf");
+	// console.log(config.amazon.clientID, "asdf");
 	var opHelper = new OperationHelper({
 	    awsId:     config.amazon.clientID,
 	    awsSecret: config.amazon.clientSecret,
 	    assocId:   config.amazon.clientAccount 
 	});
-
+	console.log(config.amazon.clientID);
 	opHelper.execute('ItemSearch', {
-	  'SearchIndex': 'Books',
-	  'Keywords': 'harry potter'
+	  'Keywords': req.body.term,
+	  'SearchIndex': 'Blended',
+	  'ResponseGroup': 'Similarities,ItemIds'
 	}, function(err, results) {
-	    var r = JSON.stringify(results);
-	    console.log(r);
-	    res.end(r);
+		console.log(results);
+		// var r = results.ItemSearchResponse.Items[0].Item[0];
+	    // var r = JSON.stringify(results.ItemSearchResponse);
+	    res.end(JSON.stringify(results));
+	 //    opHelper.execute('ItemLookup', {
+		//   'ItemId': r.Item[0].ASIN,
+		//   'ResponseGroup': 'Images'
+		// }, function(err, results) {
+		// 	// var r = results.ItemSearchResponse.Items[0];
+		//     // var r = JSON.stringify(results.ItemSearchResponse);
+		//     res.end(JSON.stringify(results));
+		// });
 	});
 
 }
@@ -32,7 +41,7 @@ var router = express.Router();
 router.get('*', test);
 // router.get('/', controller.index);
 // router.get('/:id', controller.show);
-// router.post('/', auth.isAuthenticated(), controller.create);
+router.post('*', test);
 // router.put('/:id', controller.update);
 // router.patch('/:id', controller.update);
 // router.delete('/:id', controller.destroy);

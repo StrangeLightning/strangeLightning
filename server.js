@@ -10,6 +10,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./server/config/environment');
+var https = require('https');
+var fs = require('fs');
+var credentials = {key: fs.readFileSync('server.key', 'utf-8'), cert: fs.readFileSync('server.crt', 'utf-8')};
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -19,7 +22,8 @@ if(config.seedDB) { require('./server/config/seed'); }
 
 // Setup server
 var app = express();
-var server = require('http').createServer(app);
+var server = require('https').createServer(credentials, app);
+// var server = require('http').createServer(app);
 var socketio = require('socket.io')(server, {
   serveClient: (config.env === 'production') ? false : true,
   path: '/socket.io-client'
