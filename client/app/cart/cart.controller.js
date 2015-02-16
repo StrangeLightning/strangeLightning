@@ -6,6 +6,10 @@ angular.module('thesisApp')
     var Kevin = {'name': 'Kevin', 'price':'10.00'}
     var PraneysPalace = {'name':'P', 'price' :'50.00'}
     $scope.items = [food, Kevin, PraneysPalace];
+ 	$scope.getItems = function(){
+ 		cartFactory.getItems();
+ 	}
+ 	//
  	$scope.addItem = function(item){
  		cartFactory.addItem({'name':'asdf', 'price' :'50.00'})
   	}
@@ -15,12 +19,13 @@ angular.module('thesisApp')
   		$scope.totalCharge = $scope.totalCharge - item.price;
   	}
   	$scope.totalCharge = cartFactory.totalCharge($scope.items)
+  	$scope.dropSchema = cartFactory.dropSchema;
   }]).
 factory('cartFactory', ['$http', function($http){
 	var cart = {};
 	cart.addItem = function(item, items){
-		items.push(item)
-		$http.post('/api/server/cart', $scope.item)
+		// items.push(item)
+		$http.post('/api/carts', item)
 			.success(function(data){
 
 			})
@@ -32,6 +37,7 @@ factory('cartFactory', ['$http', function($http){
 	cart.removeItem = function(items, item, totalCharge){
 		items.splice(items.indexOf(item), 1)	
 		totalCharge = totalCharge - item.price
+		$http
 	}
 	cart.totalCharge = function(items){
 		var totalCharge = 0;
@@ -42,6 +48,24 @@ factory('cartFactory', ['$http', function($http){
 		}
 		return totalCharge;
 	}
-	cart.changeTotalCharge
+	cart.getItems = function(){
+		$http.get('/api/carts')
+			.success(function(data){
+				console.log(data)
+			})
+			.error(function(err){
+				console.log("ERROR: ", err)
+			})
+	}
+	cart.dropSchema = function(){
+		$http.delete('/api/carts')
+			.success(function(msg){
+				console.log('Success dropping Schema: ', msg)
+			})
+			.error(function(err){
+				console.log('Error: ', err)
+			})
+	}
 	return cart;
 }])
+

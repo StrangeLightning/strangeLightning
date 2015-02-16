@@ -4,7 +4,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var CartSchema = new Schema({
-  items: String,
+  itemId : String,
+  name : String,
+  price : String
 });
 
 module.exports = mongoose.model('Cart', CartSchema);
