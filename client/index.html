@@ -47,15 +47,32 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container-fluid border">
+    <div class="container-fluid">
       <div class="row">
         <a href="#">
-          <img src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png" id="logo" />
+          <img src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png" />
         </a>
         <div ui-view></div>
       </div>
     </div>
-    <div ng-include="'components/navbar/navbar.html'"></div>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#">SPHEREABLE</a></li>
+          </ul>
+          <div class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search...">
+              <span class="input-group-addon" id="basic-addon1">
+                <span class="glyphicon glyphicon-search"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
     <!--[if lt IE 9]>
       <script src="bower_components/es5-shim/es5-shim.js"></script>
       <script src="bower_components/json3/lib/json3.min.js"></script>
