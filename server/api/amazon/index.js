@@ -19,7 +19,7 @@ function test(req, res, next){
 	opHelper.execute('ItemSearch', {
 	  'Keywords': req.body.term,
 	  'SearchIndex': 'Blended',
-	  'ResponseGroup': 'Similarities,ItemIds'
+	  'ResponseGroup': 'Similarities,ItemIds,Images,Small'
 	}, function(err, results) {
 		console.log(results);
 		// var r = results.ItemSearchResponse.Items[0].Item[0];
