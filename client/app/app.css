@@ -44,6 +44,7 @@ html, body {
 
 #logo {
   position: absolute;
+  z-index: 1000;
   top: 35px;
   left: 50px;
   width: 85px;
