@@ -11,9 +11,9 @@ OperationHelper = require('apac').OperationHelper;
 function test(req, res, next){
   // console.log(config.amazon.clientID, "asdf");
 	var opHelper = new OperationHelper({
-		1awsId:     config.amazon.clientID,
-		awsSecret: config.amazon.clientSecret,
-		assocId:   config.amazon.clientAccount 
+    1awsId:     config.amazon.clientID,
+    awsSecret: config.amazon.clientSecret,
+    assocId:   config.amazon.clientAccount 
 	});
 	console.log(config.amazon.clientID);
   opHelper.execute('ItemSearch', {
