@@ -14,7 +14,7 @@ function test(req, res, next){
     1awsId:     config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
     assocId:   config.amazon.clientAccount 
-	});
+  });
 	console.log(config.amazon.clientID);
   opHelper.execute('ItemSearch', {
 		'Keywords': req.body.term,
