@@ -31,11 +31,6 @@ var app = express();
 var serverHTTPS = require('https').createServer(credentials, app);
 var serverHTTP = require('http').createServer(app);
 
-
-// 
-
-
-
 if (process.env.NODE_ENV === 'production') {
   serverHTTPS.listen(443, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
@@ -55,6 +50,7 @@ else if (process.env.NODE_ENV === 'development') {
   });
 }
 
+// Redirect all requests to https
 app.all('*', function(req, res, next) {
   if (req.protocol !== 'https') {
     res.redirect('https://' + req.get('host') + req.originalUrl);
