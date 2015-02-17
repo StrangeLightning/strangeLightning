@@ -21,10 +21,10 @@ html, body {
   left: -10px;
   margin-top: 22px;
   margin-bottom: 15px;
-  font-family: 'Impact', sans-serif;
+  font-family: 'Impact', 'Arial Black', sans-serif, sans-serif;
   padding-right: 15px;
   padding-left: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 15px;  
 }
 
 .title:hover, a {
@@ -34,9 +34,7 @@ html, body {
 .navbar-default .navbar-nav > li > a {
   color: #000;
   padding: 30px;
-  font-family: 'Fjalla One', sans-serif;
-  font-size: 16px;
-  color: black;
+  font-size: 21px;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
@@ -75,6 +73,7 @@ html, body {
 }
 
 .navbar-right .form-control {
+  font-size: 16px;
   border-collapse: collapse;
   background-color: #222;
   color: #fff;
