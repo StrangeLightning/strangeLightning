@@ -36,12 +36,11 @@ var serverHTTP = require('http').createServer(app);
 
 
 if (process.env.NODE_ENV === 'production') {
-  app.all('*', function(req, res) {
-  	console.log('asdf')
-  	if (req.protocol !== 'https') {
-  		res.redirect('https://sphereable.com');
-  	}
-  	else {next();}
+  app.all('*', function(req, res, next) {
+    if (req.protocol !== 'https') {
+      res.redirect('https://' + config.ip);
+    }
+    else {next();}
   });
   serverHTTPS.listen(443, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
@@ -54,10 +53,10 @@ if (process.env.NODE_ENV === 'production') {
 
 else if (process.env.NODE_ENV === 'development') { 
   app.all('*', function(req, res, next) {
-  	if (req.protocol !== 'https') {
-  		res.redirect('https://localhost:4430');
-  	}
-  	else {next();}
+    if (req.protocol !== 'https') {
+      res.redirect('https://localhost:4430');
+    }
+    else {next();}
   });
   serverHTTP.listen(config.port, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
