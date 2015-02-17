@@ -10,7 +10,7 @@ html, body {
 }
 
 .navbar-default .navbar-nav > li > a {
-  margin-left: -125px;
+  /* margin-left: -125px; */
   color: black;
 }
 
@@ -19,6 +19,11 @@ html, body {
   background: #A8DED8;
 }
 
-.navbar-right {
-  margin-right: -125px;
+#splash {
+  margin-top: -100px;
+  text-align: center;
+}
+
+#splash img {
+  margin: 0 auto;
 }
