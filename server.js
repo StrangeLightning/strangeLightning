@@ -41,11 +41,12 @@ if (process.env.NODE_ENV === 'production') {
 
 }
 
-else if (process.env.NODE_ENV === 'development') { 
-  serverHTTP.listen(config.port, config.ip, function () {
+else if (process.env.NODE_ENV === 'development') {
+  serverHTTP.listen(9000, "localhost", function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
-  serverHTTPS.listen(4430, config.ip, function () {
+
+  serverHTTPS.listen(4430, "localhost", function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
 }
