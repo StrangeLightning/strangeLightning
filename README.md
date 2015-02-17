@@ -7,7 +7,7 @@ To create an intuitive 3D shopping experience that smartly recommends products t
 ## Team
 
 * Product Owner and Recommendation's Engine Lead: Pranay Sangani
-* Scrum Master and Lead Designer: Kevin Primat
+* Scrum Master and Three.js Lead: Kevin Primat
 * Testing Lead: Tole Liberman
 * Dev Ops Lead: Scott Rice
 * Environment Lead: Richard VanBreemen
