@@ -10,21 +10,21 @@ OperationHelper = require('apac').OperationHelper;
 
 function test(req, res, next){
   // console.log(config.amazon.clientID, "asdf");
-	var opHelper = new OperationHelper({
+  var opHelper = new OperationHelper({
     1awsId:     config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
     assocId:   config.amazon.clientAccount 
   });
-	console.log(config.amazon.clientID);
+  console.log(config.amazon.clientID);
   opHelper.execute('ItemSearch', {
-		'Keywords': req.body.term,
-		'SearchIndex': 'Blended',
-		'ResponseGroup': 'Similarities,ItemIds,Images,Small'
-	}, function(err, results) {
-		console.log(results);
+    'Keywords': req.body.term,
+    'SearchIndex': 'Blended',
+    'ResponseGroup': 'Similarities,ItemIds,Images,Small'
+  }, function(err, results) {
+    console.log(results);
 		// var r = results.ItemSearchResponse.Items[0].Item[0];
 		// var r = JSON.stringify(results.ItemSearchResponse);
-		res.end(JSON.stringify(results));
+    res.end(JSON.stringify(results));
  //    opHelper.execute('ItemLookup', {
 	//   'ItemId': r.Item[0].ASIN,
 	//   'ResponseGroup': 'Images'
