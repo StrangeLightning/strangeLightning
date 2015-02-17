@@ -7,10 +7,10 @@
 var Cart = require('./cart.model');
 
 exports.register = function(socket) {
-  Cart.schema.post('save', function (doc) {
+  Cart.schema.post('save', function(doc) {
     onSave(socket, doc);
   });
-  Cart.schema.post('remove', function (doc) {
+  Cart.schema.post('remove', function(doc) {
     onRemove(socket, doc);
   });
 }
