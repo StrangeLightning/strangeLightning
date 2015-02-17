@@ -6,16 +6,11 @@ To create an intuitive 3D shopping experience that smartly recommends products t
 
 ## Team
 
-Product Owner:
-* Pranay Sangani
-
-Scrum Master: 
-* Kevin Primat
-
-Development Team Members:
-* Angular Master: Tole Liberman
-* Search Master: Scott Rice
-* 3D Master: Richard VanBreemen
+* Product Owner and Recommendation's Engine Lead: Pranay Sangani
+* Scrum Master and Lead Designer: Kevin Primat
+* Testing Lead: Tole Liberman
+* Dev Ops Lead: Scott Rice
+* Environment Lead: Richard VanBreemen
  
 ## Demo
 
