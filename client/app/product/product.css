@@ -10,15 +10,12 @@
   width: 100%;
 }
 
-#amazon-image {
-  width: 95%;
-}
-
 #product {
-  height: 300px;
+  padding: 30px;
   overflow: scroll;
 }
 
 .close {
-  margin-right: 5px;
+  position: relative;
+  top: -3px;
 }
