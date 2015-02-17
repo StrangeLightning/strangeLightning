@@ -1,4 +1,4 @@
-# strangeLightning
+# Sphereable
 [![Stories In Progress](https://badge.waffle.io/strangelightning/strangelightning.svg?label=In%20Progress&title=In%20Progress)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning) [![Coverage Status](https://coveralls.io/repos/kxprim/strangeLightning/badge.svg)](https://coveralls.io/r/kxprim/strangeLightning)
 
 ## Mission Statement
