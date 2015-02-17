@@ -5,64 +5,25 @@
       <th>Price</th>
       <th>Remove</th>
     </tr>
-    <tr>
-      <td>Men's Shoe</td>
-      <td>$12.99</td>
+    <!-- <button ng-click="addItem({'name':'food', 'price':'20.00'})" type = 'button'>efwefw</button> -->
+    <!-- <button ng-click="getItems()" type = 'button'>getItemsTest</button> -->
+
+    <tr ng-repeat="item in items">
+      <td>{{item.name}}</td>
+      <td>$ {{item.price}}</td>
       <td class="col-md-1">
-        <button type="button" class="close center-block" aria-label="Close">
+        <button ng-click="removeItem(items, item)"  type="button" class="close center-block" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </td>
     </tr>
-    <tr>
-      <td>Men's Shoe</td>
-      <td>$12.99</td>
-      <td>
-        <button type="button" class="close center-block" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>Men's Shoe</td>
-      <td>$12.99</td>
-      <td>
-        <button type="button" class="close center-block" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>Men's Shoe</td>
-      <td>$12.99</td>
-      <td class="col-md-1">
-        <button type="button" class="close center-block" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>Men's Shoe</td>
-      <td>$12.99</td>
-      <td>
-        <button type="button" class="close center-block" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>Men's Shoe</td>
-      <td>$12.99</td>
-      <td>
-        <button type="button" class="close center-block" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </td>
     </tr>
   </table>
   <h3>
-    <span class="label label-default col-md-6 col-md-offset-3">Total: ${{12.99 * 6}}</span>
+    <span class="label label-default col-md-6 col-md-offset-3">Total: ${{charge}}</span>
     <br /><br />
-    <button type="button" class="btn btn-lg btn-danger col-md-6 col-md-offset-3">Pay</button>
+    <form type="button" class="btn btn-lg btn-danger col-md-6 col-md-offset-3">Pay</form>
+    <button ng-click="dropSchema()" type = 'button' class="btn btn-lg btn-danger col-md-6 col-md-offset-3">Clear Cart</button>
+
   </h3>
 </div>
