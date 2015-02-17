@@ -3,6 +3,8 @@ html, body {
   overflow: hidden;
   min-height: 596px;
   min-width: 980px;
+  font-family: 'PT Sans Narrow', sans-serif;
+
   /* Background gradient */
   background: -webkit-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Opera 11.1 to 12.0 */
@@ -46,14 +48,14 @@ html, body {
 
 #logo {
   position: absolute;
-  bottom: 55px;
+  top: 35px;
   left: 50px;
   width: 85px;
 }
 
 #logo:hover {
   position: absolute;
-  bottom: 50px;
+  top: 40px;
 }
 
 #splash {
