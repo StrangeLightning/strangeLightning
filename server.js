@@ -38,7 +38,7 @@ var serverHTTP = require('http').createServer(app);
 if (process.env.NODE_ENV === 'production') {
   app.all('*', function(req, res, next) {
     if (req.protocol !== 'https') {
-      res.redirect('https://' + config.ip);
+      res.redirect('https://sphereable.com');
     }
     else {next();}
   });
