@@ -32,16 +32,11 @@ var serverHTTPS = require('https').createServer(credentials, app);
 var serverHTTP = require('http').createServer(app);
 
 
-// // Start server HTTPS
+// 
+
 
 
 if (process.env.NODE_ENV === 'production') {
-  app.all('*', function(req, res, next) {
-    if (req.protocol !== 'https') {
-      res.redirect('https://sphereable.com');
-    }
-    else {next();}
-  });
   serverHTTPS.listen(443, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
@@ -52,12 +47,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 else if (process.env.NODE_ENV === 'development') { 
-  app.all('*', function(req, res, next) {
-    if (req.protocol !== 'https') {
-      res.redirect('https://localhost:4430');
-    }
-    else {next();}
-  });
   serverHTTP.listen(config.port, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
@@ -65,6 +54,13 @@ else if (process.env.NODE_ENV === 'development') {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
 }
+
+app.all('*', function(req, res, next) {
+  if (req.protocol !== 'https') {
+    res.redirect('https://' + req.get('host') + req.originalUrl);
+  }
+  else {next();}
+});
 
 var socketio = require('socket.io')(serverHTTPS, {
   serveClient: (config.env === 'production') ? false : true,
