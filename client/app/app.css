@@ -1,8 +1,6 @@
 html, body {
   height: 100%;
   overflow: hidden;
-  min-height: 596px;
-  min-width: 980px;
   font-family: 'PT Sans Narrow', sans-serif;
 
   /* Background gradient */

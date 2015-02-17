@@ -1,8 +1,20 @@
 #mainMsg {
-  color: black;
+  color: #000;
+  position: relative;
+  top: 0px;
 }
 
 #splashOuter {
   background-color: white;
-  width: 50;
+  width: 50%;
+}
+
+#cartBox {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50px;
+  width: 70%;
+  padding: 20px;
+  background-color: rgba(255,255,255,0.2);
 }
