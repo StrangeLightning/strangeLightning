@@ -22,10 +22,12 @@
   border-color: #ccc;
 }
 
+/* Risk of conflict with other pages */
 h4 {
   text-align: center;
   margin-bottom: 50px;
 }
+
 .vertical-center {
   margin-top: 10%;
 }
