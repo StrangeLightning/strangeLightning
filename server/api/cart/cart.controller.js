@@ -11,9 +11,11 @@ exports.index = function(req, res) {
   });
 };
 
+
+
 // Get a single cart
 exports.show = function(req, res) {
-  Cart.findById(req.params.id, function (err, cart) {
+  Cart.findOne({'userName': req.params.userName}, function (err, cart) {
     if(err) { return handleError(res, err); }
     if(!cart) { return res.send(404); }
     return res.json(cart);
@@ -23,18 +25,24 @@ exports.show = function(req, res) {
 // Creates a new cart in the DB.
 exports.create = function(req, res) {
   Cart.create(req.body, function(err, cart) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, cart);
+    if(err) { 
+
+      console.log('ERROR IN CREATE ON SERVER SIDE', err)
+      return handleError(res, err); }
+    else{
+      console.log("IN server no error", cart)
+      return res.json(201, cart);
+    }
   });
 };
 
 // Updates an existing cart in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Cart.findById(req.params.id, function (err, cart) {
+  
+  Cart.update({'userName' : req.params.userName}, {'items' : cartItems},{}, function (err, cart) {
     if (err) { return handleError(res, err); }
     if(!cart) { return res.send(404); }
-    var updated = _.merge(cart, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, cart);
@@ -44,9 +52,12 @@ exports.update = function(req, res) {
 
 // Deletes a cart from the DB.
 exports.destroy = function(req, res) {
-  Cart.findById(req.params.id, function (err, cart) {
+  //searches by username which is appended to the file end in serverr
+  Cart.findOne({'userName' : req.params.userName}, function (err, cart) {
     if(err) { return handleError(res, err); }
-    if(!cart) { return res.send(404); }
+    if(!cart) { 
+      console.log('inside server side destroy')
+      return res.send(404); }
     cart.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.send(204);
