@@ -23,6 +23,7 @@
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+      <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -47,23 +48,15 @@
     <![endif]-->
 
 
-
-
-<!-- 
-  --------------------------------------------------------
-  -                        Page                          -
-  --------------------------------------------------------
- -->
-
     <div class="container-fluid">
-      <div class="row">
-        <a href="#">
-          <img src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png" />
-        </a>
+
+      <!-- 
+        --------------------------------------------------------
+        -                        Page                          -
+        --------------------------------------------------------
+       -->
+
         <div ui-view></div>
-
-
-      </div>
 
       <!-- 
         --------------------------------------------------------
@@ -73,15 +66,36 @@
 
        <nav class="navbar navbar-default navbar-fixed-bottom">
          <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <span class="logo">
+              <a href="#">
+                <img id="logo" src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png"></img>
+              </a>
+              <a href="#">
+                <h2 class="title">Sphereable </h2>
+              </a>
+            </span>
+          </div>
+
            <!-- Collect the nav links, forms, and other content for toggling -->
-           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+           <div class="collapse navbar-collapse">
              <ul class="nav navbar-nav">
-               <li><a href="#">SPHEREABLE</a></li>
+               <li><a href="#">About <span class="sr-only">(current)</span></a></li>
+               <li><a href="#">Login</a></li>
+               <li><a href="#">Explore</a></li>
+               <li><a href="#"><span class="glyphicon glyphicon-shopping-cart btnWidth"></span></a></li>
              </ul>
              <div class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
                <div class="input-group">
-                 <input type="text" class="form-control" placeholder="Search...">
-                 <span class="input-group-addon" id="basic-addon1">
+                 <input type="text" class="form-control" placeholder="Search">
+                 <span class="input-group-addon" id="basic-addon1 search">
                    <span class="glyphicon glyphicon-search"></span>
                  </span>
                </div>
@@ -92,6 +106,11 @@
     
     </div>
 
+    <!-- 
+      --------------------------------------------------------
+      -                     Dependencies                     -
+      --------------------------------------------------------
+     -->
 
     <!--[if lt IE 9]>
       <script src="bower_components/es5-shim/es5-shim.js"></script>
