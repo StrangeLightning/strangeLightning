@@ -36,7 +36,6 @@ html, body {
   padding: 30px;
   font-family: 'Fjalla One', sans-serif;
   font-size: 16px;
-  /* margin-left: -125px; */
   color: black;
 }
 
@@ -45,8 +44,20 @@ html, body {
   background: #A8DED8;
 }
 
+#logo {
+  position: absolute;
+  bottom: 55px;
+  left: 50px;
+  width: 85px;
+}
+
+#logo:hover {
+  position: absolute;
+  bottom: 50px;
+}
+
 #splash {
-  margin-top: -100px;
+  margin-top: 0px;
   text-align: center;
 }
 
@@ -57,4 +68,14 @@ html, body {
 .input-group-addon {
   background-color: #000;
   color: #888;
+}
+
+.navbar-right {
+  padding: 12px;
+}
+
+.navbar-right .form-control {
+  border-collapse: collapse;
+  background-color: #222;
+  color: #fff;
 }
