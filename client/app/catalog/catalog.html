@@ -1,5 +1,5 @@
 <div class="row-fluid">
-  
+
   <!-- Sidebar wrapper -->
   <div id="sidebar-wrapper" class="col-sm-2"s>
 
@@ -36,125 +36,18 @@
   <div id="catalog-photos" class="col-sm-10">
     <div class="row">
 
-      <!-- Product info -->
-      <div class="col-sm-4">
+      <div class="col-md-4" ng-repeat="product in $scope.products">
         <div class="thumbnail">
-          <img src="http://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
+          <img src="https://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
           <div class="caption">
-            <h3>Product name</h3>
-            <p>Insert product text here</p>
+            <h3>{{product.title}}</h3>
+            <p>Price: {{product.price}}</p>
             <p>
-              <a href="#" class="btn btn-primary" role="button">Add to Cart</a>
+              <a ng-click="addToCart()" class="btn btn-primary" role="button">Add to Cart</a>
             </p>
           </div>
         </div>
       </div>
-      <!-- End product info -->
-
-      <!-- Product info -->
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="http://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
-          <div class="caption">
-            <h3>Product name</h3>
-            <p>Insert product text here</p>
-            <p>
-              <a href="#" class="btn btn-primary" role="button">Add to Cart</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- End product info -->
-
-      <!-- Product info -->
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="http://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
-          <div class="caption">
-            <h3>Product name</h3>
-            <p>Insert product text here</p>
-            <p>
-              <a href="#" class="btn btn-primary" role="button">Add to Cart</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- End product info -->
-
-      <!-- Product info -->
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="http://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
-          <div class="caption">
-            <h3>Product name</h3>
-            <p>Insert product text here</p>
-            <p>
-              <a href="#" class="btn btn-primary" role="button">Add to Cart</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- End product info -->
-
-      <!-- Product info -->
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="http://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
-          <div class="caption">
-            <h3>Product name</h3>
-            <p>Insert product text here</p>
-            <p>
-              <a href="#" class="btn btn-primary" role="button">Add to Cart</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- End product info -->
-
-      <!-- Product info -->
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="http://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
-          <div class="caption">
-            <h3>Product name</h3>
-            <p>Insert product text here</p>
-            <p>
-              <a href="#" class="btn btn-primary" role="button">Add to Cart</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- End product info -->
-      <!-- Product info -->
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="http://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
-          <div class="caption">
-            <h3>Product name</h3>
-            <p>Insert product text here</p>
-            <p>
-              <a href="#" class="btn btn-primary" role="button">Add to Cart</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- End product info -->
-
-      <!-- Product info -->
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="http://s3-eu-west-1.amazonaws.com/petrus-blog/placeholder.png">
-          <div class="caption">
-            <h3>Product name</h3>
-            <p>Insert product text here</p>
-            <p>
-              <a href="#" class="btn btn-primary" role="button">Add to Cart</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- End product info -->
-
 
     </div>
   </div>
