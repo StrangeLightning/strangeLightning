@@ -3,7 +3,6 @@
   float: right;
   height: 800px;
   overflow-x: hidden;
-  overflow-y: scroll;
   width: 30%;
   min-width: 400px;
   padding: 10px;
@@ -13,15 +12,32 @@
 
 #product-container img {
   margin-top: 15px;
-  width: 100%;
+  width: 40%;
+}
+
+#productImg {
+  margin-left: 28%;
+  margin-right: 25%;
+  margin-bottom: 40px;
 }
 
 #product {
-  padding: 30px;
-  overflow: scroll;
+  padding-left: 40px;
+  padding-right: 25px;
 }
 
 .close {
   position: absolute;
+  z-index: 1000;
   top: 8px;
+}
+
+#innerProduct{
+  position: relative;
+  top: 30px;
+}
+
+#addCartProduct {
+  margin-top: 20px;
+  margin-left: 40px;
 }
