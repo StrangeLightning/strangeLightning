@@ -29,7 +29,7 @@ var UserSchema = new Schema({
   cart: {
     HMAC: String, 
     CartId: String
-  }
+  },
   buyer: [buyerSchema],
   vendor: [vendorSchema]
 
