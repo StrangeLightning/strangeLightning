@@ -32,7 +32,7 @@ exports.searchCart = function (req, res, next) {
         var obj = r2[i];
         var product = {};
         // Sometimes no ItemAttributes Returned
-        if ('ItemAttributes' in r2[i] && 
+        if (obj.ItemAttributes && 
             obj.ItemAttributes[0].ListPrice && 
             obj.MediumImage[0].URL[0] && 
             obj.ItemAttributes[0].Title[0]) {
