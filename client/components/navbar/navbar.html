@@ -47,8 +47,8 @@
         </ul>
         <div class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search">
-              <span class="input-group-addon" id="basic-addon1 search">
+            <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
+              <span class="input-group-addon" id="basic-addon1 search" ng-click="doSearch()">
                 <span class="glyphicon glyphicon-search"></span>
               </span>
           </div>

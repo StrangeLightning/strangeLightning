@@ -32,112 +32,112 @@ angular.module('thesisApp')
       $scope.items = [];
       $scope.charge = parseFloat(0).toFixed(2);
       cartFactory.dropSchema($scope.user);
-    }
+    };
 
-/* Adapt the slide in from product view */
+    /* Adapt the slide in from product view */
 
-/*
-    $scope.product = catalogFactory.product;
-    var block = $(window).height();
-    var navbar = $('.navbar').height();
-    $('#product-container').css({
-      height: block - navbar
-    });
+    /*
+        $scope.product = catalogFactory.product;
+        var block = $(window).height();
+        var navbar = $('.navbar').height();
+        $('#product-container').css({
+          height: block - navbar
+        });
 
-    $scope.close = function() {
-      $('#product-container').animate({
-        'margin-right': '-=1000'
-      }, 500);
-    }
-*/
+        $scope.close = function() {
+          $('#product-container').animate({
+            'margin-right': '-=1000'
+          }, 500);
+        }
+    */
 
-  }]).
-factory('cartFactory', ['$http', function($http) {
-  // console.log(Auth.getCurrentUser(), "CURRENTUSER")
+  }])
 
-  var cart = {};
+  .factory('cartFactory', ['$http', function($http) {
+    // console.log(Auth.getCurrentUser(), "CURRENTUSER")
 
-  //add item to db
-  cart.addItem = function(items, item, user) {
+    var cart = {};
 
-    //push item into local item array
-    items.push(item);
+    //add item to db
+    cart.addItem = function(items, item, user) {
 
-    //if it's the first item create a row
-    if (items.length === 1) {
-      $http.put('/api/carts/name/' + user, items)
-        .success(function(data) {
-          console.log('successful res  from client create', data)
+      //push item into local item array
+      items.push(item);
 
-        })
-        .error(function(err) {
-          console.log("ERROR from client Create: ", err)
-        })
-    } else {
-      //if  not the first item update  the row
-      console.log(items, "ITEMS IN CLIENT UPDATE")
+      //if it's the first item create a row
+      if(items.length === 1) {
+        $http.put('/api/carts/name/' + user, items)
+          .success(function(data) {
+            console.log('successful res  from client create', data)
 
+          })
+          .error(function(err) {
+            console.log("ERROR from client Create: ", err)
+          })
+      } else {
+        //if  not the first item update  the row
+        console.log(items, "ITEMS IN CLIENT UPDATE")
+        $http.post('/api/carts/name/' + user, items)
+          .success(function(data) {
+            console.log('successful res  from client', data)
+
+          })
+          .error(function(err) {
+            console.log("ERROR: ", err)
+          })
+      }
+      return items
+    };
+
+    //removes item locally and from db
+    cart.removeItem = function(items, item, user) {
+      //remove item from items locally
+      items.splice(items.indexOf(item), 1);
+
+      //add to db
       $http.post('/api/carts/name/' + user, items)
         .success(function(data) {
-          console.log('successful res  from client', data)
+          console.log('successful res from client', data)
 
         })
         .error(function(err) {
-          console.log("ERROR: ", err)
+          console.log("ERROR REMOVING ITEM: ", err)
+        });
+
+      console.log(items);
+      return items;
+    };
+    //calculate price of items in local cart
+    cart.totalCharge = function(items) {
+      var totalCharge = 0;
+      for(var i = 0; i < items.length; i++) {
+        totalCharge = totalCharge + parseFloat(items[i].price);
+      }
+
+      return totalCharge.toFixed(2);
+    };
+
+    cart.getItems = function(user) {
+      $http.get('/api/carts/name/' + user)
+        .success(function(data) {
+          console.log(data);
+          return data
         })
-    }
-    return items
-  };
+        .error(function(err) {
+          console.log("ERROR: ", err);
+        })
 
-  //removes item locally and from db
-  cart.removeItem = function(items, item, user) {
-    //remove item from items locally
-    items.splice(items.indexOf(item), 1);
-
-    //add to db
-    $http.post('/api/carts/name/' + user, items)
-      .success(function(data) {
-        console.log('successful res from client', data)
-
-      })
-      .error(function(err) {
-        console.log("ERROR REMOVING ITEM: ", err)
-      });
-
-    console.log(items);
-    return items;
-  };
-  //calculate price of items in local cart
-  cart.totalCharge = function(items) {
-    var totalCharge = 0;
-    for (var i = 0; i < items.length; i++) {
-      totalCharge = totalCharge + parseFloat(items[i].price);
-    }
-
-    return totalCharge.toFixed(2);
-  };
-
-  cart.getItems = function(user) {
-    $http.get('/api/carts/name/' + user)
-      .success(function(data) {
-        console.log(data);
-        return data
-      })
-      .error(function(err) {
-        console.log("ERROR: ", err);
-      })
-
-  };
-  //clear items for user locally and in db
-  cart.dropSchema = function(user) {
-    $http.delete('/api/carts/name/' + user)
-      .success(function(msg) {
-        console.log('Success dropping Schema: ', msg);
-      })
-      .error(function(err) {
-        console.log('Error: ', err);
-      })
-  };
-  //return the CartFactory object
-  return cart;
-}]);
+    };
+    //clear items for user locally and in db
+    cart.dropSchema = function(user) {
+      $http.delete('/api/carts/name/' + user)
+        .success(function(msg) {
+          console.log('Success dropping Schema: ', msg);
+        })
+        .error(function(err) {
+          console.log('Error: ', err);
+        })
+    };
+    //return the CartFactory object
+    return cart;
+  }]);
