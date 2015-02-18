@@ -20,9 +20,13 @@ a:hover, a:visited {
 }
 
 .thumbnail {
-  border: 0;
+  border: 1px solid black;
   border-radius: 0;
+  padding: 25px;
   margin: 5px;
+  background: none;
+  height: 400px;
+  overflow: hidden;
 }
 
 .container-fluid {

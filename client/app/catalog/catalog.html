@@ -37,11 +37,13 @@
     
       <div class="col-md-4" ng-repeat="product in products">
         <div class="thumbnail">
-          <img src="{{product.mediumImage}}">
+          <div class="imgBkg">
+            <img class="centerImg" src="{{product.mediumImage}}" />
+          </div>
+          
           <div class="caption">
-            <h3>{{product.title}}</h3>
+            <h4>{{product.title}}</h4>
             <p>Price: {{product.price}}</p>
-            <p>
               <a ng-click="addToCart()" class="btn btn-primary" role="button">Add to Cart</a>
               <a ng-click="viewItem(product)" class="btn btn-primary" role="button">View Product</a>
 

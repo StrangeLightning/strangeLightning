@@ -2,12 +2,24 @@ html {
   overflow: scroll;
 }
 
+.imgBkg {
+  padding: 15px;
+  height: 200px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.centerImg {
+  top: 10px;
+}
+
 /* Custom buttons for catalog */
 .btn {
   color: black;
   border: 1px solid #999;
   border-radius: 0;
   background-color: #999;
+  margin: 0 auto;
 }
 
 .btn:hover {
@@ -18,7 +30,7 @@ html {
 
 /* Grid of Amazon products */
 #catalog-photos {
-  height: 620px;
+  height: 800px;
   overflow: scroll;
   margin-top: 20px;
 }
