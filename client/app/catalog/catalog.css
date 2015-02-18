@@ -1,27 +1,34 @@
 html {
   overflow: scroll;
-  margin: 0;
 }
-li {
-  margin: 0;
+
+/* Custom buttons for catalog */
+.btn {
+  color: black;
+  border: 1px solid #999;
+  border-radius: 0;
+  background-color: #999;
+}
+
+.btn:hover {
+  color: black;
+  border: 1px solid #999;
+  background-color: #D7F5F5;
+}
+
+/* Grid of Amazon products */
+#catalog-photos {
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 #sidebar-wrapper {
   height: 1000px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  /*min-width: 300px;*/
   background-color: rgba(255, 255, 255, 0.2);
   margin-left: 0px;
 }
 
-#catalog-photos {
-  height: 100%;
-  overflow: scroll;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
-/* Sidebar Styles */
+/* Sidebar for search filters */
 
 .sidebar-nav {
   position: relative;
