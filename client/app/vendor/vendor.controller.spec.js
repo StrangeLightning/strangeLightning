@@ -5,7 +5,7 @@ describe('Controller: AboutCtrl', function () {
   // load the controller's module
   beforeEach(module('thesisApp'));
 
-  var AboutCtrl, scope;
+  var VendorCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
