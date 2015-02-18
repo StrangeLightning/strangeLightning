@@ -41,7 +41,8 @@ exports.create = function(req, res) {
   var cart = new Cart({
     'userName': req.params.userName,
     'items': req.body.items
-  })
+  });
+
   Cart.create(req.body, function(err, cart) {
     if (err) {
 
