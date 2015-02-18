@@ -45,26 +45,49 @@ angular.module('thesisApp')
     }
   }]).
 factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
+  // console.log(Auth.getCurrentUser(), "CURRENTUSER")
 
   var cart = {};
   cart.addItem = function(items, item) {
-    // console.log(Auth.getCurrentUser();
-    //adds item to local $item.list
+    console.log(Auth.getCurrentUser());
+    //adds item to) local $item.list
+
     items.push(item);
+    if (items.length === 1) {
+      $http.put('/api/carts/name/greatScott', items)
+        .success(function(data) {
+          console.log('successful res  from client create', data)
 
-    //
-    // $http.patch('/api/carts/name/greatScott', items)
-    //  .success(function(data){
-    //      console.log('successful res  from client', data)    
+        })
+        .error(function(err) {
+          console.log("ERROR from client Create: ", err)
+        })
+    } else {
+      //
+      console.log(items, "ITEMS IN CLIENT UPDATE")
 
-    //  })
-    //  .error(function(err){
-    //      console.log("ERROR: ", err)
-    //  })
+      $http.post('/api/carts/name/greatScott', items)
+        .success(function(data) {
+          console.log('successful res  from client', data)
+
+        })
+        .error(function(err) {
+          console.log("ERROR: ", err)
+        })
+    }
     return items
   }
   cart.removeItem = function(items, item, totalCharge) {
     items.splice(items.indexOf(item), 1);
+    console.log("REMOVE PRESS POST", items, item, totalCharge)
+    $http.post('/api/carts/name/greatScott', items)
+      .success(function(data) {
+        console.log('successful res  from client', data)
+
+      })
+      .error(function(err) {
+        console.log("ERROR REMOVING ITEM: ", err)
+      })
 
     console.log(items);
     // $http.patch('userName')
@@ -82,17 +105,17 @@ factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
   };
 
   cart.getItems = function() {
-      // $http.get('/api/carts/name/greatScott')
-      //   .success(function(data) {
-      //     console.log(data)
-      //   })
-      //   .error(function(err) {
-      //     console.log("ERROR: ", err)
-      //   })
-    }
-    //clear local items 
+    $http.get('/api/carts/name/greatScott')
+      .success(function(data) {
+        console.log(data);
+      })
+      .error(function(err) {
+        console.log("ERROR: ", err);
+      })
+  };
+  //clear local items
   cart.dropSchema = function() {
-    $http.delete('/api/carts/name/test')
+    $http.delete('/api/carts/name/greatScott')
       .success(function(msg) {
         console.log('Success dropping Schema: ', msg);
       })
