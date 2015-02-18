@@ -57,13 +57,13 @@ app.all('*', function(req, res, next) {
   else {next();}
 });
 
-// For POSTMAN TESTING
+// // For POSTMAN TESTING
 // app.all('*', function(req, res, next) {
 //   console.log(req.url);
 //   next();
 // });
 
-// serverHTTP.listen(config.port, config.ip, function () {
+// serverHTTP.listen(9000, config.ip, function () {
 //     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 // });
 
