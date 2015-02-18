@@ -21,7 +21,8 @@ exports.searchCart = function (req, res, next) {
       'Keywords': req.body.term,
       'SearchIndex': 'Blended',
       'ItemPage': '1',
-      'ResponseGroup': 'Similarities,ItemIds,ItemAttributes,Images'
+      'TruncateReviewsAt' : '0',
+      'ResponseGroup': 'Similarities,ItemIds,ItemAttributes,Images,Reviews'
     }, function(err, results) {
       var _results = [];
       var r = results.ItemSearchResponse.Items[0];
@@ -31,17 +32,21 @@ exports.searchCart = function (req, res, next) {
       while (_results.length < 12) {
         var obj = r2[i];
         var product = {};
+        // console.log(obj);
         // Sometimes no ItemAttributes Returned
         if (obj.ItemAttributes &&
             obj.ItemAttributes[0].ListPrice &&
             obj.ItemAttributes[0].Title &&
-            obj.MediumImage) {
+            obj.MediumImage && 
+            obj.CustomerReviews && 
+            obj.CustomerReviews[0].IFrameURL) {
           product.id = obj.ASIN[0];
           product.price = obj.ItemAttributes[0].ListPrice[0].FormattedPrice[0];
           product.title = obj.ItemAttributes[0].Title[0];
-          // product.smallImage = obj.SmallImage[0].URL[0];
           product.mediumImage = obj.MediumImage[0].URL[0];
+          // product.smallImage = obj.SmallImage[0].URL[0];
           // product.largeImage = obj.LargeImage[0].URL[0];
+          product.reviews = obj.CustomerReviews[0].IFrameURL[0];
           _results.push(product);
         }
         i++;
