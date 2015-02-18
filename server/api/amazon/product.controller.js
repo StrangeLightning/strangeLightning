@@ -34,8 +34,8 @@ exports.searchCart = function (req, res, next) {
         // Sometimes no ItemAttributes Returned
         if (obj.ItemAttributes && 
             obj.ItemAttributes[0].ListPrice && 
-            obj.MediumImage[0] && 
-            obj.ItemAttributes[0].Title[0]) {
+            obj.ItemAttributes[0].Title &&
+            obj.MediumImage) {
           product.id = obj.ASIN[0];
           product.price = obj.ItemAttributes[0].ListPrice[0].FormattedPrice[0];
           product.title = obj.ItemAttributes[0].Title[0];
