@@ -34,7 +34,7 @@ exports.searchCart = function (req, res, next) {
         // Sometimes no ItemAttributes Returned
         if (obj.ItemAttributes && 
             obj.ItemAttributes[0].ListPrice && 
-            obj.MediumImage[0].URL[0] && 
+            obj.MediumImage[0] && 
             obj.ItemAttributes[0].Title[0]) {
           product.id = obj.ASIN[0];
           product.price = obj.ItemAttributes[0].ListPrice[0].FormattedPrice[0];
@@ -44,7 +44,6 @@ exports.searchCart = function (req, res, next) {
           // product.largeImage = obj.LargeImage[0].URL[0];
           _results.push(product);
         }
-
         i++;
       }
       res.end(JSON.stringify({time: new Date().getTime() - t, data: _results}));
