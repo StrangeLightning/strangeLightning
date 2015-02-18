@@ -1,8 +1,18 @@
 'use strict';
 
 angular.module('thesisApp')
+<<<<<<< HEAD
   .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', function($scope, cartFactory, catalogFactory) {
     $scope.addToCart = cartFactory.addItem;
+=======
+  .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', function($scope, cartFactory, catalogFactory, $http) {
+    $scope.addToCart = cartFactory.amazonCreateCart;
+    $scope.amazonCart = cartFactory.amazonCart;
+    $scope.getCartItems = function() {
+      console.log("CART FACTORY'S PROP", cartFactory.amazonCart.CardId)
+      cartFactory.amazonGetCart(cartFactory.amazonCart[CartId][0], cartFactory.amazonCart[HMCA][0]);
+    }
+>>>>>>> get working
     $scope.viewItem = function(product) {
       catalogFactory.product = product;
       catalogFactory.viewItem(product);
@@ -17,6 +27,7 @@ angular.module('thesisApp')
       return img;
     };
 
+<<<<<<< HEAD
     //initially, if products empty, then call search to show items
     if(!$scope.products){
       catalogFactory.doSearch('shoes', function(newProducts){
@@ -28,6 +39,15 @@ angular.module('thesisApp')
     //listen for products-updated event, which is broadcasted from navbar.controller.js
     $scope.$on('products-updated', function(event, args) {
       $scope.products = args.newProducts;
+=======
+    //init
+    $http.post('/api/amazonproducts/').
+    success(function(results) {
+      $scope.products = results.data;
+    }).
+    error(function(err) {
+      console.log(err);
+>>>>>>> get working
     });
   }])
 

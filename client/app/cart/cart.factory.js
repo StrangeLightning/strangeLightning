@@ -1,62 +1,6 @@
-'use strict';
-
 angular.module('thesisApp')
-  .controller('CartCtrl', ['$scope', 'cartFactory', 'Auth', function($scope, cartFactory, Auth) {
-
-    //where local items are stored
-
-    $scope.items = [];
-    $scope.user = Auth.getCurrentUser().email;
-    //returns all items from db schema,
-    $scope.getItems = function() {
-      return cartFactory.getItems($scope.user);
-    };
-
-    //add item to db
-    $scope.addItem = function(item) {
-      $scope.items = cartFactory.addItem($scope.items, item, $scope.user);
-      $scope.charge = (parseFloat($scope.charge) + parseFloat(item.price)).toFixed(2);
-    };
-    //remove item locally and from db
-    $scope.removeItem = function(items, item) {
-      $scope.charge = (parseFloat($scope.charge) - parseFloat(item.price)).toFixed(2);
-      $scope.items = cartFactory.removeItem($scope.items, item, $scope.user);
-
-    };
-    //scope.charge is rendered total price on screen
-    //cartFactory.totalCharge calculates total price of items
-    $scope.charge = cartFactory.totalCharge($scope.items);
-
-    //clear items locally and drop schema
-    $scope.dropSchema = function() {
-      $scope.items = [];
-      $scope.charge = parseFloat(0).toFixed(2);
-      cartFactory.dropSchema($scope.user);
-    };
-
-    /* Adapt the slide in from product view */
-
-    /*
-        $scope.product = catalogFactory.product;
-        var block = $(window).height();
-        var navbar = $('.navbar').height();
-        $('#product-container').css({
-          height: block - navbar
-        });
-
-<<<<<<< HEAD
-        $scope.close = function() {
-          $('#product-container').animate({
-            'margin-right': '-=1000'
-          }, 500);
-        }
-    */
-
-  }])
-
-  .factory('cartFactory', ['$http', function($http) {
+  .factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
     // console.log(Auth.getCurrentUser(), "CURRENTUSER")
-
     var cart = {};
 
     //add item to db
@@ -66,7 +10,7 @@ angular.module('thesisApp')
       items.push(item);
 
       //if it's the first item create a row
-      if(items.length === 1) {
+      if (items.length === 1) {
         $http.put('/api/carts/name/' + user, items)
           .success(function(data) {
             console.log('successful res  from client create', data)
@@ -78,6 +22,7 @@ angular.module('thesisApp')
       } else {
         //if  not the first item update  the row
         console.log(items, "ITEMS IN CLIENT UPDATE")
+
         $http.post('/api/carts/name/' + user, items)
           .success(function(data) {
             console.log('successful res  from client', data)
@@ -111,7 +56,7 @@ angular.module('thesisApp')
     //calculate price of items in local cart
     cart.totalCharge = function(items) {
       var totalCharge = 0;
-      for(var i = 0; i < items.length; i++) {
+      for (var i = 0; i < items.length; i++) {
         totalCharge = totalCharge + parseFloat(items[i].price);
       }
 
@@ -140,8 +85,51 @@ angular.module('thesisApp')
         })
     };
     //return the CartFactory object
+
+    ////AMAZON CART FUNCTIONALITY
+
+    cart.amazonGetCart = function() {
+      console.log(cart.amazonCart)
+      $http.post('/api/amazoncarts/get', {
+          'cartId': cart.amazonCart['CartId'][0],
+          'HMAC': cart.amazonCart['HMAC'][0]
+        })
+        .success(function(data) {
+          console.log('cart from AMAZON:  ', data);
+
+        })
+        .error(function(err) {
+          console.log("ERROR getting Cart ", err);
+        });
+    }
+    cart.amazonAddProduct = function(itemId, product, cartId, HMAC, newQuantity) {
+      $http.post('/api/amazoncarts/modify', {
+          'id': itemId,
+          'productId': product
+        })
+        .success(function(data) {
+          console.log('successful res from AMAZON client', data)
+
+        })
+        .error(function(err) {
+          console.log("ERROR creating Cart ", err)
+        });
+
+    }
+    cart.amazonCreateCart = function(itemId) {
+      // console.log(Auth.getCurrentUser().id)
+
+      $http.post('/api/amazoncarts/create', {
+          'id': itemId
+        })
+        .success(function(data) {
+          console.log('successful res from AMAZON client', data)
+          cart.amazonCart = data;
+        })
+        .error(function(err) {
+          console.log("ERROR creating Cart ", err)
+        });
+    }
+
     return cart;
   }]);
-=======
-  }])
->>>>>>> get working
