@@ -1,24 +1,80 @@
 html, body {
   height: 100%;
   overflow: hidden;
-  min-height: 596px;
-  min-width: 980px;
+  font-family: 'PT Sans Narrow', sans-serif;
+
+  /* Background gradient */
   background: -webkit-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* Standard syntax (must be last) */
 }
 
+/**
+ *
+ * Navbar specific
+ *
+*/
+
+.title {
+  color: #000;
+  left: -10px;
+  margin-top: 22px;
+  margin-bottom: 15px;
+  font-family: 'Impact', 'Arial Black', sans-serif, sans-serif;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;  
+}
+
+.title:hover, a {
+  color: #A8DED8;
+}
+
 .navbar-default .navbar-nav > li > a {
-  margin-left: -125px;
-  color: black;
+  color: #000;
+  padding: 30px;
+  font-size: 21px;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  color: white;
+  color: #fff;
   background: #A8DED8;
 }
 
+#logo {
+  position: absolute;
+  top: 35px;
+  left: 50px;
+  width: 85px;
+}
+
+#logo:hover {
+  position: absolute;
+  top: 40px;
+}
+
+#splash {
+  margin-top: 0px;
+  text-align: center;
+}
+
+#splash img {
+  margin: 0 auto;
+}
+
+.input-group-addon {
+  background-color: #000;
+  color: #888;
+}
+
 .navbar-right {
-  margin-right: -125px;
+  padding: 12px;
+}
+
+.navbar-right .form-control {
+  font-size: 16px;
+  border-collapse: collapse;
+  background-color: #222;
+  color: #fff;
 }

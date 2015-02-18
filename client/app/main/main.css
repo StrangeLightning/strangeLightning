@@ -1,52 +1,20 @@
-.thing-form {
-    margin: 20px 0;
+#mainMsg {
+  color: #000;
+  position: relative;
+  top: 0px;
 }
 
-#logo {
-  top: 10px;
+#splashOuter {
+  background-color: white;
+  width: 50%;
 }
 
-#banner {
-    border-bottom: none;
-    margin-top: -20px;
-}
-
-#banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
-}
-
-.hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
-}
-
-.footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
-}
-
-.page-wrap {
-  min-height: 100%;
-}
-
-.page-wrap:after {
-  content: "";
-  display: block;
-  margin-bottom: -31px;
-}
-
-.site-footer, .page-wrap:after {
-  height: 0px;
-}
-
-.navbar {
-  margin-bottom: 0px;
+#cartBox {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50px;
+  width: 70%;
+  padding: 20px;
+  background-color: rgba(255,255,255,0.2);
 }

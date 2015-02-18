@@ -7,6 +7,8 @@ angular.module('thesisApp')
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
 
+    var current = Auth.getCurrentUser();
+
     $scope.logout = function() {
       Auth.logout();
       $location.path('/login');
