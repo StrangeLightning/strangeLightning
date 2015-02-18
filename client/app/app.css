@@ -11,6 +11,21 @@ html, body {
   background: linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* Standard syntax (must be last) */
 }
 
+a:hover {
+  text-decoration: none;
+}
+
+.container-fluid {
+    padding: 0px;
+}
+
+@media (max-width: 797px) {
+  body { 
+  padding-left: 0px;
+  padding-right: 0px;
+  }
+}
+
 /**
  *
  * Navbar specific
@@ -46,14 +61,14 @@ html, body {
 #logo {
   position: absolute;
   z-index: 1000;
-  top: 35px;
-  left: 50px;
+  top: 20px;
+  left: 20px;
   width: 85px;
 }
 
 #logo:hover {
   position: absolute;
-  top: 40px;
+  top: 25px;
 }
 
 #splash {
