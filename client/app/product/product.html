@@ -2,22 +2,26 @@
   <button type="button" class="close pull-left" aria-label="Close" ng-click="close()">
     <span aria-hidden="true">&times;</span>
   </button>
-  <div id="productImg">
-    <img src="{{product.mediumImage}}"/>
+
+  <div id="innerProduct">
+    <div>
+      <img id="productImg" src="{{product.mediumImage}}"/>
+    </div>
+    <div id="product" class="caption">
+      <h3>{{ product.title}}</h3>
+      <h3>{{product.price}}</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla maximus,
+      dui id congue malesuada, elit nisi porttitor mauris, ac bibendum mi felis et
+      lacus. Donec imperdiet pretium ante quis aliquam. Vivamus fermentum lacus libero,
+      a sollicitudin magna semper at. Aenean eleifend sapien vel tellus dignissim auctor.
+      Proin facilisis molestie lorem ac auctor. Vestibulum varius velit eros, sed blandit
+      felis egestas dignissim. Etiam nulla quam, ultricies quis sollicitudin ut, tempor eu
+      libero. Aliquam erat volutpat. Donec id ornare odio. Proin ut magna non lacus accumsan
+      iaculis nec ac nisi.</p>
+    </div>
+    <p>
+      <a href="#" id="addCartProduct" class="btn btn-primary pull-left" role="button">Add to Cart</a>
+    </p>
   </div>
-  <div id="product" class="caption">
-    <h3>{{ product.title}}</h3>
-    <h3>{{product.price}}</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla maximus,
-    dui id congue malesuada, elit nisi porttitor mauris, ac bibendum mi felis et
-    lacus. Donec imperdiet pretium ante quis aliquam. Vivamus fermentum lacus libero,
-    a sollicitudin magna semper at. Aenean eleifend sapien vel tellus dignissim auctor.
-    Proin facilisis molestie lorem ac auctor. Vestibulum varius velit eros, sed blandit
-    felis egestas dignissim. Etiam nulla quam, ultricies quis sollicitudin ut, tempor eu
-    libero. Aliquam erat volutpat. Donec id ornare odio. Proin ut magna non lacus accumsan
-    iaculis nec ac nisi.</p>
-  </div>
-  <p>
-    <a href="#" class="btn btn-primary pull-right" role="button">Add to Cart</a>
-  </p>
+  
 </div>
