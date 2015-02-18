@@ -1,74 +1,95 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('CartCtrl', ['$scope', 'cartFactory', function($scope, cartFactory) {
-    var food = {
-      'name': 'food',
-      'price': '10.20'
-    };
-    var Kevin = {
-      'name': 'Kevin',
-      'price': '10.30'
-    }
-    var PraneysPalace = {
-      'name': 'P',
-      'price': '50.00'
-    }
-    $scope.items = [food, Kevin, PraneysPalace];
-    //where local items are stored
-    $scope.items = [];
+  .controller('CartCtrl', ['$scope', 'cartFactory', 'Auth', function($scope, cartFactory, Auth) {
 
-    //get all items from db schema
+    //where local items are stored
+
+    $scope.items = [];
+    $scope.user = Auth.getCurrentUser().email;
+    //returns all items from db schema, 
     $scope.getItems = function() {
-      cartFactory.getItems();
+      return cartFactory.getItems($scope.user);
     };
 
     //add item to db
     $scope.addItem = function(item) {
-      $scope.items = cartFactory.addItem($scope.items, item);
+      $scope.items = cartFactory.addItem($scope.items, item, $scope.user);
       $scope.charge = (parseFloat($scope.charge) + parseFloat(item.price)).toFixed(2);
     };
     //remove item locally and from db
     $scope.removeItem = function(items, item) {
       $scope.charge = (parseFloat($scope.charge) - parseFloat(item.price)).toFixed(2);
-      $scope.items = cartFactory.removeItem($scope.items, item);
+      $scope.items = cartFactory.removeItem($scope.items, item, $scope.user);
 
     };
-    //calculate total price of items
+    //scope.charge is rendered total price on screen
+    //cartFactory.totalCharge calculates total price of items
     $scope.charge = cartFactory.totalCharge($scope.items);
 
     //clear items locally and drop schema
     $scope.dropSchema = function() {
       $scope.items = [];
       $scope.charge = parseFloat(0).toFixed(2);
-      cartFactory.dropSchema();
+      cartFactory.dropSchema($scope.user);
     }
+
   }]).
-factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
+factory('cartFactory', ['$http', function($http) {
+  // console.log(Auth.getCurrentUser(), "CURRENTUSER")
 
   var cart = {};
-  cart.addItem = function(items, item) {
-    // console.log(Auth.getCurrentUser();
-    //adds item to local $item.list
+
+
+
+  //add item to db
+  cart.addItem = function(items, item, user) {
+
+    //push item into local item array
     items.push(item);
 
-    //
-    // $http.patch('/api/carts/name/greatScott', items)
-    //  .success(function(data){
-    //      console.log('successful res  from client', data)    
+    //if it's the first item create a row
+    if (items.length === 1) {
+      $http.put('/api/carts/name/' + user, items)
+        .success(function(data) {
+          console.log('successful res  from client create', data)
 
-    //  })
-    //  .error(function(err){
-    //      console.log("ERROR: ", err)
-    //  })
+        })
+        .error(function(err) {
+          console.log("ERROR from client Create: ", err)
+        })
+    } else {
+      //if  not the first item update  the row
+      console.log(items, "ITEMS IN CLIENT UPDATE")
+
+      $http.post('/api/carts/name/' + user, items)
+        .success(function(data) {
+          console.log('successful res  from client', data)
+
+        })
+        .error(function(err) {
+          console.log("ERROR: ", err)
+        })
+    }
     return items
   }
-  cart.removeItem = function(items, item, totalCharge) {
+
+  //removes item locally and from db
+  cart.removeItem = function(items, item, user) {
+    //remove item from items locally
     items.splice(items.indexOf(item), 1);
 
+    //add to db
+    $http.post('/api/carts/name/' + user, items)
+      .success(function(data) {
+        console.log('successful res  from client', data)
+
+      })
+      .error(function(err) {
+        console.log("ERROR REMOVING ITEM: ", err)
+      })
+
     console.log(items);
-    // $http.patch('userName')
-    // totalCharge = totalCharge - item.price
     return items;
   };
   //calculate price of items in local cart
@@ -81,18 +102,20 @@ factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
     return totalCharge.toFixed(2);
   };
 
-  cart.getItems = function() {
-      // $http.get('/api/carts/name/greatScott')
-      //   .success(function(data) {
-      //     console.log(data)
-      //   })
-      //   .error(function(err) {
-      //     console.log("ERROR: ", err)
-      //   })
-    }
-    //clear local items 
-  cart.dropSchema = function() {
-    $http.delete('/api/carts/name/test')
+  cart.getItems = function(user) {
+    $http.get('/api/carts/name/' + user)
+      .success(function(data) {
+        console.log(data);
+        return data
+      })
+      .error(function(err) {
+        console.log("ERROR: ", err);
+      })
+
+  };
+  //clear items for user locally and in db
+  cart.dropSchema = function(user) {
+    $http.delete('/api/carts/name/' + user)
       .success(function(msg) {
         console.log('Success dropping Schema: ', msg);
       })
@@ -100,5 +123,6 @@ factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
         console.log('Error: ', err);
       })
   };
+  //return the CartFactory object
   return cart;
 }])

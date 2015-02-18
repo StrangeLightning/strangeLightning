@@ -3,7 +3,6 @@
  */
 
 'use strict';
-
 var Cart = require('./cart.model');
 
 exports.register = function(socket) {

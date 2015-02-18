@@ -9,11 +9,15 @@ var router = express.Router();
 router.get('/', controller.index);
 //gets the user's cart
 router.get('/name/:userName', controller.show);
-router.post('/', controller.create);
-router.post('/:id', controller.create);
+
+
 //adds item to user's schema db
-router.put('/name/:userName', controller.update);
-//deletes item from the user's schema
+router.put('/name/:userName', controller.create);
+
+//updates items in cart for user's schema, used for removeItem and addItem on the front-end
+router.post('/name/:userName', controller.update);
+
+//clears User's items, drops Schema
 router.delete('/name/:userName', controller.destroy);
 
 module.exports = router;
