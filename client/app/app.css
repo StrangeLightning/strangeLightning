@@ -19,6 +19,12 @@ a:hover, a:visited {
   padding: 0px;
 }
 
+.row-fluid, li, a, .col-sm-2, .sidebar-nav {
+  margin: 0;
+  padding: 0;
+}
+
+
 .thumbnail {
   border: 0;
   border-radius: 0;

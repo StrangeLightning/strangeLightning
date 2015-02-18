@@ -33,7 +33,7 @@ html {
 .sidebar-nav {
   position: relative;
   top: 140px;
-  margin-right: 10%;
+  padding: 0;
   list-style: none;
 }
 
