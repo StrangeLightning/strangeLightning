@@ -41,16 +41,16 @@
             <a href="/catalog">Explore</a>
           </li>
 
-          <li ng-show="isLoggedIn()">
-            <a href="/cart"><span class="glyphicon glyphicon-shopping-cart btnWidth"></span></a>
+          <li>
+            <a ng-show="isLoggedIn()" href="/cart"><span class="glyphicon glyphicon-shopping-cart btnWidth"></span></a>
           </li>
         </ul>
-        <div ng-show="isLoggedIn()" class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
+        <div class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search">
-                 <span class="input-group-addon" id="basic-addon1 search">
-                   <span class="glyphicon glyphicon-search"></span>
-                 </span>
+              <span class="input-group-addon" id="basic-addon1 search">
+                <span class="glyphicon glyphicon-search"></span>
+              </span>
           </div>
         </div>
       </div>

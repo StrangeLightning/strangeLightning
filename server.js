@@ -67,7 +67,7 @@ serverHTTP.listen(9000, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
-var socketio = require('socket.io')(serverHTTP, {
+var socketio = require('socket.io')(serverHTTPS, {
   serveClient: (config.env === 'production') ? false : true,
   path: '/socket.io-client'
 });

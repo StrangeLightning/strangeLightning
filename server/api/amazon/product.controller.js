@@ -13,10 +13,10 @@ exports.searchCart = function (req, res, next) {
   var opHelper = new OperationHelper({
     awsId:     config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
-    assocId:   config.amazon.clientAccount 
+    assocId:   config.amazon.clientAccount
   });
   var t = new Date().getTime();
-  console.log(t);
+  //console.log(t);
   opHelper.execute('ItemSearch', {
       'Keywords': req.body.term,
       'SearchIndex': 'Blended',
@@ -25,7 +25,7 @@ exports.searchCart = function (req, res, next) {
     }, function(err, results) {
       var _results = [];
       var r = results.ItemSearchResponse.Items[0];
-      console.log(r);
+      //console.log(r);
       var r2 = results.ItemSearchResponse.Items[0].Item;
       var i = 0;
       while (_results.length < 12) {
@@ -40,7 +40,8 @@ exports.searchCart = function (req, res, next) {
           product.mediumImage = obj.MediumImage[0].URL[0];
           product.largeImage = obj.LargeImage[0].URL[0];
           _results.push(product);
-        };
+        }
+
         i++;
       }
       res.end(JSON.stringify({time: new Date().getTime() - t, data: _results}));
