@@ -7,7 +7,7 @@ angular.module('thesisApp')
 
     $scope.items = [];
     $scope.user = Auth.getCurrentUser().email;
-    //returns all items from db schema, 
+    //returns all items from db schema,
     $scope.getItems = function() {
       return cartFactory.getItems($scope.user);
     };
@@ -40,8 +40,6 @@ factory('cartFactory', ['$http', function($http) {
 
   var cart = {};
 
-
-
   //add item to db
   cart.addItem = function(items, item, user) {
 
@@ -72,7 +70,7 @@ factory('cartFactory', ['$http', function($http) {
         })
     }
     return items
-  }
+  };
 
   //removes item locally and from db
   cart.removeItem = function(items, item, user) {
@@ -82,12 +80,12 @@ factory('cartFactory', ['$http', function($http) {
     //add to db
     $http.post('/api/carts/name/' + user, items)
       .success(function(data) {
-        console.log('successful res  from client', data)
+        console.log('successful res from client', data)
 
       })
       .error(function(err) {
         console.log("ERROR REMOVING ITEM: ", err)
-      })
+      });
 
     console.log(items);
     return items;
@@ -97,7 +95,7 @@ factory('cartFactory', ['$http', function($http) {
     var totalCharge = 0;
     for (var i = 0; i < items.length; i++) {
       totalCharge = totalCharge + parseFloat(items[i].price);
-    };
+    }
 
     return totalCharge.toFixed(2);
   };
@@ -125,4 +123,4 @@ factory('cartFactory', ['$http', function($http) {
   };
   //return the CartFactory object
   return cart;
-}])
+}]);

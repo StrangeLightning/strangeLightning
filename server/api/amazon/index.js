@@ -8,10 +8,6 @@ var auth = require('../../auth/auth.service');
 var util = require('util');
 
 var router = express.Router();
-// router.get('*', test);
-router.post('*', controller.searchCart);
-// router.put('/:id', controller.update);
-// router.patch('/:id', controller.update);
-// router.delete('/:id', controller.destroy);
+router.post('/', controller.searchCart);
 
 module.exports = router;
