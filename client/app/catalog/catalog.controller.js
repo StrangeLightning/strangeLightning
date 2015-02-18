@@ -17,7 +17,7 @@ angular.module('thesisApp')
     };
 
     //init
-    $http.post('/api/amazon-products/').
+    $http.post('/api/amazonproducts/').
     success(function(results) {
       $scope.products = results.data;
     }).
