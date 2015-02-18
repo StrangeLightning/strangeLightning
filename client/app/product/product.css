@@ -2,23 +2,23 @@
   background-color: white;
   float: right;
   width: 30%;
+  min-width: 400px;
   padding: 10px;
   margin-right: -15px;
+  padding: 20px;
 }
 
 #product-container img {
+  margin-top: 15px;
   width: 100%;
 }
 
-#amazon-image {
-  width: 95%;
-}
-
 #product {
-  height: 300px;
+  padding: 30px;
   overflow: scroll;
 }
 
 .close {
-  margin-right: 5px;
+  position: absolute;
+  top: 8px;
 }
