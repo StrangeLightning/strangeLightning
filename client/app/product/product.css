@@ -1,6 +1,9 @@
 #product-container {
   background-color: white;
   float: right;
+  height: 800px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   width: 30%;
   min-width: 400px;
   padding: 10px;
