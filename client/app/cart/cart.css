@@ -2,11 +2,49 @@
   fieldset { display: table-cell; }
 }
 
-#cart {
-  text-align: center;
-  margin-top: 40px;
+.cartBtn {
+  width: 100%;
 }
+
+.label {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 100;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #e2e2e2;
+  border-radius: 0;
+}
+
+.total {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.close {
+  z-index: 1000;
+  position: relative;
+  left: 10px;
+}
+
+#cart {
+  position: absolute;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background-color: white;
+  padding: 30px;
+  text-align: center;
+  margin-top: 0px;
+}
+
 
 #cart th {
   text-align: center;
+}
+
+#checkout {
+  postion: fixed;
+  left: 100px;
+  bottom: 100px;
 }
