@@ -19,7 +19,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(client) app/vendor.css -->
       <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -29,6 +28,7 @@
     <!-- build:css({.tmp,client}) app/app.css -->
       <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
+      <link rel="stylesheet" href="app/about/about.css">
       <link rel="stylesheet" href="app/account/login/login.css">
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
@@ -36,7 +36,6 @@
       <link rel="stylesheet" href="app/catalog/catalog.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/product/product.css">
-      <link rel="stylesheet" href="app/showroom/showroom.css">
       <link rel="stylesheet" href="app/vendor/vendor.css">
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
@@ -53,6 +52,7 @@
       -                        Page                          -
       --------------------------------------------------------
      -->
+     
      <a href="/">
        <img id="logo" src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png"></img>
      </a>
@@ -86,6 +86,9 @@
     <!-- build:js({.tmp,client}) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
+      <script src="app/about/about.controller.js"></script>
+      <script src="app/about/about.js"></script>
+      <script src="app/vendor/vendor.controller.js"></script>
       <script src="app/account/account.js"></script>
       <script src="app/account/login/login.controller.js"></script>
       <script src="app/account/settings/settings.controller.js"></script>
@@ -100,8 +103,6 @@
       <script src="app/main/main.js"></script>
       <script src="app/product/product.controller.js"></script>
       <script src="app/product/product.js"></script>
-      <script src="app/showroom/showroom.controller.js"></script>
-      <script src="app/showroom/showroom.js"></script>
       <script src="app/vendor/vendor.controller.js"></script>
       <script src="app/vendor/vendor.js"></script>
       <script src="components/auth/auth.service.js"></script>

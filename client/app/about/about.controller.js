@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('ShowroomCtrl', function ($scope) {
+  .controller('AboutCtrl', function ($scope) {
     $scope.message = 'Hello';
   });
