@@ -67,10 +67,10 @@ app.all('*', function(req, res, next) {
 //     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 // });
 
-// var socketio = require('socket.io')(serverHTTPS, {
-//   serveClient: (config.env === 'production') ? false : true,
-//   path: '/socket.io-client'
-// });
+var socketio = require('socket.io')(serverHTTP, {
+  serveClient: (config.env === 'production') ? false : true,
+  path: '/socket.io-client'
+});
 
 require('./server/config/socketio')(socketio);
 require('./server/config/express')(app);
