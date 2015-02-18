@@ -60,7 +60,6 @@ angular.module('thesisApp')
       } else {
         //if  not the first item update  the row
         console.log(items, "ITEMS IN CLIENT UPDATE")
-
         $http.post('/api/carts/name/' + user, items)
           .success(function(data) {
             console.log('successful res  from client', data)
