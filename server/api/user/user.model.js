@@ -26,6 +26,10 @@ var UserSchema = new Schema({
   ip: Number,
   location: String,
   data: {},
+  cart: {
+    HMAC: String, 
+    CartId: String
+  }
   buyer: [buyerSchema],
   vendor: [vendorSchema]
 
