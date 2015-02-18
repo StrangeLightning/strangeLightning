@@ -70,15 +70,3 @@ li {
 .narrowMargin {
   margin: 0px;
 }
-
-.btn {
-  border: 1px solid #A8DED8;
-  border-radius: 0;
-  background-color: black;
-}
-
-.btn:hover {
-  border-radius: 0;
-  border: 1px solid black;
-  background-color: #A8DED8;
-}
