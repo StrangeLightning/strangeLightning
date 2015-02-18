@@ -1,4 +1,9 @@
-<div id="cart" class="table-responsive col-md-6 col-md-offset-3">
+<div id="cart" class="table-responsive">
+
+  <button type="button" class="close pull-left" aria-label="Close" ng-click="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
   <table class="table table-bordered table-hover">
     <tr>
       <th>Product</th>
@@ -17,11 +22,18 @@
     </tr>
     </tr>
   </table>
+  <br/>
+  
   <h3>
-    <span class="label label-default col-md-6 col-md-offset-3">Total: ${{charge}}</span>
-    <br /><br />
-    <form type="button" class="btn btn-lg btn-danger col-md-6 col-md-offset-3">Pay</form>
-    <button ng-click="dropSchema()" type = 'button' class="btn btn-lg btn-danger col-md-6 col-md-offset-3">Empty Cart</button>
-
+    <span class="total label label-default col-md-12">Total: ${{charge}}</span>
   </h3>
+  
+  <div id="checkout" class="row">
+    <div class="col-md-6">
+      <form type="button" class="btn btn-lg cartBtn" >Pay</form>
+    </div>
+    <div class="col-md-6">
+      <button ng-click="dropSchema()" type ="button" class="btn btn-lg cartBtn">Empty Cart</button>
+    </div>
+  </div>
 </div>
