@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: AboutCtrl', function () {
+describe('Controller: VendorCtrl', function () {
 
   // load the controller's module
   beforeEach(module('thesisApp'));
