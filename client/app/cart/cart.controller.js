@@ -34,22 +34,21 @@ angular.module('thesisApp')
       cartFactory.dropSchema($scope.user);
     }
 
-/* Adapt the slide in from product view */
 
-/*
-    $scope.product = catalogFactory.product;
+
+    /* Set height of window */
     var block = $(window).height();
     var navbar = $('.navbar').height();
-    $('#product-container').css({
-      height: block - navbar
+    $('#cart').css({
+      height: block - navbar - 1
     });
 
     $scope.close = function() {
-      $('#product-container').animate({
+      $('#cart').animate({
         'margin-right': '-=1000'
       }, 500);
     }
-*/
+
 
   }]).
 factory('cartFactory', ['$http', function($http) {
