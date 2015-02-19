@@ -44,7 +44,7 @@ exports.createCart = function(req, res, next) {
       else {
         console.log(results);
         res.end('Something went wrong!')
-      }     
+      }
   });
 };
 

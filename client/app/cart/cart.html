@@ -12,8 +12,14 @@
       <th>Price</th>
       <th>Remove</th>
     </tr>
+  </table>
 
-    <tr ng-repeat="item in items">
+  <table class="table table-bordered table-hover">
+    <tr ng-if="items.length === 0">
+      No items in cart.
+    </tr>
+
+    <tr ng-if="items.length > 0" ng-repeat="item in items">
       <td>{{item.name}}</td>
       <td>$ {{item.price}}</td>
       <td class="col-md-1">
@@ -22,10 +28,9 @@
         </button>
       </td>
     </tr>
-    </tr>
   </table>
   <br/>
-  
+
   <h3>
     <span class="total label label-default col-md-12">Total: ${{charge}}</span>
   </h3>
