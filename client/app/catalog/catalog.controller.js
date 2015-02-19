@@ -3,20 +3,20 @@
 angular.module('thesisApp')
   .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', function($scope, cartFactory, catalogFactory, $http) {
     $scope.addToCart = function(product) {
-      // console.log("LINE 6")
-      // console.log(cartFactory.amazonCart.items)
       if (cartFactory.amazonCart) {
         cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
       } else {
         cartFactory.amazonCreateCart(product);
       }
-    }
+    };
+
     $scope.amazonCart = cartFactory.amazonCart;
     $scope.getCartItems = function() {
       // console.log("CART FACTORY'S PROP", cartFactory.amazonCart['CartId'][0], cartFactory.amazonCart['HMAC'][0])
       console.log("PASSED IN IN GET CART ITEMS", cartFactory.amazonCart['CartId'])
       cartFactory.amazonGetCart(cartFactory.amazonCart['CartId'], cartFactory.amazonCart['HMAC']);
-    }
+    };
+
     $scope.viewItem = function(product) {
       catalogFactory.product = product;
       catalogFactory.viewItem(product);
@@ -42,12 +42,6 @@ angular.module('thesisApp')
     //listen for products-updated event, which is broadcasted from navbar.controller.js
     $scope.$on('products-updated', function(event, args) {
       $scope.products = args.newProducts;
-      //init
-      $http.post('/api/amazonproducts/').success(function(results) {
-        $scope.products = results.data;
-      }).error(function(err) {
-        console.log(err);
-      });
     })
   }])
 
