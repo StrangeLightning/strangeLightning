@@ -9,9 +9,9 @@ var util = require('util');
 
 var router = express.Router();
 
-router.post('/create', controller.createCart);
-router.post('/get', controller.getCart);
-router.post('/modify', controller.modifyCart);
-router.post('/:cartId/clear', controller.clearCart);
+router.post('/create', auth.isAuthenticated(), controller.createCart);
+router.post('/get', auth.isAuthenticated(), controller.getCart);
+router.post('/modify', auth.isAuthenticated(), controller.modifyCart);
+router.post('/clear', auth.isAuthenticated(), controller.clearCart);
 
 module.exports = router;
