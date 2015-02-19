@@ -1,119 +1,119 @@
 <!doctype html>
-  <!--[if lt IE 7]>
-  <html class="no-js lt-ie9 lt-ie8 lt-ie7">
-  <![endif]-->
-  <!--[if IE 7]>
-  <html class="no-js lt-ie9 lt-ie8">
-  <![endif]-->
-  <!--[if IE 8]>
-  <html class="no-js lt-ie9">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <html class="no-js">
-  <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <base href="/">
-    <title>Sphereable</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-      <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
-      <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-      <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-      <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,client}) app/app.css -->
-      <link rel="stylesheet" href="app/app.css">
-      <!-- injector:css -->
-      <link rel="stylesheet" href="app/about/about.css">
-      <link rel="stylesheet" href="app/account/login/login.css">
-      <link rel="stylesheet" href="app/admin/admin.css">
-      <link rel="stylesheet" href="app/app.css">
-      <link rel="stylesheet" href="app/cart/cart.css">
-      <link rel="stylesheet" href="app/catalog/catalog.css">
-      <link rel="stylesheet" href="app/main/main.css">
-      <link rel="stylesheet" href="app/product/product.css">
-      <link rel="stylesheet" href="app/vendor/vendor.css">
-      <link rel="stylesheet" href="components/modal/modal.css">
-      <!-- endinjector -->
-    <!-- endbuild -->
-  </head>
-  <body ng-app="thesisApp" class="page-wrap">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href="/">
+  <title>Sphereable</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css({.tmp,client}) app/app.css -->
+  <link rel="stylesheet" href="app/app.css">
+  <!-- injector:css -->
+  <link rel="stylesheet" href="app/about/about.css">
+  <link rel="stylesheet" href="app/account/login/login.css">
+  <link rel="stylesheet" href="app/admin/admin.css">
+  <link rel="stylesheet" href="app/app.css">
+  <link rel="stylesheet" href="app/cart/cart.css">
+  <link rel="stylesheet" href="app/catalog/catalog.css">
+  <link rel="stylesheet" href="app/main/main.css">
+  <link rel="stylesheet" href="app/product/product.css">
+  <link rel="stylesheet" href="app/vendor/vendor.css">
+  <link rel="stylesheet" href="components/modal/modal.css">
+  <!-- endinjector -->
+  <!-- endbuild -->
+</head>
+<body ng-app="thesisApp" class="page-wrap">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
 
-    <!--
-      --------------------------------------------------------
-      -                        Page                          -
-      --------------------------------------------------------
-     -->
+<!--
+  --------------------------------------------------------
+  -                        Page                          -
+  --------------------------------------------------------
+ -->
 
-      <a href="/">
-        <img id="logo" src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png" class="img-responsive" />
-      </a>
-      <div ui-view></div>
-      <div ng-include="'components/navbar/navbar.html'"></div>
+<a href="/">
+  <img id="logo" src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png" class="img-responsive" />
+</a>
+<div ui-view></div>
+<div ng-include="'components/navbar/navbar.html'"></div>
 
-    <!--
-      --------------------------------------------------------
-      -                     Dependencies                     -
-      --------------------------------------------------------
-     -->
+<!--
+  --------------------------------------------------------
+  -                     Dependencies                     -
+  --------------------------------------------------------
+ -->
 
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-    <!-- build:js({client,node_modules}) app/vendor.js -->
-      <!-- bower:js -->
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-      <script src="bower_components/angular-socket-io/socket.js"></script>
-      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-      <!-- endbower -->
-      <!-- // <script src="components/socket/socket.io.js"></script> -->
-    <!-- endbuild -->
-    <!-- build:js({.tmp,client}) app/app.js -->
-      <script src="app/app.js"></script>
-      <!-- injector:js -->
-      <script src="app/about/about.controller.js"></script>
-      <script src="app/about/about.js"></script>
-      <script src="app/account/account.js"></script>
-      <script src="app/account/login/login.controller.js"></script>
-      <script src="app/account/settings/settings.controller.js"></script>
-      <script src="app/account/signup/signup.controller.js"></script>
-      <script src="app/admin/admin.controller.js"></script>
-      <script src="app/admin/admin.js"></script>
-      <script src="app/cart/cart.controller.js"></script>
-      <script src="app/cart/cart.factory.js"></script>
-      <script src="app/cart/cart.js"></script>
-      <script src="app/catalog/catalog.controller.js"></script>
-      <script src="app/catalog/catalog.js"></script>
-      <script src="app/main/main.controller.js"></script>
-      <script src="app/main/main.js"></script>
-      <script src="app/product/product.controller.js"></script>
-      <script src="app/product/product.js"></script>
-      <script src="app/vendor/vendor.controller.js"></script>
-      <script src="app/vendor/vendor.js"></script>
-      <script src="components/auth/auth.service.js"></script>
-      <script src="components/auth/user.service.js"></script>
-      <script src="components/auth/vendor/vendor.service.js"></script>
-      <script src="components/modal/modal.service.js"></script>
-      <script src="components/mongoose-error/mongoose-error.directive.js"></script>
-      <script src="components/navbar/navbar.controller.js"></script>
-      <script src="components/socket/socket.io.js"></script>
-      <script src="components/socket/socket.service.js"></script>
-      <!-- endinjector -->
-    <!-- endbuild -->
-  </body>
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+<!-- build:js({client,node_modules}) app/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/angular-socket-io/socket.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<!-- endbower -->
+<!-- // <script src="components/socket/socket.io.js"></script> -->
+<!-- endbuild -->
+<!-- build:js({.tmp,client}) app/app.js -->
+<script src="app/app.js"></script>
+<!-- injector:js -->
+<script src="app/about/about.controller.js"></script>
+<script src="app/about/about.js"></script>
+<script src="app/account/account.js"></script>
+<script src="app/account/login/login.controller.js"></script>
+<script src="app/account/settings/settings.controller.js"></script>
+<script src="app/account/signup/signup.controller.js"></script>
+<script src="app/admin/admin.controller.js"></script>
+<script src="app/admin/admin.js"></script>
+<script src="app/cart/cart.controller.js"></script>
+<script src="app/cart/cart.js"></script>
+<script src="app/catalog/catalog.controller.js"></script>
+<script src="app/catalog/catalog.js"></script>
+<script src="app/main/main.controller.js"></script>
+<script src="app/main/main.js"></script>
+<script src="app/product/product.controller.js"></script>
+<script src="app/product/product.js"></script>
+<script src="app/vendor/vendor.controller.js"></script>
+<script src="app/vendor/vendor.js"></script>
+<script src="components/auth/auth.service.js"></script>
+<script src="components/auth/user.service.js"></script>
+<script src="components/auth/vendor/vendor.service.js"></script>
+<script src="components/cart/cart.service.js"></script>
+<script src="components/modal/modal.service.js"></script>
+<script src="components/mongoose-error/mongoose-error.directive.js"></script>
+<script src="components/navbar/navbar.controller.js"></script>
+<script src="components/socket/socket.io.js"></script>
+<script src="components/socket/socket.service.js"></script>
+<!-- endinjector -->
+<!-- endbuild -->
+</body>
 </html>

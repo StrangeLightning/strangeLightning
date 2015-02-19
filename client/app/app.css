@@ -51,8 +51,8 @@ a:hover, a:visited {
 
 @media (max-width: 797px) {
   body {
-  padding-left: 0px;
-  padding-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
 
