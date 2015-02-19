@@ -34,17 +34,21 @@ module.exports = function (grunt) {
       dist: 'dist'
     },
 
-    /* Start test coverage library */
-    // coveralls: {
-    //     options: {
-    //         debug: true,
-    //         coverageDir: '/coverage',
-    //         dryRun: true,
-    //         force: true,
-    //         recursive: true
-    //     }
-    // },
-    /* End test coverage library */
+    mochacov: {
+      coverage: {
+        options: {
+          coveralls: true
+        }
+      },
+      test: {
+        options: {
+          reporter: 'spec'
+        }
+      },
+      options: {
+        files: 'test/*.js'
+      }
+    },
 
     express: {
       options: {
@@ -507,12 +511,6 @@ module.exports = function (grunt) {
       }
     },
   });
-
-  // // Use to see how much of code is being tested
-  // grunt.registerTask('circleci', ['mochacov:coverage']);
-  // grunt.registerTask('test', ['mochacov:test']);
-
-  grunt.loadNpmTasks('grunt-karma-coveralls');
 
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function () {
