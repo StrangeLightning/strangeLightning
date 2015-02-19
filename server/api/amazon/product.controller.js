@@ -18,7 +18,7 @@ exports.searchCart = function (req, res, next) {
   var t = new Date().getTime();
   //console.log(t);
   opHelper.execute('ItemSearch', {
-      'Keywords': req.body.term,
+      'Keywords': req.body.term + '',
       'SearchIndex': 'Blended',
       'ItemPage': '1',
       'TruncateReviewsAt' : '0',
