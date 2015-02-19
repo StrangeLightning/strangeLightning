@@ -6,11 +6,20 @@ angular.module('thesisApp')
     $scope.addToCart = cartFactory.addItem;
 =======
   .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', function($scope, cartFactory, catalogFactory, $http) {
-    $scope.addToCart = cartFactory.amazonCreateCart;
+    $scope.addToCart = function(product) {
+      // console.log("LINE 6")
+      // console.log(cartFactory.amazonCart.items)
+      if (cartFactory.amazonCart) {
+        cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
+      } else {
+        cartFactory.amazonCreateCart(product);
+      }
+    }
     $scope.amazonCart = cartFactory.amazonCart;
     $scope.getCartItems = function() {
-      console.log("CART FACTORY'S PROP", cartFactory.amazonCart.CardId)
-      cartFactory.amazonGetCart(cartFactory.amazonCart[CartId][0], cartFactory.amazonCart[HMCA][0]);
+      // console.log("CART FACTORY'S PROP", cartFactory.amazonCart['CartId'][0], cartFactory.amazonCart['HMAC'][0])
+      console.log("PASSED IN IN GET CART ITEMS", cartFactory.amazonCart['CartId'])
+      cartFactory.amazonGetCart(cartFactory.amazonCart['CartId'], cartFactory.amazonCart['HMAC']);
     }
 >>>>>>> get working
     $scope.viewItem = function(product) {
@@ -41,11 +50,9 @@ angular.module('thesisApp')
       $scope.products = args.newProducts;
 =======
     //init
-    $http.post('/api/amazonproducts/').
-    success(function(results) {
+    $http.post('/api/amazonproducts/').success(function(results) {
       $scope.products = results.data;
-    }).
-    error(function(err) {
+    }).error(function(err) {
       console.log(err);
 >>>>>>> get working
     });
