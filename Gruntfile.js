@@ -35,15 +35,15 @@ module.exports = function (grunt) {
     },
 
     /* Start test coverage library */
-    coveralls: {
-        options: {
-            debug: true,
-            coverageDir: 'coverage',
-            dryRun: true,
-            force: true,
-            recursive: true
-        }
-    },
+    // coveralls: {
+    //     options: {
+    //         debug: true,
+    //         coverageDir: '/coverage',
+    //         dryRun: true,
+    //         force: true,
+    //         recursive: true
+    //     }
+    // },
     /* End test coverage library */
 
     express: {
