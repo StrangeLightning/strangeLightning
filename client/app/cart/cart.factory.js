@@ -57,6 +57,7 @@ angular.module('thesisApp')
     //calculate price of items in local cart
     cart.totalCharge = function(items) {
       var totalCharge = 0;
+      items = items || [];
       for(var i = 0; i < items.length; i++) {
         totalCharge = totalCharge + parseFloat(items[i].price);
       }
@@ -133,24 +134,27 @@ angular.module('thesisApp')
     };
 
     cart.amazonAddProduct = function(product, amazonCart) {
-      console.log("A CART FROM ADD PRODCUT", amazonCart)
+      //console.log("A CART FROM ADD PRODCUT", amazonCart);\
+      var newquantity;
+      amazonCart.items = amazonCart.items || [];
 
       for(var i = 0; i < amazonCart.items.length; i++) {
         if(product === amazonCart.items[i]['productId']) {
-          newquantity = ++amazonCart.items[i]['quantity']
+          newquantity = ++amazonCart.items[i]['quantity'];
           break;
         } else {
           newquantity = 1;
         }
 
       }
-      console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
+      //console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
+
       $http.post('/api/amazoncarts/modify', {
         'id': product,
         'productId': product,
         'CartId': amazonCart['CartId'],
         'HMAC': amazonCart['HMAC'],
-        'newquantity': newquantity
+        'Quantity': newquantity
       })
         .success(function(data) {
           console.log('successful res from AMAZON client', data)
