@@ -33,9 +33,8 @@ angular.module('thesisApp')
       $scope.charge = parseFloat(0).toFixed(2);
       cartFactory.dropSchema($scope.user);
     };
-
+    
     /* Set height of window */
-
     var block = $(window).height();
     var navbar = $('.navbar').height();
     $('#cart').css({
