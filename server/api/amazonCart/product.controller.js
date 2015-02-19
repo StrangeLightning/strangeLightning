@@ -24,18 +24,24 @@ exports.createCart = function (req, res, next) {
       'Item.1.Quantity': '1',
     }, function(err, results) {
       var _results = [];
-      var cart = results.CartCreateResponse.Cart[0];
-      if (req.user) {
-        var user = req.user;
-        user.cart = cart;
-        console.log(user.cart);
-        user.ASIN2CartItemId = user.ASIN2CartItemId || {};
-        user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-        user.save(function(err) {
-          if (!err) res.end(JSON.stringify(cart));
-        });
+      if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
+        var cart = results.CartCreateResponse.Cart[0];
+        if (req.user) {
+          var user = req.user;
+          user.cart = cart;
+          console.log(user.cart);
+          user.ASIN2CartItemId = user.ASIN2CartItemId || {};
+          user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          user.save(function(err) {
+            if (!err) res.end(JSON.stringify(cart));
+          });
+        }
+        else {res.end(JSON.stringify(cart));}
       }
-      else {res.end(JSON.stringify(cart));}
+      else {
+        console.log(results);
+        res.end('Something went wrong!')
+      }     
   });
 };
 
@@ -136,7 +142,7 @@ exports.getCart = function (req, res, next) {
     awsSecret: config.amazon.clientSecret,
     assocId:   config.amazon.clientAccount 
   });
-  // console.log(req.body)
+  console.log(req.body)
   var t = new Date().getTime();
   if (req.user.cart && Object.keys(req.user.cart).length) {
     opHelper.execute('CartGet', {
