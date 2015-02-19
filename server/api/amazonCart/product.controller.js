@@ -86,9 +86,9 @@ exports.modifyCart = function(req, res, next) {
         'HMAC': req.user.cart.HMAC[0],
         'Item.1.ASIN': req.body.id,
         'Item.1.Quantity': '1',
-      },
-      function(err, results) {
+      }, function(err, results) {
         var _results = [];
+        console.log(results);
         var cart = results.CartAddResponse.Cart[0];
         if (req.user) {
           var user = req.user;
@@ -101,7 +101,6 @@ exports.modifyCart = function(req, res, next) {
         } else {
           res.end(JSON.stringify(cart));
         }
-
       });
     }
   } else {
@@ -143,20 +142,8 @@ exports.getCart = function(req, res, next) {
     awsSecret: config.amazon.clientSecret,
     assocId: config.amazon.clientAccount
   });
-  // console.log(req.body)
-  var t = new Date().getTime(); << << << < HEAD
-  if (req.user.cart && Object.keys(req.user.cart).length) {
-    opHelper.execute('CartGet', {
-      'CartId': req.user.cart.CartId,
-      'HMAC': req.user.cart.HMAC,
-    }, function(err, results) {
-      var _results = [];
-      var cart = results.CartGet.Cart[0];
-      res.end(JSON.stringify(cart));
-    });
-  } else {
-    res.end('Something went wrong!')
-  } === === =
+  console.log(req.body)
+  var t = new Date().getTime();
   opHelper.execute('CartGet', {
     'CartId': req.body.CartId,
     'HMAC': req.body.HMAC,
@@ -164,7 +151,7 @@ exports.getCart = function(req, res, next) {
     var _results = [];
     var cart = results.CartCreateResponse.Cart[0];
     res.end(JSON.stringify(cart));
-  }); >>> >>> > modify not working
+  });
 };
 
 // {
@@ -268,69 +255,3 @@ exports.getCart = function(req, res, next) {
 // }
 // ]
 // }
-exports.createCart = function(req, res, next) {
-  var opHelper = new OperationHelper({
-    awsId: config.amazon.clientID,
-    awsSecret: config.amazon.clientSecret,
-    assocId: config.amazon.clientAccount
-  });
-  var t = new Date().getTime();
-  opHelper.execute('CartCreate', {
-    'Item.1.ASIN': req.body.id,
-    'Item.1.Quantity': '1',
-  }, function(err, results) {
-    var _results = [];
-    res.end(JSON.stringify(results.CartCreateResponse.Cart[0]));
-  });
-};
-
-exports.modifyCart = function(req, res, next) {
-  var opHelper = new OperationHelper({
-    awsId: config.amazon.clientID,
-    awsSecret: config.amazon.clientSecret,
-    assocId: config.amazon.clientAccount
-  });
-  var t = new Date().getTime();
-  opHelper.execute('CartModify', {
-    'CartId': req.body.CartId,
-    'HMAC': req.body.HMAC,
-    'Item.1.CartItemId': req.body.ProductId,
-    'Item.1.Quantity': req.body.Quantity,
-  }, function(err, results) {
-    var _results = [];
-    res.end(JSON.stringify(results));
-  });
-};
-
-exports.clearCart = function(req, res, next) {
-  var opHelper = new OperationHelper({
-    awsId: config.amazon.clientID,
-    awsSecret: config.amazon.clientSecret,
-    assocId: config.amazon.clientAccount
-  });
-  var t = new Date().getTime();
-  opHelper.execute('CartClear', {
-    'CartId': req.body.CartId,
-    'HMAC': req.body.HMAC,
-  }, function(err, results) {
-    var _results = [];
-    res.end(JSON.stringify(results));
-  });
-};
-
-exports.getCart = function(req, res, next) {
-  var opHelper = new OperationHelper({
-    awsId: config.amazon.clientID,
-    awsSecret: config.amazon.clientSecret,
-    assocId: config.amazon.clientAccount
-  });
-  console.log(req.body)
-  var t = new Date().getTime();
-  opHelper.execute('CartGet', {
-    'CartId': req.body.CartId,
-    'HMAC': req.body.HMAC,
-  }, function(err, results) {
-    var _results = [];
-    res.end(JSON.stringify(results));
-  });
-};

@@ -89,7 +89,7 @@ angular.module('thesisApp')
     ////AMAZON CART FUNCTIONALITY
 
     cart.amazonGetCart = function(cartId, HMAC) {
-      console.log("FROM FACTORY WHEN GETTING CART + HMAC ", cartId, HMAC1)
+      console.log("FROM FACTORY WHEN GETTING CART + HMAC ", cartId, HMAC)
 
       $http.post('/api/amazoncarts/get', {
           'cartId': cartId,
