@@ -11,6 +11,10 @@ html, body {
   background: linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* Standard syntax (must be last) */
 }
 
+#ajax-loader {
+  margin: 25% auto;
+}
+
 a:hover, a:visited {
   text-decoration: none;
 }
@@ -46,7 +50,7 @@ a:hover, a:visited {
 }
 
 @media (max-width: 797px) {
-  body { 
+  body {
   padding-left: 0px;
   padding-right: 0px;
   }
@@ -66,7 +70,7 @@ a:hover, a:visited {
   font-family: 'Impact', 'Arial Black', sans-serif, sans-serif;
   padding-right: 15px;
   padding-left: 15px;
-  padding-bottom: 15px;  
+  padding-bottom: 15px;
 }
 
 .title:hover, a {
@@ -88,7 +92,7 @@ a:hover, a:visited {
   position: absolute;
   z-index: 1000;
   top: 20px;
-  left: 20px;
+  left: 5%;
   width: 85px;
 }
 
