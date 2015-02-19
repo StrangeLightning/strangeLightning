@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('CartCtrl', ['$scope', 'cartFactory', 'Auth', function($scope, cartFactory, Auth) {
+  .controller('CartCtrl', ['$scope', '$state', 'cartFactory', 'Auth', function($scope, $state, cartFactory, Auth) {
 
     //where local items are stored
 
@@ -34,22 +34,20 @@ angular.module('thesisApp')
       cartFactory.dropSchema($scope.user);
     };
 
-    /* Adapt the slide in from product view */
+    /* Set height of window */
 
-    /*
-        $scope.product = catalogFactory.product;
-        var block = $(window).height();
-        var navbar = $('.navbar').height();
-        $('#product-container').css({
-          height: block - navbar
-        });
+    var block = $(window).height();
+    var navbar = $('.navbar').height();
+    $('#cart').css({
+      height: block - navbar - 1
+    });
 
-        $scope.close = function() {
-          $('#product-container').animate({
-            'margin-right': '-=1000'
-          }, 500);
-        }
-    */
+    $scope.close = function() {
+      $('#cart').animate({
+        'margin-right': '-=1000'
+      }, 500);
+      $state.transitionTo('catalog');
+    }
 
   }])
 
