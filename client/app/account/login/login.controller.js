@@ -5,6 +5,19 @@ angular.module('thesisApp')
     $scope.user = {};
     $scope.errors = {};
 
+    /* Set height of window */
+    var block = $(window).height();
+    var navbar = $('.navbar').height();
+    $('#login').css({
+      height: block - navbar - 1
+    });
+
+    // $scope.close = function() {
+    //   $('#cart').animate({
+    //     'margin-right': '-=1000'
+    //   }, 500);
+    // }
+
     $scope.login = function(form) {
       $scope.submitted = true;
 

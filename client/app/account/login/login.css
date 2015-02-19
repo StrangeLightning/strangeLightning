@@ -1,30 +1,21 @@
-/* Risk of conflict with other pages */
+#login {
+  background-color: rgba(255,255,255,0.2);
+}
+
 #loginTxt {
   color: #000;
   margin-top: 50px;
   margin-bottom: 100px;
 }
 
-.vertical-center {
-  margin-top: 10%;
-}
 
 .facebook {
   background-color: #3b5998;
   color: #f7f7f7;
 }
 
-#innerBox {
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-}
 
-#loginBackground {
-  width: 500px;
-  height: 350px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 2px solid #fff;
-  background-color: rgba(255,255,255,0.2);
+#innerBox {
+  margin-top: 50%;
+  text-align: center;
 }
