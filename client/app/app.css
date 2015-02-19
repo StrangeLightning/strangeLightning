@@ -125,3 +125,9 @@ a:hover, a:visited {
   background-color: #222;
   color: #fff;
 }
+
+.navbar-collapse a {
+  height: 86px;
+  margin-top: -1px;
+  background-color: none;
+}
