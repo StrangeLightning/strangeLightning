@@ -8,13 +8,13 @@ describe('Controller: CartCtrl', function() {
   var CartCtrl, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope) {
-    scope = $rootScope.$new();
-    CartCtrl = $controller('CartCtrl', {
-      $scope: scope
-    });
-  }));
-
+  // beforeEach(inject(function($controller, $rootScope) {
+  //   scope = $rootScope.$new();
+  //   CartCtrl = $controller('CartCtrl', {
+  //     $scope: scope
+  //   });
+  // }));
+  
   //it('should be able to add items locally', function() {
   //  scope.addItem({
   //    'user': 'geeered',
