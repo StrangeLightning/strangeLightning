@@ -10,7 +10,7 @@ angular.module('thesisApp')
       items.push(item);
 
       //if it's the first item create a row
-      if (items.length === 1) {
+      if(items.length === 1) {
         $http.put('/api/carts/name/' + user, items)
           .success(function(data) {
             console.log('successful res  from client create', data)
@@ -56,7 +56,7 @@ angular.module('thesisApp')
     //calculate price of items in local cart
     cart.totalCharge = function(items) {
       var totalCharge = 0;
-      for (var i = 0; i < items.length; i++) {
+      for(var i = 0; i < items.length; i++) {
         totalCharge = totalCharge + parseFloat(items[i].price);
       }
 
@@ -92,9 +92,9 @@ angular.module('thesisApp')
       console.log("FROM FACTORY WHEN GETTING CART + HMAC ", cartId, HMAC)
 
       $http.post('/api/amazoncarts/get', {
-          'cartId': cartId,
-          'HMAC': HMAC
-        })
+        'cartId': cartId,
+        'HMAC': HMAC
+      })
         .success(function(data) {
           console.log('cart from AMAZON:  ', data);
 
@@ -106,8 +106,8 @@ angular.module('thesisApp')
     cart.amazonRemoveProduct = function(product, amazonCart) {
       console.log("A SUBTRACT Remove PRODCUT", amazonCart)
 
-      for (var i = 0; i < amazonCart.items.length; i++) {
-        if (product === amazonCart.items[i]['productId']) {
+      for(var i = 0; i < amazonCart.items.length; i++) {
+        if(product === amazonCart.items[i]['productId']) {
           newquantity = --amazonCart.items[i]['quantity']
           break;
         }
@@ -115,12 +115,12 @@ angular.module('thesisApp')
       }
       console.log('WHEN BLESSED ITEM', amazonCart['CartId'])
       $http.post('/api/amazoncarts/modify', {
-          'id': product,
-          'productId': product,
-          'CartId': amazonCart['CartId'],
-          'HMAC': amazonCart['HMAC'],
-          'newquantity': newquantity
-        })
+        'id': product,
+        'productId': product,
+        'CartId': amazonCart['CartId'],
+        'HMAC': amazonCart['HMAC'],
+        'newquantity': newquantity
+      })
         .success(function(data) {
           console.log('successful res from AMAZON client', data)
         })
@@ -131,12 +131,11 @@ angular.module('thesisApp')
     }
 
 
-
     cart.amazonAddProduct = function(product, amazonCart) {
       console.log("A CART FROM ADD PRODCUT", amazonCart)
 
-      for (var i = 0; i < amazonCart.items.length; i++) {
-        if (product === amazonCart.items[i]['productId']) {
+      for(var i = 0; i < amazonCart.items.length; i++) {
+        if(product === amazonCart.items[i]['productId']) {
           newquantity = ++amazonCart.items[i]['quantity']
           break;
         } else {
@@ -146,12 +145,12 @@ angular.module('thesisApp')
       }
       console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
       $http.post('/api/amazoncarts/modify', {
-          'id': product,
-          'productId': product,
-          'CartId': amazonCart['CartId'],
-          'HMAC': amazonCart['HMAC'],
-          'newquantity': newquantity
-        })
+        'id': product,
+        'productId': product,
+        'CartId': amazonCart['CartId'],
+        'HMAC': amazonCart['HMAC'],
+        'newquantity': newquantity
+      })
         .success(function(data) {
           console.log('successful res from AMAZON client', data)
         })
@@ -159,13 +158,14 @@ angular.module('thesisApp')
           console.log("ERROR creating Cart ", err)
         });
 
-    }
+    };
+
     cart.amazonCreateCart = function(itemId) {
       // console.log(Auth.getCurrentUser().id)
 
       $http.post('/api/amazoncarts/create', {
-          'id': itemId
-        })
+        'id': itemId
+      })
         .success(function(data) {
           console.log('successful res from AMAZON client', data)
           console.log("WHEN CREATING CART ID:", data.CartId[0])
@@ -174,16 +174,18 @@ angular.module('thesisApp')
             "HMAC": data.HMAC[0],
             "items": []
           };
+
           cart.amazonCart.items.push({
-              "title": data.CartItems[0].CartItem[0].Title[0],
-              "price": data.CartItems[0].CartItem[0].Price[0].FormattedPrice[0],
-              "productId": data.CartItems[0].CartItem[0].ASIN[0],
-              "quantity": 1
-            })
-            // console.log("HMAC", data.HMAC[0])
+            "title": data.CartItems[0].CartItem[0].Title[0],
+            "price": data.CartItems[0].CartItem[0].Price[0].FormattedPrice[0],
+            "productId": data.CartItems[0].CartItem[0].ASIN[0],
+            "quantity": 1
+          });
+
+          // console.log("HMAC", data.HMAC[0])
           console.log("Title:", data.CartItems[0].CartItem[0].Title[0])
           console.log("Item Price:", data.CartItems[0].CartItem[0].Price[0].FormattedPrice[0])
-            // console.log()
+          // console.log()
         })
         .error(function(err) {
           console.log("ERROR creating Cart ", err)

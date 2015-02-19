@@ -20,32 +20,34 @@ exports.createCart = function(req, res, next) {
   });
   var t = new Date().getTime();
   opHelper.execute('CartCreate', {
-      'Item.1.ASIN': req.body.id,
-      'Item.1.Quantity': '1',
-    }, function(err, results) {
-      var _results = [];
-      var cart = results.CartCreateResponse.Cart[0];
-      if (cart.Request && cart.Request[0].Errors) {
-        console.log(JSON.stringify('Something went wrong! Here is a snippet: ' + cart.Request[0].Errors));
-        res.end({error: JSON.stringify('Something went wrong! Here is a snippet: ' + cart.Request[0].Errors), id: req.body.id});
-      }
-      else if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
-        if (req.user) {
-          var user = req.user;
-          user.cart = cart;
-          console.log(user.cart);
-          user.ASIN2CartItemId = user.ASIN2CartItemId || {};
-          user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-          user.save(function(err) {
-            if (!err) res.end(JSON.stringify(cart));
-          });
-        }
-        else {res.end(JSON.stringify(cart));}
+    'Item.1.ASIN': req.body.id,
+    'Item.1.Quantity': '1',
+  }, function(err, results) {
+    var _results = [];
+    var cart = results.CartCreateResponse.Cart[0];
+    if(cart.Request && cart.Request[0].Errors) {
+      console.log('Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors));
+      res.end({error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors)});
+    }
+    else if(results.CartCreateResponse && results.CartCreateResponse.Cart) {
+      if(req.user) {
+        var user = req.user;
+        user.cart = cart;
+        console.log("1", user.cart);
+        user.ASIN2CartItemId = user.ASIN2CartItemId || {};
+        user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+        user.save(function(err) {
+          if(!err) res.end(JSON.stringify(cart));
+        });
       }
       else {
-        console.log(results);
-        res.end('Something went wrong!')
-      }     
+        res.end(JSON.stringify(cart));
+      }
+    }
+    else {
+      console.log("2", results);
+      res.end('Something went wrong!')
+    }
   });
 };
 
@@ -57,14 +59,15 @@ exports.modifyCart = function(req, res, next) {
   });
   var t = new Date().getTime();
 
-  if (req.user) {
+  if(req.user) {
     req.user.cart = req.user.cart || {}
-  }; // This is needed because of schema initialization
+  }
+  ; // This is needed because of schema initialization
 
 
   // Check to see if the id is a stored ASIN
-  if (req.user && req.user.cart && Object.keys(req.user.cart).length) {
-    if (req.user.ASIN2CartItemId && req.user.ASIN2CartItemId[req.body.id]) {
+  if(req.user && req.user.cart && Object.keys(req.user.cart).length) {
+    if(req.user.ASIN2CartItemId && req.user.ASIN2CartItemId[req.body.id]) {
       console.log(req.user.ASIN2CartItemId[req.body.id], req.body.Quantity);
       // IF it is get the CartItemId from the user document
       opHelper.execute('CartModify', {
@@ -76,13 +79,13 @@ exports.modifyCart = function(req, res, next) {
         var _results = [];
         console.log(req.user.ASIN2CartItemId[req.body.id], req.body.Quantity);
         var cart = results.CartModifyResponse.Cart[0];
-        if (req.user) {
+        if(req.user) {
           var user = req.user;
           user.cart = cart;
           user.ASIN2CartItemId = user.ASIN2CartItemId || {};
           user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
           user.save(function(err) {
-            if (!err) res.end(JSON.stringify(cart));
+            if(!err) res.end(JSON.stringify(cart));
           });
         } else {
           res.end(JSON.stringify(cart));
@@ -99,13 +102,13 @@ exports.modifyCart = function(req, res, next) {
         var _results = [];
         console.log(results);
         var cart = results.CartAddResponse.Cart[0];
-        if (req.user) {
+        if(req.user) {
           var user = req.user;
           user.cart = cart;
           user.ASIN2CartItemId = user.ASIN2CartItemId || {};
           user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
           user.save(function(err) {
-            if (!err) res.end(JSON.stringify(cart));
+            if(!err) res.end(JSON.stringify(cart));
           });
         } else {
           res.end(JSON.stringify(cart));
@@ -124,19 +127,19 @@ exports.clearCart = function(req, res, next) {
     assocId: config.amazon.clientAccount
   });
   var t = new Date().getTime();
-  if (req.user.cart && Object.keys(req.user.cart).length) {
+  if(req.user.cart && Object.keys(req.user.cart).length) {
     opHelper.execute('CartClear', {
       'CartId': req.user.cart.CartId[0],
       'HMAC': req.user.cart.HMAC[0],
     }, function(err, results) {
       var _results = [];
       var cart = results.CartClearResponse.Cart[0];
-      if (req.user) {
+      if(req.user) {
         var user = req.user;
         user.cart = {};
         user.ASIN2CartItemId = {};
         user.save(function(err) {
-          if (!err) res.end(JSON.stringify(cart));
+          if(!err) res.end(JSON.stringify(cart));
         });
       } else {
         res.end(JSON.stringify(cart));
