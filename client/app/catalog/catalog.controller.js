@@ -21,6 +21,7 @@ angular.module('thesisApp')
     if(!$scope.products){
       catalogFactory.doSearch('shoes', function(newProducts){
         $scope.products = $scope.products || newProducts;
+        $('#ajax-loader').hide();
       });
     }
 

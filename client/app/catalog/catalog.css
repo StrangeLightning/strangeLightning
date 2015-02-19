@@ -33,6 +33,7 @@ html {
   height: 800px;
   overflow: scroll;
   margin-top: 20px;
+  padding-bottom: 150px;
 }
 
 #sidebar-wrapper {
