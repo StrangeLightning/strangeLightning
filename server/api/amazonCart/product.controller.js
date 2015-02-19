@@ -24,7 +24,7 @@ exports.createCart = function(req, res, next) {
       'Item.1.Quantity': '1',
     }, function(err, results) {
       var _results = [];
-      if (results.request && results.request.Errors) {
+      if (results.Request && results.Request.Errors) {
         res.end(JSON.stringify('Something went wrong! Here is a snippet: ' + results.request.Errors));
       }
       else if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
