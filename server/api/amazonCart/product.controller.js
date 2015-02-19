@@ -168,7 +168,6 @@ exports.getCart = function(req, res, next) {
         console.log("results", results.CartGetResponse.Cart[0]);
         cart = results.CartGetResponse.Cart[0];
       }
-
       res.end(JSON.stringify(cart));
     }
   });
