@@ -33,6 +33,9 @@ exports.createCart = function(req, res, next) {
       if(req.user) {
         var user = req.user;
         user.cart = cart;
+        user.cart.items = {};
+        user.cart.items[req.body.id] = 1;
+        user.cart.Quantity = 1;
         user.ASIN2CartItemId = user.ASIN2CartItemId || {};
         user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
         user.save(function(err) {
@@ -77,6 +80,8 @@ exports.modifyCart = function(req, res, next) {
         if(req.user && cart.CartItems) {
           var user = req.user;
           user.cart = cart;
+          user.cart.items[req.body.id] = req.body.Quantity;
+          user.cart.Quantity = calcQuantity(cart);
           user.ASIN2CartItemId = user.ASIN2CartItemId || {};
           user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
           user.save(function(err) {
@@ -99,6 +104,8 @@ exports.modifyCart = function(req, res, next) {
         if(req.user) {
           var user = req.user;
           user.cart = cart;
+          user.cart.items[req.body.id] = 1;
+          user.cart.Quantity = calcQuantity(cart);
           user.ASIN2CartItemId = user.ASIN2CartItemId || {};
           user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
           user.save(function(err) {
@@ -166,12 +173,23 @@ exports.getCart = function(req, res, next) {
       if(results.CartGetResponse && results.CartGetResponse.Cart) {
         console.log("results", results.CartGetResponse.Cart[0]);
         cart = results.CartGetResponse.Cart[0];
+        if (req.user.cart && Object.keys(req.user.cart || {}).length) {
+          cart.items = req.user.cart.items;
+          cart.Quantity = calcQuantity(cart);
+        }
       }
-
       res.end(JSON.stringify(cart));
     }
   });
 };
+
+function calcQuantity(cart) {
+  var count = 0;
+  for (var i in cart.items) {
+    count += +cart.items[i];
+  }
+  return count;
+}
 
 // {
 // "time": 4626,
