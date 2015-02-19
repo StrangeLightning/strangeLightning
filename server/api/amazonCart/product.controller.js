@@ -156,8 +156,8 @@ exports.getCart = function(req, res, next) {
   console.log("HMAC", req.body.HMAC);
 
   opHelper.execute('CartGet', {
-    'CartId': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.CartId : req.body.CartId,
-    'HMAC': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.HMAC : req.body.HMAC
+    'CartId': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.CartId[0] : req.body.CartId,
+    'HMAC': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.HMAC[0] : req.body.HMAC
   }, function(err, results) {
     if(err) {
       console.log(err);
