@@ -3,7 +3,7 @@
 angular.module('thesisApp')
   .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', function($scope, cartFactory, catalogFactory, $http) {
     $scope.addToCart = function(product) {
-      if (cartFactory.amazonCart) {
+      if (cartFactory.amazonCart.items) {
         cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
       } else {
         cartFactory.amazonCreateCart(product);

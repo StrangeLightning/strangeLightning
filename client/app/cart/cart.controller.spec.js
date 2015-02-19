@@ -14,32 +14,36 @@ describe('Controller: CartCtrl', function() {
   //     $scope: scope
   //   });
   // }));
-
-  // it('should be able to add items locally', function() {
-  //   scope.addItem({
-  //     'user': 'geeered',
-  //     'items': {
-  //       'name': 'coke ',
-  //       'price ': '70.00'
-  //     }
-  //   })
-  //   expect(scope.items.length).toEqual(1)
-  // })
-  // it('should be able to add multiple items locally', function() {
-  //   scope.addItem({
-  //     'user': 'ed',
-  //     'items': {
-  //       'name': 'coddde ',
-  //       'price ': '700.00'
-  //     }
-  //   })
-  //   scope.addItem({
-  //     'user': 'geeered',
-  //     'items': {
-  //       'name': 'coke ',
-  //       'price ': '70.00'
-  //     }
-  //   })
-  //   expect(scope.items.length).toEqual(2)
-  // })
+  
+  //it('should be able to add items locally', function() {
+  //  scope.addItem({
+  //    'user': 'geeered',
+  //    'items': {
+  //      'name': 'coke ',
+  //      'price ': '70.00'
+  //    }
+  //  });
+  //
+  //  expect(scope.items.length).toEqual(1)
+  //});
+  //
+  //it('should be able to add multiple items locally', function() {
+  //  scope.addItem({
+  //    'user': 'ed',
+  //    'items': {
+  //      'name': 'coddde ',
+  //      'price ': '700.00'
+  //    }
+  //  });
+  //
+  //  scope.addItem({
+  //    'user': 'geeered',
+  //    'items': {
+  //      'name': 'coke ',
+  //      'price ': '70.00'
+  //    }
+  //  });
+  //
+  //  expect(scope.items.length).toEqual(2)
+  //})
 });

@@ -60,8 +60,7 @@ exports.modifyCart = function(req, res, next) {
 
   if(req.user) {
     req.user.cart = req.user.cart || {}
-  }
-  ; // This is needed because of schema initialization
+  }; // This is needed because of schema initialization
 
 
   // Check to see if the id is a stored ASIN
@@ -75,7 +74,7 @@ exports.modifyCart = function(req, res, next) {
         'Item.1.Quantity': req.body.Quantity,
       }, function(err, results) {
         var cart = results.CartModifyResponse.Cart[0];
-        if(req.user) {
+        if(req.user && cart.CartItems) {
           var user = req.user;
           user.cart = cart;
           user.ASIN2CartItemId = user.ASIN2CartItemId || {};

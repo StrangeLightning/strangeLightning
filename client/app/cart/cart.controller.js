@@ -6,7 +6,7 @@ angular.module('thesisApp')
 
       //where local items are stored
 
-      $scope.items = cartFactory.amazonCart.items;
+      $scope.items = cartFactory.amazonCart.items || [];
       $scope.user = Auth.getCurrentUser().email;
       //returns all items from db schema,
       $scope.getItems = function() {
