@@ -512,10 +512,6 @@ module.exports = function (grunt) {
     },
   });
 
-  // Use to see how much of code is being tested
-  grunt.registerTask('circleci', ['mochacov:coverage']);
-  grunt.registerTask('test', ['mochacov:test']);
-
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function () {
     grunt.log.ok('Waiting for server reload...');
