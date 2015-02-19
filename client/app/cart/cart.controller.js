@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('CartCtrl', ['$scope', 'cartFactory', 'Auth', function($scope, cartFactory, Auth) {
+  .controller('CartCtrl', ['$scope', '$state', 'cartFactory', 'Auth', function($scope, $state, cartFactory, Auth) {
 
     //where local items are stored
 
@@ -35,6 +35,7 @@ angular.module('thesisApp')
     };
 
     /* Set height of window */
+
     var block = $(window).height();
     var navbar = $('.navbar').height();
     $('#cart').css({
@@ -45,6 +46,7 @@ angular.module('thesisApp')
       $('#cart').animate({
         'margin-right': '-=1000'
       }, 500);
+      $state.transitionTo('catalog');
     }
 
   }])
