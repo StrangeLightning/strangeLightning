@@ -1,4 +1,4 @@
-# strangeLightning
+# Sphereable
 [![Stories In Progress](https://badge.waffle.io/strangelightning/strangelightning.svg?label=In%20Progress&title=In%20Progress)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning) [![Coverage Status](https://coveralls.io/repos/kxprim/strangeLightning/badge.svg)](https://coveralls.io/r/kxprim/strangeLightning)
 
 ## Mission Statement
@@ -6,16 +6,11 @@ To create an intuitive 3D shopping experience that smartly recommends products t
 
 ## Team
 
-Product Owner:
-* Pranay Sangani
-
-Scrum Master: 
-* Kevin Primat
-
-Development Team Members:
-* Angular Master: Tole Liberman
-* Search Master: Scott Rice
-* 3D Master: Richard VanBreemen
+* Product Owner and Recommendation's Engine Lead: Pranay Sangani
+* Scrum Master and Three.js Lead: Kevin Primat
+* Testing Lead: Tole Liberman
+* Dev Ops Lead: Scott Rice
+* Environment Lead: Richard VanBreemen
  
 ## Demo
 

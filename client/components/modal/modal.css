@@ -4,7 +4,7 @@
 .modal-warning .modal-header,
 .modal-danger .modal-header {
   color: #fff;
-  border-radius: 5px 5px 0 0;
+  border-radius: 0px 0px 0 0;
 }
 .modal-primary .modal-header {
   background: #428bca;
