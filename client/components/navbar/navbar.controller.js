@@ -1,12 +1,21 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory',
-    function($rootScope, $scope, $location, $http, Auth, catalogFactory) {
+  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', 'cartFactory',
+    function($rootScope, $scope, $location, $http, Auth, catalogFactory, cartFactory) {
       $scope.isCollapsed = true;
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
+
+      cartFactory.amazonGetCart().then(function (cart) {
+        $scope.cartQty = cart.Quantity;
+        console.log('cart', cart);
+      });
+
+
+
+      // console.log(cartFactory.getItems($scope.getCurrentUser()));
 
       $scope.logout = function() {
         Auth.logout();

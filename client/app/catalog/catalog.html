@@ -42,7 +42,8 @@
           </div>
 
           <div class="caption">
-            <h4>{{product.title}}</h4>
+            <h4 ng-if="product.title.length >= 100">{{product.title.substr(0,100)}}...</h4>
+            <h4 ng-if="product.title.length < 100">{{product.title}}</h4>
             <p>Price: {{product.price}}</p>
               <a ng-click="addToCart(product.id)" class="btn btn-primary" role="button">Add to Cart</a>
               <a ng-click="viewItem(product)" class="btn btn-primary" role="button">View Product</a>
