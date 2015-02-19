@@ -20,23 +20,28 @@ exports.createCart = function(req, res, next) {
   });
   var t = new Date().getTime();
   opHelper.execute('CartCreate', {
-    'Item.1.ASIN': req.body.id,
-    'Item.1.Quantity': '1',
-  }, function(err, results) {
-    var _results = [];
-    var cart = results.CartCreateResponse.Cart[0];
-    if (req.user) {
-      var user = req.user;
-      user.cart = cart;
-      console.log(user.cart);
-      user.ASIN2CartItemId = user.ASIN2CartItemId || {};
-      user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-      user.save(function(err) {
-        if (!err) res.end(JSON.stringify(cart));
-      });
-    } else {
-      res.end(JSON.stringify(cart));
-    }
+      'Item.1.ASIN': req.body.id,
+      'Item.1.Quantity': '1',
+    }, function(err, results) {
+      var _results = [];
+      if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
+        var cart = results.CartCreateResponse.Cart[0];
+        if (req.user) {
+          var user = req.user;
+          user.cart = cart;
+          console.log(user.cart);
+          user.ASIN2CartItemId = user.ASIN2CartItemId || {};
+          user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          user.save(function(err) {
+            if (!err) res.end(JSON.stringify(cart));
+          });
+        }
+        else {res.end(JSON.stringify(cart));}
+      }
+      else {
+        console.log(results);
+        res.end('Something went wrong!')
+      }     
   });
 };
 
