@@ -9,7 +9,7 @@ module.exports = function(config) {
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['mocha'],
+    frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -40,7 +40,6 @@ module.exports = function(config) {
       '**/*.jade': 'ng-jade2js',
       '**/*.html': 'html2js',
       '**/*.coffee': 'coffee',
-      // "**/lib/*js": "coverage"
     },
 
     ngHtml2JsPreprocessor: {
@@ -50,17 +49,6 @@ module.exports = function(config) {
     ngJade2JsPreprocessor: {
       stripPrefix: 'client/'
     },
-
-    /* Start test coverage plugin */
-    // coverageReporter: {
-    //     type: "lcov",
-    //     dir: "coverage/"
-    // },
-
-    plugins: [
-        'karma-coverage',
-    ],
-    /* End test coverage plugin */
 
     // list of files / patterns to exclude
     exclude: [],
