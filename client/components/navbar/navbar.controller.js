@@ -23,6 +23,7 @@ angular.module('thesisApp')
           catalogFactory.products = newProducts;
           $rootScope.$broadcast('products-updated', {newProducts: newProducts});
         });
+        $scope.searchTerm = '';
       }
 
     }]);
