@@ -1,0 +1,14 @@
+#aboutDiv {
+  position: relative;
+  top: 100px;
+  margin-left: 15%;
+}
+
+.roundCorner {
+  border-radius: 5px;
+  border: 1px solid white;
+}
+
+.bold {
+  font-weight: 600;
+}

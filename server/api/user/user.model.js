@@ -26,6 +26,8 @@ var UserSchema = new Schema({
   ip: Number,
   location: String,
   data: {},
+  cart: Object,
+  ASIN2CartItemId: Object,
   buyer: [buyerSchema],
   vendor: [vendorSchema]
 

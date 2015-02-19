@@ -126,6 +126,10 @@ angular.module('thesisApp')
         }
       },
 
+      isAuth: function() {
+        return !!$cookieStore.get('token');
+      },
+
       /**
        * Check if a user is an admin
        *
