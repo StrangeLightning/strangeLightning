@@ -12,11 +12,11 @@ var validationError = function(res, err) {
   return res.json(422, err);
 };
 
-exports.createCart = function (req, res, next) {
+exports.createCart = function(req, res, next) {
   var opHelper = new OperationHelper({
-    awsId:     config.amazon.clientID,
+    awsId: config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
-    assocId:   config.amazon.clientAccount 
+    assocId: config.amazon.clientAccount
   });
   var t = new Date().getTime();
   opHelper.execute('CartCreate', {
@@ -45,15 +45,17 @@ exports.createCart = function (req, res, next) {
   });
 };
 
-exports.modifyCart = function (req, res, next) {
+exports.modifyCart = function(req, res, next) {
   var opHelper = new OperationHelper({
-    awsId:     config.amazon.clientID,
+    awsId: config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
-    assocId:   config.amazon.clientAccount 
+    assocId: config.amazon.clientAccount
   });
   var t = new Date().getTime();
 
-  if (req.user) {req.user.cart = req.user.cart || {}}; // This is needed because of schema initialization
+  if (req.user) {
+    req.user.cart = req.user.cart || {}
+  }; // This is needed because of schema initialization
 
 
   // Check to see if the id is a stored ASIN
@@ -62,99 +64,99 @@ exports.modifyCart = function (req, res, next) {
       console.log(req.user.ASIN2CartItemId[req.body.id], req.body.Quantity);
       // IF it is get the CartItemId from the user document
       opHelper.execute('CartModify', {
-          'CartId': req.user.cart.CartId[0],
-          'HMAC': req.user.cart.HMAC[0],
-          'Item.1.CartItemId': req.user.ASIN2CartItemId[req.body.id],
-          'Item.1.Quantity': req.body.Quantity,
-        }, function(err, results) {
-          var _results = [];
-          console.log(req.user.ASIN2CartItemId[req.body.id], req.body.Quantity);
-          var cart = results.CartModifyResponse.Cart[0];
-          if (req.user) {
-            var user = req.user;
-            user.cart = cart;
-            user.ASIN2CartItemId = user.ASIN2CartItemId || {};
-            user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-            user.save(function(err) {
-              if (!err) res.end(JSON.stringify(cart));
-            });
-          }
-          else {res.end(JSON.stringify(cart));}
+        'CartId': req.user.cart.CartId[0],
+        'HMAC': req.user.cart.HMAC[0],
+        'Item.1.CartItemId': req.user.ASIN2CartItemId[req.body.id],
+        'Item.1.Quantity': req.body.Quantity,
+      }, function(err, results) {
+        var _results = [];
+        console.log(req.user.ASIN2CartItemId[req.body.id], req.body.Quantity);
+        var cart = results.CartModifyResponse.Cart[0];
+        if (req.user) {
+          var user = req.user;
+          user.cart = cart;
+          user.ASIN2CartItemId = user.ASIN2CartItemId || {};
+          user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          user.save(function(err) {
+            if (!err) res.end(JSON.stringify(cart));
+          });
+        } else {
+          res.end(JSON.stringify(cart));
+        }
       });
-    }
-    else {
+    } else {
       // IF NOT then greate it in the cart
       opHelper.execute('CartAdd', {
-          'CartId': req.user.cart.CartId[0],
-          'HMAC': req.user.cart.HMAC[0],
-          'Item.1.ASIN': req.body.id,
-          'Item.1.Quantity': '1',
-        }, function(err, results) {
-          var _results = [];
-          var cart = results.CartAddResponse.Cart[0];
-          if (req.user) {
-            var user = req.user;
-            user.cart = cart;
-            user.ASIN2CartItemId = user.ASIN2CartItemId || {};
-            user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-            user.save(function(err) {
-              if (!err) res.end(JSON.stringify(cart));
-            });
-          }
-          else {res.end(JSON.stringify(cart));}
+        'CartId': req.user.cart.CartId[0],
+        'HMAC': req.user.cart.HMAC[0],
+        'Item.1.ASIN': req.body.id,
+        'Item.1.Quantity': '1',
+      }, function(err, results) {
+        var _results = [];
+        console.log(results);
+        var cart = results.CartAddResponse.Cart[0];
+        if (req.user) {
+          var user = req.user;
+          user.cart = cart;
+          user.ASIN2CartItemId = user.ASIN2CartItemId || {};
+          user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          user.save(function(err) {
+            if (!err) res.end(JSON.stringify(cart));
+          });
+        } else {
+          res.end(JSON.stringify(cart));
+        }
       });
     }
+  } else {
+    res.end('Something went wrong!')
   }
-
-  else {res.end('Something went wrong!')}
 };
 
-exports.clearCart = function (req, res, next) {
+exports.clearCart = function(req, res, next) {
   var opHelper = new OperationHelper({
-    awsId:     config.amazon.clientID,
+    awsId: config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
-    assocId:   config.amazon.clientAccount 
+    assocId: config.amazon.clientAccount
   });
   var t = new Date().getTime();
   if (req.user.cart && Object.keys(req.user.cart).length) {
     opHelper.execute('CartClear', {
       'CartId': req.user.cart.CartId[0],
       'HMAC': req.user.cart.HMAC[0],
-      }, function(err, results) {
-        var _results = [];
-        var cart = results.CartClearResponse.Cart[0];
-        if (req.user) {
-          var user = req.user;
-          user.cart = {};
-          user.ASIN2CartItemId = {};
-          user.save(function(err) {
-            if (!err) res.end(JSON.stringify(cart));
-          });
-        }
-        else {res.end(JSON.stringify(cart));}
+    }, function(err, results) {
+      var _results = [];
+      var cart = results.CartClearResponse.Cart[0];
+      if (req.user) {
+        var user = req.user;
+        user.cart = {};
+        user.ASIN2CartItemId = {};
+        user.save(function(err) {
+          if (!err) res.end(JSON.stringify(cart));
+        });
+      } else {
+        res.end(JSON.stringify(cart));
+      }
     });
   }
 };
 
-exports.getCart = function (req, res, next) {
+exports.getCart = function(req, res, next) {
   var opHelper = new OperationHelper({
-    awsId:     config.amazon.clientID,
+    awsId: config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
-    assocId:   config.amazon.clientAccount 
+    assocId: config.amazon.clientAccount
   });
   console.log(req.body)
   var t = new Date().getTime();
-  if (req.user.cart && Object.keys(req.user.cart).length) {
-    opHelper.execute('CartGet', {
-        'CartId': req.user.cart.CartId,
-        'HMAC': req.user.cart.HMAC,
-      }, function(err, results) {
-        var _results = [];
-        var cart = results.CartGet.Cart[0];
-        res.end(JSON.stringify(cart));
-    });
-  }
-  else {res.end('Something went wrong!')}
+  opHelper.execute('CartGet', {
+    'CartId': req.body.CartId,
+    'HMAC': req.body.HMAC,
+  }, function(err, results) {
+    var _results = [];
+    var cart = results.CartCreateResponse.Cart[0];
+    res.end(JSON.stringify(cart));
+  });
 };
 
 // {
