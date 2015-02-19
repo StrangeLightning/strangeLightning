@@ -33,21 +33,11 @@ module.exports = function (grunt) {
       client: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
-
-    mochacov: {
-      coverage: {
-        options: {
-          coveralls: true
-        }
-      },
-      test: {
-        options: {
-          reporter: 'spec'
-        }
-      },
-      options: {
-        files: 'test/*.js'
-      }
+    
+    // Automatically generate documentation    
+    docco_husky : {
+      'Sphereable':'testing',
+      'files':['client/../*.js']
     },
 
     express: {
@@ -115,9 +105,10 @@ module.exports = function (grunt) {
       },
       express: {
         files: [
-          'server/**/*.{js,json}'
+          'server/**/*.{js,json}',
         ],
-        tasks: ['express:dev', 'wait'],
+        // Added docco_husky
+        tasks: ['express:dev', 'wait', 'docco_husky'],
         options: {
           livereload: true,
           nospawn: true //Without this option specified express won't be reloaded
@@ -511,6 +502,9 @@ module.exports = function (grunt) {
       }
     },
   });
+
+  // Automatically generate documentation
+  grunt.loadNpmTasks('grunt-docco-husky');
 
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function () {
