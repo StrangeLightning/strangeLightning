@@ -26,7 +26,8 @@ exports.createCart = function(req, res, next) {
       var _results = [];
       var cart = results.CartCreateResponse.Cart[0];
       if (cart.Request && cart.Request[0].Errors) {
-        res.end(JSON.stringify('Something went wrong! Here is a snippet: ' + results.request.Errors));
+        console.log(JSON.stringify('Something went wrong! Here is a snippet: ' + cart.Request[0].Errors));
+        res.end({error: JSON.stringify('Something went wrong! Here is a snippet: ' + cart.Request[0].Errors), id: req.body.id});
       }
       else if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
         if (req.user) {

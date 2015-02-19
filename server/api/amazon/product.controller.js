@@ -22,6 +22,8 @@ exports.searchCart = function (req, res, next) {
       'SearchIndex': 'Blended',
       'ItemPage': '1',
       'TruncateReviewsAt' : '0',
+      'Availability' : 'Available',
+      'MerchantId' : 'Amazon',
       'ResponseGroup': 'Similarities,ItemIds,ItemAttributes,Images,Reviews'
     }, function(err, results) {
       var _results = [];
