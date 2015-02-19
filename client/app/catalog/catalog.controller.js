@@ -3,7 +3,7 @@
 angular.module('thesisApp')
   .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', function($scope, cartFactory, catalogFactory, $http) {
     $scope.addToCart = function(product) {
-      if (cartFactory.amazonCart) {
+      if (cartFactory.amazonCart.items) {
         cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
       } else {
         cartFactory.amazonCreateCart(product);
@@ -12,8 +12,6 @@ angular.module('thesisApp')
 
     $scope.amazonCart = cartFactory.amazonCart;
     $scope.getCartItems = function() {
-      // console.log("CART FACTORY'S PROP", cartFactory.amazonCart['CartId'][0], cartFactory.amazonCart['HMAC'][0])
-      console.log("PASSED IN IN GET CART ITEMS", cartFactory.amazonCart['CartId'])
       cartFactory.amazonGetCart(cartFactory.amazonCart['CartId'], cartFactory.amazonCart['HMAC']);
     };
 

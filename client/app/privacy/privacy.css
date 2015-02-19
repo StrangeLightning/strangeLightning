@@ -1,0 +1,24 @@
+#policyTxt {
+  color: #000;
+  margin-top: 0;
+  text-align: center;
+}
+
+#policyBox {
+  margin: 0 auto;
+}
+
+#innerBox a {
+  color: #70A3C7;
+}
+
+#policyBackground {
+  width: 500px;
+  padding: 15px;
+  overflow: scroll;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid #fff;
+  background-color: rgba(255,255,255,0.2);
+}

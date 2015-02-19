@@ -2,6 +2,7 @@ angular.module('thesisApp')
   .factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
     // console.log(Auth.getCurrentUser(), "CURRENTUSER")
     var cart = {};
+    cart.amazonCart = {};
 
     //add item to db
     cart.addItem = function(items, item, user) {
@@ -56,6 +57,7 @@ angular.module('thesisApp')
     //calculate price of items in local cart
     cart.totalCharge = function(items) {
       var totalCharge = 0;
+      items = items || [];
       for(var i = 0; i < items.length; i++) {
         totalCharge = totalCharge + parseFloat(items[i].price);
       }
@@ -89,7 +91,7 @@ angular.module('thesisApp')
     ////AMAZON CART FUNCTIONALITY
 
     cart.amazonGetCart = function(cartId, HMAC) {
-      console.log("FROM FACTORY WHEN GETTING CART + HMAC ", cartId, HMAC)
+      //console.log("FROM FACTORY WHEN GETTING CART + HMAC ", cartId, HMAC)
 
       $http.post('/api/amazoncarts/get', {
         'cartId': cartId,
@@ -102,7 +104,8 @@ angular.module('thesisApp')
         .error(function(err) {
           console.log("ERROR getting Cart ", err);
         });
-    }
+    };
+
     cart.amazonRemoveProduct = function(product, amazonCart) {
       console.log("A SUBTRACT Remove PRODCUT", amazonCart)
 
@@ -113,7 +116,7 @@ angular.module('thesisApp')
         }
 
       }
-      console.log('WHEN BLESSED ITEM', amazonCart['CartId'])
+      //console.log('WHEN BLESSED ITEM', amazonCart['CartId'])
       $http.post('/api/amazoncarts/modify', {
         'id': product,
         'productId': product,
@@ -128,28 +131,30 @@ angular.module('thesisApp')
           console.log("ERROR creating Cart ", err)
         });
 
-    }
-
+    };
 
     cart.amazonAddProduct = function(product, amazonCart) {
-      console.log("A CART FROM ADD PRODCUT", amazonCart)
+      //console.log("A CART FROM ADD PRODCUT", amazonCart);\
+      var newquantity;
+      amazonCart.items = amazonCart.items || [];
 
       for(var i = 0; i < amazonCart.items.length; i++) {
         if(product === amazonCart.items[i]['productId']) {
-          newquantity = ++amazonCart.items[i]['quantity']
+          newquantity = ++amazonCart.items[i]['quantity'];
           break;
         } else {
           newquantity = 1;
         }
 
       }
-      console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
+      //console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
+
       $http.post('/api/amazoncarts/modify', {
         'id': product,
         'productId': product,
         'CartId': amazonCart['CartId'],
         'HMAC': amazonCart['HMAC'],
-        'newquantity': newquantity
+        'Quantity': newquantity
       })
         .success(function(data) {
           console.log('successful res from AMAZON client', data)
