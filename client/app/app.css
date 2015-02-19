@@ -24,7 +24,7 @@ a:hover, a:visited {
 }
 
 .thumbnail {
-  border: 1px solid black;
+  border: 0;
   border-radius: 0;
   padding: 25px;
   margin: 5px;
