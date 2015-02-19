@@ -24,7 +24,10 @@ exports.createCart = function(req, res, next) {
       'Item.1.Quantity': '1',
     }, function(err, results) {
       var _results = [];
-      if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
+      if (results.request && results.request.Errors) {
+        res.end(JSON.stringify('Something went wrong! Here is a snippet: ' + results.request.Errors));
+      }
+      else if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
         var cart = results.CartCreateResponse.Cart[0];
         if (req.user) {
           var user = req.user;
