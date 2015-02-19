@@ -2,6 +2,7 @@ angular.module('thesisApp')
   .factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
     // console.log(Auth.getCurrentUser(), "CURRENTUSER")
     var cart = {};
+    cart.amazonCart = {};
 
     //add item to db
     cart.addItem = function(items, item, user) {
@@ -89,7 +90,7 @@ angular.module('thesisApp')
     ////AMAZON CART FUNCTIONALITY
 
     cart.amazonGetCart = function(cartId, HMAC) {
-      console.log("FROM FACTORY WHEN GETTING CART + HMAC ", cartId, HMAC)
+      //console.log("FROM FACTORY WHEN GETTING CART + HMAC ", cartId, HMAC)
 
       $http.post('/api/amazoncarts/get', {
         'cartId': cartId,
@@ -102,7 +103,8 @@ angular.module('thesisApp')
         .error(function(err) {
           console.log("ERROR getting Cart ", err);
         });
-    }
+    };
+
     cart.amazonRemoveProduct = function(product, amazonCart) {
       console.log("A SUBTRACT Remove PRODCUT", amazonCart)
 
@@ -113,7 +115,7 @@ angular.module('thesisApp')
         }
 
       }
-      console.log('WHEN BLESSED ITEM', amazonCart['CartId'])
+      //console.log('WHEN BLESSED ITEM', amazonCart['CartId'])
       $http.post('/api/amazoncarts/modify', {
         'id': product,
         'productId': product,
@@ -128,8 +130,7 @@ angular.module('thesisApp')
           console.log("ERROR creating Cart ", err)
         });
 
-    }
-
+    };
 
     cart.amazonAddProduct = function(product, amazonCart) {
       console.log("A CART FROM ADD PRODCUT", amazonCart)

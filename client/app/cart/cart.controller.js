@@ -6,7 +6,7 @@ angular.module('thesisApp')
 
       //where local items are stored
 
-      $scope.items = [];
+      $scope.items = cartFactory.amazonCart.items;
       $scope.user = Auth.getCurrentUser().email;
       //returns all items from db schema,
       $scope.getItems = function() {
@@ -15,13 +15,13 @@ angular.module('thesisApp')
 
       //add item to db
       $scope.addItem = function(item) {
-        $scope.items = cartFactory.addItem($scope.items, item, $scope.user);
+        //$scope.items = cartFactory.addItem($scope.items, item, $scope.user);
         $scope.charge = (parseFloat($scope.charge) + parseFloat(item.price)).toFixed(2);
       };
       //remove item locally and from db
       $scope.removeItem = function(items, item) {
         $scope.charge = (parseFloat($scope.charge) - parseFloat(item.price)).toFixed(2);
-        $scope.items = cartFactory.removeItem($scope.items, item, $scope.user);
+        //$scope.items = cartFactory.removeItem($scope.items, item, $scope.user);
 
       };
       //scope.charge is rendered total price on screen
@@ -30,7 +30,7 @@ angular.module('thesisApp')
 
       //clear items locally and drop schema
       $scope.dropSchema = function() {
-        $scope.items = [];
+        //$scope.items = [];
         $scope.charge = parseFloat(0).toFixed(2);
         cartFactory.dropSchema($scope.user);
       };

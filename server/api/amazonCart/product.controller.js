@@ -21,7 +21,7 @@ exports.createCart = function(req, res, next) {
   var t = new Date().getTime();
   opHelper.execute('CartCreate', {
     'Item.1.ASIN': req.body.id,
-    'Item.1.Quantity': '1',
+    'Item.1.Quantity': '1'
   }, function(err, results) {
     var _results = [];
     var cart = results.CartCreateResponse.Cart[0];
@@ -33,7 +33,6 @@ exports.createCart = function(req, res, next) {
       if(req.user) {
         var user = req.user;
         user.cart = cart;
-        console.log("1", user.cart);
         user.ASIN2CartItemId = user.ASIN2CartItemId || {};
         user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
         user.save(function(err) {
@@ -68,7 +67,6 @@ exports.modifyCart = function(req, res, next) {
   // Check to see if the id is a stored ASIN
   if(req.user && req.user.cart && Object.keys(req.user.cart).length) {
     if(req.user.ASIN2CartItemId && req.user.ASIN2CartItemId[req.body.id]) {
-      console.log(req.user.ASIN2CartItemId[req.body.id], req.body.Quantity);
       // IF it is get the CartItemId from the user document
       opHelper.execute('CartModify', {
         'CartId': req.user.cart.CartId[0],
@@ -76,8 +74,6 @@ exports.modifyCart = function(req, res, next) {
         'Item.1.CartItemId': req.user.ASIN2CartItemId[req.body.id],
         'Item.1.Quantity': req.body.Quantity,
       }, function(err, results) {
-        var _results = [];
-        console.log(req.user.ASIN2CartItemId[req.body.id], req.body.Quantity);
         var cart = results.CartModifyResponse.Cart[0];
         if(req.user) {
           var user = req.user;
@@ -97,10 +93,9 @@ exports.modifyCart = function(req, res, next) {
         'CartId': req.user.cart.CartId[0],
         'HMAC': req.user.cart.HMAC[0],
         'Item.1.ASIN': req.body.id,
-        'Item.1.Quantity': '1',
+        'Item.1.Quantity': '1'
       }, function(err, results) {
-        var _results = [];
-        console.log(results);
+
         var cart = results.CartAddResponse.Cart[0];
         if(req.user) {
           var user = req.user;
@@ -154,15 +149,28 @@ exports.getCart = function(req, res, next) {
     awsSecret: config.amazon.clientSecret,
     assocId: config.amazon.clientAccount
   });
-  console.log(req.body)
+
   var t = new Date().getTime();
+
+  console.log("cartID", req.body.CartId);
+  console.log("HMAC", req.body.HMAC);
+
   opHelper.execute('CartGet', {
-    'CartId': req.body.CartId,
-    'HMAC': req.body.HMAC,
+    'CartId': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.CartId : req.body.CartId,
+    'HMAC': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.HMAC : req.body.HMAC
   }, function(err, results) {
-    var _results = [];
-    var cart = results.CartCreateResponse.Cart[0];
-    res.end(JSON.stringify(cart));
+    if(err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      var cart;
+      if(results.CartGetResponse && results.CartGetResponse.Cart) {
+        console.log("results", results.CartGetResponse.Cart[0]);
+        cart = results.CartGetResponse.Cart[0];
+      }
+
+      res.end(JSON.stringify(cart));
+    }
   });
 };
 
