@@ -35,7 +35,6 @@ angular.module('thesisApp')
     };
 
     /* Set height of window */
-
     var block = $(window).height();
     var navbar = $('.navbar').height();
     $('#cart').css({
