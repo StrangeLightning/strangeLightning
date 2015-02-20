@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>Three.JS Test for Sphereable 3D environment</title>
+</head>
+<body>
+  <div id="container"></div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+<script>
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setClearColor('rgb(255, 255, 255)');
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  var light = new THREE.DirectionalLight( 0xffffff, 1);
+  
+  document.body.appendChild(renderer.domElement);
+  
+  light.position.set(1,1,1).normalize();
+  scene.add(light);
+  
+  var geometry = new THREE.SphereGeometry(5, 25, 25);
+  for (var i = 0; i < 1000; i++) {
+    var material = new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff });
+    var object = new THREE.Mesh(geometry, material);
+    
+    object.position.x = Math.random() * 800 - 400;
+		object.position.y = Math.random() * 800 - 400;
+		object.position.z = Math.random() * 800 - 400;
+
+		object.rotation.x = Math.random() * 2 * Math.PI;
+		object.rotation.y = Math.random() * 2 * Math.PI;
+		object.rotation.z = Math.random() * 2 * Math.PI;
+
+		scene.add(object);
+  }
+
+    var manager = new THREE.LoadingManager();
+    var loader = new THREE.OBJLoader( manager );
+  
+  renderer.render(scene, camera);
+</script>
+</html>
