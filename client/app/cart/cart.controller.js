@@ -9,18 +9,35 @@ angular.module('thesisApp')
       // $scope.rem
       $scope.removeFromCart = function(product) {
         console.log("CART CONTROLER PROD", product)
-        if (cartFactory.amazonCart.items) {
+        if (cartFactory.amazonCart) {
           console.log("Product FROM REmove on catalog", product)
-            // cartFactory.amazonRemoveProduct(product.id, cartFactory.amazonCart)
-            // function(cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart), function($scope.getItems()))()
+          console.log(product)
+          cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
+            .success(function(data) {
+              if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
+                $scope.purchaseUrl = data.PurchaseURL[0];
+                $scope.subTotal = data.SubTotal[0].FormattedPrice[0];
+                $scope.items = data.CartItems[0].CartItem || [];
+              } else {
+                $scope.purchaseUrl = '';
+                $scope.subTotal = '$0';
+                $scope.items = [];
+              }
+            })
+            .error(function(err) {
+              console.log("ERROR removing Cart ", err)
+            });
+          // function(cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart), function($scope.getItems()))()
 
-        } else {
-          console.log("item not in cart");
         }
+        // else {
+        //   console.log("item not in cart");
+        // }
       };
       //returns all items from db schema,
       $scope.getItems = function() {
         cartFactory.amazonGetCart(function(data) {
+          console.log('DATA FROM GET CART')
           if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
             $scope.purchaseUrl = data.PurchaseURL[0];
             $scope.subTotal = data.SubTotal[0].FormattedPrice[0];
