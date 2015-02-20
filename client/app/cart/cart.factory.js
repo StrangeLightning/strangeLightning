@@ -108,7 +108,7 @@ angular.module('thesisApp')
 
       var newquantity;
       console.log("Product", product, amazonCart);
-
+      console.log("AMAzon Cart", amazonCart)
       for (var i = 0; i < amazonCart.items.length; i++) {
         if (product === amazonCart.items[i]['productId']) {
           if (amazonCart.items[i]['quantity'] > 0) {

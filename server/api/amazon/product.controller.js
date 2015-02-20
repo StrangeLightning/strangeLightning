@@ -40,7 +40,7 @@ exports.searchCart = function(req, res, next) {
       var product = {};
 
       // Sometimes no ItemAttributes Returned
-      if (obj.ItemAttributes adsfasdf &&
+      if (obj.ItemAttributes &&
         obj.ItemAttributes[0].ListPrice &&
         obj.ItemAttributes[0].Title &&
         obj.MediumImage &&

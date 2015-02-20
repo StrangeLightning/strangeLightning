@@ -8,7 +8,7 @@ angular.module('thesisApp')
       $scope.items = 0;
       $scope.rem
         //returns all items from db schema,
-      $scope.getItems = function() { << << << < HEAD
+      $scope.getItems = function() {
         cartFactory.amazonGetCart(function(data) {
           if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
             $scope.purchaseUrl = data.PurchaseURL[0];

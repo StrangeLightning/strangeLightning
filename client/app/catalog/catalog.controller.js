@@ -9,8 +9,8 @@ angular.module('thesisApp')
 
     $scope.removeFromCart = function(product) {
       if (cartFactory.amazonCart.items) {
-        console.log("ProductId FROM REmove on catalog", product)
-        cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
+        console.log("Product FROM REmove on catalog", product)
+        cartFactory.amazonRemoveProduct(product.id, cartFactory.amazonCart)
       } else {
         console.log("item not in cart");
       }
