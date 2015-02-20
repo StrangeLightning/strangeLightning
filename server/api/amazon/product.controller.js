@@ -31,12 +31,12 @@ exports.searchCart = function(req, res, next) {
     var r2 = results.ItemSearchResponse.Items[0].Item;
     var i = 0;
     console.log(r2);
-    while(_results.length < 12) {
+    while(_results.length < 12 && r2 && r2[i]) {
       var obj = r2[i];
       var product = {};
 
       // Sometimes no ItemAttributes Returned
-      if(obj.ItemAttributes adsfasdf&&
+      if(obj.ItemAttributes &&
         obj.ItemAttributes[0].ListPrice &&
         obj.ItemAttributes[0].Title &&
         obj.MediumImage &&
