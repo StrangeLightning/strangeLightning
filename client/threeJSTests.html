@@ -20,11 +20,11 @@
 
 
   // Camera
-  camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000);
+  camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 100000);
   // Set height
   // camera.position.z = 1000;
-  camera.position.set( 0, 0, 1000 );
-
+  camera.position.set( 10, 10, 50 );
+  // camera.rotateOnAxis(new THREE.Vector3(1, 1, 0), degInRad(180));
 
   // Camera controls
   controls = new THREE.TrackballControls( camera );
@@ -45,10 +45,9 @@
   scene = new THREE.Scene();
 
   // Directional Light
-  light = new THREE.DirectionalLight( 0xffffff, 1);
-  light.position.set(1,1,100).normalize();
-  // Add light to scene
-  scene.add( light );
+  light = new THREE.SpotLight(0xffffff);
+  light.position.set( -5, 5, 5 );
+  // light.position.multiplyScalar( 50 );
 
   // Project shadow to ground - (require ground to work)
   light.castShadow = true;
@@ -56,31 +55,37 @@
   light.shadowMapWidth = 2048;
   light.shadowMapHeight = 2048;
 
-  var d = 50;
+  light.intensity = 1;
 
-  light.shadowCameraLeft = -d;
-  light.shadowCameraRight = d;
-  light.shadowCameraTop = d;
-  light.shadowCameraBottom = -d;
+  // var d = 50;
 
-  light.shadowCameraFar = 3500;
-  light.shadowBias = -0.0001;
-  light.shadowDarkness = 0.35;
+  // light.shadowCameraLeft = -d;
+  // light.shadowCameraRight = d;
+  // light.shadowCameraTop = d;
+  // light.shadowCameraBottom = -d;
+
+  // light.shadowCameraFar = 3500;
+  // light.shadowBias = -0.0001;
+  // light.shadowDarkness = 0.35;
   // light.shadowCameraVisible = true;
   
-/*
+  light.shadowCameraNear = true;
+  
+  // Add light to scene
+  scene.add( light );
+
   // Hemisphere Light - for softer shadows
   hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
   // H: Hue (between 0.0 and 1.0), S: Saturation (0.0 - 1.0), L: Lightness (0.0 - 1.0)
   hemiLight.color.setHSL( 0.6, 1, 0.6);
-  hemiLight.groundColor.setHSL( 0.095, 1, 0.75);
+  hemiLight.groundColor.setHSL( 0.095, 1, 0.7);
   // Set high 'y' value for light position
-  hemiLight.position.set( 0, 500, 0);
+  hemiLight.position.set( 0, 5, 0);
   scene.add( hemiLight );
-*/
+
 
   // Create a ground plane
-  var groundGeometry = new THREE.PlaneBufferGeometry(10000, 10000);
+  var groundGeometry = new THREE.PlaneBufferGeometry(100, 100);
   var groundMaterial = new THREE.MeshPhongMaterial({ ambient: 0xffffff, color: 0xffffff, specular: 0x050505 });
   groundMaterial.color.setHSL( 0.095, 1, 0.75 );
 
@@ -88,36 +93,35 @@
   // ground.rotation.x = -Math.PI/2;
   ground.position.y = -33;
   // ground.position.z = 100;
+  
+  ground.receiveShadow = true;
 
   scene.add( ground );
 
-  ground.receiveShadow = true;
   
 
   // Set a geometry for the object
-  var geometry = new THREE.BoxGeometry(200,200,200);
+  var geometry = new THREE.BoxGeometry(2,2,2);
 
-  // for(var i = 0; i<100; i++){
+  //  Mesh the created geometry
+  var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: 0x70A3C7 }) );
+  
+  object.castShadow = true;
 
-    //  Mesh the created geometry
-    var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xFFFFFF }) );
+  object.position.x = 0;
+  object.position.y = 0;
+  object.position.z = 3;
 
-    object.position.x = 0;
-    object.position.y = 0;
-    object.position.z = 100;
+  object.rotation.x = degInRad(45);
+  object.rotation.y = degInRad(45);
+  object.rotation.z = 0;
 
-    object.rotation.x = 0;
-    object.rotation.y = 0;
-    object.rotation.z = 0;
-
-    // object.scale.x = Math.random() + 0.5;
-    // object.scale.y = Math.random() + 0.5;
-    // object.scale.z = Math.random() + 0.5;
-    
-    // Add each item in scene
-    scene.add( object );
-
-  // }
+  // object.scale.x = Math.random() + 0.5;
+  // object.scale.y = Math.random() + 0.5;
+  // object.scale.z = Math.random() + 0.5;
+  
+  // Add each item in scene
+  scene.add( object );
 
 
   // Renderer
@@ -128,6 +132,10 @@
   renderer.setClearColor( 0xFFFFFF );
   // Stretch renderer to window size
   renderer.setSize( window.innerWidth, window.innerHeight );
+  
+  // Tell renderer to show shadows
+  renderer.shadowMapEnabled = true;
+  
 
   document.body.appendChild(renderer.domElement);
 
@@ -143,6 +151,124 @@
     // Render scene
     renderer.render(scene, camera);
 }
+
+function degInRad(deg) {
+    return deg * Math.PI / 180;
+}  
+
+/*
+// globals
+        var renderer;
+        var scene;
+        var camera, mirrorCamera;
+        var W = window.innerWidth - 25;
+        var H = window.innerHeight - 25;
+        var cube;
+        var plane;
+        var SPEED = 0.001;
+        var spotLight;
+
+
+        // initialise
+        function init() {
+            // create new scene
+            scene = new THREE.Scene();
+
+            // setup renderer
+            renderer = new THREE.WebGLRenderer();
+           // renderer.setClearColor(0x000000, 1.0); 
+            renderer.setSize(W,H);
+            renderer.shadowMapEnabled = true;
+            //renderer.shadowMapSoft = true;
+            
+            // setup camera pointing at scene
+            camera = new THREE.PerspectiveCamera( 80, W/H,  1 , 50000);
+            camera.position.x = 1;
+            camera.position.y = 1;
+            camera.position.z = 1;
+            camera.lookAt(scene.position);
+             
+
+            // draw a cube
+            var cubeWidth = 0.5;
+            var cubeHeight = 0.5;
+            var cubeDepth = 0.5;
+            var cubeGeometry = new THREE.CubeGeometry(cubeWidth, cubeHeight, cubeDepth);
+            var cubeMaterial = new THREE.MeshPhongMaterial({ color: "yellow", ambient: "white", shininess: 9, metal: true, reflectivity: 9 });                
+            cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+            // make the cube cast and recieve shadow
+            cube.castShadow = true;
+            cube.receiveShadow = true;            
+            scene.add(cube);
+            
+            // draw a floor (plane) for the cube to sit on 
+            var planeGeometry = new THREE.PlaneGeometry(4, 4);
+            //var planeMaterial = new THREE.MeshLambertMaterial({ color: "white" });  
+            var planeMaterial = new THREE.MeshPhongMaterial({ color: "yellow" });
+            plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            // make the plane recieve shadow from the cube
+            plane.castShadow = true;
+            plane.receiveShadow = true;
+            plane.rotation.x = -0.5 * Math.PI;
+            plane.position.y = -1;
+            
+            plane.receiveShadow = true;
+
+
+            scene.add(plane);
+   
+
+           
+
+            // LIGHTS
+            // var ambient = new THREE.AmbientLight("red");
+            // ambient.castShadow = true;
+            // scene.add(ambient);
+
+           
+
+
+            // add a spotlight to illuminate the cube and cause shadows            
+            spotLight = new THREE.SpotLight("white");
+            //spotLight = new THREE.DirectionalLight(0xdfebff, 1.75);
+            spotLight.position.set(4, 4, 1);
+            
+            spotLight.castShadow = true;
+            //spotLight.shadowCameraVisible = true;
+            spotLight.shadowMapWidth = 512;
+            spotLight.shadowMapHeight = 512;
+            spotLight.intensity = 1;
+            spotLight.shadowDarkness = 0.1;
+            spotLight.shadowCameraNear = true;   // this line makes the shadow appear, hooray!
+            
+            scene.add(spotLight);
+            
+            // render it!
+            document.body.appendChild(renderer.domElement);
+            render();
+
+        }
+         
+
+        // do the render
+        function render() {
+            requestAnimationFrame(render);
+              
+
+
+            // randomly turn the cube
+            cube.rotation.x += Math.PI * SPEED * 0.8;
+            cube.rotation.y += Math.PI * SPEED * 1.0;
+            cube.rotation.z += Math.PI * SPEED * 0.5;
+            
+
+            renderer.render(scene, camera);
+        }
+
+        init();        
+        render();
+  */
+        
 
   </script>
 </html>
