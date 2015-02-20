@@ -6,11 +6,11 @@ angular.module('thesisApp')
       //where local items are stored
       $scope.user = Auth.getCurrentUser().email;
       $scope.items = 0;
-
-      //returns all items from db schema,
-      $scope.getItems = function() {
-        cartFactory.amazonGetCart(function(data){
-          if(data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem){
+      $scope.rem
+        //returns all items from db schema,
+      $scope.getItems = function() { << << << < HEAD
+        cartFactory.amazonGetCart(function(data) {
+          if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
             $scope.purchaseUrl = data.PurchaseURL[0];
             $scope.subTotal = data.SubTotal[0].FormattedPrice[0];
             $scope.items = data.CartItems[0].CartItem || [];
@@ -51,7 +51,7 @@ angular.module('thesisApp')
       };
 
       //open Amazon cart in a new tab
-      $scope.goToAmazonCart = function(){
+      $scope.goToAmazonCart = function() {
         window.open(
           $scope.purchaseUrl,
           '_blank' // <- This is what makes it open in a new window.

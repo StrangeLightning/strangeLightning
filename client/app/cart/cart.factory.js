@@ -11,7 +11,7 @@ angular.module('thesisApp')
       items.push(item);
 
       //if it's the first item create a row
-      if(items.length === 1) {
+      if (items.length === 1) {
         $http.put('/api/carts/name/' + user, items)
           .success(function(data) {
             console.log('successful res  from client create', data)
@@ -58,7 +58,7 @@ angular.module('thesisApp')
     cart.totalCharge = function(items) {
       var totalCharge = 0;
       items = items || [];
-      for(var i = 0; i < items.length; i++) {
+      for (var i = 0; i < items.length; i++) {
         totalCharge = totalCharge + parseFloat(items[i].price);
       }
 
@@ -105,21 +105,31 @@ angular.module('thesisApp')
     };
 
     cart.amazonRemoveProduct = function(product, amazonCart) {
-      for(var i = 0; i < amazonCart.items.length; i++) {
-        if(product === amazonCart.items[i]['productId']) {
-          newquantity = --amazonCart.items[i]['quantity'];
+
+      var newquantity;
+      console.log("Product", product, amazonCart);
+
+      for (var i = 0; i < amazonCart.items.length; i++) {
+        if (product === amazonCart.items[i]['productId']) {
+          if (amazonCart.items[i]['quantity'] > 0) {
+            newquantity = --amazonCart.items[i]['quantity'];
+          }
+          console.log('This is the new quanitty in remove', newquantity)
           break;
+        } else {
+          newquantity = 0;
         }
 
       }
-      //console.log('WHEN BLESSED ITEM', amazonCart['CartId'])
+
+      console.log('PRODUCT ID', product)
       $http.post('/api/amazoncarts/modify', {
-        'id': product,
-        'productId': product,
-        'CartId': amazonCart['CartId'],
-        'HMAC': amazonCart['HMAC'],
-        'newquantity': newquantity
-      })
+          'id': product,
+          'productId': product,
+          'CartId': amazonCart['CartId'],
+          'HMAC': amazonCart['HMAC'],
+          'Quantity': newquantity
+        })
         .success(function(data) {
           console.log('successful res from AMAZON client', data)
         })
@@ -134,8 +144,8 @@ angular.module('thesisApp')
       var newquantity;
       amazonCart.items = amazonCart.items || [];
 
-      for(var i = 0; i < amazonCart.items.length; i++) {
-        if(product === amazonCart.items[i]['productId']) {
+      for (var i = 0; i < amazonCart.items.length; i++) {
+        if (product === amazonCart.items[i]['productId']) {
           newquantity = ++amazonCart.items[i]['quantity'];
           break;
         } else {
@@ -146,12 +156,12 @@ angular.module('thesisApp')
       //console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
 
       $http.post('/api/amazoncarts/modify', {
-        'id': product,
-        'productId': product,
-        'CartId': amazonCart['CartId'],
-        'HMAC': amazonCart['HMAC'],
-        'Quantity': newquantity
-      })
+          'id': product,
+          'productId': product,
+          'CartId': amazonCart['CartId'],
+          'HMAC': amazonCart['HMAC'],
+          'Quantity': newquantity
+        })
         .success(function(data) {
           console.log('successful res from AMAZON client', data)
         })
@@ -165,8 +175,8 @@ angular.module('thesisApp')
       // console.log(Auth.getCurrentUser().id)
 
       $http.post('/api/amazoncarts/create', {
-        'id': itemId
-      })
+          'id': itemId
+        })
         .success(function(data) {
           console.log('successful res from AMAZON client', data)
           console.log("WHEN CREATING CART ID:", data.CartId[0])
@@ -186,7 +196,7 @@ angular.module('thesisApp')
           // console.log("HMAC", data.HMAC[0])
           console.log("Title:", data.CartItems[0].CartItem[0].Title[0])
           console.log("Item Price:", data.CartItems[0].CartItem[0].Price[0].FormattedPrice[0])
-          // console.log()
+            // console.log()
         })
         .error(function(err) {
           console.log("ERROR creating Cart ", err)

@@ -1,7 +1,21 @@
 'use strict';
 
 angular.module('thesisApp')
+<<<<<<< HEAD
   .controller('CatalogCtrl', ['$scope', '$rootScope', 'cartFactory', 'catalogFactory', '$http', '$location', function($scope, $rootScope, cartFactory, catalogFactory, $http, $location) {
+=======
+  .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', '$location', function($scope, cartFactory, catalogFactory, $http, $location) {
+
+
+    $scope.removeFromCart = function(product) {
+      if (cartFactory.amazonCart.items) {
+        console.log("ProductId FROM REmove on catalog", product)
+        cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
+      } else {
+        console.log("item not in cart");
+      }
+    }
+>>>>>>> looking deep into remove
     $scope.addToCart = function(product) {
       $rootScope.$broadcast('addToCart');
       if (cartFactory.amazonCart.items) {
