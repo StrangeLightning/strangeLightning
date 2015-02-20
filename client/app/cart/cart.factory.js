@@ -105,8 +105,6 @@ angular.module('thesisApp')
     };
 
     cart.amazonRemoveProduct = function(product, amazonCart) {
-      console.log("A SUBTRACT Remove PRODCUT", amazonCart);
-
       for(var i = 0; i < amazonCart.items.length; i++) {
         if(product === amazonCart.items[i]['productId']) {
           newquantity = --amazonCart.items[i]['quantity'];

@@ -15,9 +15,7 @@
   </table>
 
   <table class="table table-bordered table-hover">
-    <tr>
-     <span ng-if="items.length === 0"> No items in cart. </span>
-    </tr>
+     <span ng-if="!(items.length > 0)"> No items in cart. </span>
 
     <tr ng-if="items.length > 0" ng-repeat="item in items">
       <td>{{item.Title[0]}}</td>
@@ -37,10 +35,14 @@
 
   <div id="checkout" class="row">
     <div class="col-md-6">
-      <form type="button" class="btn btn-lg cartBtn" >Pay</form>
+      <button type="button" class="btn btn-lg cartBtn" ng-click="goToAmazonCart()">
+        <a href="{{purchaseUrl}}" target="_blank">Pay</a>
+      </button>
     </div>
     <div class="col-md-6">
-      <button ng-click="dropSchema()" type ="button" class="btn btn-lg cartBtn">Empty Cart</button>
+      <button ng-click="dropSchema()" type ="button" class="btn btn-lg cartBtn">
+        <a href="#">Empty Cart</a>
+      </button>
     </div>
   </div>
 </div>

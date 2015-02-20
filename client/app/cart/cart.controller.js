@@ -11,9 +11,9 @@ angular.module('thesisApp')
       $scope.getItems = function() {
         cartFactory.amazonGetCart(function(data){
           if(data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem){
+            $scope.purchaseUrl = data.PurchaseURL[0];
             $scope.items = data.CartItems[0].CartItem || [];
           }
-
         });
       };
 
@@ -35,7 +35,7 @@ angular.module('thesisApp')
 
       //clear items locally and drop schema
       $scope.dropSchema = function() {
-
+        $scope.items = 0;
         cartFactory.amazonClearCart();
       };
 
@@ -51,6 +51,14 @@ angular.module('thesisApp')
           'margin-right': '-=1000'
         }, 500);
         $state.transitionTo('catalog');
+      };
+
+      //open Amazon cart in a new tab
+      $scope.goToAmazonCart = function(){
+        window.open(
+          $scope.purchaseUrl,
+          '_blank' // <- This is what makes it open in a new window.
+        );
       };
 
       //init
