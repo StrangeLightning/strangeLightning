@@ -6,8 +6,19 @@ angular.module('thesisApp')
       //where local items are stored
       $scope.user = Auth.getCurrentUser().email;
       $scope.items = 0;
-      $scope.rem
-        //returns all items from db schema,
+      // $scope.rem
+      $scope.removeFromCart = function(product) {
+        console.log("CART CONTROLER PROD", product)
+        if (cartFactory.amazonCart.items) {
+          console.log("Product FROM REmove on catalog", product)
+            // cartFactory.amazonRemoveProduct(product.id, cartFactory.amazonCart)
+            // function(cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart), function($scope.getItems()))()
+
+        } else {
+          console.log("item not in cart");
+        }
+      };
+      //returns all items from db schema,
       $scope.getItems = function() {
         cartFactory.amazonGetCart(function(data) {
           if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {

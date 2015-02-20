@@ -22,9 +22,9 @@
       <td>{{item.Title[0]}}</td>
       <td>{{item.ItemTotal[0].FormattedPrice[0]}}</td>
       <td>{{item.Quantity[0]}}</td>
-      <td class="col-md-1">
-        <button ng-click="removeItem(items, item)"  type="button" class="close center-block" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+      <td>
+        <button type="button" ng-click="removeFromCart(item.ASIN[0])"  class="btn btn-lg cartBtn">
+          <!-- <span aria-hidden="true">&times;</span> -->
         </button>
       </td>
     </tr>

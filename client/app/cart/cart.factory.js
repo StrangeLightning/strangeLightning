@@ -107,21 +107,21 @@ angular.module('thesisApp')
     cart.amazonRemoveProduct = function(product, amazonCart) {
 
       var newquantity;
-      console.log("Product", product, amazonCart);
-      console.log("AMAzon Cart", amazonCart)
+      console.log("Product", product);
+      // console.log("AMAzon Cart", amazonCart)
       for (var i = 0; i < amazonCart.items.length; i++) {
         if (product === amazonCart.items[i]['productId']) {
           if (amazonCart.items[i]['quantity'] > 0) {
             newquantity = --amazonCart.items[i]['quantity'];
+            console.log('This is the new quanitty in remove', newquantity)
+            break;
           }
-          console.log('This is the new quanitty in remove', newquantity)
-          break;
-        } else {
-          newquantity = 0;
         }
+        newquantity = newquantity || 0;
+
 
       }
-
+      console.log("NEW QUANTITY BEING PASSED IN", newquantity)
       console.log('PRODUCT ID', product)
       $http.post('/api/amazoncarts/modify', {
           'id': product,

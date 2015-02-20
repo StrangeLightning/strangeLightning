@@ -60,6 +60,7 @@ exports.modifyCart = function(req, res, next) {
   });
   var t = new Date().getTime();
 
+
   if (req.user) {
     req.user.cart = req.user.cart || {}
   } // This is needed because of schema initialization
