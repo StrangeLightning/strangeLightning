@@ -35,9 +35,8 @@ angular.module('thesisApp')
 
       //clear items locally and drop schema
       $scope.dropSchema = function() {
-        //$scope.items = [];
-        $scope.charge = parseFloat(0).toFixed(2);
-        cartFactory.dropSchema($scope.user);
+
+        cartFactory.amazonClearCart();
       };
 
       /* Set height of window */

@@ -195,5 +195,21 @@ angular.module('thesisApp')
         });
     };
 
+    cart.amazonClearCart = function() {
+      // console.log(Auth.getCurrentUser().id)
+
+      $http.post('/api/amazoncarts/clear', {})
+        .success(function(data) {
+          cart.amazonCart = {
+            "CartId": data.CartId[0],
+            "HMAC": data.HMAC[0],
+            "items": []
+          };
+        })
+        .error(function(err) {
+          console.log("ERROR creating Cart ", err)
+        });
+    };
+
     return cart;
   }]);
