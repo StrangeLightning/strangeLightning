@@ -185,7 +185,7 @@ angular.module('thesisApp')
       // console.log(Auth.getCurrentUser().id)
 
       $http.post('/api/amazoncarts/create', {
-          'id': itemId
+      'id': itemId
         })
         .success(function(data) {
           cart.amazonCart = {

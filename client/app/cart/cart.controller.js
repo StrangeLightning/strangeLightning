@@ -27,7 +27,7 @@ angular.module('thesisApp')
             .error(function(err) {
               console.log("ERROR removing Cart ", err)
             });
-          // function(cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart), function($scope.getItems()))()
+          // function(cartFactory.amazonRemoveProduct(product, crartFactory.amazonCart), function($scope.getItems()))()
 
         }
         // else {
