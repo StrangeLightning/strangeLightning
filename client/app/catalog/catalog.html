@@ -34,7 +34,7 @@
 
   <!-- Start photo catalog -->
   <div id="catalog-photos" class="col-md-10" >
-      <img id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive" />
+      <img ng-hide="products.length > 0" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive" />
       <div class="col-md-4" ng-repeat="product in products">
         <div class="thumbnail">
           <div class="imgBkg">

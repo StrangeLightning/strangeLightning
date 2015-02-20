@@ -24,6 +24,15 @@ angular.module('thesisApp')
           $rootScope.$broadcast('products-updated', {newProducts: newProducts});
         });
         $scope.searchTerm = '';
-      }
+      };
 
+      //init
+
+      //register to listen to keyboard events
+      $rootScope.$on('keypress',function(onEvent, keypressEvent){
+        var keyCode = keypressEvent.which;
+        if(keyCode === 13) /* A */ {
+          $scope.doSearch();
+        }
+      });
     }]);
