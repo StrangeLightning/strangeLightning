@@ -15,13 +15,13 @@
   </table>
 
   <table class="table table-bordered table-hover">
-    <tr ng-if="items.length === 0">
-      No items in cart.
+    <tr>
+     <span ng-if="items.length === 0"> No items in cart. </span>
     </tr>
 
     <tr ng-if="items.length > 0" ng-repeat="item in items">
-      <td>{{item.name}}</td>
-      <td>$ {{item.price}}</td>
+      <td>{{item.Title[0]}}</td>
+      <td>{{item.Price[0].FormattedPrice[0]}}</td>
       <td class="col-md-1">
         <button ng-click="removeItem(items, item)"  type="button" class="close center-block" aria-label="Close">
           <span aria-hidden="true">&times;</span>
