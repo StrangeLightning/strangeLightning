@@ -44,7 +44,7 @@ module.exports = function (grunt) {
       options: {
         debug: true,
         coverageDir: 'test-coverage',
-        dryRun: true,
+        dryRun: false,
         force: true,
         recursive: true
       }
@@ -607,7 +607,8 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'env:all',
         'env:test',
-        'mochaTest'
+        'mochaTest',
+        'coveralls'
       ]);
     }
 
