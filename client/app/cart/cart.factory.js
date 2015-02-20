@@ -90,28 +90,24 @@ angular.module('thesisApp')
 
     ////AMAZON CART FUNCTIONALITY
 
-    cart.amazonGetCart = function(cartId, HMAC) {
+    cart.amazonGetCart = function(callback) {
       //console.log("FROM FACTORY WHEN GETTING CART + HMAC ", cartId, HMAC)
 
-      $http.post('/api/amazoncarts/get', {
-        'cartId': cartId,
-        'HMAC': HMAC
-      })
+      $http.post('/api/amazoncarts/get', {})
         .success(function(data) {
           console.log('cart from AMAZON:  ', data);
-
+          callback(data);
         })
         .error(function(err) {
           console.log("ERROR getting Cart ", err);
+          callback(data);
         });
     };
 
     cart.amazonRemoveProduct = function(product, amazonCart) {
-      console.log("A SUBTRACT Remove PRODCUT", amazonCart)
-
       for(var i = 0; i < amazonCart.items.length; i++) {
         if(product === amazonCart.items[i]['productId']) {
-          newquantity = --amazonCart.items[i]['quantity']
+          newquantity = --amazonCart.items[i]['quantity'];
           break;
         }
 
@@ -195,7 +191,23 @@ angular.module('thesisApp')
         .error(function(err) {
           console.log("ERROR creating Cart ", err)
         });
-    }
+    };
+
+    cart.amazonClearCart = function() {
+      // console.log(Auth.getCurrentUser().id)
+
+      $http.post('/api/amazoncarts/clear', {})
+        .success(function(data) {
+          cart.amazonCart = {
+            "CartId": data.CartId[0],
+            "HMAC": data.HMAC[0],
+            "items": []
+          };
+        })
+        .error(function(err) {
+          console.log("ERROR creating Cart ", err)
+        });
+    };
 
     return cart;
   }]);

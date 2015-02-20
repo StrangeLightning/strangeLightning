@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', function($scope, cartFactory, catalogFactory, $http) {
+  .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', '$location', function($scope, cartFactory, catalogFactory, $http, $location) {
     $scope.addToCart = function(product) {
       if (cartFactory.amazonCart.items) {
         cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
@@ -12,7 +12,7 @@ angular.module('thesisApp')
 
     $scope.amazonCart = cartFactory.amazonCart;
     $scope.getCartItems = function() {
-      cartFactory.amazonGetCart(cartFactory.amazonCart['CartId'], cartFactory.amazonCart['HMAC']);
+      $location.path("/cart");
     };
 
     $scope.viewItem = function(product) {
