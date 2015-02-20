@@ -27,7 +27,6 @@ exports.searchCart = function(req, res, next) {
   }, function(err, results) {
     var _results = [];
     var r = results.ItemSearchResponse.Items[0];
-    //console.log(r);
     var r2 = results.ItemSearchResponse.Items[0].Item;
     var i = 0;
     console.log(r2);
@@ -52,7 +51,6 @@ exports.searchCart = function(req, res, next) {
         // product.smallImage = obj.SmallImage[0].URL[0];
         // product.largeImage = obj.LargeImage[0].URL[0];
         product.reviews = obj.CustomerReviews[0].IFrameURL[0];
-        console.log("IN LOOP")
         _results.push(product);
       }
       i++;
