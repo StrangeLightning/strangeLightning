@@ -30,7 +30,8 @@ exports.searchCart = function(req, res, next) {
     //console.log(r);
     var r2 = results.ItemSearchResponse.Items[0].Item;
     var i = 0;
-    while(_results.length < 12) {
+    console.log(r2);
+    while(_results.length < 12 && r2 && r2[i]) {
       var obj = r2[i];
       var product = {};
 
@@ -51,6 +52,7 @@ exports.searchCart = function(req, res, next) {
         // product.smallImage = obj.SmallImage[0].URL[0];
         // product.largeImage = obj.LargeImage[0].URL[0];
         product.reviews = obj.CustomerReviews[0].IFrameURL[0];
+        console.log("IN LOOP")
         _results.push(product);
       }
       i++;
