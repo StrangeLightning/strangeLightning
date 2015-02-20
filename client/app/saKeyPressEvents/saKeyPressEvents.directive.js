@@ -2,7 +2,7 @@
 
 // Listen for all keypress events in app, and broadcast those
 angular.module('thesisApp')
-  .directive("ipKeypressEvents", function($document, $rootScope)
+  .directive("saKeypressEvents", function($document, $rootScope)
   {
     return(
     {
