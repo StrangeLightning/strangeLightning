@@ -27,10 +27,10 @@ exports.searchCart = function(req, res, next) {
   }, function(err, results) {
     var _results = [];
     var r = results.ItemSearchResponse.Items[0];
-    //console.log(r);
     var r2 = results.ItemSearchResponse.Items[0].Item;
     var i = 0;
-    while(_results.length < 12) {
+    console.log(r2);
+    while(_results.length < 12 && r2 && r2[i]) {
       var obj = r2[i];
       var product = {};
 

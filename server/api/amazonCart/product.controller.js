@@ -63,23 +63,28 @@ exports.modifyCart = function(req, res, next) {
 
   if(req.user) {
     req.user.cart = req.user.cart || {}
-  }; // This is needed because of schema initialization
-
+  } // This is needed because of schema initialization
 
   // Check to see if the id is a stored ASIN
-  if(req.user && req.user.cart && Object.keys(req.user.cart).length) {
-    if(req.user.ASIN2CartItemId && req.user.ASIN2CartItemId[req.body.id]) {
+  if(req.user &&
+    req.user.cart &&
+    Object.keys(req.user.cart).length) {
+    var user = req.user;
+    var items = user.cart.items;
+    if(user.ASIN2CartItemId &&
+      user.ASIN2CartItemId[req.body.id]) {
       // IF it is get the CartItemId from the user document
       opHelper.execute('CartModify', {
-        'CartId': req.user.cart.CartId[0],
-        'HMAC': req.user.cart.HMAC[0],
-        'Item.1.CartItemId': req.user.ASIN2CartItemId[req.body.id],
-        'Item.1.Quantity': req.body.Quantity,
+        'CartId': user.cart.CartId[0],
+        'HMAC': user.cart.HMAC[0],
+        'Item.1.CartItemId': user.ASIN2CartItemId[req.body.id],
+        'Item.1.Quantity': req.body.Quantity
       }, function(err, results) {
         var cart = results.CartModifyResponse.Cart[0];
-        if(req.user && cart.CartItems) {
-          var user = req.user;
+
+        if(user && cart.CartItems) {
           user.cart = cart;
+          user.cart.items = items;
           user.cart.items[req.body.id] = req.body.Quantity;
           user.cart.Quantity = calcQuantity(cart);
           user.ASIN2CartItemId = user.ASIN2CartItemId || {};
@@ -94,16 +99,17 @@ exports.modifyCart = function(req, res, next) {
     } else {
       // IF NOT then greate it in the cart
       opHelper.execute('CartAdd', {
-        'CartId': req.user.cart.CartId[0],
-        'HMAC': req.user.cart.HMAC[0],
+        'CartId': user.cart.CartId[0],
+        'HMAC': user.cart.HMAC[0],
         'Item.1.ASIN': req.body.id,
         'Item.1.Quantity': '1'
       }, function(err, results) {
 
         var cart = results.CartAddResponse.Cart[0];
-        if(req.user) {
-          var user = req.user;
+        console.log("CART", cart);
+        if(user) {
           user.cart = cart;
+          user.cart.items = items;
           user.cart.items[req.body.id] = 1;
           user.cart.Quantity = calcQuantity(cart);
           user.ASIN2CartItemId = user.ASIN2CartItemId || {};
@@ -131,7 +137,7 @@ exports.clearCart = function(req, res, next) {
   if(req.user.cart && Object.keys(req.user.cart).length) {
     opHelper.execute('CartClear', {
       'CartId': req.user.cart.CartId[0],
-      'HMAC': req.user.cart.HMAC[0],
+      'HMAC': req.user.cart.HMAC[0]
     }, function(err, results) {
       var _results = [];
       var cart = results.CartClearResponse.Cart[0];
@@ -158,9 +164,6 @@ exports.getCart = function(req, res, next) {
 
   var t = new Date().getTime();
 
-  console.log("cartID", req.body.CartId);
-  console.log("HMAC", req.body.HMAC);
-
   opHelper.execute('CartGet', {
     'CartId': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.CartId[0] : req.body.CartId,
     'HMAC': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.HMAC[0] : req.body.HMAC
@@ -171,7 +174,6 @@ exports.getCart = function(req, res, next) {
     } else {
       var cart;
       if(results.CartGetResponse && results.CartGetResponse.Cart) {
-        console.log("results", results.CartGetResponse.Cart[0]);
         cart = results.CartGetResponse.Cart[0];
         if (req.user.cart && Object.keys(req.user.cart || {}).length) {
           cart.items = req.user.cart.items;
