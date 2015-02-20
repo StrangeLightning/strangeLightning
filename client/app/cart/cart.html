@@ -10,6 +10,7 @@
     <tr>
       <th>Product</th>
       <th>Price</th>
+      <th>Quantity</th>
       <th>Remove</th>
     </tr>
   </table>
@@ -20,6 +21,7 @@
     <tr ng-if="items.length > 0" ng-repeat="item in items">
       <td>{{item.Title[0]}}</td>
       <td>{{item.Price[0].FormattedPrice[0]}}</td>
+      <td>{{item.Quantity[0]}}</td>
       <td class="col-md-1">
         <button ng-click="removeItem(items, item)"  type="button" class="close center-block" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -30,13 +32,13 @@
   <br/>
 
   <h3>
-    <span class="total label label-default col-md-12">Total: ${{charge}}</span>
+    <span class="total label label-default col-md-12">Total: {{subTotal}}</span>
   </h3>
 
   <div id="checkout" class="row">
     <div class="col-md-6">
       <button type="button" class="btn btn-lg cartBtn" ng-click="goToAmazonCart()">
-        <a href="{{purchaseUrl}}" target="_blank">Pay</a>
+        <a>Pay</a>
       </button>
     </div>
     <div class="col-md-6">
