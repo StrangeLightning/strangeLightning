@@ -107,7 +107,6 @@ angular.module('thesisApp')
     cart.amazonRemoveProduct = function(product, amazonCart) {
 
       var newquantity;
-      console.log("Product", product);
       // console.log("AMAzon Cart", amazonCart)
       for (var i = 0; i < amazonCart.items.length; i++) {
         if (product === amazonCart.items[i]['productId']) {
@@ -156,24 +155,16 @@ angular.module('thesisApp')
         }
       }
       if (updated !== true) {
-        console.log("PUSHING ITE")
         cart.amazonCart.items.push({
           // "title": data.CartItems[0].CartItem[0].Title[0],
           // "price": data.CartItems[0].CartItem[0].Price[0].FormattedPrice[0],
           "productId": product,
           "quantity": 1
         });
-        console.log('newQAut 164', newquantity)
         newquantity = 1;
-        console.log('newQAut 166', newquantity)
 
       }
-      console.log('newQAut 169', newquantity)
-
-
-      console.log("CART AMAZON 172", cart.amazonCart)
-        //console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
-      console.log('newQAut 174 ', newquantity)
+      //console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
       $http.post('/api/amazoncarts/modify', {
           'id': product,
           'productId': product,
@@ -197,8 +188,6 @@ angular.module('thesisApp')
           'id': itemId
         })
         .success(function(data) {
-          console.log('successful res from AMAZON client', data)
-          console.log("WHEN CREATING CART ID:", data.CartId[0])
           cart.amazonCart = {
             "CartId": data.CartId[0],
             "HMAC": data.HMAC[0],

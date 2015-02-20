@@ -34,6 +34,10 @@ angular.module('thesisApp')
         //   console.log("item not in cart");
         // }
       };
+      $scope.emptyCart = function() {
+        $scope.items = $0
+        cartFactory.amazonClearCart();
+      };
       //returns all items from db schema,
       $scope.getItems = function() {
         cartFactory.amazonGetCart(function(data) {
@@ -63,6 +67,7 @@ angular.module('thesisApp')
         cartFactory.amazonClearCart();
         $rootScope.$broadcast('clearCartQty');
       };
+
 
       /* Set height of window */
       var block = $(window).height();
