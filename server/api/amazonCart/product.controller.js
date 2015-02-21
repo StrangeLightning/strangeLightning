@@ -121,7 +121,7 @@ exports.modifyCart = function(req, res, next) {
               break;
             }
           }
-          user.save(function(err) {
+          user.save(function(err, user) {
             if(!err) res.end(JSON.stringify(cart));
           });
         } else {
