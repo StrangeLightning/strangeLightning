@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', '$location', function($scope, cartFactory, catalogFactory, $http, $location) {
+  .controller('CatalogCtrl', ['$scope', '$rootScope', 'cartFactory', 'catalogFactory', '$http', '$location', function($scope, $rootScope, cartFactory, catalogFactory, $http, $location) {
     $scope.addToCart = function(product) {
+      $rootScope.$broadcast('addToCart');
       if (cartFactory.amazonCart.items) {
         cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
       } else {

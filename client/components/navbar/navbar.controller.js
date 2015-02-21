@@ -7,18 +7,20 @@ angular.module('thesisApp')
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
+      $scope.cartQty = 0;
 
-      cartFactory.amazonGetCart().then(function (cart) {
-        $scope.cartQty = cart.Quantity;
-        console.log('cart', cart);
-      });
+      $scope.increment = function () {
+        $scope.cartQty++;
+      };
 
-
-
-      // console.log(cartFactory.getItems($scope.getCurrentUser()));
+      $scope.clearCart = function () {
+        $scope.cartQty = 0;
+        $scope.$apply();
+      };
 
       $scope.logout = function() {
         Auth.logout();
+        $scope.cartQty = 0;
         $location.path('/login');
       };
 
@@ -44,4 +46,7 @@ angular.module('thesisApp')
           $scope.doSearch();
         }
       });
+
+      $rootScope.$on('addToCart', $scope.increment);
+      $rootScope.$on('clearCartQty', $scope.clearCart);
     }]);
