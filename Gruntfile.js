@@ -1,7 +1,7 @@
 // Generated on 2015-02-10 using generator-angular-fullstack 2.0.13
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   var localConfig;
   try {
     localConfig = require('./server/config/local.env.js');
@@ -35,9 +35,9 @@ module.exports = function (grunt) {
     },
 
     // Automatically generate documentation
-    docco_husky : {
-      'Sphereable':'testing',
-      'files':['client/../*.js']
+    docco_husky: {
+      'Sphereable': 'testing',
+      'files': ['client/../*.js']
     },
 
     coveralls: {
@@ -47,6 +47,32 @@ module.exports = function (grunt) {
         dryRun: false,
         force: true,
         recursive: true
+      },
+      all: {
+        // Target-specific LCOV coverage file
+        src: ['test-coverage/lcov.info']
+      }
+    },
+
+    mocha_istanbul: {
+      target: {
+        src: 'server',
+        options: {
+          coverage: true,
+          force: true,
+          dryRun: false,
+          coverageFolder: 'test-coverage/mocha',
+          reporter: 'spec',
+          reportFormats: ['lcovonly'],
+          quiet: true
+        }
+      }
+    },
+
+    concat: {
+      extras: {
+        src: ['test-coverage/karma/lcov.info', 'test-coverage/mocha/lcov.info'],
+        dest: 'test-coverage/lcov.info'
       }
     },
 
@@ -210,14 +236,14 @@ module.exports = function (grunt) {
           env: {
             PORT: process.env.PORT || 4430
           },
-          callback: function (nodemon) {
-            nodemon.on('log', function (event) {
+          callback: function(nodemon) {
+            nodemon.on('log', function(event) {
               console.log(event.colour);
             });
 
             // opens browser on initial server start
-            nodemon.on('config:update', function () {
-              setTimeout(function () {
+            nodemon.on('config:update', function() {
+              setTimeout(function() {
                 require('open')('https://localhost:8080/debug?port=5858');
               }, 500);
             });
@@ -387,34 +413,10 @@ module.exports = function (grunt) {
       }
     },
 
-    buildcontrol: {
-      options: {
-        dir: 'dist',
-        commit: true,
-        push: true,
-        connectCommits: false,
-        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
-      },
-      heroku: {
-        options: {
-          remote: 'heroku',
-          branch: 'master'
-        }
-      },
-      openshift: {
-        options: {
-          remote: 'openshift',
-          branch: 'master'
-        }
-      }
-    },
-
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-      server: [
-      ],
-      test: [
-      ],
+      server: [],
+      test: [],
       debug: {
         tasks: [
           'nodemon',
@@ -469,9 +471,7 @@ module.exports = function (grunt) {
     },
 
     injector: {
-      options: {
-
-      },
+      options: {},
       // Inject application script files into index.html (doesn't include bower)
       scripts: {
         options: {
@@ -485,11 +485,11 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-              ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-               '!{.tmp,<%= yeoman.client %>}/app/app.js',
-               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
-               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
-            ]
+            ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+              '!{.tmp,<%= yeoman.client %>}/app/app.js',
+              '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
+              '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
+          ]
         }
       },
 
@@ -510,7 +510,7 @@ module.exports = function (grunt) {
           ]
         }
       }
-    },
+    }
   });
 
   // Automatically generate documentation
@@ -518,14 +518,21 @@ module.exports = function (grunt) {
 
   //code coverage using Coveralls
   grunt.loadNpmTasks('grunt-karma-coveralls');
+  grunt.loadNpmTasks('grunt-coveralls');
+
+  // Set up mocha code coverage
+  grunt.loadNpmTasks('grunt-mocha-istanbul');
+  grunt.event.on('coverage', function(lcov, done) {
+    done();
+  });
 
   // Used for delaying livereload until after server has restarted
-  grunt.registerTask('wait', function () {
+  grunt.registerTask('wait', function() {
     grunt.log.ok('Waiting for server reload...');
 
     var done = this.async();
 
-    setTimeout(function () {
+    setTimeout(function() {
       grunt.log.writeln('Done waiting!');
       done();
     }, 1500);
@@ -535,12 +542,12 @@ module.exports = function (grunt) {
     this.async();
   });
 
-  grunt.registerTask('serve', function (target) {
-    if (target === 'dist') {
+  grunt.registerTask('serve', function(target) {
+    if(target === 'dist') {
       return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
     }
 
-    if (target === 'debug') {
+    if(target === 'debug') {
       return grunt.task.run([
         'clean:server',
         'env:all',
@@ -566,12 +573,12 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('serveHTTP', function (target) {
-    if (target === 'dist') {
+  grunt.registerTask('serveHTTP', function(target) {
+    if(target === 'dist') {
       return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
     }
 
-    if (target === 'debug') {
+    if(target === 'debug') {
       return grunt.task.run([
         'clean:server',
         'env:all',
@@ -595,35 +602,32 @@ module.exports = function (grunt) {
       'open',
       'watch'
     ]);
-  });
-
-  grunt.registerTask('server', function () {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
   });
 
   grunt.registerTask('test', function(target) {
-    if (target === 'server') {
-      return grunt.task.run([
-        'env:all',
-        'env:test',
-        'mochaTest'
-      ]);
-    }
-
-    else if (target === 'client') {
+    if(target === 'client') {
       return grunt.task.run([
         'clean:server',
         'env:all',
         'concurrent:test',
         'injector',
         'autoprefixer',
-        'karma',
-        'coveralls'
+        'karma'
       ]);
     }
 
-    else if (target === 'e2e') {
+    else if(target === 'server') {
+      return grunt.task.run([
+        'env:all',
+        'env:test',
+        'mochaTest',
+        'mocha_istanbul',
+        'concat',
+        'coveralls:all'
+      ]);
+    }
+
+    else if(target === 'e2e') {
       return grunt.task.run([
         'clean:server',
         'env:all',
@@ -638,9 +642,9 @@ module.exports = function (grunt) {
     }
 
     else grunt.task.run([
-      'test:server',
-      'test:client'
-    ]);
+        'test:client',
+        'test:server'
+      ]);
   });
 
   grunt.registerTask('build', [
