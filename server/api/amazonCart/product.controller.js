@@ -92,11 +92,14 @@ exports.modifyCart = function(req, res, next) {
           user.save(function(err) {
             if(!err) res.end(JSON.stringify(cart));
           });
-        } else {
+        } 
+        else {
           res.end(JSON.stringify(cart));
         }
       });
-    } else {
+    } 
+
+    else {
       // IF NOT then greate it in the cart
       opHelper.execute('CartAdd', {
         'CartId': user.cart.CartId[0],
@@ -106,14 +109,18 @@ exports.modifyCart = function(req, res, next) {
       }, function(err, results) {
 
         var cart = results.CartAddResponse.Cart[0];
-        console.log("CART", cart);
         if(user) {
           user.cart = cart;
           user.cart.items = items;
           user.cart.items[req.body.id] = 1;
           user.cart.Quantity = calcQuantity(cart);
           user.ASIN2CartItemId = user.ASIN2CartItemId || {};
-          user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          for (var i = 0; i < cart.CartItems[0].CartItem.length; i++) {
+            if (cart.CartItems[0].CartItem[i].ASIN[0] === req.body.id) {
+              user.ASIN2CartItemId[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
+              break;
+            }
+          }
           user.save(function(err) {
             if(!err) res.end(JSON.stringify(cart));
           });
