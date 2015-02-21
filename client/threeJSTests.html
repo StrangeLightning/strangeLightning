@@ -21,6 +21,7 @@
 
   // Camera
   camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 1, 100000);
+
   // Set height
   // camera.position.z = 1000;
   camera.position.set( 10, 10, 50 );
@@ -46,6 +47,7 @@
 
   // Directional Light
   light = new THREE.SpotLight(0xffffff);
+
   light.position.set( -5, 5, 15 );
   // light.position.multiplyScalar( 50 );
 
@@ -60,16 +62,21 @@
 
   var d = 50;
 
-  light.shadowCameraLeft = -d;
-  light.shadowCameraRight = d;
-  light.shadowCameraTop = d;
-  light.shadowCameraBottom = -d;
-
   // Sets how far 'shadow rays' go
   light.shadowCameraFar = 20;
   light.shadowBias = -0.0001;
   light.shadowDarkness = 0.35;
   light.shadowCameraVisible = true;
+
+  // light.shadowCameraLeft = -d;
+  // light.shadowCameraRight = d;
+  // light.shadowCameraTop = d;
+  // light.shadowCameraBottom = -d;
+
+  // light.shadowCameraFar = 3500;
+  // light.shadowBias = -0.0001;
+  // light.shadowDarkness = 0.35;
+  // light.shadowCameraVisible = true;
   
   light.shadowCameraNear = true;
   
@@ -157,120 +164,7 @@
 
 function degInRad(deg) {
     return deg * Math.PI / 180;
-}  
-
-/*
-// globals
-        var renderer;
-        var scene;
-        var camera, mirrorCamera;
-        var W = window.innerWidth - 25;
-        var H = window.innerHeight - 25;
-        var cube;
-        var plane;
-        var SPEED = 0.001;
-        var spotLight;
-
-
-        // initialise
-        function init() {
-            // create new scene
-            scene = new THREE.Scene();
-
-            // setup renderer
-            renderer = new THREE.WebGLRenderer();
-           // renderer.setClearColor(0x000000, 1.0); 
-            renderer.setSize(W,H);
-            renderer.shadowMapEnabled = true;
-            //renderer.shadowMapSoft = true;
-            
-            // setup camera pointing at scene
-            camera = new THREE.PerspectiveCamera( 80, W/H,  1 , 50000);
-            camera.position.x = 1;
-            camera.position.y = 1;
-            camera.position.z = 1;
-            camera.lookAt(scene.position);
-             
-
-            // draw a cube
-            var cubeWidth = 0.5;
-            var cubeHeight = 0.5;
-            var cubeDepth = 0.5;
-            var cubeGeometry = new THREE.CubeGeometry(cubeWidth, cubeHeight, cubeDepth);
-            var cubeMaterial = new THREE.MeshPhongMaterial({ color: "yellow", ambient: "white", shininess: 9, metal: true, reflectivity: 9 });                
-            cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-            // make the cube cast and recieve shadow
-            cube.castShadow = true;
-            cube.receiveShadow = true;            
-            scene.add(cube);
-            
-            // draw a floor (plane) for the cube to sit on 
-            var planeGeometry = new THREE.PlaneGeometry(4, 4);
-            //var planeMaterial = new THREE.MeshLambertMaterial({ color: "white" });  
-            var planeMaterial = new THREE.MeshPhongMaterial({ color: "yellow" });
-            plane = new THREE.Mesh(planeGeometry, planeMaterial);
-            // make the plane recieve shadow from the cube
-            plane.castShadow = true;
-            plane.receiveShadow = true;
-            plane.rotation.x = -0.5 * Math.PI;
-            plane.position.y = -1;
-            
-            plane.receiveShadow = true;
-
-
-            scene.add(plane);
-   
-
-           
-
-            // LIGHTS
-            // var ambient = new THREE.AmbientLight("red");
-            // ambient.castShadow = true;
-            // scene.add(ambient);
-
-           
-
-
-            // add a spotlight to illuminate the cube and cause shadows            
-            spotLight = new THREE.SpotLight("white");
-            //spotLight = new THREE.DirectionalLight(0xdfebff, 1.75);
-            spotLight.position.set(4, 4, 1);
-            
-            spotLight.castShadow = true;
-            //spotLight.shadowCameraVisible = true;
-            spotLight.shadowMapWidth = 512;
-            spotLight.shadowMapHeight = 512;
-            spotLight.intensity = 1;
-            spotLight.shadowDarkness = 0.1;
-            spotLight.shadowCameraNear = true;   // this line makes the shadow appear, hooray!
-            
-            scene.add(spotLight);
-            
-            // render it!
-            document.body.appendChild(renderer.domElement);
-            render();
-
-        }
-         
-
-        // do the render
-        function render() {
-            requestAnimationFrame(render);
-              
-
-
-            // randomly turn the cube
-            cube.rotation.x += Math.PI * SPEED * 0.8;
-            cube.rotation.y += Math.PI * SPEED * 1.0;
-            cube.rotation.z += Math.PI * SPEED * 0.5;
-            
-
-            renderer.render(scene, camera);
-        }
-
-        init();        
-        render();
-  */
+}
         
 
   </script>
