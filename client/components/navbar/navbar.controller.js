@@ -15,7 +15,6 @@ angular.module('thesisApp')
 
       $scope.clearCart = function () {
         $scope.cartQty = 0;
-        $scope.$apply();
       };
 
       $scope.logout = function() {

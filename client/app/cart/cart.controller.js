@@ -31,6 +31,7 @@ angular.module('thesisApp')
       //clear items locally and drop schema
       $scope.dropSchema = function() {
         $scope.items = 0;
+        $scope.subTotal = "$0.00";
         cartFactory.amazonClearCart();
         $rootScope.$broadcast('clearCartQty');
       };
