@@ -20,7 +20,7 @@
 
 
   // Camera
-  camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 1, 100000);
+  camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
 
   // Set height
   // camera.position.z = 1000;
@@ -139,7 +139,7 @@
   // Adapt pixelization to screen resolution
   renderer.setPixelRatio( window.devicePixelRatio );
   // Set background color
-  renderer.setClearColor( 0xFFFFFF );
+  renderer.setClearColor( 0x050505 );
   // Stretch renderer to window size
   renderer.setSize( window.innerWidth, window.innerHeight );
   
