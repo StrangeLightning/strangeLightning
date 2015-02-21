@@ -607,8 +607,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'env:all',
         'env:test',
-        'mochaTest',
-        'coveralls'
+        'mochaTest'
       ]);
     }
 
@@ -619,7 +618,8 @@ module.exports = function (grunt) {
         'concurrent:test',
         'injector',
         'autoprefixer',
-        'karma'
+        'karma',
+        'coveralls'
       ]);
     }
 
