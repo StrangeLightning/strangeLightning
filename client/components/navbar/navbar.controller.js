@@ -1,15 +1,26 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory',
-    function($rootScope, $scope, $location, $http, Auth, catalogFactory) {
+  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', 'cartFactory',
+    function($rootScope, $scope, $location, $http, Auth, catalogFactory, cartFactory) {
       $scope.isCollapsed = true;
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
+      $scope.cartQty = 0;
+
+      $scope.increment = function () {
+        $scope.cartQty++;
+      };
+
+      $scope.clearCart = function () {
+        $scope.cartQty = 0;
+        $scope.$apply();
+      };
 
       $scope.logout = function() {
         Auth.logout();
+        $scope.cartQty = 0;
         $location.path('/login');
       };
 
@@ -35,4 +46,7 @@ angular.module('thesisApp')
           $scope.doSearch();
         }
       });
+
+      $rootScope.$on('addToCart', $scope.increment);
+      $rootScope.$on('clearCartQty', $scope.clearCart);
     }]);

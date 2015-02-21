@@ -45,9 +45,14 @@
             <a href="/catalog">Explore</a>
           </li>
 
-          <li>
-            <a ng-show="isLoggedIn()" href="/cart"><span class="glyphicon glyphicon-shopping-cart btnWidth"></span></a>
+          <li id="cart-quantity">
+            <a href="/cart">
+              <span class="glyphicon glyphicon-shopping-cart btnWidth"></span>
+              <span class="badge" ng-if="cartQty > 0">{{cartQty}}</span>
+            </a>
           </li>
+
+
         </ul>
         <div class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
           <div class="input-group">
@@ -60,3 +65,12 @@
       </div>
     </div>
   </nav>
+
+
+
+  <!-- <li role="presentation">
+    <a ng-show="isLoggedIn()" href="/cart">
+      <span class="glyphicon glyphicon-shopping-cart btnWidth"></span>
+      <span class="badge">42</span>
+    </a>
+  </li> -->

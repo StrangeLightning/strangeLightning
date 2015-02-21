@@ -131,3 +131,7 @@ a:hover, a:visited {
   margin-top: -1px;
   background-color: none;
 }
+
+#cart-quantity {
+  margin-top: 0;
+}
