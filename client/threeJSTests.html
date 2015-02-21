@@ -18,6 +18,8 @@
   var light;
   var hemiLight;
 
+  var raycaster;
+
 
   // Camera
   camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
@@ -63,22 +65,25 @@
   var d = 50;
 
   // Sets how far 'shadow rays' go
+  
+  light.shadowCameraNear = 1;
   light.shadowCameraFar = 20;
-  light.shadowBias = -0.0001;
+  light.shadowBias = -0.001;
   light.shadowDarkness = 0.35;
   light.shadowCameraVisible = true;
 
-  // light.shadowCameraLeft = -d;
-  // light.shadowCameraRight = d;
-  // light.shadowCameraTop = d;
-  // light.shadowCameraBottom = -d;
+  light.shadowCameraLeft = -d;
+  light.shadowCameraRight = d;
+  light.shadowCameraTop = d;
+  light.shadowCameraBottom = -d;
 
-  // light.shadowCameraFar = 3500;
-  // light.shadowBias = -0.0001;
-  // light.shadowDarkness = 0.35;
-  // light.shadowCameraVisible = true;
+  light.shadowCameraFar = 3500;
+  light.shadowBias = -0.0001;
+  light.shadowDarkness = 0.35;
+  light.shadowCameraVisible = true;
   
-  light.shadowCameraNear = true;
+  // light.shadowCameraNear = true;
+  // light.shadowCameraFar = false;
   
   // Add light to scene
   scene.add( light );
