@@ -19,6 +19,10 @@
   var hemiLight;
 
   var raycaster;
+  var mouse = new THREE.Vector2();
+  var INTERSECTED;
+  var radius = 100;
+  var theta = 0;
 
 
   // Camera
@@ -138,6 +142,10 @@
   // Add each item in scene
   scene.add( object );
 
+  // Raycaster
+  // Used to select objects on the screen
+  raycaster = new THREE.Raycaster();
+
 
   // Renderer
   renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -165,6 +173,9 @@
   function render(){
     // Render scene
     renderer.render(scene, camera);
+
+    // Find intersection between the ray and an invisible backscreen
+    raycaster.setFromCamera( mouse, camera );
 }
 
 function degInRad(deg) {
