@@ -4,7 +4,6 @@ describe('Directive: saKeyPressEvents', function () {
 
   // load the directive's module and view
   beforeEach(module('thesisApp'));
-  beforeEach(module('app/saKeyPressEvents/saKeyPressEvents.html'));
 
   var element, scope;
 
@@ -16,6 +15,6 @@ describe('Directive: saKeyPressEvents', function () {
     element = angular.element('<sa-key-press-events></sa-key-press-events>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the saKeyPressEvents directive');
+    expect(element).toBeDefined();
   }));
 });

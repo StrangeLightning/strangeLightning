@@ -33,11 +33,21 @@ module.exports = function (grunt) {
       client: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
-    
-    // Automatically generate documentation    
+
+    // Automatically generate documentation
     docco_husky : {
       'Sphereable':'testing',
       'files':['client/../*.js']
+    },
+
+    coveralls: {
+      options: {
+        debug: true,
+        coverageDir: 'test-coverage',
+        dryRun: false,
+        force: true,
+        recursive: true
+      }
     },
 
     express: {
@@ -506,6 +516,9 @@ module.exports = function (grunt) {
   // Automatically generate documentation
   grunt.loadNpmTasks('grunt-docco-husky');
 
+  //code coverage using Coveralls
+  grunt.loadNpmTasks('grunt-karma-coveralls');
+
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function () {
     grunt.log.ok('Waiting for server reload...');
@@ -605,7 +618,8 @@ module.exports = function (grunt) {
         'concurrent:test',
         'injector',
         'autoprefixer',
-        'karma'
+        'karma',
+        'coveralls'
       ]);
     }
 
