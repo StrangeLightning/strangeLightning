@@ -1,6 +1,10 @@
 <html>
   <head>
     <title>Three.JS Test for Sphereable 3D environment</title>
+    <style>
+      body { margin: 0; }
+      canvas { width: 100%; height: 100% }
+    </style>
   </head>
   <body>
     <div id="container"></div>
@@ -25,13 +29,19 @@
   var theta = 0;
 
 
+  // TODO: Move camera, light, scene, and objects to init functions
+  var init = function(){};
+
+
+
   // Camera
-  camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
+  camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
 
   // Set height
   // camera.position.z = 1000;
-  camera.position.set( 10, 10, 50 );
-  // camera.rotateOnAxis(new THREE.Vector3(1, 1, 0), degInRad(180));
+  camera.position.set( -15, 0, 5 );
+  // camera.rotateOnAxis(new THREE.Vector3(0, 0, 1), degInRad(90));
+  camera.up = new THREE.Vector3(0, 0, 1);
 
   // Camera controls
   controls = new THREE.TrackballControls( camera );
@@ -84,7 +94,7 @@
   light.shadowCameraFar = 3500;
   light.shadowBias = -0.0001;
   light.shadowDarkness = 0.35;
-  light.shadowCameraVisible = true;
+  light.shadowCameraVisible = false;
   
   // light.shadowCameraNear = true;
   // light.shadowCameraFar = false;
@@ -104,9 +114,10 @@
 
 
   // Create a ground plane
-  var groundGeometry = new THREE.PlaneBufferGeometry(100, 100);
-  var groundMaterial = new THREE.MeshPhongMaterial({ ambient: 0xffffff, color: 0xffffff, specular: 0x050505 });
+  var groundGeometry = new THREE.PlaneBufferGeometry(1000, 1000);
+  var groundMaterial = new THREE.MeshLambertMaterial({ color: 0x050505 });
   groundMaterial.color.setHSL( 0.095, 1, 0.75 );
+  groundMaterial.side = THREE.DoubleSide;
 
   var ground = new THREE.Mesh( groundGeometry, groundMaterial );
   // ground.rotation.x = -Math.PI/2;
@@ -115,32 +126,36 @@
   
   ground.receiveShadow = true;
 
-  scene.add( ground );
+  // scene.add( ground );
 
-  
+  // Add multiple objects
+  for (var i = 0; i < 10; i++) {
+    
+    // Set a geometry for the object
+    var geometry = new THREE.BoxGeometry(2,2,2);
 
-  // Set a geometry for the object
-  var geometry = new THREE.BoxGeometry(2,2,2);
+    //  Mesh the created geometry
+    var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: 0x70A3C7 }) );
+    
+    object.castShadow = true;
 
-  //  Mesh the created geometry
-  var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: 0x70A3C7 }) );
-  
-  object.castShadow = true;
+    object.position.x = Math.random() * 10;
+    object.position.y = Math.random() * 10;
+    object.position.z = Math.random() * 10;
 
-  object.position.x = 0;
-  object.position.y = 0;
-  object.position.z = 3;
+    object.rotation.x = degInRad(Math.random() * 90);
+    object.rotation.y = degInRad(Math.random() * 90);
+    object.rotation.z = degInRad(Math.random() * 90);
 
-  object.rotation.x = degInRad(45);
-  object.rotation.y = degInRad(45);
-  object.rotation.z = 0;
+    // object.scale.x = Math.random() + 0.5;
+    // object.scale.y = Math.random() + 0.5;
+    // object.scale.z = Math.random() + 0.5;
+    
+    // Add each item in scene
+    scene.add( object );
 
-  // object.scale.x = Math.random() + 0.5;
-  // object.scale.y = Math.random() + 0.5;
-  // object.scale.z = Math.random() + 0.5;
-  
-  // Add each item in scene
-  scene.add( object );
+  }
+
 
   // Raycaster
   // Used to select objects on the screen
@@ -159,6 +174,15 @@
   // Tell renderer to show shadows
   renderer.shadowMapEnabled = true;
   
+  // renderer.gammaInput = true;
+  // renderer.gammaOutput = true;
+  renderer.sortObjects = true;
+
+  // On mouse move
+  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  // When window size changes, resize 3D environment
+  document.addEventListener( 'resize', onWindowResize, false );
+  
 
   document.body.appendChild(renderer.domElement);
 
@@ -166,21 +190,85 @@
 
   // Update image after every manipulation
   function animate(){
-    requestAnimationFrame( animate );
     controls.update();
+    requestAnimationFrame( animate );
   }
 
   function render(){
-    // Render scene
-    renderer.render(scene, camera);
 
     // Find intersection between the ray and an invisible backscreen
     raycaster.setFromCamera( mouse, camera );
-}
 
-function degInRad(deg) {
+    var intersects = raycaster.intersectObjects( scene.children );
+    var material;
+
+    if (intersects.length > 0) {
+
+      if (INTERSECTED != intersects[0].object) {
+
+        if (INTERSECTED){
+          material = INTERSECTED.material;
+          if(material.emissive){
+            material.emissive.setHex(INTERSECTED.currentHex);
+          } else {
+            material.color.setHex(INTERSECTED.currentHex);
+            }
+          } 
+          INTERSECTED = intersects[0].object;
+          material = INTERSECTED.material;
+
+          if(material.emissive){
+            INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+            material.emissive.setHex(0xff0000);
+          } else {
+            INTERSECTED.currentHex = material.color.getHex();
+            material.color.setHex(0xff0000);
+          }
+
+          console.log(INTERSECTED.position);
+        }
+    } else {
+
+      if (INTERSECTED){
+        material = INTERSECTED.material;
+
+        if(material.emissive){
+          material.emissive.setHex(INTERSECTED.currentHex);
+        } else {
+          material.color.setHex(INTERSECTED.currentHex);
+        }
+      
+      }
+
+      INTERSECTED = null;
+    }
+    
+    // Camera automatically rotating around object
+    // theta += 0.1;
+    // camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
+  
+
+    // Render scene
+    renderer.render(scene, camera);
+  }
+
+  function onWindowResize(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+    renderer.setSize( window.innerWidth, window.innerHeight );
+  }
+
+  function onDocumentMouseMove( event ){
+    event.preventDefault();
+
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  }
+
+
+  // Convert radiant into degrees
+  function degInRad(deg) {
     return deg * Math.PI / 180;
-}
+  }
         
 
   </script>
