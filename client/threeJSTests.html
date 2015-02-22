@@ -30,7 +30,10 @@
 
 
   // TODO: Move camera, light, scene, and objects to init functions
-  var init = function(){};
+  var init = function(){
+
+
+  };
 
 
 
@@ -147,10 +150,9 @@
     object.rotation.y = degInRad(Math.random() * 90);
     object.rotation.z = degInRad(Math.random() * 90);
 
-    // object.scale.x = Math.random() + 0.5;
-    // object.scale.y = Math.random() + 0.5;
-    // object.scale.z = Math.random() + 0.5;
-    
+    // Assign ID to each object
+    object.name = '0' + i;
+
     // Add each item in scene
     scene.add( object );
 
@@ -208,6 +210,7 @@
 
         if (INTERSECTED){
           material = INTERSECTED.material;
+          // Check if object material has an emissive property
           if(material.emissive){
             material.emissive.setHex(INTERSECTED.currentHex);
           } else {
@@ -225,7 +228,8 @@
             material.color.setHex(0xff0000);
           }
 
-          console.log(INTERSECTED.position);
+          // Get ID of object selected
+          console.log(INTERSECTED.name);
         }
     } else {
 
