@@ -2,6 +2,16 @@
 
 angular.module('thesisApp')
   .controller('CatalogCtrl', ['$scope', '$rootScope', 'cartFactory', 'catalogFactory', '$http', '$location', function($scope, $rootScope, cartFactory, catalogFactory, $http, $location) {
+
+
+    $scope.removeFromCart = function(product) {
+      if (cartFactory.amazonCart.items) {
+        console.log("Product FROM REmove on catalog", product)
+        cartFactory.amazonRemoveProduct(product.id, cartFactory.amazonCart)
+      } else {
+        console.log("item not in cart");
+      }
+    }
     $scope.addToCart = function(product) {
       $rootScope.$broadcast('addToCart');
       if (cartFactory.amazonCart.items) {

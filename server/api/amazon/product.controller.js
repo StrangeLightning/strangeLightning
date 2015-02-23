@@ -29,12 +29,13 @@ exports.searchCart = function(req, res, next) {
     var r = results.ItemSearchResponse.Items[0];
     var r2 = results.ItemSearchResponse.Items[0].Item;
     var i = 0;
-    while(_results.length < 12 && r2 && r2[i]) {
+    while (_results.length < 12 && r2 && r2[i]) {
+
       var obj = r2[i];
       var product = {};
 
       // Sometimes no ItemAttributes Returned
-      if(obj.ItemAttributes &&
+      if (obj.ItemAttributes &&
         obj.ItemAttributes[0].ListPrice &&
         obj.ItemAttributes[0].Title &&
         obj.MediumImage &&
@@ -42,7 +43,7 @@ exports.searchCart = function(req, res, next) {
         obj.CustomerReviews[0].IFrameURL &&
         obj.Offers &&
         obj.Offers[0].TotalOffers &&
-        +obj.Offers[0].TotalOffers[0] > 0 ) {
+        +obj.Offers[0].TotalOffers[0] > 0) {
         product.id = obj.ASIN[0];
         product.price = obj.ItemAttributes[0].ListPrice[0].FormattedPrice[0];
         product.title = obj.ItemAttributes[0].Title[0];
@@ -54,7 +55,9 @@ exports.searchCart = function(req, res, next) {
       }
       i++;
     }
-    res.end(JSON.stringify({time: new Date().getTime() - t, data: _results}));
+    res.end(JSON.stringify({
+      time: new Date().getTime() - t,
+      data: _results
+    }));
   });
 };
-
