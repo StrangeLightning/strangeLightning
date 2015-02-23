@@ -197,6 +197,7 @@ function calcQuantity(cart) {
   for (var i in cart.items) {
     count += +cart.items[i];
   }
+  console.log(cart.items);
   return count;
 }
 
