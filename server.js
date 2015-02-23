@@ -13,6 +13,7 @@ var config = require('./server/config/environment');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
+var schedule = require('node-schedule');
 
 var credentials = {
   key: process.env.NODE_ENV === 'production' ? fs.readFileSync(path.join(__dirname, '/../../shared/config/ssl.key'), 'utf-8')  : fs.readFileSync('./shared/config/ssl.key', 'utf-8'),
@@ -30,12 +31,20 @@ var app = express();
 var serverHTTPS = require('https').createServer(credentials, app);
 var serverHTTP = require('http').createServer(app);
 
+var rule = new schedule.RecurrenceRule();
+rule.minute = 42;
+
 if (process.env.NODE_ENV === 'production') {
   serverHTTPS.listen(443, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
   });
   serverHTTP.listen(80, config.ip, function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  });
+
+  //schedule indexing of MongoDB
+  schedule.scheduleJob(rule, function(){
+
   });
 }
 
@@ -46,6 +55,10 @@ else if (process.env.NODE_ENV === 'development') {
 
   serverHTTPS.listen(4430, "localhost", function () {
     console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  });
+
+  schedule.scheduleJob(rule, function(){
+
   });
 }
 

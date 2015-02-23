@@ -18,7 +18,7 @@ exports.searchCart = function(req, res, next) {
   var t = new Date().getTime();
   //console.log(t);
   opHelper.execute('ItemSearch', {
-    'Keywords': req.body.term + '',
+    'Keywords': 'toys',
     'SearchIndex': 'Blended',
     'ItemPage': '1',
     'TruncateReviewsAt': '0',
@@ -26,8 +26,8 @@ exports.searchCart = function(req, res, next) {
     'ResponseGroup': 'Similarities,ItemIds,ItemAttributes,Images,Reviews,Offers'
   }, function(err, results) {
     var _results = [];
-    var r = results.ItemSearchResponse.Items[0];
     var r2 = results.ItemSearchResponse.Items[0].Item;
+    console.log(results.ItemSearchResponse.Items[0]);
     var i = 0;
     while(_results.length < 12 && r2 && r2[i]) {
       var obj = r2[i];
