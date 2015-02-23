@@ -12,7 +12,7 @@ exports.searchCart = function(req, res, next) {
   });
   var t = new Date().getTime();
   opHelper.execute('ItemSearch', {
-    'Keywords': 'toys',
+    'Keywords': req.body.term + '',
     'SearchIndex': 'Blended',
     'ItemPage': '1',
     'TruncateReviewsAt': '0',
