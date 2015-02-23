@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('CartCtrl', ['$scope', '$state', 'cartFactory', 'Auth',
-    function($scope, $state, cartFactory, Auth) {
+  .controller('CartCtrl', ['$scope', '$rootScope', '$state', 'cartFactory', 'Auth',
+    function($scope, $rootScope, $state, cartFactory, Auth) {
       //where local items are stored
       $scope.user = Auth.getCurrentUser().email;
       $scope.items = 0;
@@ -31,7 +31,9 @@ angular.module('thesisApp')
       //clear items locally and drop schema
       $scope.dropSchema = function() {
         $scope.items = 0;
+        $scope.subTotal = "$0.00";
         cartFactory.amazonClearCart();
+        $rootScope.$broadcast('clearCartQty');
       };
 
       /* Set height of window */
