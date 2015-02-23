@@ -32,7 +32,6 @@
   // TODO: Move camera, light, scene, and objects to init functions
   var init = function(){
 
-
   };
 
 
@@ -42,7 +41,7 @@
 
   // Set height
   // camera.position.z = 1000;
-  camera.position.set( -15, 0, 5 );
+  camera.position.set( 5, 20, 15 );
   // camera.rotateOnAxis(new THREE.Vector3(0, 0, 1), degInRad(90));
   camera.up = new THREE.Vector3(0, 0, 1);
 
@@ -57,8 +56,9 @@
   controls.dynamicDampingFactor = 0.3;
 
   // Move with keys
-  // controls.keys = [ 65, 83, 68 ];
+  controls.keys = [ 65, 83, 68 ];
 
+  // On every change, call the render function
   controls.addEventListener( 'change', render );
 
   // Create a new scene
@@ -81,10 +81,10 @@
 
   var d = 50;
 
-  // Sets how far 'shadow rays' go
   
-  light.shadowCameraNear = 1;
+  // Sets how far 'shadow rays' go
   light.shadowCameraFar = 20;
+  light.shadowCameraNear = 1;
   light.shadowBias = -0.001;
   light.shadowDarkness = 0.35;
   light.shadowCameraVisible = true;
@@ -169,7 +169,7 @@
   // Adapt pixelization to screen resolution
   renderer.setPixelRatio( window.devicePixelRatio );
   // Set background color
-  renderer.setClearColor( 0x050505 );
+  renderer.setClearColor( 0xffffff );
   // Stretch renderer to window size
   renderer.setSize( window.innerWidth, window.innerHeight );
   
