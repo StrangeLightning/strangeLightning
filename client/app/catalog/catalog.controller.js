@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('CatalogCtrl', ['$scope', 'cartFactory', 'catalogFactory', '$http', '$location', function($scope, cartFactory, catalogFactory, $http, $location) {
+  .controller('CatalogCtrl', ['$scope', '$rootScope', 'cartFactory', 'catalogFactory', '$http', '$location', function($scope, $rootScope, cartFactory, catalogFactory, $http, $location) {
     $scope.addToCart = function(product) {
+      $rootScope.$broadcast('addToCart');
       if (cartFactory.amazonCart.items) {
         cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
       } else {
@@ -33,23 +34,27 @@ angular.module('thesisApp')
     if (!$scope.products) {
       catalogFactory.doSearch('shoes', function(newProducts) {
         $scope.products = $scope.products || newProducts;
-        $('#ajax-loader').hide();
       });
     }
 
     //listen for products-updated event, which is broadcasted from navbar.controller.js
     $scope.$on('products-updated', function(event, args) {
       $scope.products = args.newProducts;
+    });
+
+    $scope.$on('search-in-progress', function(event, args) {
+      $scope.products = [];
     })
   }])
 
-.factory('catalogFactory', ['$location', '$http', function($location, $http) {
+.factory('catalogFactory', ['$location', '$http', '$rootScope', function($location, $http, $rootScope) {
   var catalog = {};
   catalog.viewItem = function() {
     $location.path('/product');
   };
 
   catalog.doSearch = function(searchTerm, callback) {
+    $rootScope.$broadcast('search-in-progress');
     return $http.post('/api/amazonproducts/', {
         term: searchTerm
       })
