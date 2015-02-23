@@ -106,12 +106,12 @@ angular.module('thesisApp')
     cart.amazonRemoveProduct = function(product, amazonCart) {
 
       var newquantity;
-      // console.log("AMAzon Cart", amazonCart)
+
+      //if find and update quantity in serverside cart
       for (var i = 0; i < cart.amazonCart.items.length; i++) {
         if (product === cart.amazonCart.items[i]['productId']) {
           if (cart.amazonCart.items[i]['quantity'] > 0) {
             newquantity = --cart.amazonCart.items[i]['quantity'];
-            console.log('This is the new quanitty in remove', newquantity)
             break;
           }
         }
@@ -142,7 +142,6 @@ angular.module('thesisApp')
       //console.log("A CART FROM ADD PRODCUT", amazonCart);\
       var newquantity;
       cart.amazonCart.items = cart.amazonCart.items || [];
-      console.log("CART AMAZIN CART:", cart.amazonCart)
       for (var i = 0; i < cart.amazonCart.items.length; i++) {
         if (product === cart.amazonCart.items[i]['productId']) {
           console.log(cart.amazonCart.items[i])
