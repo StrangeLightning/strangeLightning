@@ -10,5 +10,5 @@ var router = express.Router();
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.post('/buy/:username/:data', auth.isAuthenticated(), controller.buy);
 router.get('/:username', auth.isAuthenticated(), controller.show);
-router.post('/:id/:data', auth.isAuthenticated(), controller.create
+router.post('/:id/:data', auth.isAuthenticated(), controller.create);
 module.exports = router;

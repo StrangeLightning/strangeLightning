@@ -1,0 +1,18 @@
+#load {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 24px;
+  background-color: black;
+  text-align: center;
+  position: relative;
+  top: 350px;
+  color: white;
+  border: 1px solid #999;
+  padding: 5px;
+}
+
+#load:hover {
+  color: black;
+  border: 1px solid #999;
+  background-color: #D7F5F5;
+}
