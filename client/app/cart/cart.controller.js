@@ -41,7 +41,6 @@ angular.module('thesisApp')
       //returns all items from db schema,
       $scope.getItems = function() {
         cartFactory.amazonGetCart(function(data) {
-          console.log('DATA FROM GET CART')
           if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
             $scope.purchaseUrl = data.PurchaseURL[0];
             $scope.subTotal = data.SubTotal[0].FormattedPrice[0];

@@ -29,13 +29,8 @@ exports.searchCart = function(req, res, next) {
     var r = results.ItemSearchResponse.Items[0];
     var r2 = results.ItemSearchResponse.Items[0].Item;
     var i = 0;
-<<<<<<< HEAD
-    while(_results.length < 12 && r2 && r2[i]) {
-=======
-    console.log(r2);
     while (_results.length < 12 && r2 && r2[i]) {
 
->>>>>>> fasd
       var obj = r2[i];
       var product = {};
 

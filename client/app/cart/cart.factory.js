@@ -22,7 +22,6 @@ angular.module('thesisApp')
           })
       } else {
         //if  not the first item update  the row
-        console.log(items, "ITEMS IN CLIENT UPDATE")
 
         $http.post('/api/carts/name/' + user, items)
           .success(function(data) {
@@ -108,9 +107,9 @@ angular.module('thesisApp')
 
       var newquantity;
       // console.log("AMAzon Cart", amazonCart)
-      for (var i = 0; i < amazonCart.items.length; i++) {
-        if (product === amazonCart.items[i]['productId']) {
-          if (amazonCart.items[i]['quantity'] > 0) {
+      for (var i = 0; i < cart.amazonCart.items.length; i++) {
+        if (product === cart.amazonCart.items[i]['productId']) {
+          if (cart.amazonCart.items[i]['quantity'] > 0) {
             newquantity = --cart.amazonCart.items[i]['quantity'];
             console.log('This is the new quanitty in remove', newquantity)
             break;
@@ -120,8 +119,6 @@ angular.module('thesisApp')
 
 
       }
-      console.log("NEW QUANTITY BEING PASSED IN", newquantity)
-      console.log('PRODUCT ID', product)
       return $http.post('/api/amazoncarts/modify', {
         'id': product,
         'productId': product,
@@ -144,10 +141,10 @@ angular.module('thesisApp')
     cart.amazonAddProduct = function(product, amazonCart) {
       //console.log("A CART FROM ADD PRODCUT", amazonCart);\
       var newquantity;
-      amazonCart.items = amazonCart.items || [];
-      console.log(cart.amazonCart)
-      for (var i = 0; i < amazonCart.items.length; i++) {
-        if (product === amazonCart.items[i]['productId']) {
+      cart.amazonCart.items = cart.amazonCart.items || [];
+      console.log("CART AMAZIN CART:", cart.amazonCart)
+      for (var i = 0; i < cart.amazonCart.items.length; i++) {
+        if (product === cart.amazonCart.items[i]['productId']) {
           console.log(cart.amazonCart.items[i])
           newquantity = ++cart.amazonCart.items[i]['quantity'];
           var updated = true
@@ -161,7 +158,6 @@ angular.module('thesisApp')
           "productId": product,
           "quantity": 1
         });
-        newquantity = 1;
 
       }
       //console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
@@ -183,9 +179,9 @@ angular.module('thesisApp')
 
     cart.amazonCreateCart = function(itemId) {
       // console.log(Auth.getCurrentUser().id)
-
+      console.log("CREATING CART")
       $http.post('/api/amazoncarts/create', {
-      'id': itemId
+          'id': itemId
         })
         .success(function(data) {
           cart.amazonCart = {
