@@ -16,7 +16,6 @@ exports.searchCart = function(req, res, next) {
     assocId: config.amazon.clientAccount
   });
   var t = new Date().getTime();
-  //console.log(t);
   opHelper.execute('ItemSearch', {
     'Keywords': 'toys',
     'SearchIndex': 'Blended',
@@ -27,7 +26,6 @@ exports.searchCart = function(req, res, next) {
   }, function(err, results) {
     var _results = [];
     var r2 = results.ItemSearchResponse.Items[0].Item;
-    console.log(results.ItemSearchResponse.Items[0]);
     var i = 0;
     while(_results.length < 12 && r2 && r2[i]) {
       var obj = r2[i];
