@@ -72,9 +72,9 @@
                 <div ng-bind-html="suggestedProduct.title | highlight: $select.search"></div>
               </ui-select-choices>
             </ui-select>
-              <span class="input-group-addon" id="basic-addon1 search" ng-click="doSearch()">
-                <span class="glyphicon glyphicon-search"></span>
-              </span>
+            <span class="input-group-addon" id="basic-addon1 search" ng-click="doSearch(searchTerm)">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
           </div>
 
         </div>

@@ -23,26 +23,33 @@
 
   };
 
-
-
   // Camera
-  camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
 
   // Set height
-  // camera.position.z = 1000;
-  camera.position.set( 5, 20, 15 );
+  // camera.position.z = 100;
+  camera.position.set( 14, 12, 8 );
+  //
+  // camera.position.y = 00;
+  // camera.position.x = 0;
+  // camera.position.z = 100;
+  // camera.lookAt({ x: 0, y: 0, z: 0 });
   // camera.rotateOnAxis(new THREE.Vector3(0, 0, 1), degInRad(90));
-  camera.up = new THREE.Vector3(0, 0, 1);
+  camera.up.set(0, 0, 1);
 
   // Camera controls
   controls = new THREE.TrackballControls( camera );
+  // controls = new THREE.FlyControls( camera );
   controls.rotateSpeed = 1.0;
   controls.zoomSpeed = 1.2;
   controls.panSpeed = 0.8;
   controls.noZoom = false;
   controls.noSpan = false;
   controls.staticMoving = true;
-  controls.dynamicDampingFactor = 0.3;
+  //controls.dynamicDampingFactor = 0.3;
+
+  controls.minDistance = 20;
+  controls.maxDistance = -50;
 
   // Move with keys
   controls.keys = [ 65, 83, 68 ];
@@ -70,7 +77,7 @@
 
   var d = 50;
 
-  
+
   // Sets how far 'shadow rays' go
   light.shadowCameraFar = 20;
   light.shadowCameraNear = 1;
@@ -87,18 +94,18 @@
   light.shadowBias = -0.0001;
   light.shadowDarkness = 0.35;
   light.shadowCameraVisible = false;
-  
+
   // light.shadowCameraNear = true;
   // light.shadowCameraFar = false;
-  
+
   // Add light to scene
   scene.add( light );
 
   // Hemisphere Light - for softer shadows
   hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
   // H: Hue (between 0.0 and 1.0), S: Saturation (0.0 - 1.0), L: Lightness (0.0 - 1.0)
-  hemiLight.color.setHSL( 0.6, 1, 0.6);
-  hemiLight.groundColor.setHSL( 0.095, 1, 0.7);
+  //hemiLight.color.setHSL( 0.6, 1, 0.6);
+  //hemiLight.groundColor.setHSL( 0.095, 1, 0.7);
   // Set high 'y' value for light position
   hemiLight.position.set( 0, 5, 0);
 
@@ -107,9 +114,9 @@
 
   // Create a ground plane
   var groundGeometry = new THREE.PlaneBufferGeometry(1000, 1000);
-  var groundMaterial = new THREE.MeshLambertMaterial({ color: 0x050505 });
+  var groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
   groundMaterial.color.setHSL( 0.095, 1, 0.75 );
-  groundMaterial.side = THREE.DoubleSide;
+  // groundMaterial.side = THREE.DoubleSide;
 
   var ground = new THREE.Mesh( groundGeometry, groundMaterial );
   // ground.rotation.x = -Math.PI/2;
@@ -118,17 +125,27 @@
   
   ground.receiveShadow = true;
 
-  // scene.add( ground );
+  scene.add( ground );
+
+
+  var sky = new THREE.Mesh(new THREE.SphereGeometry(100,32,32), new THREE.MeshLambertMaterial({
+    map: THREE.ImageUtils.loadTexture('assets/images/sky.jpg')
+  }));
+  sky.material.side = THREE.DoubleSide;
+  sky.rotation.x = 323.43;
+  sky.position.y = -8;
+  sky.position.z = 5;
+  scene.add(sky);
 
   // Add multiple objects
   for (var i = 0; i < 10; i++) {
-    
+
     // Set a geometry for the object
-    var geometry = new THREE.BoxGeometry(2,2,2);
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
 
     //  Mesh the created geometry
-    var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: 0x70A3C7 }) );
-    
+    var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({ color: 0x70A3C7 }) );
+
     object.castShadow = true;
 
     object.position.x = Math.random() * 10;
@@ -152,11 +169,10 @@
   // Used to select objects on the screen
   raycaster = new THREE.Raycaster();
 
-
   // Renderer
   renderer = new THREE.WebGLRenderer( {
     antialias: true,
-    alpha: true 
+    alpha: true
   } );
 
   // Adapt pixelization to screen resolution
@@ -165,10 +181,10 @@
   renderer.setClearColor( 0x000000, 0 );
   // Stretch renderer to window size
   renderer.setSize( window.innerWidth, window.innerHeight );
-  
+
   // Tell renderer to show shadows
   renderer.shadowMapEnabled = true;
-  
+
   // renderer.gammaInput = true;
   // renderer.gammaOutput = true;
   renderer.sortObjects = true;
@@ -177,29 +193,34 @@
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   // When window size changes, resize 3D environment
   document.addEventListener( 'resize', onWindowResize, false );
-  
+
 
   document.body.appendChild(renderer.domElement);
 
   animate();
+  render();
 
   // Update image after every manipulation
   function animate(){
-    controls.update();
     requestAnimationFrame( animate );
+    controls.update();
   }
 
   function render(){
+
+    requestAnimationFrame(render);
+    sky.rotation.y += 0.000025;
 
     // Find intersection between the ray and an invisible backscreen
     raycaster.setFromCamera( mouse, camera );
 
     var intersects = raycaster.intersectObjects( scene.children );
     var material;
+    
 
-    if (intersects.length > 0) {
+    if (intersects.length > 0 && INTERSECTED !== sky) {
 
-      if (INTERSECTED != intersects[0].object) {
+      if (INTERSECTED != intersects[0].object ) {
 
         if (INTERSECTED){
           material = INTERSECTED.material;
@@ -209,7 +230,7 @@
           } else {
             material.color.setHex(INTERSECTED.currentHex);
             }
-          } 
+          }
           INTERSECTED = intersects[0].object;
           material = INTERSECTED.material;
 
@@ -222,11 +243,11 @@
           }
 
           // Get ID of object selected
-          console.log(INTERSECTED.name);
+          // console.log(INTERSECTED.name);
         }
     } else {
 
-      if (INTERSECTED){
+      if (INTERSECTED || INTERSECTED !== sky){
         material = INTERSECTED.material;
 
         if(material.emissive){
@@ -234,16 +255,16 @@
         } else {
           material.color.setHex(INTERSECTED.currentHex);
         }
-      
+
       }
 
       INTERSECTED = null;
     }
-    
+
     // Camera automatically rotating around object
     // theta += 0.1;
     // camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
-  
+
 
     // Render scene
     renderer.render(scene, camera);
@@ -266,5 +287,5 @@
   function degInRad(deg) {
     return deg * Math.PI / 180;
   }
-  
+
 </script>
