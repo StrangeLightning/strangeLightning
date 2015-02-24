@@ -38,18 +38,21 @@
       <div class="col-md-4" ng-repeat="product in products">
         <div class="thumbnail">
           <div class="imgBkg">
-            <img class="centerImg img-responsive" src="{{product.mediumImage}}" />
+            <a ng-click="viewItem(product)"><img class="centerImg" src="{{product.mediumImage}}" /></a>
           </div>
 
           <div class="caption">
-            <h4 ng-if="product.title.length >= 100">{{product.title.substr(0,75)}}...</h4>
-            <h4 ng-if="product.title.length < 100">{{product.title}}</h4>
+            <a ng-click="viewItem(product)">
+              <h4 ng-if="product.title.length >= 100">{{product.title.substr(0,75)}}...</h4>
+            </a>
+            <a ng-click="viewItem(product)">
+              <h4 ng-if="product.title.length < 100">{{product.title}}</h4>
+            </a>
             <p>Price: {{product.price}}</p>
               <a ng-click="addToCart(product.id)" class="btn btn-primary" role="button">Add to Cart</a>
-              <a ng-click="removeFromCart(product)" class="btn btn-primary" role="button">Remove from cart</a>
-              <a ng-click="viewItem(product)" class="btn btn-primary" role="button">View Product</a>
-              <a ng-click='getCartItems(amazonCart)'class="btn btn-primary" role="button">Get Cart Items</a>
-            
+
+              <a ng-click="viewItem(product)" class="btn btn-primary" role="button">View</a>
+              <!-- <a ng-click='getCartItems(amazonCart)'class="btn btn-primary" role="button">Get Cart Items</a> -->
             </p>
           </div>
         </div>
