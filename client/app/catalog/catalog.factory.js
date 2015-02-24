@@ -20,5 +20,17 @@ angular.module('thesisApp')
         });
     };
 
+    catalog.doSuggestor = function(searchTerm, callback) {
+      return $http.post('/api/amazonproducts/', {
+        term: searchTerm
+      })
+        .success(function(results) {
+          callback(results.data);
+        })
+        .error(function(err) {
+          console.log(err);
+        });
+    };
+
     return catalog;
   }]);

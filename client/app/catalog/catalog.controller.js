@@ -64,7 +64,7 @@ angular.module('thesisApp')
     //initially, if products empty, then call search to show items
     if (!$scope.products) {
       $scope.doSearch('shoes', function(newProducts) {
-        $scope.products = $scope.products || newProducts;
+        $scope.products = newProducts;
       });
     }
 

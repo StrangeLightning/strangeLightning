@@ -7,7 +7,9 @@ angular.module('thesisApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'thesisApp.filter'
+  'ui.select',
+  'thesisApp.filter',
+  'angularUtils.directives.dirPagination'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
