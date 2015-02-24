@@ -50,7 +50,6 @@ exports.createCart = function(req, res, next) {
         res.end(JSON.stringify(cart));
       }
     } else {
-      console.log("2", results);
       res.end('Something went wrong!')
     }
   });
