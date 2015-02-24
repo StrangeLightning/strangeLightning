@@ -11,11 +11,21 @@
   var light;
   var hemiLight;
 
+  var groundGeometry;
+  var groundMaterial;
+  var ground;
+
   var raycaster;
   var mouse = new THREE.Vector2();
   var INTERSECTED;
   var radius = 100;
   var theta = 0;
+
+  var clock = new THREE.Clock();
+
+  // if ( ! Detector.webgl ) {
+  //   Detector.addGetWebGLMessage();
+  // }
 
 
   // TODO: Move camera, light, scene, and objects to init functions
@@ -26,39 +36,57 @@
   // Camera
   camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
 
+
   // Set height
-  // camera.position.z = 100;
-  camera.position.set( 14, 12, 8 );
-  //
-  // camera.position.y = 00;
-  // camera.position.x = 0;
-  // camera.position.z = 100;
-  // camera.lookAt({ x: 0, y: 0, z: 0 });
+  // camera.position.set( 14, 12, 8 );
+
+  camera.position.x = 100;
+  camera.position.y = 10;
+  camera.position.z = 10;
+  camera.lookAt(new THREE.Vector3(0, 0, 0));
+
   // camera.rotateOnAxis(new THREE.Vector3(0, 0, 1), degInRad(90));
-  camera.up.set(0, 0, 1);
+  
+  // The camera's point of focus
+  // camera.lookAt({ x: 0, y: 0, z: 0 });
+  
+  // Define which way is 'up'
+  // camera.up.set(0, 0, 1);
+
+  scene.add( camera );
+  
 
   // Camera controls
-  controls = new THREE.TrackballControls( camera );
-  // controls = new THREE.FlyControls( camera );
-  controls.rotateSpeed = 1.0;
-  controls.zoomSpeed = 1.2;
-  controls.panSpeed = 0.8;
-  controls.noZoom = false;
-  controls.noSpan = false;
-  controls.staticMoving = true;
-  //controls.dynamicDampingFactor = 0.3;
+  controls = new THREE.FirstPersonControls(camera);
+  controls.movementSpeed = 150;
+  controls.lookSpeed = 0.1;
+  controls.noFly = false;
+  controls.lookVertical = true;
 
-  controls.minDistance = 20;
-  controls.maxDistance = -50;
+  controls.constrainVertical = true;
+  controls.verticalMin = 1.0;
+  controls.verticalMax = 2.0;
+  controls.lon = -150;
+  controls.lat = 120;
 
-  // Move with keys
-  controls.keys = [ 65, 83, 68 ];
+  // controls = new THREE.TrackballControls( camera );
+  // controls.rotateSpeed = 1.0;
+  // controls.zoomSpeed = 1.2;
+  // controls.panSpeed = 0.8;
+  // controls.noZoom = false;
+  // controls.noSpan = false;
+  // controls.staticMoving = true;
+  // controls.dynamicDampingFactor = 0.3;
+
+  // controls.minDistance = 20;
+  // controls.maxDistance = -50;
 
   // On every change, call the render function
-  controls.addEventListener( 'change', render );
+  // controls.addEventListener( 'change', render );
 
   // Create a new scene
   scene = new THREE.Scene();
+
 
   // Directional Light
   light = new THREE.SpotLight(0xffffff);
@@ -76,7 +104,6 @@
   light.intensity = 1;
 
   var d = 50;
-
 
   // Sets how far 'shadow rays' go
   light.shadowCameraFar = 20;
@@ -99,7 +126,7 @@
   // light.shadowCameraFar = false;
 
   // Add light to scene
-  scene.add( light );
+  // scene.add( light );
 
   // Hemisphere Light - for softer shadows
   hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
@@ -109,33 +136,33 @@
   // Set high 'y' value for light position
   hemiLight.position.set( 0, 5, 0);
 
-  scene.add( hemiLight );
+  // scene.add( hemiLight );
 
 
   // Create a ground plane
-  var groundGeometry = new THREE.PlaneBufferGeometry(1000, 1000);
-  var groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+  groundGeometry = new THREE.PlaneBufferGeometry(1000, 1000);
+  groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
   groundMaterial.color.setHSL( 0.095, 1, 0.75 );
   // groundMaterial.side = THREE.DoubleSide;
 
-  var ground = new THREE.Mesh( groundGeometry, groundMaterial );
+  ground = new THREE.Mesh( groundGeometry, groundMaterial );
   // ground.rotation.x = -Math.PI/2;
   ground.position.y = -33;
   // ground.position.z = 100;
   
   ground.receiveShadow = true;
 
-  scene.add( ground );
+  // scene.add( ground );
 
 
   var sky = new THREE.Mesh(new THREE.SphereGeometry(100,32,32), new THREE.MeshLambertMaterial({
     map: THREE.ImageUtils.loadTexture('assets/images/sky.jpg')
   }));
   sky.material.side = THREE.DoubleSide;
-  sky.rotation.x = 323.43;
-  sky.position.y = -8;
-  sky.position.z = 5;
-  scene.add(sky);
+  // sky.rotation.x = 323.43;
+  // sky.position.y = -8;
+  // sky.position.z = 5;
+  // scene.add( sky );
 
   // Add multiple objects
   for (var i = 0; i < 10; i++) {
@@ -160,7 +187,7 @@
     object.name = '0' + i;
 
     // Add each item in scene
-    scene.add( object );
+    // scene.add( object );
 
   }
 
@@ -171,8 +198,8 @@
 
   // Renderer
   renderer = new THREE.WebGLRenderer( {
-    antialias: true,
-    alpha: true
+    // antialias: true,
+    // alpha: true
   } );
 
   // Adapt pixelization to screen resolution
@@ -187,38 +214,36 @@
 
   // renderer.gammaInput = true;
   // renderer.gammaOutput = true;
-  renderer.sortObjects = true;
+  // renderer.sortObjects = true;
 
   // On mouse move
-  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   // When window size changes, resize 3D environment
-  document.addEventListener( 'resize', onWindowResize, false );
+  // document.addEventListener( 'resize', onWindowResize, false );
 
-
-  document.body.appendChild(renderer.domElement);
-
+  // document.body.appendChild(renderer.domElement);
+// 
   animate();
   render();
 
   // Update image after every manipulation
   function animate(){
     requestAnimationFrame( animate );
-    controls.update();
   }
 
   function render(){
 
-    requestAnimationFrame(render);
-    sky.rotation.y += 0.000025;
+
+    // sky.rotation.y += 0.000025;
 
     // Find intersection between the ray and an invisible backscreen
-    raycaster.setFromCamera( mouse, camera );
+    // raycaster.setFromCamera( mouse, camera );
 
     var intersects = raycaster.intersectObjects( scene.children );
     var material;
     
-
-    if (intersects.length > 0 && INTERSECTED !== sky) {
+    
+    if (intersects.length > 0) {
 
       if (INTERSECTED != intersects[0].object ) {
 
@@ -247,7 +272,7 @@
         }
     } else {
 
-      if (INTERSECTED || INTERSECTED !== sky){
+      if (INTERSECTED){
         material = INTERSECTED.material;
 
         if(material.emissive){
@@ -261,10 +286,8 @@
       INTERSECTED = null;
     }
 
-    // Camera automatically rotating around object
-    // theta += 0.1;
-    // camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
-
+    
+    controls.update( clock.getDelta() );
 
     // Render scene
     renderer.render(scene, camera);
@@ -272,15 +295,20 @@
 
   function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
+
+    // camera.updateProjectionMatrix();
+
     renderer.setSize( window.innerWidth, window.innerHeight );
+
+    controls.handleResize();
   }
 
-  function onDocumentMouseMove( event ){
-    event.preventDefault();
+  // function onDocumentMouseMove( event ){
+  //   event.preventDefault();
 
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  }
+  //   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  //   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  // }
 
 
   // Convert radiant into degrees
