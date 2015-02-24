@@ -27,22 +27,23 @@
   camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
 
   // Set height
-  // camera.position.z = 1000;
-  //camera.position.set( 5, 20, 15 );
+  // camera.position.z = 100;
+  camera.position.set( 14, 12, 8 );
   //
-  camera.position.y = -80;
-  camera.position.x = 0;
-  camera.position.z = 1000;
-  camera.lookAt({ x: 0, y: 0, z: 0 });
+  // camera.position.y = 00;
+  // camera.position.x = 0;
+  // camera.position.z = 100;
+  // camera.lookAt({ x: 0, y: 0, z: 0 });
   // camera.rotateOnAxis(new THREE.Vector3(0, 0, 1), degInRad(90));
-  camera.up = new THREE.Vector3(0, 0, 1);
+  camera.up.set(0, 0, 1);
 
   // Camera controls
   controls = new THREE.TrackballControls( camera );
+  // controls = new THREE.FlyControls( camera );
   controls.rotateSpeed = 1.0;
   controls.zoomSpeed = 1.2;
   controls.panSpeed = 0.8;
-  controls.noZoom = true;
+  controls.noZoom = false;
   controls.noSpan = false;
   controls.staticMoving = true;
   //controls.dynamicDampingFactor = 0.3;
@@ -110,13 +111,30 @@
 
   scene.add( hemiLight );
 
+
+  // Create a ground plane
+  var groundGeometry = new THREE.PlaneBufferGeometry(1000, 1000);
+  var groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+  groundMaterial.color.setHSL( 0.095, 1, 0.75 );
+  // groundMaterial.side = THREE.DoubleSide;
+
+  var ground = new THREE.Mesh( groundGeometry, groundMaterial );
+  // ground.rotation.x = -Math.PI/2;
+  ground.position.y = -33;
+  // ground.position.z = 100;
+  
+  ground.receiveShadow = true;
+
+  scene.add( ground );
+
+
   var sky = new THREE.Mesh(new THREE.SphereGeometry(100,32,32), new THREE.MeshLambertMaterial({
     map: THREE.ImageUtils.loadTexture('assets/images/sky.jpg')
   }));
   sky.material.side = THREE.DoubleSide;
   sky.rotation.x = 323.43;
   sky.position.y = -8;
-  sky.position.z += 5;
+  sky.position.z = 5;
   scene.add(sky);
 
   // Add multiple objects
@@ -191,17 +209,18 @@
   function render(){
 
     requestAnimationFrame(render);
-    sky.rotation.z += 0.000025;
+    sky.rotation.y += 0.000025;
 
     // Find intersection between the ray and an invisible backscreen
     raycaster.setFromCamera( mouse, camera );
 
     var intersects = raycaster.intersectObjects( scene.children );
     var material;
+    
 
-    if (intersects.length > 0) {
+    if (intersects.length > 0 && INTERSECTED !== sky) {
 
-      if (INTERSECTED != intersects[0].object) {
+      if (INTERSECTED != intersects[0].object ) {
 
         if (INTERSECTED){
           material = INTERSECTED.material;
@@ -224,11 +243,11 @@
           }
 
           // Get ID of object selected
-          console.log(INTERSECTED.name);
+          // console.log(INTERSECTED.name);
         }
     } else {
 
-      if (INTERSECTED){
+      if (INTERSECTED || INTERSECTED !== sky){
         material = INTERSECTED.material;
 
         if(material.emissive){
