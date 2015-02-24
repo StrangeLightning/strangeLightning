@@ -46,7 +46,6 @@ exports.createCart = function(req, res, next) {
         res.end(JSON.stringify(cart));
       }
     } else {
-      console.log("2", results);
       res.end('Something went wrong!')
     }
   });
@@ -60,7 +59,6 @@ exports.modifyCart = function(req, res, next) {
   });
   var t = new Date().getTime();
 
-  console.log(req.body.Quantity)
   if (req.user) {
     req.user.cart = req.user.cart || {}
   } // This is needed because of schema initialization
