@@ -27,7 +27,7 @@ var UserSchema = new Schema({
   location: String,
   data: {},
   cart: Object,
-  aaa: Object,
+  ASIN2CART: Object,
   buyer: [buyerSchema],
   vendor: [vendorSchema]
 });

@@ -39,10 +39,10 @@ exports.createCart = function(req, res, next) {
         user.cart.items = {};
         user.cart.items[req.body.id] = 1;
         user.cart.Quantity = 1;
-        user.cart.aaa = {};
-        user.cart.aaa[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-        user.aaa = {};
-        user.aaa[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+        user.cart.ASIN2CART = {};
+        user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+        user.ASIN2CART = {};
+        user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
         user.save(function(err, u) {
           if (!err) res.end(JSON.stringify(cart));
         });
@@ -73,15 +73,15 @@ exports.modifyCart = function(req, res, next) {
     Object.keys(req.user.cart).length) {
     var user = req.user;
     var items = user.cart.items;
-    var aaa = user.cart.aaa;
-    if (user.aaa &&
-      user.aaa[req.body.id]) {
+    var aaa = user.cart.ASIN2CART;
+    if (user.ASIN2CART &&
+      user.ASIN2CART[req.body.id]) {
 
       // IF it is get the CartItemId from the user document
       opHelper.execute('CartModify', {
         'CartId': user.cart.CartId[0],
         'HMAC': user.cart.HMAC[0],
-        'Item.1.CartItemId': user.aaa[req.body.id],
+        'Item.1.CartItemId': user.ASIN2CART[req.body.id],
         'Item.1.Quantity': req.body.Quantity || 1,
       }, function(err, results) {
         var cart = results.CartModifyResponse.Cart[0];
@@ -92,8 +92,8 @@ exports.modifyCart = function(req, res, next) {
           user.cart.items[req.body.id] = req.body.Quantity;
           console.log(user.cart.items, "89");
           user.cart.Quantity = calcQuantity(cart);
-          user.cart.aaa[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-          user.aaa[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
           console.log(user.cart.items);
           user.save(function(err) {
             if (!err) res.end(JSON.stringify(cart));
@@ -118,16 +118,16 @@ exports.modifyCart = function(req, res, next) {
           user.cart = cart;
           user.cart.items = items;
           user.cart.items[req.body.id] = 1;
-          user.cart.aaa = aaa;
-          user.aaa = aaa;
+          user.cart.ASIN2CART = aaa;
+          user.ASIN2CART = aaa;
           user.cart.Quantity = calcQuantity(cart);
           var flag = true;
           for (var i = 0; i < cart.CartItems[0].CartItem.length; i++) {
             if (cart.CartItems[0].CartItem[i].ASIN[0] === req.body.id) {
-              console.log("ASIN", user.aaa, req.body.id);
-              user.cart.aaa[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
-              user.aaa[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
-              console.log("ASIN", user.aaa, req.body.id);
+              console.log("ASIN", user.ASIN2CART, req.body.id);
+              user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
+              user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
+              console.log("ASIN", user.ASIN2CART, req.body.id);
               flag = false;
               break;
             }
@@ -168,7 +168,7 @@ exports.clearCart = function(req, res, next) {
       if (req.user) {
         var user = req.user;
         user.cart = {};
-        user.aaa = {};
+        user.ASIN2CART = {};
         user.save(function(err) {
           if (!err) res.end(JSON.stringify(cart));
         });
