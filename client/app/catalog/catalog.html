@@ -3,25 +3,53 @@
   <!-- Sidebar wrapper -->
   <div id="sidebar-wrapper" class="col-md-2"s>
 
+    <!--<ul class="sidebar-nav">-->
+      <!--<li class="sidebar-brand">-->
+        <!--Filter Catalog-->
+      <!--</li>-->
+
+      <!--<li ng-repeat="(facet,object) in products.facets" ng-if="products.records.length">-->
+        <!--<h5 style="font-weight: bold" ng-bind="object.label"></h5>-->
+        <!--<ul>-->
+          <!--<li ng-repeat="item in object.buckets">-->
+            <!--<a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">-->
+              <!--<input type="checkbox" ng-model="checked[item.value]">-->
+              <!--<span ng-bind-html="item.value | trust" class="facetText"></span>-->
+              <!--({{item.count | number}})-->
+            <!--</a>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</li>-->
+
+    <!--</ul>-->
+
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
-        Filter Catalog
+        Filter Catalogue
       </li>
-
-      <li ng-repeat="(facet,object) in products.facets" ng-if="products.records.length">
-        <h5 style="font-weight: bold" ng-bind="object.label"></h5>
-        <ul>
-          <li ng-repeat="item in object.buckets">
-            <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
-              <input type="checkbox" ng-model="checked[item.value]">
-              <span ng-bind-html="item.value | trust" class="facetText"></span>
-              ({{item.count | number}})
-            </a>
-          </li>
-        </ul>
+      <li>
+        <a href="#">Suggestion # 1</a>
       </li>
-
+      <li>
+        <a href="#">Suggestion # 2</a>
+      </li>
+      <li>
+        <a href="#">Suggestion # 3</a>
+      </li>
+      <li>
+        <a href="#">Suggestion # 4</a>
+      </li>
+      <li>
+        <a href="#">Suggestion # 5</a>
+      </li>
+      <li>
+        <a href="#">Suggestion # 6</a>
+      </li>
+      <li>
+        <a href="#">Suggestion # 7</a>
+      </li>
     </ul>
+
   </div>
   <!-- End sidebar wrapper -->
 
@@ -48,9 +76,9 @@
     </div>
 
     <!--pagination-->
-    <dir-pagination-controls on-page-change="doSearch(newPageNumber)"
-                             template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">
-    </dir-pagination-controls>
+    <!--<dir-pagination-controls on-page-change="doSearch(newPageNumber)"-->
+                             <!--template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">-->
+    <!--</dir-pagination-controls>-->
 
     <div class="row-fluid" style="min-height:500px" ng-if="products.found <= 0">
       Your search for<b> {{query}} </b>did not match any documents...

@@ -46,13 +46,13 @@ angular.module('thesisApp')
 
       //init
 
-      //register to listen to keyboard events
-      $rootScope.$on('keypress',function(onEvent, keypressEvent){
-        var keyCode = keypressEvent.which;
-        if(keyCode === 13) /* A */ {
-          $scope.doSearch($scope.product.selected);
-        }
-      });
+      ////register to listen to keyboard events
+      //$rootScope.$on('keypress',function(onEvent, keypressEvent){
+      //  var keyCode = keypressEvent.which;
+      //  if(keyCode === 13) /* A */ {
+      //    $scope.doSearch($scope.searchTerm);
+      //  }
+      //});
 
       $rootScope.$on('addToCart', $scope.increment);
       $rootScope.$on('clearCartQty', $scope.clearCart);
