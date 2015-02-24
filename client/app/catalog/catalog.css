@@ -11,7 +11,8 @@ html {
 }
 
 .centerImg {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Custom buttons for catalog */
@@ -21,6 +22,8 @@ html {
   border-radius: 0;
   background-color: #999;
   margin-top: 10px;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
 .btn:hover {
@@ -29,12 +32,21 @@ html {
   background-color: #D7F5F5;
 }
 
+.caption a {
+  color: black;
+  cursor: pointer;
+}
+
+.caption a:hover {
+  color: #999;
+}
+
 /* Grid of Amazon products */
 #catalog-photos {
   height: 800px;
   overflow: scroll;
   margin-top: 20px;
-  padding-bottom: 150px;
+  padding-bottom: 200px;
 }
 
 #sidebar-wrapper {
@@ -78,7 +90,7 @@ html {
 
 .sidebar-nav > .sidebar-brand {
   font-size: 18px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .sidebar-nav > .sidebar-brand a {
