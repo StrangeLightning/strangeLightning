@@ -1,9 +1,8 @@
-
-<div id="load container
-" onclick="this.parentNode.parentNode.removeChild(this.parentNode);">
+<!-- 
+<div id="load" onclick="this.parentNode.parentNode.removeChild(this.parentNode);">
   Click on the screen to explore
 </div>
-
+ -->
 <script>
 
   // if ( ! Detector.webgl ) {
@@ -69,20 +68,20 @@
     camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.5, 3000000 );
     camera.position.set( 2000, 750, 2000 );
 
-    controls = new THREE.OrbitControls( camera /*, renderer.domElement */ );
-    controls.userPan = false;
-    controls.userPanSpeed = 0.0;
-    controls.maxDistance = 1000000/2;
-    controls.maxPolarAngle = Math.PI * 0.495;
-    controls.center.set( 0, 500, 0 );
+    controls = new THREE.FirstPersonControls( camera );
+    controls.movementSpeed = 30000;
+    controls.lookSpeed = 0.1;
 
     /******************************************/
     /*          Orbit camera controls         */
     /******************************************/
 
-    // controls = new THREE.FirstPersonControls( camera );
-    // controls.movementSpeed = 150;
-    // controls.lookSpeed = 0.1;
+    // controls = new THREE.OrbitControls( camera /*, renderer.domElement */ );
+    // controls.userPan = false;
+    // controls.userPanSpeed = 0.0;
+    // controls.maxDistance = 1000000/2;
+    // controls.maxPolarAngle = Math.PI * 0.495;
+    // controls.center.set( 0, 500, 0 );
 
     /******************************************/
     /*               SpotLight                */
@@ -110,6 +109,7 @@
 
     var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
     light.position.set( - 1, 1, - 1 );
+    
     light.shadowCameraVisible = true;
 
     scene.add( light );
@@ -157,7 +157,7 @@
     mirrorMesh.add(water);
     mirrorMesh.rotation.x = - Math.PI * 0.5;
 
-    // scene.add( mirrorMesh );
+    scene.add( mirrorMesh );
 
     /******************************************/
     /*    Skybox / surrounding environment    */
@@ -206,7 +206,7 @@
     });
 
     var skyBox = new THREE.Mesh(
-      new THREE.BoxGeometry( 1000000, 1000000, 900000 ), skyBoxMaterial
+      new THREE.BoxGeometry( 1000000, 1000000, 1000000 ), skyBoxMaterial
     );
     
     skyBox.position.y += 1000000/2;
@@ -217,35 +217,35 @@
     /*          Object1 - soccer ball         */
     /******************************************/
 
-    // var ballTexture = new THREE.Texture();
-    // var imgLoader = new THREE.ImageLoader();
-    // imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
-    //   ballTexture.image = image;
-    //   ballTexture.needsUpdate = true;
-    // });
+    var ballTexture = new THREE.Texture();
+    var imgLoader = new THREE.ImageLoader();
+    imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
+      ballTexture.image = image;
+      ballTexture.needsUpdate = true;
+    });
 
-    // // Add OBJ object
-    // var loader = new THREE.OBJLoader();
-    // loader.load( 'assets/images/soccerBall.obj', function ( object ) {
-    //   object.traverse( function ( child ) {
-    //     if ( child instanceof THREE.Mesh ) {
-    //       child.material.map = ballTexture;
-    //     }
-    //   });
+    // Add OBJ object
+    var loader = new THREE.OBJLoader();
+    loader.load( 'assets/images/soccerBall.obj', function ( object ) {
+      object.traverse( function ( child ) {
+        if ( child instanceof THREE.Mesh ) {
+          child.material.map = ballTexture;
+        }
+      });
 
-    //   object.position.set(
-    //     Math.random() * 500000 - 200000,
-    //     Math.random() * 500000 - 300000,
-    //     Math.random() * 500000 - 200000
-    //   );
+      object.position.set(
+        Math.random() * 500000 - 200000,
+        Math.random() * 500000,
+        Math.random() * 500000 - 200000
+      );
 			
-    //   object.scale.set(500, 500, 500);
+      object.scale.set(500, 500, 500);
 			
-    //   object.receiveShadow = true;
-    //   object.castShadow = true;
+      object.receiveShadow = true;
+      object.castShadow = true;
 
-    //   scene.add( object );
-    // });
+      scene.add( object );
+    });
 
     /******************************************/
     /*          Object2 - disco ball          */
@@ -277,7 +277,10 @@
       var geometry = new THREE.BoxGeometry(5000, 5000, 5000);
       //  Mesh the created geometry
       var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({ color: 0xff0000 }) );
+      
       object.castShadow = true;
+      object.receiveShadow = true;
+
       object.position.x = Math.random() * 500000 - 200000;
       object.position.y = Math.random() * 500000 - 50000;
       object.position.z = Math.random() * 500000 - 200000;
@@ -303,7 +306,7 @@
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();
     
-    controls.update();
+    controls.update(clock.getDelta());
     renderer.render( scene, camera );
   }
 
