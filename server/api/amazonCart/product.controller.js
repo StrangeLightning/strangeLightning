@@ -90,8 +90,8 @@ exports.modifyCart = function(req, res, next) {
           user.cart = cart;
           user.cart.items = items;
           user.cart.items[req.body.id] = req.body.Quantity;
-          console.log(user.cart.items, "89");
           user.cart.Quantity = calcQuantity(cart);
+          user.cart.ASIN2CART = ASIN2CART;
           user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
           user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
           console.log(user.cart.items);
