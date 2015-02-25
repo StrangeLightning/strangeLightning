@@ -8,12 +8,12 @@ exports.searchCart = function(req, res, next) {
   params.start = req.body.start || 0;
   params.partial = true;
 
-  if(typeof req.body.q === "undefined" || req.body.filters) {
+  if(typeof req.body.q === "undefined" || req.body.q === "" || req.body.filters) {
     params.queryParser = 'simple';
 
     // build text query
     if(req.body.q || req.body.filters) {
-      params.query = req.body.q ? req.body.q: "~1";
+      params.query = req.body.q ? req.body.q : "~1";
     } else {
       params.queryParser = 'structured';
       params.query = "(matchall)";
@@ -71,64 +71,81 @@ exports.searchCart = function(req, res, next) {
     }()
   }
 
-  console.log(params);
+  //console.log(params);
   cloudsearchdomain.search(params, function(err, data) {
     if(err) {
       res.json(err);
       console.log(err, err.stack);
     } else {
       var _results = [];
-      console.log(data.hits.hit);
-      for(var i = 0; i < data.hits.hit.length; i++) {
-        var product = {};
-        var result = data.hits.hit[i];
+      var isData = data.hits.hit.length > 0;
+      if(isData) {
+        for(var i = 0; i < data.hits.hit.length; i++) {
+          var product = {};
+          var result = data.hits.hit[i];
 
-        product.id = result.fields.product_id[0];
-        product.price = result.fields.price[0];
-        product.title = result.fields.title[0];
-        product.mediumImage = result.fields.img_url[0];
-        _results.push(product);
+          product.id = result.fields.product_id[0];
+          product.price = result.fields.price[0];
+          product.title = result.fields.title[0];
+          product.mediumImage = result.fields.img_url[0];
+          product.category = result.fields.category[0];
+          product.prodAttributes = result.fields.prod_attributes[0];
+          _results.push(product);
 
-        if(_results.length === data.hits.hit.length - 1){
-          res.end(JSON.stringify({
-            data: _results
-          }));
+          if(_results.length === data.hits.hit.length - 1) {
+            res.end(JSON.stringify({
+              data: _results
+            }));
+          }
         }
+      } else {
+        res.end(JSON.stringify({
+          data: []
+        }));
       }
     }
   })
 };
 
-exports.suggest = function(req, res){
+exports.suggest = function(req, res) {
   var params = {
     query: req.body.q, /* required */
     suggester: 'title', /* required */
     size: 10
   };
 
-  cloudsearchdomain.suggest(params, function(err, data) {
-    if(err) {
-      res.json(err);
-      console.log(err, err.stack);
-    } else {
-      var _results = [];
-      console.log(data.hits.hit);
-      for(var i = 0; i < data.hits.hit.length; i++) {
-        var product = {};
-        var result = data.hits.hit[i];
+  if(req.body.q) {
+    cloudsearchdomain.suggest(params, function(err, data) {
+      if(err) {
+        res.json(err);
+        console.log(err, err.stack);
+      } else {
+        var _results = [];
+        var isData = data.suggest.suggestions.length > 0;
+        if(isData) {
 
-        product.id = result.fields.product_id[0];
-        product.price = result.fields.price[0];
-        product.title = result.fields.title[0];
-        product.mediumImage = result.fields.img_url[0];
-        _results.push(product);
+          for(var i = 0; i < data.suggest.suggestions.length; i++) {
+            var product = {};
+            var result = data.suggest.suggestions[i];
+            product.title = result.suggestion;
+            _results.push(product);
 
-        if(_results.length === data.hits.hit.length - 1){
+            if(_results.length === data.suggest.suggestions.length - 1) {
+              res.end(JSON.stringify({
+                data: _results
+              }));
+            }
+          }
+        } else {
           res.end(JSON.stringify({
-            data: _results
+            data: []
           }));
         }
       }
-    }
-  });
+    });
+  } else {
+    res.end(JSON.stringify({
+      data: []
+    }));
+  }
 };

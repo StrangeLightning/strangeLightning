@@ -62,7 +62,7 @@
           <div class="input-group nav-search">
             <ui-select ng-model="suggestedProduct.selected"
                        theme="bootstrap"
-                       reset-search-input="false"
+                       reset-search-input="true"
                        on-select="doSearch($item.title)"
                        title="Search">
               <ui-select-match placeholder="Search...">{{$select.selected.value}}</ui-select-match>
