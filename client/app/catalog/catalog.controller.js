@@ -84,6 +84,21 @@ angular.module('thesisApp')
       $scope.doSearch(searchTerm, pageNumber);
     };
 
+    $scope.doSearch = function(searchTerm, pageNumber) {
+      pageNumber = pageNumber || 0;
+      $scope.searchTerm = searchTerm;
+      $location.path("/catalog");
+      catalogFactory.doSearch(searchTerm, pageNumber, function(newProducts) {
+        $rootScope.$broadcast('products-updated', {newProducts: newProducts});
+      });
+    };
+
+    // Function for fetch page results.
+    $scope.fetchPage = function(searchTerm, pageNumber) {
+      pageNumber = (pageNumber - 1) * 12;
+      $scope.doSearch(searchTerm, pageNumber);
+    };
+
     //INIT
     //initially, if products empty, then call search to show items
     if (!$scope.products) {
