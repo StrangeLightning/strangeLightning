@@ -1,4 +1,4 @@
-describe('LoginCtrl', function () {
+describe('LoginCtrl', function() {
   var LoginCtrl, createLoginCtrl, $scope, $rootScope, $controller, $httpBackend, $location, $q, $window;
 
   beforeEach(function () {
@@ -29,10 +29,12 @@ describe('LoginCtrl', function () {
 
       expect($scope).toBeDefined();
     })
+
     it("should have a loginOauth function", function () {
       // createLoginCtrl();
       expect(angular.isFunction($scope.loginOauth)).toBe(true)
     })
+
     it('should redirect to /auth/facebook ', function () {
       // $window.location.href = 'boo '
       // console.log($window.location.href)
@@ -61,6 +63,7 @@ describe('LoginCtrl', function () {
       expect(1).toEqual(1);
     })
   });
+
   describe('login authentication functionality', function () {
     // it('should return an authentication token', function() {
     //   $httpBackend.whenGET('auth/faker').respond(404);
