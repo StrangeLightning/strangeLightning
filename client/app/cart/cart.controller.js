@@ -33,7 +33,7 @@ angular.module('thesisApp')
         // }
       };
       $scope.emptyCart = function() {
-        $scope.items = $0
+        $scope.items = '$0'
         cartFactory.amazonClearCart();
       };
       //returns all items from db schema,

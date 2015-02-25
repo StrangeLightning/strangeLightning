@@ -1,5 +1,3 @@
-
-
 // Karma configuration
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 
@@ -10,7 +8,7 @@ module.exports = function(config) {
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
-    reporters: ['coverage'],
+    reporters: ['progress', 'coverage'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -65,8 +63,8 @@ module.exports = function(config) {
     browsers: ['PhantomJS'],
 
     plugins: [
-      'karma-coverage',
       'karma-jasmine',
+      'karma-coverage',
       'karma-chrome-launcher',
       'karma-phantomjs-launcher'
     ],
