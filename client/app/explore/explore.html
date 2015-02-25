@@ -1,14 +1,15 @@
 
-<div id="load" onclick="this.parentNode.parentNode.removeChild(this.parentNode);">
+<div id="load container
+" onclick="this.parentNode.parentNode.removeChild(this.parentNode);">
   Click on the screen to explore
 </div>
 
 <script>
 
-  if ( ! Detector.webgl ) {
-    Detector.addGetWebGLMessage();
-    document.getElementById( 'container' ).innerHTML = "";
-  }
+  // if ( ! Detector.webgl ) {
+  //   Detector.addGetWebGLMessage();
+  //   document.getElementById( 'container' ).innerHTML = "";
+  // }
 
   var groundGeometry;
   var groundMaterial;
@@ -22,13 +23,10 @@
 
   var clock = new THREE.Clock();
 
-  // if ( ! Detector.webgl ) {
-  //   Detector.addGetWebGLMessage();
-  // }
-
   var container, stats;
   var camera, scene, renderer;
   var sphere;
+  var waterNormals;
 
   var parameters = {
     width: 2000,
@@ -40,33 +38,55 @@
     filterparam: 1
   };
 
-
-  var waterNormals;
-
   init();
   animate();
 
   function init() {
 
+    /******************************************/
+    /*         Window, renderer, scene        */
+    /******************************************/
+
     container = document.createElement( 'div' );
     document.body.appendChild( container );
-
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
+    
+    scene = new THREE.Scene();
+
+    // Add fog
+    // scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+    // renderer.setClearColor( scene.fog.color, 1 );
+
     container.appendChild( renderer.domElement );
 
-    scene = new THREE.Scene();
+
+    /******************************************/
+    /*            Camera controls             */
+    /******************************************/
 
     camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.5, 3000000 );
     camera.position.set( 2000, 750, 2000 );
 
-    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls = new THREE.OrbitControls( camera /*, renderer.domElement */ );
     controls.userPan = false;
     controls.userPanSpeed = 0.0;
     controls.maxDistance = 1000000/2;
     controls.maxPolarAngle = Math.PI * 0.495;
     controls.center.set( 0, 500, 0 );
+
+    /******************************************/
+    /*          Orbit camera controls         */
+    /******************************************/
+
+    // controls = new THREE.FirstPersonControls( camera );
+    // controls.movementSpeed = 150;
+    // controls.lookSpeed = 0.1;
+
+    /******************************************/
+    /*               SpotLight                */
+    /******************************************/
     
     var spotLight = new THREE.SpotLight( 0xffffff );
     spotLight.position.set( -10000, 10000, -10000 );
@@ -84,12 +104,37 @@
     
    scene.add( spotLight );
   
-    // Other
+    /******************************************/
+    /*               Hemisphere               */
+    /******************************************/
+
     var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
     light.position.set( - 1, 1, - 1 );
     light.shadowCameraVisible = true;
+
     scene.add( light );
+
+    /******************************************/
+    /*           Alternative ground           */
+    /******************************************/
+
+    // // Create a ground plane
+    // groundGeometry = new THREE.PlaneBufferGeometry(1000000, 1000000);
+    // groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+    // groundMaterial.color.setHSL( 0.095, 1, 0.75 );
+    // // groundMaterial.side = THREE.DoubleSide;
+
+    // ground = new THREE.Mesh( groundGeometry, groundMaterial );
+    // ground.rotation.x = -Math.PI/2;
+    // ground.position.y = 10000;
     
+    // ground.receiveShadow = true;
+
+    // scene.add( ground );
+    
+    /******************************************/
+    /*             Water surface              */
+    /******************************************/
 
     waterNormals = new THREE.ImageUtils.loadTexture( 'assets/images/waternormals.jpg' );
     waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
@@ -111,10 +156,12 @@
     );
     mirrorMesh.add(water);
     mirrorMesh.rotation.x = - Math.PI * 0.5;
-    scene.add( mirrorMesh );
 
+    // scene.add( mirrorMesh );
 
-    // load skybox
+    /******************************************/
+    /*    Skybox / surrounding environment    */
+    /******************************************/
 
     var cubeMap = new THREE.CubeTexture( [] );
     cubeMap.format = THREE.RGBFormat;
@@ -159,42 +206,50 @@
     });
 
     var skyBox = new THREE.Mesh(
-      new THREE.BoxGeometry( 1000000, 1000000, 1000000 ), skyBoxMaterial
+      new THREE.BoxGeometry( 1000000, 1000000, 900000 ), skyBoxMaterial
     );
     
     skyBox.position.y += 1000000/2;
+
     scene.add(skyBox);
     
-    var ballTexture = new THREE.Texture();
-    var imgLoader = new THREE.ImageLoader();
-    imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
-      ballTexture.image = image;
-      ballTexture.needsUpdate = true;
-    });
+    /******************************************/
+    /*          Object1 - soccer ball         */
+    /******************************************/
 
-    // Add OBJ object
-    var loader = new THREE.OBJLoader();
-    loader.load( 'assets/images/soccerBall.obj', function ( object ) {
-      object.traverse( function ( child ) {
-        if ( child instanceof THREE.Mesh ) {
-          child.material.map = ballTexture;
-        }
-      });
+    // var ballTexture = new THREE.Texture();
+    // var imgLoader = new THREE.ImageLoader();
+    // imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
+    //   ballTexture.image = image;
+    //   ballTexture.needsUpdate = true;
+    // });
 
-      object.position.set(
-        Math.random() * 500000 - 200000,
-        Math.random() * 500000 - 300000,
-        Math.random() * 500000 - 200000
-      );
+    // // Add OBJ object
+    // var loader = new THREE.OBJLoader();
+    // loader.load( 'assets/images/soccerBall.obj', function ( object ) {
+    //   object.traverse( function ( child ) {
+    //     if ( child instanceof THREE.Mesh ) {
+    //       child.material.map = ballTexture;
+    //     }
+    //   });
+
+    //   object.position.set(
+    //     Math.random() * 500000 - 200000,
+    //     Math.random() * 500000 - 300000,
+    //     Math.random() * 500000 - 200000
+    //   );
 			
-      object.scale.set(500, 500, 500);
+    //   object.scale.set(500, 500, 500);
 			
-      object.receiveShadow = true;
-      object.castShadow = true;
+    //   object.receiveShadow = true;
+    //   object.castShadow = true;
 
-      scene.add( object );
+    //   scene.add( object );
+    // });
 
-    });
+    /******************************************/
+    /*          Object2 - disco ball          */
+    /******************************************/
 
     var geometry = new THREE.IcosahedronGeometry( 2000, 4 );
 
@@ -210,8 +265,11 @@
 
     sphere = new THREE.Mesh( geometry, material );
     sphere.position.set(3500,2500,5500);
-    
     scene.add( sphere );
+
+    /******************************************/
+    /*            Multiple cubes              */
+    /******************************************/
 
     // Add multiple objects
     for (var i = 0; i < 100; i++) {
@@ -221,7 +279,7 @@
       var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({ color: 0xff0000 }) );
       object.castShadow = true;
       object.position.x = Math.random() * 500000 - 200000;
-      object.position.y = Math.random() * 500000 - 200000;
+      object.position.y = Math.random() * 500000 - 50000;
       object.position.z = Math.random() * 500000 - 200000;
       object.rotation.x = degInRad(Math.random() * 90);
       object.rotation.y = degInRad(Math.random() * 90);
@@ -233,9 +291,6 @@
     }
 
   }
-  
-  // Fog
-  // scene.fog = new THREE.Fog( 0xffffff, 2000, 100000 );
 
   function animate() {
     requestAnimationFrame( animate );
@@ -245,13 +300,10 @@
   function render() {
     var time = performance.now() * 0.001;
 
-    //sphere.position.y = Math.sin( time ) * 500 + 250;
-    //sphere.rotation.x = time * 0.5;
-    //sphere.rotation.z = time * 0.51;
-
     water.material.uniforms.time.value += 1.0 / 60.0;
-    controls.update();
     water.render();
+    
+    controls.update();
     renderer.render( scene, camera );
   }
 
