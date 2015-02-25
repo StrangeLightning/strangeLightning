@@ -1,4 +1,4 @@
-<!-- 
+<!--
 <div id="load" onclick="this.parentNode.parentNode.removeChild(this.parentNode);">
   Click on the screen to explore
 </div>
@@ -51,7 +51,7 @@
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
-    
+
     scene = new THREE.Scene();
 
     // Add fog
@@ -86,30 +86,30 @@
     /******************************************/
     /*               SpotLight                */
     /******************************************/
-    
+
     var spotLight = new THREE.SpotLight( 0xffffff );
     spotLight.position.set( -10000, 10000, -10000 );
-    
+
     spotLight.castShadow = true;
-    
+
     spotLight.shadowCameraVisible = true;
-    
+
     spotLight.shadowMapWidth = 1024;
     spotLight.shadowMapHeight = 1024;
-    
+
     spotLight.shadowCameraNear = 500;
     spotLight.shadowCameraFar = 4000;
     spotLight.shadowCameraFov = 30;
-    
-   scene.add( spotLight );
-  
+
+    scene.add( spotLight );
+
     /******************************************/
     /*               Hemisphere               */
     /******************************************/
 
     var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
     light.position.set( - 1, 1, - 1 );
-    
+
     light.shadowCameraVisible = true;
 
     scene.add( light );
@@ -127,11 +127,11 @@
     // ground = new THREE.Mesh( groundGeometry, groundMaterial );
     // ground.rotation.x = -Math.PI/2;
     // ground.position.y = 10000;
-    
+
     // ground.receiveShadow = true;
 
     // scene.add( ground );
-    
+
     /******************************************/
     /*             Water surface              */
     /******************************************/
@@ -208,11 +208,11 @@
     var skyBox = new THREE.Mesh(
       new THREE.BoxGeometry( 1000000, 1000000, 1000000 ), skyBoxMaterial
     );
-    
+
     skyBox.position.y += 1000000/2;
 
     scene.add(skyBox);
-    
+
     /******************************************/
     /*          Object1 - soccer ball         */
     /******************************************/
@@ -238,9 +238,9 @@
         Math.random() * 500000,
         Math.random() * 500000 - 200000
       );
-			
+
       object.scale.set(500, 500, 500);
-			
+
       object.receiveShadow = true;
       object.castShadow = true;
 
@@ -277,7 +277,7 @@
       var geometry = new THREE.BoxGeometry(5000, 5000, 5000);
       //  Mesh the created geometry
       var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({ color: 0xff0000 }) );
-      
+
       object.castShadow = true;
       object.receiveShadow = true;
 
@@ -292,7 +292,6 @@
       // Add each item in scene
       scene.add( object );
     }
-
   }
 
   function animate() {
@@ -305,7 +304,7 @@
 
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();
-    
+
     controls.update(clock.getDelta());
     renderer.render( scene, camera );
   }
