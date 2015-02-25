@@ -168,11 +168,11 @@
     
     var ballTexture = new THREE.Texture();
     var imgLoader = new THREE.ImageLoader();
-		imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
-			ballTexture.image = image;
-			ballTexture.needsUpdate = true;
-		});
-    
+    imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
+      ballTexture.image = image;
+      ballTexture.needsUpdate = true;
+    });
+
     // Add OBJ object
     var loader = new THREE.OBJLoader();
     loader.load( 'assets/images/soccerBall.obj', function ( object ) {
