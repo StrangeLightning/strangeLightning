@@ -28,17 +28,17 @@ angular.module('thesisApp')
         return route === $location.path();
       };
 
-      $scope.doSearch = function(searchTerm) {
+      $scope.doSearch = function(searchTerm, pageNumber) {
+        pageNumber = pageNumber || 0;
         $scope.searchTerm = searchTerm;
         $location.path("/catalog");
-        catalogFactory.doSearch(searchTerm, function(newProducts) {
+        catalogFactory.doSearch(searchTerm, pageNumber, function(newProducts) {
           $rootScope.$broadcast('products-updated', {newProducts: newProducts});
         });
       };
 
       $scope.doSuggestor = function(searchTerm) {
         $scope.searchTerm = searchTerm;
-        $location.path("/catalog");
         catalogFactory.doSuggestor(searchTerm, function(newProducts) {
          $scope.suggestedProducts = newProducts;
         });

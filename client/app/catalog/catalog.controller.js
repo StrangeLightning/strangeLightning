@@ -2,8 +2,6 @@
 
 angular.module('thesisApp')
   .controller('CatalogCtrl', ['$scope', '$rootScope', 'cartFactory', 'catalogFactory', '$http', '$location', function ($scope, $rootScope, cartFactory, catalogFactory, $http, $location) {
-    $scope.doSearch = catalogFactory.doSearch;
-
     $scope.facetFields = "";
     $scope.filterFields = "";
     $scope.selectedItems = [];
@@ -69,10 +67,25 @@ angular.module('thesisApp')
       $scope.doSearch();
     };
 
+    $scope.doSearch = function(searchTerm, pageNumber) {
+      pageNumber = pageNumber || 0;
+      $scope.searchTerm = searchTerm;
+      $location.path("/catalog");
+      catalogFactory.doSearch(searchTerm, pageNumber, function(newProducts) {
+        $rootScope.$broadcast('products-updated', {newProducts: newProducts});
+      });
+    };
+
+    // Function for fetch page results.
+    $scope.fetchPage = function(searchTerm, pageNumber) {
+      pageNumber = (pageNumber - 1) * 12;
+      $scope.doSearch(searchTerm, pageNumber);
+    };
+
     //INIT
     //initially, if products empty, then call search to show items
     if (!$scope.products) {
-      $scope.doSearch('', function (newProducts) {
+      $scope.doSearch('', 0, function (newProducts) {
         $scope.products = newProducts;
       });
     }
