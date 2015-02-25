@@ -15,6 +15,7 @@ To create an intuitive 3D shopping experience that smartly recommends products t
 ## Demo
 
 View [Sphereable](http://sphereable.com).
+![](https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/screenshotExplore.png)
 
 ## Roadmap
 

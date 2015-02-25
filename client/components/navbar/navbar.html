@@ -55,26 +55,29 @@
               <span class="badge" ng-if="cartQty > 0">{{cartQty}}</span>
             </a>
           </li>
-
-
         </ul>
-        <div class="navbar-right col-md-4" role="search" style="margin-top: 8px;">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" ng-model="searchTerm">
-              <span class="input-group-addon" id="basic-addon1 search" ng-click="doSearch()">
-                <span class="glyphicon glyphicon-search"></span>
-              </span>
+
+        <div class="navbar-right col-md-4 nav-search-container" role="search" style="margin-top: 8px;">
+
+          <div class="input-group nav-search">
+            <ui-select ng-model="suggestedProduct.selected"
+                       theme="bootstrap"
+                       reset-search-input="true"
+                       on-select="doSearch($item.title)"
+                       title="Search">
+              <ui-select-match placeholder="Search...">{{$select.selected.value}}</ui-select-match>
+              <ui-select-choices repeat="suggestedProduct.title as suggestedProduct in suggestedProducts track by $index"
+                                 refresh="doSuggestor($select.search)"
+                                 refresh-delay="0">
+                <div ng-bind-html="suggestedProduct.title | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+            <span class="input-group-addon" id="basic-addon1 search" ng-click="doSearch(searchTerm)">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
           </div>
+
         </div>
       </div>
     </div>
   </nav>
-
-
-
-  <!-- <li role="presentation">
-    <a ng-show="isLoggedIn()" href="/cart">
-      <span class="glyphicon glyphicon-shopping-cart btnWidth"></span>
-      <span class="badge">42</span>
-    </a>
-  </li> -->

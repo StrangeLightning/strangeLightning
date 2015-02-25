@@ -106,3 +106,7 @@ html {
 .narrowMargin {
   margin: 0px;
 }
+
+.ui-select-bootstrap .ui-select-choices-row.active>a {
+  background-color: #999;
+}

@@ -11,7 +11,7 @@ angular.module('thesisApp')
       {
         $document.bind('keyup', function(e)
         {
-          console.log('Got keypress:', e.which);
+          // console.log('Got keypress:', e.which);
           $rootScope.$broadcast('keypress', e);
           $rootScope.$broadcast('keypress:' + e.which, e);
 

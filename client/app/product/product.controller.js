@@ -6,6 +6,8 @@ angular.module('thesisApp')
     // we can leave this here and migrate it inside of a directive should
     // we have a need to create one.
     $scope.product = catalogFactory.product;
+    //$scope.product.prodAttributes = JSON.parse($scope.product.prodAttributes);
+
     var block = $(window).height();
     var navbar = $('.navbar').height();
     $('#product-container').css({

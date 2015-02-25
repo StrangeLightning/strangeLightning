@@ -1,0 +1,25 @@
+.nav-search {
+  width: 100%;
+}
+
+.nav-search-container {
+  width: 386px;
+}
+
+.ui-select-choices-row-inner {
+  height: 35px !important;
+}
+
+.navbar-right .form-control {
+  margin-top: 0px !important;
+}
+
+.ui-select-bootstrap .ui-select-toggle > .caret {
+  display: none !important;
+}
+
+@media (max-width: 1200px) {
+  .nav-search-container {
+    float: left!important;
+  }
+}
