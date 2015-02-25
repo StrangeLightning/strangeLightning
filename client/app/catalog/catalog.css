@@ -113,10 +113,10 @@ html {
 
 .facet-list{
   list-style: none;
-  padding-left: 10px;
+  padding-left: 0px;
 }
 
 .facet-title {
-  padding-left: 5px;
+  padding-left: 0px;
   font-weight: bold;
 }
