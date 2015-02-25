@@ -6,10 +6,8 @@
 <script>
 
   if ( ! Detector.webgl ) {
-
     Detector.addGetWebGLMessage();
     document.getElementById( 'container' ).innerHTML = "";
-
   }
 
   var groundGeometry;
@@ -64,7 +62,7 @@
     camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.5, 3000000 );
     camera.position.set( 2000, 750, 2000 );
 
-    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls = new THREE.FirstPersonControls( camera, renderer.domElement );
     controls.userPan = false;
     controls.userPanSpeed = 0.0;
     controls.maxDistance = 1000000/2;
@@ -93,11 +91,7 @@
     light.shadowCameraVisible = true;
     scene.add( light );
     
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 5465f509157c25efe0c14afa8ffe1cd0593e5041
     waterNormals = new THREE.ImageUtils.loadTexture( 'assets/images/waternormals.jpg' );
     waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
@@ -181,28 +175,28 @@
     
     // Add OBJ object
     var loader = new THREE.OBJLoader();
-		loader.load( 'assets/images/soccerBall.obj', function ( object ) {
-			object.traverse( function ( child ) {
-				if ( child instanceof THREE.Mesh ) {
-					child.material.map = ballTexture;
-				}
-			});
+    loader.load( 'assets/images/soccerBall.obj', function ( object ) {
+      object.traverse( function ( child ) {
+        if ( child instanceof THREE.Mesh ) {
+          child.material.map = ballTexture;
+        }
+      });
 
-			object.position.set(
-			  Math.random() * 500000 - 200000,
-			  Math.random() * 500000 - 300000,
-			  Math.random() * 500000 - 200000
-		  );
+      object.position.set(
+        Math.random() * 500000 - 200000,
+        Math.random() * 500000 - 300000,
+        Math.random() * 500000 - 200000
+      );
 			
-			object.scale.set(500, 500, 500);
+      object.scale.set(500, 500, 500);
 			
-			object.receiveShadow = true;
-			object.castShadow = true;
-			
-			scene.add( object );
+      object.receiveShadow = true;
+      object.castShadow = true;
 
-		});
-    
+      scene.add( object );
+
+    });
+
     var geometry = new THREE.IcosahedronGeometry( 2000, 4 );
 
     for ( var i = 0, j = geometry.faces.length; i < j; i ++ ) {
