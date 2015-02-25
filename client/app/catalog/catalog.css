@@ -8,6 +8,7 @@ html {
   background-color: #fff;
   text-align: center;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .centerImg {
