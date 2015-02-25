@@ -6,11 +6,26 @@
 <script>
 
   if ( ! Detector.webgl ) {
-
     Detector.addGetWebGLMessage();
     document.getElementById( 'container' ).innerHTML = "";
-
   }
+
+  var groundGeometry;
+  var groundMaterial;
+  var ground;
+
+  var raycaster;
+  var mouse = new THREE.Vector2();
+  var INTERSECTED;
+  var radius = 100;
+  var theta = 0;
+
+  var clock = new THREE.Clock();
+
+  // if ( ! Detector.webgl ) {
+  //   Detector.addGetWebGLMessage();
+  // }
+
 
   var container, stats;
   var camera, scene, renderer;
@@ -25,6 +40,7 @@
     param: 4,
     filterparam: 1
   }
+
 
   var waterNormals;
 
@@ -46,22 +62,40 @@
     camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.5, 3000000 );
     camera.position.set( 2000, 750, 2000 );
 
-    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls = new THREE.FirstPersonControls( camera, renderer.domElement );
     controls.userPan = false;
     controls.userPanSpeed = 0.0;
-    controls.maxDistance = 5000.0;
+    controls.maxDistance = 1000000/2;
     controls.maxPolarAngle = Math.PI * 0.495;
     controls.center.set( 0, 500, 0 );
-
+    
+    var spotLight = new THREE.SpotLight( 0xffffff );
+    spotLight.position.set( -10000, 10000, -10000 );
+    
+    spotLight.castShadow = true;
+    
+    spotLight.shadowCameraVisible = true;
+    
+    spotLight.shadowMapWidth = 1024;
+    spotLight.shadowMapHeight = 1024;
+    
+    spotLight.shadowCameraNear = 500;
+    spotLight.shadowCameraFar = 4000;
+    spotLight.shadowCameraFov = 30;
+    
+   scene.add( spotLight );
+  
+  //Other
     var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
     light.position.set( - 1, 1, - 1 );
+    light.shadowCameraVisible = true;
     scene.add( light );
-
+    
 
     waterNormals = new THREE.ImageUtils.loadTexture( 'assets/images/waternormals.jpg' );
     waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
-    water = new THREE.Water( renderer, camera, scene, {
+    water = new THREE.Water(renderer, camera, scene, {
       textureWidth: 512,
       textureHeight: 512,
       waterNormals: waterNormals,
@@ -70,14 +104,13 @@
       sunColor: 0xffffff,
       waterColor: 0x001e0f,
       distortionScale: 50.0,
-    } );
+    });
 
     mirrorMesh = new THREE.Mesh(
       new THREE.PlaneBufferGeometry( parameters.width * 500, parameters.height * 500 ),
       water.material
     );
-
-    mirrorMesh.add( water );
+    mirrorMesh.add(water);
     mirrorMesh.rotation.x = - Math.PI * 0.5;
     scene.add( mirrorMesh );
 
@@ -105,7 +138,6 @@
         return canvas;
 
       };
-
       cubeMap.images[ 0 ] = getSide( 2, 1 ); // px
       cubeMap.images[ 1 ] = getSide( 0, 1 ); // nx
       cubeMap.images[ 2 ] = getSide( 1, 0 ); // py
@@ -130,37 +162,68 @@
     var skyBox = new THREE.Mesh(
       new THREE.BoxGeometry( 1000000, 1000000, 1000000 ), skyBoxMaterial
     );
+    
+    skyBox.position.y += 1000000/2;
+    scene.add(skyBox);
+    
+    var ballTexture = new THREE.Texture();
+    var imgLoader = new THREE.ImageLoader();
+    imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
+      ballTexture.image = image;
+      ballTexture.needsUpdate = true;
+    });
 
-    scene.add( skyBox );
+    // Add OBJ object
+    var loader = new THREE.OBJLoader();
+    loader.load( 'assets/images/soccerBall.obj', function ( object ) {
+      object.traverse( function ( child ) {
+        if ( child instanceof THREE.Mesh ) {
+          child.material.map = ballTexture;
+        }
+      });
 
+      object.position.set(
+        Math.random() * 500000 - 200000,
+        Math.random() * 500000 - 300000,
+        Math.random() * 500000 - 200000
+      );
+			
+      object.scale.set(500, 500, 500);
+			
+      object.receiveShadow = true;
+      object.castShadow = true;
 
-    var geometry = new THREE.IcosahedronGeometry( 400, 4 );
+      scene.add( object );
+
+    });
+
+    var geometry = new THREE.IcosahedronGeometry( 2000, 4 );
 
     for ( var i = 0, j = geometry.faces.length; i < j; i ++ ) {
-
       geometry.faces[ i ].color.setHex( Math.random() * 0xffffff );
-
     }
 
     var material = new THREE.MeshPhongMaterial( {
-      //vertexColors: THREE.FaceColors,
+      vertexColors: THREE.FaceColors,
       shininess: 50,
       envMap: cubeMap
     } );
 
     sphere = new THREE.Mesh( geometry, material );
-    //scene.add( sphere );
+    sphere.position.set(3500,2500,5500);
+    
+    scene.add( sphere );
 
     //// Add multiple objects
     for (var i = 0; i < 100; i++) {
       // Set a geometry for the object
-      var geometry = new THREE.BoxGeometry(200, 200, 100);
+      var geometry = new THREE.BoxGeometry(5000, 5000, 5000);
       //  Mesh the created geometry
-      var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({ color: 0x70A3C7 }) );
+      var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({ color: 0xff0000 }) );
       object.castShadow = true;
-      object.position.x = Math.random() * 2000;
-      object.position.y = Math.random() * 2000;
-      object.position.z = Math.random() * 2000;
+      object.position.x = Math.random() * 500000 - 200000;
+      object.position.y = Math.random() * 500000 - 200000;
+      object.position.z = Math.random() * 500000 - 200000;
       object.rotation.x = degInRad(Math.random() * 90);
       object.rotation.y = degInRad(Math.random() * 90);
       object.rotation.z = degInRad(Math.random() * 90);
@@ -171,12 +234,14 @@
     }
 
   }
+  
+  // Fog
+  // scene.fog = new THREE.Fog( 0xffffff, 2000, 100000 );
 
   function animate() {
 
     requestAnimationFrame( animate );
     render();
-
   }
 
   function render() {
@@ -187,11 +252,11 @@
     //sphere.rotation.x = time * 0.5;
     //sphere.rotation.z = time * 0.51;
 
+
     water.material.uniforms.time.value += 1.0 / 60.0;
     controls.update();
     water.render();
     renderer.render( scene, camera );
-
   }
 
   // Convert radiant into degrees
