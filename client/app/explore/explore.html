@@ -48,7 +48,8 @@
     /*         Window, renderer, scene        */
     /******************************************/
 
-    container = document.createElement( 'div' );
+    container = document.createElement('div');
+    container.id = 'three-world';
     document.body.appendChild( container );
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio( window.devicePixelRatio );
