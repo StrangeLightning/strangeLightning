@@ -44,10 +44,9 @@ html {
 
 /* Grid of Amazon products */
 #catalog-photos {
-  height: 800px;
+  height: 600px;
   overflow: scroll;
   margin-top: 20px;
-  padding-bottom: 200px;
 }
 
 #sidebar-wrapper {

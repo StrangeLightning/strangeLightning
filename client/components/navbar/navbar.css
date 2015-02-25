@@ -18,6 +18,15 @@
   display: none !important;
 }
 
+.pagination > .active > a {
+  background-color: #999;
+  border-color: #999;
+}
+
+.pagination > li > a {
+  color: #999;
+}
+
 @media (max-width: 1200px) {
   .nav-search-container {
     float: left!important;
