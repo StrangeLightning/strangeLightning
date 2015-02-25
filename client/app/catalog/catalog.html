@@ -10,7 +10,8 @@
           <li ng-repeat="item in object.buckets">
             <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
               <input type="checkbox" ng-model="checked[item.value]">
-              <span ng-bind-html="item.value | trust" class="facetText"></span>
+              <span ng-if="facet !=='price'" ng-bind-html="item.value | trust" class="facetText"></span>
+              <span ng-if="facet ==='price'" class="facetText">{{item.value | currency:'$'}}</span>
               ({{item.count | number}})
             </a>
           </li>
