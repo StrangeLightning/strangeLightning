@@ -98,7 +98,7 @@ exports.me = function(req, res, next) {
  */
 exports.buy = function(req, res, next) {
   var buyerId = req.params.id;
-  User.findOne({
+  User.findOneById({
     _id: buyerId
   }, '-salt -hashedPassword', function(err, buyer) { // don't ever give out the password or salt
     if (err) return next(err);

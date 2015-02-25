@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', 'cartFactory',
-    function($rootScope, $scope, $location, $http, Auth, catalogFactory, cartFactory) {
+  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', '$timeout',
+    function($rootScope, $scope, $location, $http, Auth, catalogFactory, $timeout) {
       $scope.isCollapsed = true;
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
       $scope.cartQty = 0;
+      $scope.suggestedProducts = [];
 
       $scope.increment = function () {
         $scope.cartQty++;
@@ -33,7 +34,6 @@ angular.module('thesisApp')
         catalogFactory.doSearch(searchTerm, function(newProducts) {
           $rootScope.$broadcast('products-updated', {newProducts: newProducts});
         });
-        $scope.searchTerm = '';
       };
 
       $scope.doSuggestor = function(searchTerm) {
@@ -44,16 +44,16 @@ angular.module('thesisApp')
         });
       };
 
+      //when enter pressed, trigger search if no suggestions given
+      $rootScope.$on('keypress',function(onEvent, keypressEvent){
+        var keyCode = keypressEvent.which;
+
+        if(keyCode === 13 && $scope.searchTerm) {
+          $scope.doSearch($scope.searchTerm);
+        }
+      });
+
       //init
-
-      ////register to listen to keyboard events
-      //$rootScope.$on('keypress',function(onEvent, keypressEvent){
-      //  var keyCode = keypressEvent.which;
-      //  if(keyCode === 13) /* A */ {
-      //    $scope.doSearch($scope.searchTerm);
-      //  }
-      //});
-
       $rootScope.$on('addToCart', $scope.increment);
       $rootScope.$on('clearCartQty', $scope.clearCart);
     }]);

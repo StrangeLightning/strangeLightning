@@ -70,6 +70,11 @@ var all = {
     clientSecret: process.env.AMAZON_SECRET || local.AMAZON_SECRET,
     clientAccount: process.env.AMAZON_ACCOUNT || local.AMAZON_ACCOUNT,
     callbackURL:  (process.env.DOMAIN || '') + '/auth/amazon/callback'
+  },
+
+  cloudsearch: {
+    accessKeyId: process.env.CLOUDSEARCH_AMAZON_ID || local.CLOUDSEARCH_AMAZON_ID,
+    secretAccessKey: process.env.CLOUDSEARCH_AMAZON_SECRET || local.CLOUDSEARCH_AMAZON_SECRET
   }
 
 };
