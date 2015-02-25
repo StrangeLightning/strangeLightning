@@ -9,5 +9,6 @@ var util = require('util');
 
 var router = express.Router();
 router.post('/', controller.searchCart);
+router.post('/suggest', controller.suggest);
 
 module.exports = router;
