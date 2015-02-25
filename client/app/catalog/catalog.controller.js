@@ -13,15 +13,16 @@ angular.module('thesisApp')
     $scope.noOfSuggests = 5;
     $scope.checked = [];
     $scope.filterFields = [];
+    $scope.searchInProgress = false;
 
     $scope.removeFromCart = function (product) {
       if (cartFactory.amazonCart.items) {
-        console.log("Product FROM REmove on catalog", product)
+        console.log("Product FROM REmove on catalog", product);
         cartFactory.amazonRemoveProduct(product.id, cartFactory.amazonCart)
       } else {
         console.log("item not in cart");
       }
-    }
+    };
 
     $scope.addToCart = function (product) {
       $rootScope.$broadcast('addToCart');
@@ -75,7 +76,7 @@ angular.module('thesisApp')
     //INIT
     //initially, if products empty, then call search to show items
     if (!$scope.products) {
-      $scope.doSearch('shoes', function (newProducts) {
+      $scope.doSearch('', function (newProducts) {
         $scope.products = newProducts;
       });
     }
@@ -83,9 +84,11 @@ angular.module('thesisApp')
     //listen for products-updated event, which is broadcasted from navbar.controller.js
     $scope.$on('products-updated', function (event, args) {
       $scope.products = args.newProducts;
+      $scope.searchInProgress = false;
     });
 
     $scope.$on('search-in-progress', function (event, args) {
       $scope.products = [];
+      $scope.searchInProgress = true;
     })
   }]);

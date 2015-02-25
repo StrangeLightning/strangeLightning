@@ -55,12 +55,12 @@
 
   <!-- Start photo catalog -->
   <div id="catalog-photos" class="col-md-10">
-    <img ng-hide="products.length > 0" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive"/>
+    <img ng-show="searchInProgress" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive"/>
 
-    <div class="col-md-4" ng-repeat="product in products track by product.id"
-         dir-paginate="product in products | itemsPerPage: 12 track by product.id" total-items="products.found">
+    <div class="col-md-4" ng-repeat="product in products track by $index"
+         dir-paginate="product in products | itemsPerPage: 12 track by $index" total-items="products.found">
       <div class="thumbnail">
-        <div class="imgBkg">
+        <div class="imgBkg" ng-click="viewItem(product)">
           <img class="centerImg" src="{{product.mediumImage}}"/>
         </div>
 
@@ -68,13 +68,20 @@
           <h4 ng-if="product.title.length >= 100">{{product.title.substr(0,75)}}...</h4>
           <h4 ng-if="product.title.length < 100">{{product.title}}</h4>
 
-          <p>Price: {{product.price}}</p>
+          <p>Price: {{product.price | currency:"$"}}</p>
           <a ng-click="addToCart(product.id)" class="btn btn-primary" role="button">Add to Cart</a>
-          <a ng-click="viewItem(product)" class="btn btn-primary" role="button">View Product</a>
           <a ng-click='getCartItems(amazonCart)' class="btn btn-primary" role="button">Get Cart Items</a>
           </p>
         </div>
       </div>
+    </div>
+
+    <div class="row-fluid" style="min-height:500px" ng-if="products.length <= 0">
+      Your search for<b> {{query}} </b>did not match any documents...
+      <br/><br/>
+      * Suggestions: Make sure all words are spelled correctly.</br>
+      * Use similar words or synonyms.</br>
+      * Try more general keywords.
     </div>
   </div>
 
@@ -82,14 +89,6 @@
   <!--<dir-pagination-controls on-page-change="doSearch(newPageNumber)"-->
   <!--template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">-->
   <!--</dir-pagination-controls>-->
-
-  <div class="row-fluid" style="min-height:500px" ng-if="products.found <= 0">
-    Your search for<b> {{query}} </b>did not match any documents...
-    <br/><br/>
-    * Suggestions: Make sure all words are spelled correctly.</br>
-    * Use similar words or synonyms.</br>
-    * Try more general keywords.
-  </div>
 
 </div>
 <!-- End product info -->
