@@ -14,6 +14,7 @@ angular.module('thesisApp')
     $scope.checked = [];
     $scope.filterFields = [];
     $scope.searchInProgress = false;
+    $scope.amazonCart = cartFactory.amazonCart;
 
     $scope.removeFromCart = function (product) {
       if (cartFactory.amazonCart.items) {
@@ -31,11 +32,6 @@ angular.module('thesisApp')
       } else {
         cartFactory.amazonCreateCart(product);
       }
-    };
-
-    $scope.amazonCart = cartFactory.amazonCart;
-    $scope.getCartItems = function () {
-      $location.path("/cart");
     };
 
     $scope.viewItem = function (product) {
