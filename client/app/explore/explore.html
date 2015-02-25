@@ -62,7 +62,7 @@
     camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.5, 3000000 );
     camera.position.set( 2000, 750, 2000 );
 
-    controls = new THREE.FirstPersonControls( camera, renderer.domElement );
+    controls = new THREE.OrbitControl( camera, renderer.domElement );
     controls.userPan = false;
     controls.userPanSpeed = 0.0;
     controls.maxDistance = 1000000/2;
