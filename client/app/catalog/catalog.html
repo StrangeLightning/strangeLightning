@@ -3,52 +3,52 @@
   <!-- Sidebar wrapper -->
   <div id="sidebar-wrapper" class="col-md-2" s>
 
-    <!--<ul class="sidebar-nav">-->
-    <!--<li class="sidebar-brand">-->
-    <!--Filter Catalog-->
-    <!--</li>-->
-
-    <!--<li ng-repeat="(facet,object) in products.facets" ng-if="products.records.length">-->
-    <!--<h5 style="font-weight: bold" ng-bind="object.label"></h5>-->
-    <!--<ul>-->
-    <!--<li ng-repeat="item in object.buckets">-->
-    <!--<a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">-->
-    <!--<input type="checkbox" ng-model="checked[item.value]">-->
-    <!--<span ng-bind-html="item.value | trust" class="facetText"></span>-->
-    <!--({{item.count | number}})-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</li>-->
-
-    <!--</ul>-->
-
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
-        Filter Catalogue
+        Filter Catalog
       </li>
-      <li>
-        <a href="#">Suggestion # 1</a>
+
+      <li ng-repeat="(facet,object) in products.facets" ng-if="products.length">
+        <h5 style="font-weight: bold" ng-bind="object.label"></h5>
+        <ul>
+          <li ng-repeat="item in object.buckets">
+            <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
+              <input type="checkbox" ng-model="checked[item.value]">
+              <span ng-bind-html="item.value | trust" class="facetText"></span>
+              ({{item.count | number}})
+            </a>
+          </li>
+        </ul>
       </li>
-      <li>
-        <a href="#">Suggestion # 2</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 3</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 4</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 5</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 6</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 7</a>
-      </li>
+
     </ul>
+
+    <!--<ul class="sidebar-nav">-->
+      <!--<li class="sidebar-brand">-->
+        <!--Filter Catalogue-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href="#">Suggestion # 1</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href="#">Suggestion # 2</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href="#">Suggestion # 3</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href="#">Suggestion # 4</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href="#">Suggestion # 5</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href="#">Suggestion # 6</a>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href="#">Suggestion # 7</a>-->
+      <!--</li>-->
+    <!--</ul>-->
 
   </div>
   <!-- End sidebar wrapper -->

@@ -1,0 +1,18 @@
+{
+  "facetFilters": [
+    {
+      "field": "category"
+    },
+    {
+      "field": "price"
+    }
+  ],
+  "facets": {
+    "category": {
+      "label": "Category"
+    },
+    "price": {
+      "label": "Price"
+    }
+  }
+}
