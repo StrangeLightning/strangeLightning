@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('ProductCtrl', ['$rootScope', '$scope', 'catalogFactory', 'cartFactory', function($rootScope, $scope, catalogFactory, cartFactory) {
+  .controller('ProductCtrl', ['$rootScope', '$scope', 'catalogFactory', 'cartFactory', function ($rootScope, $scope, catalogFactory, cartFactory) {
     // This should go into a directive but since it's only 6 lines of code
     // we can leave this here and migrate it inside of a directive should
     // we have a need to create one.
@@ -24,7 +24,7 @@ angular.module('thesisApp')
       height: block - navbar
     });
 
-    $scope.close = function() {
+    $scope.close = function () {
       $('#product-container').animate({
         'margin-right': '-=1000'
       }, 500);

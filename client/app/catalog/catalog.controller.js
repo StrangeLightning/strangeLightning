@@ -66,18 +66,20 @@ angular.module('thesisApp')
       $scope.doSearch($scope.searchTerm, 0, $scope.filterFields);
     };
 
-    $scope.doSearch = function(searchTerm, pageNumber, filterFields) {
+    $scope.doSearch = function (searchTerm, pageNumber, filterFields) {
       pageNumber = pageNumber || 0;
       filterFields = filterFields || null;
       $scope.searchTerm = searchTerm;
       $location.path("/catalog");
-      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, function(newProducts) {
-        $rootScope.$broadcast('products-updated', {newProducts: newProducts});
+      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, function (newProducts) {
+        $rootScope.$broadcast('products-updated', {
+          newProducts: newProducts
+        });
       });
     };
 
     // Function for fetch page results.
-    $scope.fetchPage = function(searchTerm, pageNumber) {
+    $scope.fetchPage = function (searchTerm, pageNumber) {
       pageNumber = (pageNumber - 1) * 12;
       $scope.doSearch(searchTerm, pageNumber);
     };
