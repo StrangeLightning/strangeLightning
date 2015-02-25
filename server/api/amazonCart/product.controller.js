@@ -82,7 +82,7 @@ exports.modifyCart = function(req, res, next) {
         'CartId': user.cart.CartId[0],
         'HMAC': user.cart.HMAC[0],
         'Item.1.CartItemId': user.ASIN2CART[req.body.id],
-        'Item.1.Quantity': req.body.Quantity || 1,
+        'Item.1.Quantity': req.body.Quantity === undefined ? 1 : req.body.Quantity,
       }, function(err, results) {
         var cart = results.CartModifyResponse.Cart[0];
 
