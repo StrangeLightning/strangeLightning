@@ -76,7 +76,6 @@
     light.shadowCameraVisible = true;
     scene.add( light );
     
-
     waterNormals = new THREE.ImageUtils.loadTexture( 'assets/images/waternormals.jpg' );
     waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
@@ -123,7 +122,6 @@
         return canvas;
 
       };
-
       cubeMap.images[ 0 ] = getSide( 2, 1 ); // px
       cubeMap.images[ 1 ] = getSide( 0, 1 ); // nx
       cubeMap.images[ 2 ] = getSide( 1, 0 ); // py
