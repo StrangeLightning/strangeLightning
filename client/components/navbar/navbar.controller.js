@@ -34,13 +34,6 @@ angular.module('thesisApp')
         catalogFactory.doSearch(searchTerm, function(newProducts) {
           $rootScope.$broadcast('products-updated', {newProducts: newProducts});
         });
-
-        // after search, clear out search term and suggested values
-        // use set timeout with suggest products so that enter only triggers search when no suggested results found
-        $timeout(function(){
-          $scope.suggestedProducts = [];
-          $scope.searchTerm = '';
-        }, 200);
       };
 
       $scope.doSuggestor = function(searchTerm) {
@@ -55,7 +48,7 @@ angular.module('thesisApp')
       $rootScope.$on('keypress',function(onEvent, keypressEvent){
         var keyCode = keypressEvent.which;
 
-        if(keyCode === 13 && $scope.suggestedProducts.length === 0) /* A */ {
+        if(keyCode === 13 && $scope.searchTerm) {
           $scope.doSearch($scope.searchTerm);
         }
       });
