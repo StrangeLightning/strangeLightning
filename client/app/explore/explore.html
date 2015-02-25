@@ -12,6 +12,23 @@
 
   }
 
+  var groundGeometry;
+  var groundMaterial;
+  var ground;
+
+  var raycaster;
+  var mouse = new THREE.Vector2();
+  var INTERSECTED;
+  var radius = 100;
+  var theta = 0;
+
+  var clock = new THREE.Clock();
+
+  // if ( ! Detector.webgl ) {
+  //   Detector.addGetWebGLMessage();
+  // }
+
+
   var container, stats;
   var camera, scene, renderer;
   var sphere;
@@ -76,6 +93,11 @@
     light.shadowCameraVisible = true;
     scene.add( light );
     
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 5465f509157c25efe0c14afa8ffe1cd0593e5041
     waterNormals = new THREE.ImageUtils.loadTexture( 'assets/images/waternormals.jpg' );
     waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
@@ -235,6 +257,7 @@
     //sphere.position.y = Math.sin( time ) * 500 + 250;
     //sphere.rotation.x = time * 0.5;
     //sphere.rotation.z = time * 0.51;
+
 
     water.material.uniforms.time.value += 1.0 / 60.0;
     controls.update();
