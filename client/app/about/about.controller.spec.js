@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: AboutCtrl', function () {
+describe('Controller: AboutCtrl', function() {
 
   // load the controller's module
   beforeEach(module('thesisApp'));
@@ -8,14 +8,14 @@ describe('Controller: AboutCtrl', function () {
   var ShowroomCtrl, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function($controller, $rootScope) {
     scope = $rootScope.$new();
     ShowroomCtrl = $controller('AboutCtrl', {
       $scope: scope
     });
   }));
 
-  it('should ...', function () {
+  it('should ...', function() {
     expect(1).toEqual(1);
   });
 });
