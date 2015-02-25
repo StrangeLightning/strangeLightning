@@ -26,7 +26,6 @@
   //   Detector.addGetWebGLMessage();
   // }
 
-
   var container, stats;
   var camera, scene, renderer;
   var sphere;
@@ -39,7 +38,7 @@
     depth: 1500,
     param: 4,
     filterparam: 1
-  }
+  };
 
 
   var waterNormals;
@@ -62,7 +61,7 @@
     camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.5, 3000000 );
     camera.position.set( 2000, 750, 2000 );
 
-    controls = new THREE.OrbitControl( camera, renderer.domElement );
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
     controls.userPan = false;
     controls.userPanSpeed = 0.0;
     controls.maxDistance = 1000000/2;
@@ -85,7 +84,7 @@
     
    scene.add( spotLight );
   
-  //Other
+    // Other
     var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
     light.position.set( - 1, 1, - 1 );
     light.shadowCameraVisible = true;
@@ -146,7 +145,7 @@
       cubeMap.images[ 5 ] = getSide( 3, 1 ); // nz
       cubeMap.needsUpdate = true;
 
-    } );
+    });
 
     var cubeShader = THREE.ShaderLib['cube'];
     cubeShader.uniforms['tCube'].value = cubeMap;
@@ -203,18 +202,18 @@
       geometry.faces[ i ].color.setHex( Math.random() * 0xffffff );
     }
 
-    var material = new THREE.MeshPhongMaterial( {
+    var material = new THREE.MeshPhongMaterial({
       vertexColors: THREE.FaceColors,
       shininess: 50,
       envMap: cubeMap
-    } );
+    });
 
     sphere = new THREE.Mesh( geometry, material );
     sphere.position.set(3500,2500,5500);
     
     scene.add( sphere );
 
-    //// Add multiple objects
+    // Add multiple objects
     for (var i = 0; i < 100; i++) {
       // Set a geometry for the object
       var geometry = new THREE.BoxGeometry(5000, 5000, 5000);
@@ -239,19 +238,16 @@
   // scene.fog = new THREE.Fog( 0xffffff, 2000, 100000 );
 
   function animate() {
-
     requestAnimationFrame( animate );
     render();
   }
 
   function render() {
-
     var time = performance.now() * 0.001;
 
     //sphere.position.y = Math.sin( time ) * 500 + 250;
     //sphere.rotation.x = time * 0.5;
     //sphere.rotation.z = time * 0.51;
-
 
     water.material.uniforms.time.value += 1.0 / 60.0;
     controls.update();
