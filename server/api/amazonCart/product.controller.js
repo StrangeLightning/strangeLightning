@@ -73,7 +73,7 @@ exports.modifyCart = function(req, res, next) {
     Object.keys(req.user.cart).length) {
     var user = req.user;
     var items = user.cart.items;
-    var aaa = user.cart.ASIN2CART;
+    var ASIN2CART = user.cart.ASIN2CART;
     if (user.ASIN2CART &&
       user.ASIN2CART[req.body.id]) {
 
@@ -118,8 +118,8 @@ exports.modifyCart = function(req, res, next) {
           user.cart = cart;
           user.cart.items = items;
           user.cart.items[req.body.id] = 1;
-          user.cart.ASIN2CART = aaa;
-          user.ASIN2CART = aaa;
+          user.cart.ASIN2CART = ASIN2CART;
+          user.ASIN2CART = ASIN2CART;
           user.cart.Quantity = calcQuantity(cart);
           var flag = true;
           for (var i = 0; i < cart.CartItems[0].CartItem.length; i++) {
