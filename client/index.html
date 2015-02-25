@@ -23,6 +23,7 @@
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css({.tmp,client}) app/app.css -->
@@ -39,6 +40,7 @@
   <link rel="stylesheet" href="app/privacy/privacy.css">
   <link rel="stylesheet" href="app/product/product.css">
   <link rel="stylesheet" href="components/modal/modal.css">
+  <link rel="stylesheet" href="components/navbar/navbar.css">
   <!-- endinjector -->
   <!-- endbuild -->
 </head>
@@ -83,6 +85,8 @@
 <script src="bower_components/lodash/dist/lodash.compat.js"></script>
 <script src="bower_components/angular-socket-io/socket.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-ui-select/dist/select.js"></script>
+<script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
 <!-- endbower -->
 <!-- // <script src="components/socket/socket.io.js"></script> -->
 <!-- endbuild -->
@@ -108,6 +112,7 @@
 <script src="app/cart/cart.factory.js"></script>
 <script src="app/cart/cart.js"></script>
 <script src="app/catalog/catalog.controller.js"></script>
+<script src="app/catalog/catalog.factory.js"></script>
 <script src="app/catalog/catalog.js"></script>
 <script src="app/explore/explore.controller.js"></script>
 <script src="app/explore/explore.js"></script>
@@ -120,6 +125,7 @@
 <script src="components/auth/auth.service.js"></script>
 <script src="components/auth/user.service.js"></script>
 <script src="components/auth/vendor/vendor.service.js"></script>
+<script src="components/filters/trust.filter.js"></script>
 <script src="components/modal/modal.service.js"></script>
 <script src="components/mongoose-error/mongoose-error.directive.js"></script>
 <script src="components/navbar/navbar.controller.js"></script>

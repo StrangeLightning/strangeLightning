@@ -2,12 +2,7 @@
 
 var passport = require('passport');
 var config = require('../../config/environment');
-var jwt = require('jsonwebtoken');
 var OperationHelper = require('apac').OperationHelper;
-
-var validationError = function(res, err) {
-  return res.json(422, err);
-};
 
 exports.searchCart = function(req, res, next) {
   var opHelper = new OperationHelper({
@@ -16,7 +11,6 @@ exports.searchCart = function(req, res, next) {
     assocId: config.amazon.clientAccount
   });
   var t = new Date().getTime();
-  //console.log(t);
   opHelper.execute('ItemSearch', {
     'Keywords': req.body.term + '',
     'SearchIndex': 'Blended',
@@ -26,7 +20,6 @@ exports.searchCart = function(req, res, next) {
     'ResponseGroup': 'Similarities,ItemIds,ItemAttributes,Images,Reviews,Offers'
   }, function(err, results) {
     var _results = [];
-    var r = results.ItemSearchResponse.Items[0];
     var r2 = results.ItemSearchResponse.Items[0].Item;
     var i = 0;
     while (_results.length < 12 && r2 && r2[i]) {

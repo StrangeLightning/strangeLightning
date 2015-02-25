@@ -27,24 +27,32 @@ angular.module('thesisApp')
         return route === $location.path();
       };
 
-      $scope.doSearch = function() {
+      $scope.doSearch = function(searchTerm) {
+        $scope.searchTerm = searchTerm;
         $location.path("/catalog");
-        catalogFactory.doSearch($scope.searchTerm, function(newProducts) {
-          catalogFactory.products = newProducts;
+        catalogFactory.doSearch(searchTerm, function(newProducts) {
           $rootScope.$broadcast('products-updated', {newProducts: newProducts});
         });
         $scope.searchTerm = '';
       };
 
+      $scope.doSuggestor = function(searchTerm) {
+        $scope.searchTerm = searchTerm;
+        $location.path("/catalog");
+        catalogFactory.doSuggestor(searchTerm, function(newProducts) {
+         $scope.suggestedProducts = newProducts;
+        });
+      };
+
       //init
 
-      //register to listen to keyboard events
-      $rootScope.$on('keypress',function(onEvent, keypressEvent){
-        var keyCode = keypressEvent.which;
-        if(keyCode === 13) /* A */ {
-          $scope.doSearch();
-        }
-      });
+      ////register to listen to keyboard events
+      //$rootScope.$on('keypress',function(onEvent, keypressEvent){
+      //  var keyCode = keypressEvent.which;
+      //  if(keyCode === 13) /* A */ {
+      //    $scope.doSearch($scope.searchTerm);
+      //  }
+      //});
 
       $rootScope.$on('addToCart', $scope.increment);
       $rootScope.$on('clearCartQty', $scope.clearCart);

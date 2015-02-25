@@ -1,7 +1,27 @@
 <div class="row-fluid">
 
   <!-- Sidebar wrapper -->
-  <div id="sidebar-wrapper" class="col-md-2"s>
+  <div id="sidebar-wrapper" class="col-md-2" s>
+
+    <!--<ul class="sidebar-nav">-->
+    <!--<li class="sidebar-brand">-->
+    <!--Filter Catalog-->
+    <!--</li>-->
+
+    <!--<li ng-repeat="(facet,object) in products.facets" ng-if="products.records.length">-->
+    <!--<h5 style="font-weight: bold" ng-bind="object.label"></h5>-->
+    <!--<ul>-->
+    <!--<li ng-repeat="item in object.buckets">-->
+    <!--<a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">-->
+    <!--<input type="checkbox" ng-model="checked[item.value]">-->
+    <!--<span ng-bind-html="item.value | trust" class="facetText"></span>-->
+    <!--({{item.count | number}})-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</li>-->
+
+    <!--</ul>-->
 
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
@@ -29,39 +49,49 @@
         <a href="#">Suggestion # 7</a>
       </li>
     </ul>
+
   </div>
   <!-- End sidebar wrapper -->
 
   <!-- Start photo catalog -->
-  <div id="catalog-photos" class="col-md-10" >
-      <img ng-hide="products.length > 0" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive" />
-      <div class="col-md-4" ng-repeat="product in products">
-        <div class="thumbnail">
-          <div class="imgBkg">
-            <img class="centerImg" src="{{product.mediumImage}}" ng-click="viewItem(product)"/>
-          </div>
+  <div id="catalog-photos" class="col-md-10">
+    <img ng-hide="products.length > 0" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive"/>
 
-          <div class="caption">
-            <a ng-click="viewItem(product)">
-              <h4 ng-if="product.title.length >= 100">{{product.title.substr(0,75)}}...</h4>
-            </a>
-            <a ng-click="viewItem(product)">
-              <h4 ng-if="product.title.length < 100">{{product.title}}</h4>
-            </a>
-            <p>Price: {{product.price}}</p>
+    <div class="col-md-4" ng-repeat="product in products track by product.id"
+         dir-paginate="product in products | itemsPerPage: 12 track by product.id" total-items="products.found">
+      <div class="thumbnail">
+        <div class="imgBkg">
+          <img class="centerImg" src="{{product.mediumImage}}"/>
+        </div>
 
-              <a ng-click="addToCart(product.id)" class="btn btn-primary" role="button">Add to Cart</a>
+        <div class="caption">
+          <h4 ng-if="product.title.length >= 100">{{product.title.substr(0,75)}}...</h4>
+          <h4 ng-if="product.title.length < 100">{{product.title}}</h4>
 
-              <a ng-click="viewItem(product)" class="btn btn-primary" role="button">View</a>
-              <!-- <a ng-click='getCartItems(amazonCart)'class="btn btn-primary" role="button">Get Cart Items</a> -->
-            </p>
-          </div>
+          <p>Price: {{product.price}}</p>
+          <a ng-click="addToCart(product.id)" class="btn btn-primary" role="button">Add to Cart</a>
+          <a ng-click="viewItem(product)" class="btn btn-primary" role="button">View Product</a>
+          <a ng-click='getCartItems(amazonCart)' class="btn btn-primary" role="button">Get Cart Items</a>
+          </p>
         </div>
       </div>
-
     </div>
-    <!-- End product info -->
-
   </div>
+
+  <!--pagination-->
+  <!--<dir-pagination-controls on-page-change="doSearch(newPageNumber)"-->
+  <!--template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">-->
+  <!--</dir-pagination-controls>-->
+
+  <div class="row-fluid" style="min-height:500px" ng-if="products.found <= 0">
+    Your search for<b> {{query}} </b>did not match any documents...
+    <br/><br/>
+    * Suggestions: Make sure all words are spelled correctly.</br>
+    * Use similar words or synonyms.</br>
+    * Try more general keywords.
+  </div>
+
+</div>
+<!-- End product info -->
 
 </div>

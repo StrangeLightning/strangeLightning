@@ -24,6 +24,8 @@ module.exports = function(config) {
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'client/bower_components/angular-ui-select/dist/select.js',
+      'client/bower_components/angular-utils-pagination/dirPagination.js',
       'client/app/app.js',
       'client/app/**/*.js',
       'client/components/**/*.js',
@@ -48,7 +50,6 @@ module.exports = function(config) {
 
     // web server port
     port: 8080,
-
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
