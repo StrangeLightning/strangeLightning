@@ -2,8 +2,6 @@
 
 angular.module('thesisApp')
   .controller('CatalogCtrl', ['$scope', '$rootScope', 'cartFactory', 'catalogFactory', '$http', '$location', function ($scope, $rootScope, cartFactory, catalogFactory, $http, $location) {
-    $scope.doSearch = catalogFactory.doSearch;
-
     $scope.facetFields = "";
     $scope.filterFields = "";
     $scope.selectedItems = [];
@@ -13,7 +11,10 @@ angular.module('thesisApp')
     $scope.noOfSuggests = 5;
     $scope.checked = [];
     $scope.filterFields = [];
-    $scope.searchInProgress = false;
+    $scope.searchInProgress = true;
+    $scope.amazonCart = cartFactory.amazonCart;
+    $scope.clickLimit = 5;
+    $scope.showMoreFacets = true;
 
     $scope.removeFromCart = function (product) {
       if (cartFactory.amazonCart.items) {
@@ -33,11 +34,6 @@ angular.module('thesisApp')
       }
     };
 
-    $scope.amazonCart = cartFactory.amazonCart;
-    $scope.getCartItems = function () {
-      $location.path("/cart");
-    };
-
     $scope.viewItem = function (product) {
       catalogFactory.product = product;
       catalogFactory.viewItem(product);
@@ -54,7 +50,6 @@ angular.module('thesisApp')
 
     // Search by facet filter.
     $scope.doSearchByFilter = function (term, value) {
-      $scope.page = 1;
       $scope.checked[value] = !$scope.checked[value];
 
       if ($scope.checked[value]) {
@@ -70,13 +65,49 @@ angular.module('thesisApp')
         })
       }
 
-      $scope.doSearch();
+      $scope.doSearch($scope.searchTerm, 0, $scope.filterFields);
+    };
+
+    $scope.doSearch = function (searchTerm, pageNumber, filterFields) {
+      pageNumber = pageNumber || 0;
+      filterFields = filterFields || null;
+      $scope.searchTerm = searchTerm;
+      $location.path("/catalog");
+      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, function (newProducts) {
+        $rootScope.$broadcast('products-updated', {
+          newProducts: newProducts
+        });
+      });
+    };
+
+    // Function for fetch page results.
+    $scope.fetchPage = function (searchTerm, pageNumber) {
+      pageNumber = (pageNumber - 1) * 12;
+      $scope.doSearch(searchTerm, pageNumber);
+    };
+
+    //ajax call to show more favorite records
+    $scope.showMoreFacetLinks = function (numberToShow) {
+      // toggle to "Show Less"
+      $scope.showMoreFacets = false;
+
+      // set limit filter for ng-repeat
+      $scope.clickLimit = numberToShow;
+    };
+
+    //ajax call to show less favorite records
+    $scope.showLessFacetLinks = function () {
+      // toggle to "Show More"
+      $scope.showMoreFacets = true;
+
+      // set limit filter for ng-repeat
+      $scope.clickLimit = 5;
     };
 
     //INIT
     //initially, if products empty, then call search to show items
     if (!$scope.products) {
-      $scope.doSearch('', function (newProducts) {
+      $scope.doSearch('', 0, function (newProducts) {
         $scope.products = newProducts;
       });
     }
@@ -88,7 +119,8 @@ angular.module('thesisApp')
     });
 
     $scope.$on('search-in-progress', function (event, args) {
-      $scope.products = [];
+      $scope.products.results.length = [];
+      $scope.products.totalCount = 0;
       $scope.searchInProgress = true;
     })
   }]);

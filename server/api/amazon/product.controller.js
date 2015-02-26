@@ -12,7 +12,7 @@ exports.searchCart = function(req, res, next) {
     params.queryParser = 'simple';
 
     // build text query
-    if(req.body.q || req.body.filters) {
+    if(req.body.q) {
       params.query = req.body.q ? req.body.q : "~1";
     } else {
       params.queryParser = 'structured';
@@ -20,8 +20,8 @@ exports.searchCart = function(req, res, next) {
     }
 
     //build facet query
-    if(req.body.filters) {
-      var filtersArray = JSON.parse(req.body.filters);
+    if(req.body.filters && req.body.filters.length > 0) {
+      var filtersArray = req.body.filters;
       var filterHolder = {};
       filtersArray.forEach(function(filter) {
         //group filters by term
@@ -71,28 +71,38 @@ exports.searchCart = function(req, res, next) {
     }()
   }
 
-  //console.log(params);
+  console.log(params);
   cloudsearchdomain.search(params, function(err, data) {
     if(err) {
       res.json(err);
       console.log(err, err.stack);
     } else {
-      var _results = [];
+      var _results = {};
+      _results.results = [];
+
+      //add total results found
+      _results.totalCount = data.hits.found;
+
+      //add facets
+      _results.facets = data.facets;
+
       var isData = data.hits.hit.length > 0;
       if(isData) {
         for(var i = 0; i < data.hits.hit.length; i++) {
           var product = {};
           var result = data.hits.hit[i];
 
+          //add fields
           product.id = result.fields.product_id[0];
           product.price = result.fields.price[0];
           product.title = result.fields.title[0];
           product.mediumImage = result.fields.img_url[0];
           product.category = result.fields.category[0];
           product.prodAttributes = result.fields.prod_attributes[0];
-          _results.push(product);
 
-          if(_results.length === data.hits.hit.length - 1) {
+          _results.results.push(product);
+
+          if(_results.results.length === data.hits.hit.length - 1) {
             res.end(JSON.stringify({
               data: _results
             }));

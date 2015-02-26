@@ -8,10 +8,10 @@ describe('LoginCtrl', function() {
       $scope = $rootScope.$new();
       $location = _$location_;
       $httpBackend = _$httpBackend_;
-      $window = _$window_
+      $window = _$window_;
 
       createLoginCtrl = function() {
-        console.log("Creating controller")
+        console.log("Creating controller");
         $controller('LoginCtrl', {
           $scope: $scope,
         })
@@ -28,11 +28,13 @@ describe('LoginCtrl', function() {
     it("should have a scope variable", function() {
 
       expect($scope).toBeDefined();
-    })
+    });
+
     it("should have a loginOauth function", function() {
       // createLoginCtrl();
       expect(angular.isFunction($scope.loginOauth)).toBe(true)
-    })
+    });
+
     it('should redirect to /auth/facebook ', function() {
       // $window.location.href = 'boo '
       // console.log($window.location.href)
@@ -42,22 +44,22 @@ describe('LoginCtrl', function() {
             href: "http://sphereable.com/login"
           }
         }
-      }
+      };
 
       // simulated context
       with(localContext) {
-          // console.log(window.location.href);
-          // $scope.loginOauth('facebook')
-          // console.log(window.location.href);
+        // console.log(window.location.href);
+        // $scope.loginOauth('facebook')
+        // console.log(window.location.href);
 
-          // http://www.website.com?varName=foo
-        }
-        // console.
-        // SpyOn($window.location, 'href').toEqual('/auth/facebook')
-        // $httpBackend.whenGET('/auth/facebook').respond(200)
-        // scope.loginOauth('faker')
-        // console.log("SCOPE", scope)
-        // console.log("LoginCtrl: ", LoginCtrl)
+        // http://www.website.com?varName=foo
+      }
+      // console.
+      // SpyOn($window.location, 'href').toEqual('/auth/facebook')
+      // $httpBackend.whenGET('/auth/facebook').respond(200)
+      // scope.loginOauth('faker')
+      // console.log("SCOPE", scope)
+      // console.log("LoginCtrl: ", LoginCtrl)
       expect(1).toEqual(1);
     })
   });
