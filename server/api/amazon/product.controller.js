@@ -71,7 +71,7 @@ exports.searchCart = function(req, res, next) {
     }()
   }
 
-  console.log(params);
+  //console.log(params);
   cloudsearchdomain.search(params, function(err, data) {
     if(err) {
       res.json(err);
@@ -98,7 +98,7 @@ exports.searchCart = function(req, res, next) {
           product.title = result.fields.title[0];
           product.mediumImage = result.fields.img_url[0];
           product.category = result.fields.category[0];
-          product.prodAttributes = result.fields.prod_attributes[0];
+          product.prodAttributes = JSON.parse(result.fields.prod_attributes[0]);
 
           _results.results.push(product);
 
