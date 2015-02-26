@@ -13,6 +13,8 @@ angular.module('thesisApp')
     $scope.filterFields = [];
     $scope.searchInProgress = true;
     $scope.amazonCart = cartFactory.amazonCart;
+    $scope.clickLimit = 5;
+    $scope.showMoreFacets = true;
 
     $scope.removeFromCart = function (product) {
       if (cartFactory.amazonCart.items) {
@@ -82,6 +84,26 @@ angular.module('thesisApp')
     $scope.fetchPage = function (searchTerm, pageNumber) {
       pageNumber = (pageNumber - 1) * 12;
       $scope.doSearch(searchTerm, pageNumber);
+    };
+
+    //ajax call to show more favorite records
+    $scope.showMoreFacetLinks = function(numberToShow)
+    {
+      // toggle to "Show Less"
+      $scope.showMoreFacets = false;
+
+      // set limit filter for ng-repeat
+      $scope.clickLimit = numberToShow;
+    };
+
+    //ajax call to show less favorite records
+    $scope.showLessFacetLinks = function()
+    {
+      // toggle to "Show More"
+      $scope.showMoreFacets = true;
+
+      // set limit filter for ng-repeat
+      $scope.clickLimit = 5;
     };
 
     //INIT
