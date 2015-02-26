@@ -87,8 +87,7 @@ angular.module('thesisApp')
     };
 
     //ajax call to show more favorite records
-    $scope.showMoreFacetLinks = function(numberToShow)
-    {
+    $scope.showMoreFacetLinks = function (numberToShow) {
       // toggle to "Show Less"
       $scope.showMoreFacets = false;
 
@@ -97,8 +96,7 @@ angular.module('thesisApp')
     };
 
     //ajax call to show less favorite records
-    $scope.showLessFacetLinks = function()
-    {
+    $scope.showLessFacetLinks = function () {
       // toggle to "Show More"
       $scope.showMoreFacets = true;
 
