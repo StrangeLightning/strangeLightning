@@ -11,7 +11,7 @@ angular.module('thesisApp')
     $scope.noOfSuggests = 5;
     $scope.checked = [];
     $scope.filterFields = [];
-    $scope.searchInProgress = false;
+    $scope.searchInProgress = true;
     $scope.amazonCart = cartFactory.amazonCart;
 
     $scope.removeFromCart = function (product) {
@@ -48,7 +48,6 @@ angular.module('thesisApp')
 
     // Search by facet filter.
     $scope.doSearchByFilter = function (term, value) {
-      $scope.page = 1;
       $scope.checked[value] = !$scope.checked[value];
 
       if ($scope.checked[value]) {
@@ -64,14 +63,15 @@ angular.module('thesisApp')
         })
       }
 
-      $scope.doSearch();
+      $scope.doSearch($scope.searchTerm, 0, $scope.filterFields);
     };
 
-    $scope.doSearch = function(searchTerm, pageNumber) {
+    $scope.doSearch = function(searchTerm, pageNumber, filterFields) {
       pageNumber = pageNumber || 0;
+      filterFields = filterFields || null;
       $scope.searchTerm = searchTerm;
       $location.path("/catalog");
-      catalogFactory.doSearch(searchTerm, pageNumber, function(newProducts) {
+      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, function(newProducts) {
         $rootScope.$broadcast('products-updated', {newProducts: newProducts});
       });
     };
@@ -97,7 +97,8 @@ angular.module('thesisApp')
     });
 
     $scope.$on('search-in-progress', function (event, args) {
-      $scope.products = [];
+      $scope.products.results.length = [];
+      $scope.products.totalCount = 0;
       $scope.searchInProgress = true;
     })
   }]);
