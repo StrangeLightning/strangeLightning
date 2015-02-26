@@ -7,7 +7,7 @@
       <li ng-repeat="(facet,object) in products.facets" ng-if="products.results.length">
         <h5 class="facet-title" ng-bind="facet | uppercase"></h5>
         <ul class="facet-list">
-          <li ng-repeat="item in object.buckets">
+          <li ng-repeat="item in object.buckets | limitTo: clickLimit">
             <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
               <input type="checkbox" ng-model="checked[item.value]">
               <span ng-if="facet !=='price'" ng-bind-html="item.value | trust" class="facetText"></span>
@@ -15,6 +15,17 @@
               ({{item.count | number}})
             </a>
           </li>
+
+          <div ng-show='object.buckets.length > 5'>
+            <a href='#' ng-if='showMoreFacets' ng-click='showMoreFacetLinks(object.buckets.length)' class="show-more-link">
+             Show more
+            </a>
+
+            <a href='#' ng-if='!showMoreFacets' ng-click='showLessFacetLinks()' class="show-more-link">
+              Show less
+            </a>
+          </div>
+
         </ul>
       </li>
 

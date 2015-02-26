@@ -62,7 +62,7 @@ html {
   top: 140px;
   padding: 0;
   list-style: none;
-  height: 600px;
+  height: 450px;
   overflow: scroll;
 }
 
@@ -119,4 +119,8 @@ html {
 .facet-title {
   padding-left: 0px;
   font-weight: bold;
+}
+
+.show-more-link{
+  text-decoration: underline!important;
 }
