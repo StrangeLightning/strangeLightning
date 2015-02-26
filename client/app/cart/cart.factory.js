@@ -106,10 +106,13 @@ angular.module('thesisApp')
     cart.amazonRemoveProduct = function(product, amazonCart) {
 
       var newquantity;
-
+      var emptyCart = true;
       //if find and update quantity in serverside cart
       console.log("AMAZON CART AT REMOVE", cart.amazonCart)
       for (var i = 0; i < cart.amazonCart.items.length; i++) {
+        if (cart.amazonCart.items[i]['quantity'] > 0) {
+          emptyCart = false
+        }
         if (product === cart.amazonCart.items[i]['productId']) {
           if (cart.amazonCart.items[i]['quantity'] > 0) {
             newquantity = --cart.amazonCart.items[i]['quantity'];
