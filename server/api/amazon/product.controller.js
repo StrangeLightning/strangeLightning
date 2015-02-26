@@ -12,7 +12,7 @@ exports.searchCart = function(req, res, next) {
     params.queryParser = 'simple';
 
     // build text query
-    if(req.body.q || req.body.filters) {
+    if(req.body.q) {
       params.query = req.body.q ? req.body.q : "~1";
     } else {
       params.queryParser = 'structured';
@@ -20,8 +20,8 @@ exports.searchCart = function(req, res, next) {
     }
 
     //build facet query
-    if(req.body.filters) {
-      var filtersArray = JSON.parse(req.body.filters);
+    if(req.body.filters && req.body.filters.length > 0) {
+      var filtersArray = req.body.filters;
       var filterHolder = {};
       filtersArray.forEach(function(filter) {
         //group filters by term
