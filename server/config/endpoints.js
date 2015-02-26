@@ -15,7 +15,7 @@ AWS.config.update({
 
 //AWS cloudsearchdomain configuration
 exports.cloudsearchdomain = new AWS.CloudSearchDomain({
-  endpoint: 'https://search-sphereable-rzdvc3bpj454pwnlev566fogm4.us-west-2.cloudsearch.amazonaws.com',
+  endpoint: 'https://search-sphereable-staging-7wyt6pm6h5uicoxjypgnam4mxi.us-west-2.cloudsearch.amazonaws.com',
   apiVersion: '2013-01-01'
 });
 
