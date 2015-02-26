@@ -51,9 +51,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
   this.viewHalfY = 0;
 
   if ( this.domElement !== document ) {
-
     this.domElement.setAttribute( 'tabindex', -1 );
-
   }
 
 
@@ -70,52 +68,6 @@ THREE.FirstPersonControls = function ( object, domElement ) {
       this.viewHalfY = this.domElement.offsetHeight / 2;
 
     }
-
-  };
-
-  this.onMouseDown = function ( event ) {
-
-    if ( this.domElement !== document ) {
-
-      this.domElement.focus();
-
-    }
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    if ( this.activeLook ) {
-
-      switch ( event.button ) {
-
-        case 0: this.moveForward = true; break;
-        case 2: this.moveBackward = true; break;
-
-      }
-
-    }
-
-    this.mouseDragOn = true;
-
-  };
-
-  this.onMouseUp = function ( event ) {
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    if ( this.activeLook ) {
-
-      switch ( event.button ) {
-
-        case 0: this.moveForward = false; break;
-        case 2: this.moveBackward = false; break;
-
-      }
-
-    }
-
-    this.mouseDragOn = false;
 
   };
 
