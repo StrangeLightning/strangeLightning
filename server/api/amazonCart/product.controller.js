@@ -5,7 +5,7 @@ var config = require('../../config/environment');
 var OperationHelper = require('apac').OperationHelper;
 var User = require('../user/user.model');
 
-exports.createCart = function (req, res, next) {
+exports.createCart = function(req, res, next) {
   var opHelper = new OperationHelper({
     awsId: config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
@@ -15,7 +15,7 @@ exports.createCart = function (req, res, next) {
   opHelper.execute('CartCreate', {
     'Item.1.ASIN': req.body.id,
     'Item.1.Quantity': '1'
-  }, function (err, results) {
+  }, function(err, results) {
     var cart = results.CartCreateResponse.Cart[0];
     if (cart.Request && cart.Request[0].Errors) {
       console.log('Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors));
@@ -33,7 +33,7 @@ exports.createCart = function (req, res, next) {
         user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
         user.ASIN2CART = {};
         user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-        user.save(function (err, u) {
+        user.save(function(err, u) {
           if (!err) res.end(JSON.stringify(cart));
         });
       } else {
@@ -45,7 +45,7 @@ exports.createCart = function (req, res, next) {
   });
 };
 
-exports.modifyCart = function (req, res, next) {
+exports.modifyCart = function(req, res, next) {
   var opHelper = new OperationHelper({
     awsId: config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
@@ -55,7 +55,6 @@ exports.modifyCart = function (req, res, next) {
   if (req.user) {
     req.user.cart = req.user.cart || {}
   } // This is needed because of schema initialization
-
   // Check to see if the id is a stored ASIN
   if (req.user &&
     req.user.cart &&
@@ -65,16 +64,17 @@ exports.modifyCart = function (req, res, next) {
     var ASIN2CART = user.cart.ASIN2CART;
     if (user.ASIN2CART &&
       user.ASIN2CART[req.body.id]) {
-
       // IF it is get the CartItemId from the user document
       opHelper.execute('CartModify', {
         'CartId': user.cart.CartId[0],
         'HMAC': user.cart.HMAC[0],
         'Item.1.CartItemId': user.ASIN2CART[req.body.id],
         'Item.1.Quantity': req.body.Quantity === undefined ? 1 : req.body.Quantity,
-      }, function (err, results) {
+      }, function(err, results) {
         var cart = results.CartModifyResponse.Cart[0];
-
+        if (cart.CartItems === undefined) {
+          exports.clearCart(req, res)
+        }
         if (user && cart.CartItems) {
           user.cart = cart;
           user.cart.items = items;
@@ -83,8 +83,7 @@ exports.modifyCart = function (req, res, next) {
           user.cart.ASIN2CART = ASIN2CART;
           user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
           user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-          console.log(user.cart.items);
-          user.save(function (err) {
+          user.save(function(err) {
             if (!err) res.end(JSON.stringify(cart));
           });
         } else {
@@ -98,7 +97,7 @@ exports.modifyCart = function (req, res, next) {
         'HMAC': user.cart.HMAC[0],
         'Item.1.ASIN': req.body.id,
         'Item.1.Quantity': '1'
-      }, function (err, results) {
+      }, function(err, results) {
 
         var cart = results.CartAddResponse.Cart[0];
         if (user) {
@@ -111,21 +110,18 @@ exports.modifyCart = function (req, res, next) {
           var flag = true;
           for (var i = 0; i < cart.CartItems[0].CartItem.length; i++) {
             if (cart.CartItems[0].CartItem[i].ASIN[0] === req.body.id) {
-              console.log("ASIN", user.ASIN2CART, req.body.id);
               user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
               user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
-              console.log("ASIN", user.ASIN2CART, req.body.id);
               flag = false;
               break;
             }
           }
           if (flag) throw new Error('Cannot add id to ASIN2CART 129');
-          user.save(function (err, _user) {
+          user.save(function(err, _user) {
             if (err) {
               console.log(err)
             }
             if (!err) {
-              console.log(_user, "user object after saving")
               res.end(JSON.stringify(cart))
             }
           });
@@ -139,7 +135,7 @@ exports.modifyCart = function (req, res, next) {
   }
 };
 
-exports.clearCart = function (req, res, next) {
+exports.clearCart = function(req, res, next) {
   var opHelper = new OperationHelper({
     awsId: config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
@@ -150,13 +146,13 @@ exports.clearCart = function (req, res, next) {
     opHelper.execute('CartClear', {
       'CartId': req.user.cart.CartId[0],
       'HMAC': req.user.cart.HMAC[0]
-    }, function (err, results) {
+    }, function(err, results) {
       var cart = results.CartClearResponse.Cart[0];
       if (req.user) {
         var user = req.user;
         user.cart = {};
         user.ASIN2CART = {};
-        user.save(function (err) {
+        user.save(function(err) {
           if (!err) res.end(JSON.stringify(cart));
         });
       } else {
@@ -166,7 +162,7 @@ exports.clearCart = function (req, res, next) {
   }
 };
 
-exports.getCart = function (req, res, next) {
+exports.getCart = function(req, res, next) {
   var opHelper = new OperationHelper({
     awsId: config.amazon.clientID,
     awsSecret: config.amazon.clientSecret,
@@ -176,7 +172,7 @@ exports.getCart = function (req, res, next) {
   opHelper.execute('CartGet', {
     'CartId': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.CartId[0] : req.body.CartId,
     'HMAC': req.user.cart && Object.keys(req.user.cart || {}).length ? req.user.cart.HMAC[0] : req.body.HMAC
-  }, function (err, results) {
+  }, function(err, results) {
     if (err) {
       console.log(err);
       res.end(err);
@@ -199,6 +195,5 @@ function calcQuantity(cart) {
   for (var i in cart.items) {
     count += +cart.items[i];
   }
-  // console.log(cart.items);
   return count;
 }
