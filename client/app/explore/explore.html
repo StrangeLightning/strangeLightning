@@ -16,7 +16,7 @@
 
   var raycaster;
   var mouse = new THREE.Vector2();
-  var INTERSECTED;
+  var collision;
   var radius = 100;
   var theta = 0;
 
@@ -54,36 +54,33 @@
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
 
+    renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+
     scene = new THREE.Scene();
 
-    // Add fog
-    // scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
-    // renderer.setClearColor( scene.fog.color, 1 );
-
     container.appendChild( renderer.domElement );
+
+    // Set cursor as crosshair
+    container.style.cursor = 'crosshair';
 
 
     /******************************************/
     /*            Camera controls             */
     /******************************************/
 
-    camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 0.5, 3000000 );
+    camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.5, 3000000 );
     camera.position.set( 2000, 750, 2000 );
 
-    controls = new THREE.FirstPersonControls( camera );
+    controls = new THREE.FirstPersonControls( camera, renderer.domElement );
     controls.movementSpeed = 30000;
     controls.lookSpeed = 0.1;
 
     /******************************************/
-    /*          Orbit camera controls         */
+    /*               Raycaster                */
     /******************************************/
 
-    // controls = new THREE.OrbitControls( camera /*, renderer.domElement */ );
-    // controls.userPan = false;
-    // controls.userPanSpeed = 0.0;
-    // controls.maxDistance = 1000000/2;
-    // controls.maxPolarAngle = Math.PI * 0.495;
-    // controls.center.set( 0, 500, 0 );
+    // Used to select objects on the screen
+    raycaster = new THREE.Raycaster();
 
     /******************************************/
     /*               SpotLight                */
@@ -120,19 +117,21 @@
     /*           Alternative ground           */
     /******************************************/
 
-    // // Create a ground plane
-    // groundGeometry = new THREE.PlaneBufferGeometry(1000000, 1000000);
-    // groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
-    // groundMaterial.color.setHSL( 0.095, 1, 0.75 );
-    // // groundMaterial.side = THREE.DoubleSide;
+    /*
+     // Create a ground plane
+     groundGeometry = new THREE.PlaneBufferGeometry(1000000, 1000000);
+     groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+     groundMaterial.color.setHSL( 0.095, 1, 0.75 );
+     // groundMaterial.side = THREE.DoubleSide;
 
-    // ground = new THREE.Mesh( groundGeometry, groundMaterial );
-    // ground.rotation.x = -Math.PI/2;
-    // ground.position.y = 10000;
+     ground = new THREE.Mesh( groundGeometry, groundMaterial );
+     ground.rotation.x = -Math.PI/2;
+     ground.position.y = 10000;
 
-    // ground.receiveShadow = true;
+     ground.receiveShadow = true;
 
-    // scene.add( ground );
+     scene.add( ground );
+     */
 
     /******************************************/
     /*             Water surface              */
@@ -145,21 +144,23 @@
       textureWidth: 512,
       textureHeight: 512,
       waterNormals: waterNormals,
-      alpha: 	1.0,
+      alpha:   1.0,
       sunDirection: light.position.clone().normalize(),
       sunColor: 0xffffff,
       waterColor: 0x001e0f,
       distortionScale: 50.0,
     });
 
-    mirrorMesh = new THREE.Mesh(
+    waterMesh = new THREE.Mesh(
       new THREE.PlaneBufferGeometry( parameters.width * 500, parameters.height * 500 ),
       water.material
     );
-    mirrorMesh.add(water);
-    mirrorMesh.rotation.x = - Math.PI * 0.5;
+    waterMesh.add(water);
+    waterMesh.rotation.x = - Math.PI * 0.5;
 
-    scene.add( mirrorMesh );
+    waterMesh.name = "waterMesh";
+
+    scene.add( waterMesh );
 
     /******************************************/
     /*    Skybox / surrounding environment    */
@@ -212,6 +213,7 @@
     );
 
     skyBox.position.y += 1000000/2;
+    skyBox.name = "skyBox";
 
     scene.add(skyBox);
 
@@ -256,10 +258,10 @@
     var geometry = new THREE.IcosahedronGeometry( 2000, 4 );
 
     for ( var i = 0, j = geometry.faces.length; i < j; i ++ ) {
-      geometry.faces[ i ].color.setHex( Math.random() * 0xffffff );
+      geometry.faces[ i ].color.setHex( 0xffffff );
     }
 
-    var material = new THREE.MeshPhongMaterial({
+    var material = new THREE.MeshLambertMaterial({
       vertexColors: THREE.FaceColors,
       shininess: 50,
       envMap: cubeMap
@@ -278,7 +280,7 @@
       // Set a geometry for the object
       var geometry = new THREE.BoxGeometry(5000, 5000, 5000);
       //  Mesh the created geometry
-      var object = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial({ color: 0xff0000 }) );
+      var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: 0xff0000 }) );
 
       object.castShadow = true;
       object.receiveShadow = true;
@@ -289,8 +291,6 @@
       object.rotation.x = degInRad(Math.random() * 90);
       object.rotation.y = degInRad(Math.random() * 90);
       object.rotation.z = degInRad(Math.random() * 90);
-      // Assign ID to each object
-      object.name = '0' + i;
       // Add each item in scene
       scene.add( object );
     }
@@ -337,7 +337,12 @@
     render();
   }
 
+  /******************************************/
+  /*               Render scene             */
+  /******************************************/
+
   function render() {
+
     var time = performance.now() * 0.001;
 
     water.material.uniforms.time.value += 1.0 / 60.0;
@@ -389,6 +394,7 @@
     // if (controls.object.position.y < 100) controls.moveForward = false;
 
     controls.update(clock.getDelta());
+
     renderer.render( scene, camera );
   }
 
