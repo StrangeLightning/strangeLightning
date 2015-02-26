@@ -32,6 +32,7 @@ angular.module('thesisApp')
         pageNumber = pageNumber || 0;
         $scope.searchTerm = searchTerm;
         $location.path("/catalog");
+
         catalogFactory.doSearch(searchTerm, pageNumber, null, function (newProducts) {
           $rootScope.$broadcast('products-updated', {
             newProducts: newProducts
