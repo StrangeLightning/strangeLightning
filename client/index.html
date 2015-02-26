@@ -36,7 +36,6 @@
   <link rel="stylesheet" href="app/cart/cart.css">
   <link rel="stylesheet" href="app/catalog/catalog.css">
   <link rel="stylesheet" href="app/explore/explore.css">
-  <link rel="stylesheet" href="app/main/main.css">
   <link rel="stylesheet" href="app/privacy/privacy.css">
   <link rel="stylesheet" href="app/product/product.css">
   <link rel="stylesheet" href="components/modal/modal.css">
@@ -60,7 +59,7 @@
   <img id="logo" src="https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/logos/logo5small.png" class="img-responsive" />
 </a>
 <div ui-view></div>
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div id="navBar" ng-include="'components/navbar/navbar.html'"></div>
 <sa-keypress-events></sa-keypress-events>
 
 <!--
@@ -86,6 +85,7 @@
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-ui-select/dist/select.js"></script>
 <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <!-- endbower -->
 <!-- // <script src="components/socket/socket.io.js"></script> -->
 <!-- endbuild -->
@@ -118,12 +118,12 @@
 <script src="app/catalog/catalog.js"></script>
 <script src="app/explore/explore.controller.js"></script>
 <script src="app/explore/explore.js"></script>
-<script src="app/main/main.controller.js"></script>
-<script src="app/main/main.js"></script>
+<script src="app/facet/facet.service.js"></script>
 <script src="app/privacy/privacy.js"></script>
 <script src="app/product/product.controller.js"></script>
 <script src="app/product/product.js"></script>
 <script src="app/saKeyPressEvents/saKeyPressEvents.directive.js"></script>
+<script src="app/saSetHeightDirective/saSetHeightDirective.directive.js"></script>
 <script src="components/auth/auth.service.js"></script>
 <script src="components/auth/user.service.js"></script>
 <script src="components/auth/vendor/vendor.service.js"></script>

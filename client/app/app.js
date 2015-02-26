@@ -9,7 +9,8 @@ angular.module('thesisApp', [
   'ui.bootstrap',
   'ui.select',
   'thesisApp.filter',
-  'angularUtils.directives.dirPagination'
+  'angularUtils.directives.dirPagination',
+  'LocalStorageModule'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

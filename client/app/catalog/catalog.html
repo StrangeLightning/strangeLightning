@@ -3,62 +3,43 @@
   <!-- Sidebar wrapper -->
   <div id="sidebar-wrapper" class="col-md-2" s>
 
-    <!--<ul class="sidebar-nav">-->
-    <!--<li class="sidebar-brand">-->
-    <!--Filter Catalog-->
-    <!--</li>-->
+    <ul sa-set-height-directive identifier=".sidebar-nav" class="sidebar-nav">
+      <li ng-repeat="(facet,object) in products.facets" ng-if="products.results.length">
+        <h5 class="facet-title" ng-bind="facet | uppercase"></h5>
+        <ul class="facet-list">
+          <li ng-repeat="item in object.buckets | limitTo: clickLimit">
+            <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
+              <input type="checkbox" ng-model="checked[item.value]">
+              <span ng-if="facet !=='price'" ng-bind-html="item.value | trust" class="facetText"></span>
+              <span ng-if="facet ==='price'" class="facetText">{{item.value | currency:'$'}}</span>
+              ({{item.count | number}})
+            </a>
+          </li>
 
-    <!--<li ng-repeat="(facet,object) in products.facets" ng-if="products.records.length">-->
-    <!--<h5 style="font-weight: bold" ng-bind="object.label"></h5>-->
-    <!--<ul>-->
-    <!--<li ng-repeat="item in object.buckets">-->
-    <!--<a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">-->
-    <!--<input type="checkbox" ng-model="checked[item.value]">-->
-    <!--<span ng-bind-html="item.value | trust" class="facetText"></span>-->
-    <!--({{item.count | number}})-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</li>-->
+          <div ng-show='object.buckets.length > 5'>
+            <a href='#' ng-if='showMoreFacets' ng-click='showMoreFacetLinks(object.buckets.length)' class="show-more-link">
+              Show more
+            </a>
 
-    <!--</ul>-->
+            <a href='#' ng-if='!showMoreFacets' ng-click='showLessFacetLinks()' class="show-more-link">
+              Show less
+            </a>
+          </div>
 
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        Filter Catalogue
+        </ul>
       </li>
-      <li>
-        <a href="#">Suggestion # 1</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 2</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 3</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 4</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 5</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 6</a>
-      </li>
-      <li>
-        <a href="#">Suggestion # 7</a>
-      </li>
+
     </ul>
 
   </div>
   <!-- End sidebar wrapper -->
 
   <!-- Start photo catalog -->
-  <div id="catalog-photos" class="col-md-10">
+  <div sa-set-height-directive identifier="#catalog-photos" id="catalog-photos" class="col-md-10">
     <img ng-show="searchInProgress" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive"/>
 
-    <div class="col-md-4" ng-repeat="product in products track by $index"
-         dir-paginate="product in products | itemsPerPage: 12 track by $index" total-items="products.found">
+    <div class="col-md-4" ng-repeat="product in products.results track by $index"
+         dir-paginate="product in products.results | itemsPerPage: 12 track by $index" total-items="products.totalCount">
       <div class="thumbnail">
         <div class="imgBkg" ng-click="viewItem(product)">
           <img class="centerImg" src="{{product.mediumImage}}"/>
@@ -70,27 +51,24 @@
 
           <p>Price: {{product.price | currency:"$"}}</p>
           <a ng-click="addToCart(product.id)" class="btn btn-primary" role="button">Add to Cart</a>
-          <a ng-click='getCartItems(amazonCart)' class="btn btn-primary" role="button">Get Cart Items</a>
           </p>
         </div>
       </div>
     </div>
 
-    <div class="row-fluid" style="min-height:500px" ng-if="products.length <= 0">
+    <div class="row-fluid" style="min-height:500px" ng-if="!searchInProgress && !products.results">
       Your search for<b> {{query}} </b>did not match any documents...
       <br/><br/>
       * Suggestions: Make sure all words are spelled correctly.</br>
       * Use similar words or synonyms.</br>
       * Try more general keywords.
     </div>
-  </div>
 
-  <!--pagination-->
-  <!--<dir-pagination-controls on-page-change="doSearch(newPageNumber)"-->
-  <!--template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">-->
-  <!--</dir-pagination-controls>-->
+    <!--pagination-->
+    <dir-pagination-controls on-page-change="fetchPage(searchTerm, newPageNumber)"
+                             template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">
+    </dir-pagination-controls>
+  </div>
 
 </div>
 <!-- End product info -->
-
-</div>

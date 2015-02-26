@@ -9,12 +9,29 @@
     <div id="product" class="caption">
       <h3>{{ product.title}}</h3>
       <h3>{{product.price | currency:"$"}}</h3>
-      <p ng-repeat="attr in product.prodAttributes">
-        <span>{{attr}}</span>
+      <p ng-repeat="(key,value) in product.prodAttributes">
+        <span ng-if="key === 'ProductGroup'">
+          <span class="attr-label">Product Group:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'Brand'">
+          <span class="attr-label">{{key}}:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'Color'">
+          <span class="attr-label">{{key}}:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'Department'">
+          <span class="attr-label">{{key}}:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'Feature'">
+          <span class="attr-label">{{key}}:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'ListPrice'">
+          <span class="attr-label">{{key}}:</span> {{value[0].FormattedPrice[0]}}
+        </span>
       </p>
     </div>
     <p>
-      <a href="#" id="addCartProduct" class="btn btn-primary pull-left" role="button">Add to Cart</a>
+      <a href="#" id="addCartProduct" ng-click="addToCart(product.id)" class="btn btn-primary pull-left" role="button">Add to Cart</a>
     </p>
   </div>
 

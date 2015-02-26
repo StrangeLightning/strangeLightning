@@ -8,6 +8,7 @@ html {
   background-color: #fff;
   text-align: center;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .centerImg {
@@ -43,10 +44,8 @@ html {
 
 /* Grid of Amazon products */
 #catalog-photos {
-  height: 800px;
   overflow: scroll;
   margin-top: 20px;
-  padding-bottom: 200px;
 }
 
 #sidebar-wrapper {
@@ -62,19 +61,19 @@ html {
   top: 140px;
   padding: 0;
   list-style: none;
+  overflow: scroll;
 }
 
 .sidebar-nav li {
-  text-align: center;
   font-size: 14px;
   line-height: 40px;
 }
 
 .sidebar-nav li a {
-  display: block;
+  /* display: block; */
   text-decoration: none;
   color: #999;
-  padding-left: 30px;
+  /* padding-left: 30px; */
   padding-right: 30px;
 }
 
@@ -90,7 +89,6 @@ html {
 
 .sidebar-nav > .sidebar-brand {
   font-size: 18px;
-  margin-bottom: 50px;
 }
 
 .sidebar-nav > .sidebar-brand a {
@@ -109,4 +107,18 @@ html {
 
 .ui-select-bootstrap .ui-select-choices-row.active>a {
   background-color: #999;
+}
+
+.facet-list{
+  list-style: none;
+  padding-left: 0px;
+}
+
+.facet-title {
+  padding-left: 0px;
+  font-weight: bold;
+}
+
+.show-more-link{
+  text-decoration: underline!important;
 }
