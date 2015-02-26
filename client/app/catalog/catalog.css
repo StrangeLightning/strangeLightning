@@ -44,7 +44,6 @@ html {
 
 /* Grid of Amazon products */
 #catalog-photos {
-  height: 600px;
   overflow: scroll;
   margin-top: 20px;
 }
@@ -62,7 +61,6 @@ html {
   top: 140px;
   padding: 0;
   list-style: none;
-  height: 450px;
   overflow: scroll;
 }
 

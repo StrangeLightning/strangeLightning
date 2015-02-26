@@ -6,12 +6,12 @@
  * @author paulirish / http://paulirish.com/
  */
 
-THREE.FirstPersonControls = function ( object, domElement ) {
+THREE.FirstPersonControls = function(object, domElement) {
 
   this.object = object;
-  this.target = new THREE.Vector3( 0, 0, 0 );
+  this.target = new THREE.Vector3(0, 0, 0);
 
-  this.domElement = ( domElement !== undefined ) ? domElement : document;
+  this.domElement = (domElement !== undefined) ? domElement : document;
 
   this.enabled = true;
 
@@ -52,13 +52,13 @@ THREE.FirstPersonControls = function ( object, domElement ) {
   this.viewHalfX = 0;
   this.viewHalfY = 0;
 
-  if ( this.domElement !== document ) {
-    this.domElement.setAttribute( 'tabindex', -1 );
+  if (this.domElement !== document) {
+    this.domElement.setAttribute('tabindex', -1);
   }
 
 
-  this.handleResize = function () {
-    if ( this.domElement === document ) {
+  this.handleResize = function() {
+    if (this.domElement === document) {
       this.viewHalfX = window.innerWidth / 2;
       this.viewHalfY = window.innerHeight / 2;
     } else {
@@ -67,8 +67,8 @@ THREE.FirstPersonControls = function ( object, domElement ) {
     }
   };
 
-  this.onMouseMove = function ( event ) {
-    if ( this.domElement === document ) {
+  this.onMouseMove = function(event) {
+    if (this.domElement === document) {
       this.mouseX = event.pageX - this.viewHalfX;
       this.mouseY = event.pageY - this.viewHalfY;
     } else {
@@ -77,37 +77,53 @@ THREE.FirstPersonControls = function ( object, domElement ) {
     }
   };
 
-  this.onKeyDown = function ( event ) {
-    if(event.keyCode === 87){ this.moveForward = true; }  /* W */
-    if(event.keyCode === 65){ this.moveLeft = true; }     /* A */
-    if(event.keyCode === 83){ this.moveBackward = true; } /* S */
-    if(event.keyCode === 68){ this.moveRight = true; }    /* D */
+  this.onKeyDown = function(event) {
+    if (event.keyCode === 87) {
+      this.moveForward = true;
+    } /* W */
+    if (event.keyCode === 65) {
+      this.moveLeft = true;
+    } /* A */
+    if (event.keyCode === 83) {
+      this.moveBackward = true;
+    } /* S */
+    if (event.keyCode === 68) {
+      this.moveRight = true;
+    } /* D */
   };
 
   // When key is released, stop moving
-  this.onKeyUp = function ( event ) {
-    if(event.keyCode === 87){ this.moveForward = false; }  /* W */
-    if(event.keyCode === 65){ this.moveLeft = false; }     /* A */
-    if(event.keyCode === 83){ this.moveBackward = false; } /* S */
-    if(event.keyCode === 68){ this.moveRight = false; }    /* D */
+  this.onKeyUp = function(event) {
+    if (event.keyCode === 87) {
+      this.moveForward = false;
+    } /* W */
+    if (event.keyCode === 65) {
+      this.moveLeft = false;
+    } /* A */
+    if (event.keyCode === 83) {
+      this.moveBackward = false;
+    } /* S */
+    if (event.keyCode === 68) {
+      this.moveRight = false;
+    } /* D */
   };
 
-  this.update = function( delta ) {
+  this.update = function(delta) {
 
-    if ( this.enabled === false ) return;
+    if (this.enabled === false) return;
 
-    if ( this.heightSpeed ) {
-      var y = THREE.Math.clamp( this.object.position.y, this.heightMin, this.heightMax );
+    if (this.heightSpeed) {
+      var y = THREE.Math.clamp(this.object.position.y, this.heightMin, this.heightMax);
       var heightDelta = y - this.heightMin;
-      this.autoSpeedFactor = delta * ( heightDelta * this.heightCoef );
+      this.autoSpeedFactor = delta * (heightDelta * this.heightCoef);
     } else {
       this.autoSpeedFactor = 0.0;
     }
 
     var actualMoveSpeed = delta * this.movementSpeed;
 
-    if ( this.moveForward || ( this.autoForward && !this.moveBackward ) ) this.object.translateZ( - ( actualMoveSpeed + this.autoSpeedFactor ) );
-    if ( this.moveBackward ) this.object.translateZ( actualMoveSpeed );
+    if (this.moveForward || (this.autoForward && !this.moveBackward)) this.object.translateZ(-(actualMoveSpeed + this.autoSpeedFactor));
+    if (this.moveBackward) this.object.translateZ(actualMoveSpeed);
 
     // if ( this.moveLeft ) this.object.translateX( - actualMoveSpeed );
     // if ( this.moveRight ) this.object.translateX( actualMoveSpeed );
@@ -120,52 +136,54 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
     var actualLookSpeed = delta * this.lookSpeed;
 
-    if ( !this.activeLook ) {
+    if (!this.activeLook) {
       actualLookSpeed = 0;
     }
 
     var verticalLookRatio = 1;
 
-    if ( this.constrainVertical ) {
+    if (this.constrainVertical) {
 
-      verticalLookRatio = Math.PI / ( this.verticalMax - this.verticalMin );
+      verticalLookRatio = Math.PI / (this.verticalMax - this.verticalMin);
 
     }
 
     this.lon += this.mouseX * actualLookSpeed;
-    if( this.lookVertical ) this.lat -= this.mouseY * actualLookSpeed * verticalLookRatio;
+    if (this.lookVertical) this.lat -= this.mouseY * actualLookSpeed * verticalLookRatio;
 
-    this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
-    this.phi = THREE.Math.degToRad( 90 - this.lat );
+    this.lat = Math.max(-85, Math.min(85, this.lat));
+    this.phi = THREE.Math.degToRad(90 - this.lat);
 
-    this.theta = THREE.Math.degToRad( this.lon );
+    this.theta = THREE.Math.degToRad(this.lon);
 
-    if ( this.constrainVertical ) {
-      this.phi = THREE.Math.mapLinear( this.phi, 0, Math.PI, this.verticalMin, this.verticalMax );
+    if (this.constrainVertical) {
+      this.phi = THREE.Math.mapLinear(this.phi, 0, Math.PI, this.verticalMin, this.verticalMax);
     }
 
     // Set the point of focus for the camera
     var targetPosition = this.target;
     var position = this.object.position;
 
-    targetPosition.x = position.x + 100 * Math.sin( this.phi ) * Math.cos( this.theta );
-    targetPosition.y = position.y + 100 * Math.cos( this.phi );
-    targetPosition.z = position.z + 100 * Math.sin( this.phi ) * Math.sin( this.theta );
+    targetPosition.x = position.x + 100 * Math.sin(this.phi) * Math.cos(this.theta);
+    targetPosition.y = position.y + 100 * Math.cos(this.phi);
+    targetPosition.z = position.z + 100 * Math.sin(this.phi) * Math.sin(this.theta);
 
-    this.object.lookAt( targetPosition );
+    this.object.lookAt(targetPosition);
 
   };
 
 
-  this.domElement.addEventListener( 'contextmenu', function ( event ) { event.preventDefault(); }, false );
-  this.domElement.addEventListener( 'mousemove', bind( this, this.onMouseMove ), false );
+  this.domElement.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+  }, false);
+  this.domElement.addEventListener('mousemove', bind(this, this.onMouseMove), false);
 
-  window.addEventListener( 'keydown', bind( this, this.onKeyDown ), false );
-  window.addEventListener( 'keyup', bind( this, this.onKeyUp ), false );
+  window.addEventListener('keydown', bind(this, this.onKeyDown), false);
+  window.addEventListener('keyup', bind(this, this.onKeyUp), false);
 
-  function bind( scope, fn ) {
-    return function () {
-      fn.apply( scope, arguments );
+  function bind(scope, fn) {
+    return function() {
+      fn.apply(scope, arguments);
     };
   };
   this.handleResize();
