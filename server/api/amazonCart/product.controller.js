@@ -65,21 +65,15 @@ exports.modifyCart = function(req, res, next) {
   if (req.user) {
     req.user.cart = req.user.cart || {}
   } // This is needed because of schema initialization
-
-  console.log("checking for id in stored ASIN")
-    // Check to see if the id is a stored ASIN
+  // Check to see if the id is a stored ASIN
   if (req.user &&
     req.user.cart &&
     Object.keys(req.user.cart).length) {
     var user = req.user;
-    console.log("ITEMS BEFORE MOD", items)
     var items = user.cart.items;
     var ASIN2CART = user.cart.ASIN2CART;
     if (user.ASIN2CART &&
       user.ASIN2CART[req.body.id]) {
-      // console.log('If cart Id in user document')
-      // console.log('This is the whole cart', user.ASIN2CART)
-      // console.log("This is the user ASIN CART", user.ASIN2CART[req.body.id])
       // IF it is get the CartItemId from the user document
       opHelper.execute('CartModify', {
         'CartId': user.cart.CartId[0],
@@ -88,30 +82,17 @@ exports.modifyCart = function(req, res, next) {
         'Item.1.Quantity': req.body.Quantity === undefined ? 1 : req.body.Quantity,
       }, function(err, results) {
         var cart = results.CartModifyResponse.Cart[0];
-
-        for (var i in cart) {
-          console.log("THIS CART ITEM SHOULD BE UPDATED", cart.CartItems[0].CartItem)
+        if (cart.CartItems === undefined) {
+          exports.clearCart(req, res)
         }
         if (user && cart.CartItems) {
-          // console.log("This is the cart state at 92", cart)
           user.cart = cart;
-          console.log("94444444444444")
-            // console.log("USER CART", user.cart)
-          console.log('')
           user.cart.items = items;
-          console.log("ITEMS POST MOD", items)
-          console.log('9555555555555555')
           user.cart.items[req.body.id] = req.body.Quantity;
-          console.log(user.cart.items, "89");
-          console.log('this is the user.cart', user.cart)
           user.cart.Quantity = calcQuantity(cart);
-          // console.log('(66666666666666666666666666', user.cart.Quantity)
           user.cart.ASIN2CART = ASIN2CART;
-          console.log(user.ASIN2CART)
           user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-          console.log('7777777777777')
           user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-          console.log(user.cart.items);
           user.save(function(err) {
             if (!err) res.end(JSON.stringify(cart));
           });
