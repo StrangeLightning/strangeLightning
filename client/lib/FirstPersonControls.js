@@ -6,7 +6,7 @@
  * @author paulirish / http://paulirish.com/
  */
 
-THREE.FirstPersonControls = function (object, domElement) {
+THREE.FirstPersonControls = function(object, domElement) {
 
   this.object = object;
   this.target = new THREE.Vector3(0, 0, 0);
@@ -57,7 +57,7 @@ THREE.FirstPersonControls = function (object, domElement) {
   }
 
 
-  this.handleResize = function () {
+  this.handleResize = function() {
     if (this.domElement === document) {
       this.viewHalfX = window.innerWidth / 2;
       this.viewHalfY = window.innerHeight / 2;
@@ -65,10 +65,9 @@ THREE.FirstPersonControls = function (object, domElement) {
       this.viewHalfX = this.domElement.offsetWidth / 2;
       this.viewHalfY = this.domElement.offsetHeight / 2;
     }
-
   };
 
-  this.onMouseMove = function (event) {
+  this.onMouseMove = function(event) {
     if (this.domElement === document) {
       this.mouseX = event.pageX - this.viewHalfX;
       this.mouseY = event.pageY - this.viewHalfY;
@@ -78,7 +77,7 @@ THREE.FirstPersonControls = function (object, domElement) {
     }
   };
 
-  this.onKeyDown = function (event) {
+  this.onKeyDown = function(event) {
     if (event.keyCode === 87) {
       this.moveForward = true;
     } /* W */
@@ -94,7 +93,7 @@ THREE.FirstPersonControls = function (object, domElement) {
   };
 
   // When key is released, stop moving
-  this.onKeyUp = function (event) {
+  this.onKeyUp = function(event) {
     if (event.keyCode === 87) {
       this.moveForward = false;
     } /* W */
@@ -109,7 +108,7 @@ THREE.FirstPersonControls = function (object, domElement) {
     } /* D */
   };
 
-  this.update = function (delta) {
+  this.update = function(delta) {
 
     if (this.enabled === false) return;
 
@@ -174,7 +173,7 @@ THREE.FirstPersonControls = function (object, domElement) {
   };
 
 
-  this.domElement.addEventListener('contextmenu', function (event) {
+  this.domElement.addEventListener('contextmenu', function(event) {
     event.preventDefault();
   }, false);
   this.domElement.addEventListener('mousemove', bind(this, this.onMouseMove), false);
@@ -183,7 +182,7 @@ THREE.FirstPersonControls = function (object, domElement) {
   window.addEventListener('keyup', bind(this, this.onKeyUp), false);
 
   function bind(scope, fn) {
-    return function () {
+    return function() {
       fn.apply(scope, arguments);
     };
   };
