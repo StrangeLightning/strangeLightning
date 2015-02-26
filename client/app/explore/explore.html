@@ -311,11 +311,11 @@
     // Set the raycaster
     var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
     var intersects = raycaster.intersectObjects( scene.children );
-    
+
     SELECTED = intersects[0].object;
 
     if ( intersects.length > 0 && SELECTED.name === "" ) {
-      
+
       controls.enabled = false;
 
       SELECTED.scale.x *= 5;
@@ -332,7 +332,7 @@
     object.scale.y *= 2;
     object.scale.z *= 2;
   }
- 
+
   function animate() {
     requestAnimationFrame( animate );
     render();
@@ -343,44 +343,44 @@
 
     water.material.uniforms.time.value += 1.0 / 60.0;
     water.render();
-    
+
     // Bounding box for navigation in all axes
     if ( controls.object.position.y > 22000 ){
-    
+
       controls.moveForward = false;
       controls.moveBackward = false;
       controls.object.position.y -= 50;
-    
+
     } else if( controls.object.position.y < 100 ){
-    
+
       controls.moveForward = false;
       controls.moveBackward = false;
       controls.object.position.y += 2;
-    
+
     } else if( controls.object.position.x > (WATER_WIDTH/2 - 300000) ){
 
       controls.moveForward = false;
       controls.moveBackward = false;
       controls.object.position.x -= 100;
-    
+
     } else if( controls.object.position.x < -(WATER_WIDTH/2 - 300000) ){
 
       controls.moveForward = false;
       controls.moveBackward = false;
       controls.object.position.x += 100;
-    
+
     } else if( controls.object.position.z > (WATER_WIDTH/2 - 300000) ){
-    
+
       controls.moveForward = false;
       controls.moveBackward = false;
       controls.object.position.z -= 100;
-    
+
     } else if( controls.object.position.z < -(WATER_WIDTH/2 - 300000) ){
-    
+
       controls.moveForward = false;
       controls.moveBackward = false;
       controls.object.position.z += 100;
-    
+
     } else {
       controls.object.position.x;
       controls.object.position.y;
