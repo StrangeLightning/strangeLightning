@@ -6,11 +6,40 @@ angular.module('thesisApp')
       //where local items are stored
       $scope.user = Auth.getCurrentUser().email;
       $scope.items = 0;
+      // $scope.rem
+      $scope.removeFromCart = function(product) {
+        if (cartFactory.amazonCart) {
+          console.log("cart state at remove", product)
+          cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
+            .success(function(data) {
+              if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
+                $scope.purchaseUrl = data.PurchaseURL[0];
+                $scope.subTotal = data.SubTotal[0].FormattedPrice[0];
+                $scope.items = data.CartItems[0].CartItem || [];
+              } else {
+                $scope.purchaseUrl = '';
+                $scope.subTotal = '$0';
+                $scope.items = [];
+              }
+            })
+            .error(function(err) {
+              console.log("ERROR removing Cart ", err)
+            });
+          // function(cartFactory.amazonRemoveProduct(product, crartFactory.amazonCart), function($scope.getItems()))()
 
+        }
+        // else {
+        //   console.log("item not in cart");
+        // }
+      };
+      $scope.emptyCart = function() {
+        $scope.items = '$0'
+        cartFactory.amazonClearCart();
+      };
       //returns all items from db schema,
       $scope.getItems = function() {
-        cartFactory.amazonGetCart(function(data){
-          if(data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem){
+        cartFactory.amazonGetCart(function(data) {
+          if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
             $scope.purchaseUrl = data.PurchaseURL[0];
             $scope.subTotal = data.SubTotal[0].FormattedPrice[0];
             $scope.items = data.CartItems[0].CartItem || [];
@@ -36,6 +65,7 @@ angular.module('thesisApp')
         $rootScope.$broadcast('clearCartQty');
       };
 
+
       /* Set height of window */
       var block = $(window).height();
       var navbar = $('.navbar').height();
@@ -51,7 +81,7 @@ angular.module('thesisApp')
       };
 
       //open Amazon cart in a new tab
-      $scope.goToAmazonCart = function(){
+      $scope.goToAmazonCart = function() {
         window.open(
           $scope.purchaseUrl,
           '_blank' // <- This is what makes it open in a new window.

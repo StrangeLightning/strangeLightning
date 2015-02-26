@@ -1,20 +1,48 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('ProductCtrl', ['$scope', 'catalogFactory', function($scope, catalogFactory) {
-    // This should go into a directive but since it's only 6 lines of code
-    // we can leave this here and migrate it inside of a directive should
-    // we have a need to create one.
-    $scope.product = catalogFactory.product;
-    var block = $(window).height();
-    var navbar = $('.navbar').height();
-    $('#product-container').css({
-      height: block - navbar
-    });
+  .controller('ProductCtrl', ['$rootScope', '$scope', 'catalogFactory', 'cartFactory', 'localStorageService',
+    function($rootScope, $scope, catalogFactory, cartFactory, localStorageService) {
+      // If coming from the catalog screen, get product from click event.
+      // Else, get previously stored product from local storage
+      if(catalogFactory.product){
+        $scope.product = catalogFactory.product;
+      } else {
+        $scope.product = localStorageService.get("product.view");
+      }
 
-    $scope.close = function() {
-      $('#product-container').animate({
-        'margin-right': '-=1000'
-      }, 500);
-    }
-  }]);
+      // If product not stored / updated in local storage, do so now
+      if($scope.product && !localStorageService.get("product.view")){
+        localStorageService.add("product.view", $scope.product);
+      } else if (localStorageService.get("product.view") !== $scope.product){
+        localStorageService.remove("product.view");
+        localStorageService.add("product.view", $scope.product);
+      }
+
+      // Call add product method from cart factor, and broadcast addToCart message to listeners
+      $scope.addToCart = function(product) {
+        $rootScope.$broadcast('addToCart');
+        if(cartFactory.amazonCart.items) {
+          cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
+        } else {
+          cartFactory.amazonCreateCart(product);
+        }
+      };
+
+      $scope.viewItem = function(product) {
+        catalogFactory.product = product;
+        catalogFactory.viewItem(product);
+      };
+
+      var block = $(window).height();
+      var navbar = $('.navbar').height();
+      $('#product-container').css({
+        height: block - navbar
+      });
+
+      $scope.close = function() {
+        $('#product-container').animate({
+          'margin-right': '-=1000'
+        }, 500);
+      }
+    }]);

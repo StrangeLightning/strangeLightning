@@ -6,7 +6,11 @@ angular.module('thesisApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ui.select',
+  'thesisApp.filter',
+  'angularUtils.directives.dirPagination',
+  'LocalStorageModule'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

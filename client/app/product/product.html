@@ -8,18 +8,30 @@
     </div>
     <div id="product" class="caption">
       <h3>{{ product.title}}</h3>
-      <h3>{{product.price}}</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla maximus,
-      dui id congue malesuada, elit nisi porttitor mauris, ac bibendum mi felis et
-      lacus. Donec imperdiet pretium ante quis aliquam. Vivamus fermentum lacus libero,
-      a sollicitudin magna semper at. Aenean eleifend sapien vel tellus dignissim auctor.
-      Proin facilisis molestie lorem ac auctor. Vestibulum varius velit eros, sed blandit
-      felis egestas dignissim. Etiam nulla quam, ultricies quis sollicitudin ut, tempor eu
-      libero. Aliquam erat volutpat. Donec id ornare odio. Proin ut magna non lacus accumsan
-      iaculis nec ac nisi.</p>
+      <h3>{{product.price | currency:"$"}}</h3>
+      <p ng-repeat="(key,value) in product.prodAttributes">
+        <span ng-if="key === 'ProductGroup'">
+          <span class="attr-label">Product Group:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'Brand'">
+          <span class="attr-label">{{key}}:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'Color'">
+          <span class="attr-label">{{key}}:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'Department'">
+          <span class="attr-label">{{key}}:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'Feature'">
+          <span class="attr-label">{{key}}:</span> {{value[0]}}
+        </span>
+        <span ng-if="key === 'ListPrice'">
+          <span class="attr-label">{{key}}:</span> {{value[0].FormattedPrice[0]}}
+        </span>
+      </p>
     </div>
     <p>
-      <a href="#" id="addCartProduct" class="btn btn-primary pull-left" role="button">Add to Cart</a>
+      <a href="#" id="addCartProduct" ng-click="addToCart(product.id)" class="btn btn-primary pull-left" role="button">Add to Cart</a>
     </p>
   </div>
 

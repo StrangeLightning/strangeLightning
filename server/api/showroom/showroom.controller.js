@@ -2,8 +2,7 @@
 
 var _ = require('lodash');
 var Showroom = require('./showroom.model');
-var config = require('../../config/environment');
-var auth = require('../../auth/auth.service');
+
 
 // Get list of showrooms
 exports.index = function(req, res) {

@@ -8,10 +8,12 @@ html {
   background-color: #fff;
   text-align: center;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .centerImg {
-  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Custom buttons for catalog */
@@ -21,6 +23,8 @@ html {
   border-radius: 0;
   background-color: #999;
   margin-top: 10px;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
 .btn:hover {
@@ -29,12 +33,19 @@ html {
   background-color: #D7F5F5;
 }
 
+.caption a {
+  color: black;
+  cursor: pointer;
+}
+
+.caption a:hover {
+  color: #999;
+}
+
 /* Grid of Amazon products */
 #catalog-photos {
-  height: 800px;
   overflow: scroll;
   margin-top: 20px;
-  padding-bottom: 150px;
 }
 
 #sidebar-wrapper {
@@ -50,19 +61,19 @@ html {
   top: 140px;
   padding: 0;
   list-style: none;
+  overflow: scroll;
 }
 
 .sidebar-nav li {
-  text-align: center;
   font-size: 14px;
   line-height: 40px;
 }
 
 .sidebar-nav li a {
-  display: block;
+  /* display: block; */
   text-decoration: none;
   color: #999;
-  padding-left: 30px;
+  /* padding-left: 30px; */
   padding-right: 30px;
 }
 
@@ -78,7 +89,6 @@ html {
 
 .sidebar-nav > .sidebar-brand {
   font-size: 18px;
-  margin-bottom: 30px;
 }
 
 .sidebar-nav > .sidebar-brand a {
@@ -93,4 +103,22 @@ html {
 
 .narrowMargin {
   margin: 0px;
+}
+
+.ui-select-bootstrap .ui-select-choices-row.active>a {
+  background-color: #999;
+}
+
+.facet-list{
+  list-style: none;
+  padding-left: 0px;
+}
+
+.facet-title {
+  padding-left: 0px;
+  font-weight: bold;
+}
+
+.show-more-link{
+  text-decoration: underline!important;
 }

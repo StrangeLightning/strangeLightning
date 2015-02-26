@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', 'cartFactory',
-    function($rootScope, $scope, $location, $http, Auth, catalogFactory, cartFactory) {
+  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', '$timeout',
+    function ($rootScope, $scope, $location, $http, Auth, catalogFactory, $timeout) {
       $scope.isCollapsed = true;
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
       $scope.cartQty = 0;
+      $scope.suggestedProducts = [];
 
       $scope.increment = function () {
         $scope.cartQty++;
@@ -17,35 +18,47 @@ angular.module('thesisApp')
         $scope.cartQty = 0;
       };
 
-      $scope.logout = function() {
+      $scope.logout = function () {
         Auth.logout();
         $scope.cartQty = 0;
         $location.path('/login');
       };
 
-      $scope.isActive = function(route) {
+      $scope.isActive = function (route) {
         return route === $location.path();
       };
 
-      $scope.doSearch = function() {
+      $scope.doSearch = function (searchTerm, pageNumber) {
+        pageNumber = pageNumber || 0;
+        $scope.searchTerm = searchTerm;
         $location.path("/catalog");
-        catalogFactory.doSearch($scope.searchTerm, function(newProducts) {
-          catalogFactory.products = newProducts;
-          $rootScope.$broadcast('products-updated', {newProducts: newProducts});
+
+        catalogFactory.doSearch(searchTerm, pageNumber, null, function (newProducts) {
+          newProducts = catalogFactory.processFacets(newProducts);
+          $rootScope.$broadcast('products-updated', {
+            newProducts: newProducts
+          });
         });
-        $scope.searchTerm = '';
       };
 
-      //init
+      $scope.doSuggestor = function (searchTerm) {
+        $scope.searchTerm = searchTerm;
+        catalogFactory.doSuggestor(searchTerm, function (newProducts) {
+          $scope.suggestedProducts = newProducts;
+        });
+      };
 
-      //register to listen to keyboard events
-      $rootScope.$on('keypress',function(onEvent, keypressEvent){
+      //when enter pressed, trigger search if no suggestions given
+      $rootScope.$on('keypress', function (onEvent, keypressEvent) {
         var keyCode = keypressEvent.which;
-        if(keyCode === 13) /* A */ {
-          $scope.doSearch();
+
+        if (keyCode === 13 && $scope.searchTerm) {
+          $scope.doSearch($scope.searchTerm);
         }
       });
 
+      //init
       $rootScope.$on('addToCart', $scope.increment);
       $rootScope.$on('clearCartQty', $scope.clearCart);
-    }]);
+    }
+  ]);
