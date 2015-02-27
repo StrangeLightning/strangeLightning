@@ -3,7 +3,7 @@
   <!-- Sidebar wrapper -->
   <div id="sidebar-wrapper" class="col-md-2" s>
 
-    <ul class="sidebar-nav">
+    <ul sa-set-height-directive identifier=".sidebar-nav" class="sidebar-nav">
       <li ng-repeat="(facet,object) in products.facets" ng-if="products.results.length">
         <h5 class="facet-title" ng-bind="facet | uppercase"></h5>
         <ul class="facet-list">
@@ -18,7 +18,7 @@
 
           <div ng-show='object.buckets.length > 5'>
             <a href='#' ng-if='showMoreFacets' ng-click='showMoreFacetLinks(object.buckets.length)' class="show-more-link">
-             Show more
+              Show more
             </a>
 
             <a href='#' ng-if='!showMoreFacets' ng-click='showLessFacetLinks()' class="show-more-link">
@@ -35,7 +35,7 @@
   <!-- End sidebar wrapper -->
 
   <!-- Start photo catalog -->
-  <div id="catalog-photos" class="col-md-10">
+  <div sa-set-height-directive identifier="#catalog-photos" id="catalog-photos" class="col-md-10">
     <img ng-show="searchInProgress" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive"/>
 
     <div class="col-md-4" ng-repeat="product in products.results track by $index"
@@ -72,5 +72,3 @@
 
 </div>
 <!-- End product info -->
-
-</div>

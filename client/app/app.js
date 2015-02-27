@@ -49,6 +49,16 @@ angular.module('thesisApp', [
   .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
+      /*
+        The 3D world was overriding the page views after it was appended
+        to the DOM. This line here checks whether the viwer is requesting
+        the page or not. If they are not, simply remove the DIV from the DOM.
+       */
+      if (next.url !== '/' || next.url !== '/explore') {
+        var el = document.getElementById('three-world');
+        document.body.removeChild(el);
+      }
+
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
           $location.path('/login');

@@ -8,18 +8,9 @@ angular.module('thesisApp')
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
-
       $scope.cartQty = 0;
       $scope.suggestedProducts = [];
 
-
-      // $scope.increment = function() {
-      //   $scope.cartQty++;
-      // };
-
-      // $scope.clearCart = function() {
-      //   $scope.cartQty = 0;
-      // };
       $rootScope.$on('changeCartQuantity', function() {
         console.log('event Triggered');
         $scope.cartQty = localStorageService.get('Cart')['Qty'];
@@ -41,6 +32,7 @@ angular.module('thesisApp')
         $location.path("/catalog");
 
         catalogFactory.doSearch(searchTerm, pageNumber, null, function(newProducts) {
+          newProducts = catalogFactory.processFacets(newProducts);
           $rootScope.$broadcast('products-updated', {
             newProducts: newProducts
           });
