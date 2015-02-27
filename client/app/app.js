@@ -56,7 +56,7 @@ angular.module('thesisApp', [
        */
       if (next.url !== '/' || next.url !== '/explore') {
         var el = document.getElementById('three-world');
-
+        
         if(el){
           document.body.removeChild(el);
         }
