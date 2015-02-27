@@ -1,4 +1,4 @@
-/* Adapted from the following creators */
+/* Adapted from the following contributors */
 
 /**
  * @author mrdoob / http://mrdoob.com/
@@ -69,8 +69,8 @@ THREE.FirstPersonControls = function(object, domElement) {
 
   this.onMouseMove = function(event) {
     if (this.domElement === document) {
-      this.mouseX = event.pageX - this.viewHalfX;
-      this.mouseY = event.pageY - this.viewHalfY;
+      // this.mouseX = event.pageX - this.viewHalfX;
+      // this.mouseY = event.pageY - this.viewHalfY;
     } else {
       this.mouseX = event.pageX - this.domElement.offsetLeft - this.viewHalfX;
       this.mouseY = event.pageY - this.domElement.offsetTop - this.viewHalfY;
@@ -134,9 +134,7 @@ THREE.FirstPersonControls = function(object, domElement) {
     var verticalLookRatio = 1;
 
     if (this.constrainVertical) {
-
       verticalLookRatio = Math.PI / (this.verticalMax - this.verticalMin);
-
     }
 
     this.lon += this.mouseX * actualLookSpeed;
