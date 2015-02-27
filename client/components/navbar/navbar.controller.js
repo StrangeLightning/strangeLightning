@@ -16,7 +16,8 @@ angular.module('thesisApp')
 
       $rootScope.$on('changeCartQuantity', function() {
         $scope.cartQty = localStorageService.get('Cart')['Qty'];
-      })
+      });
+
       $scope.logout = function() {
         Auth.logout();
         $scope.cartQty = 0;
