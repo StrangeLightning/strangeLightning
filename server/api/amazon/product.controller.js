@@ -75,7 +75,7 @@ exports.searchCart = function(req, res, next) {
     }()
   }
 
-  console.log(params);
+  //console.log(params);
   cloudsearchdomain.search(params, function(err, data) {
     if(err) {
       res.json(err);
