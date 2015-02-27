@@ -107,7 +107,7 @@
     /******************************************/
 
     var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
-    light.position.set( - 1, 1, - 1 );
+    light.position.set( - 1, 1000000, - 1 );
 
     light.shadowCameraVisible = true;
 
@@ -232,10 +232,12 @@
     var loader = new THREE.OBJLoader();
     loader.load( 'assets/images/soccerBall.obj', function ( object ) {
       object.traverse( function ( child ) {
-        if ( child instanceof THREE.Mesh ) {
-          child.material.map = ballTexture;
-        }
-      });
+        if( child instanceof THREE.Mesh ) {
+          child.material.ambient.setHex(0xFF0000);
+          child.material.color.setHex(0x00FF00);
+          }
+        });
+
 
       object.position.set(
         Math.random() * 500000 - 200000,
@@ -252,7 +254,36 @@
     });
 
     /******************************************/
-    /*          Object2 - disco ball          */
+    /*           Object2 - character          */
+    /******************************************/
+
+    // Add OBJ object
+    var loader = new THREE.OBJLoader();
+    loader.load( 'assets/models/eurofighter.obj', function ( eurofighter ) {
+      // eurofighter.traverse( function ( child ) {
+      //   if ( child instanceof THREE.Mesh ) {
+      //     child.material.map = new THREE.MeshLambertMaterial({
+      //       // vertexColors: THREE.FaceColors,
+      //       // shininess: 50,
+      //       // envMap: cubeMap
+      //     });
+      //   }
+      // });
+
+      eurofighter.position.set(1000, 1000, 1000);
+
+      eurofighter.scale.set(500, 500, 500);
+
+      eurofighter.receiveShadow = true;
+      eurofighter.castShadow = true;
+
+      eurofighter.name = "";
+
+      scene.add( eurofighter );
+    });
+
+    /******************************************/
+    /*          Object3 - disco ball          */
     /******************************************/
 
     var geometry = new THREE.IcosahedronGeometry( 2000, 4 );
