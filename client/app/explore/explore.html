@@ -1,11 +1,11 @@
-<!--
+
 <div id="load" onclick="this.parentNode.parentNode.removeChild(this.parentNode);">
   Click on the screen to explore
 </div>
- -->
+ 
 <script>
 
-  // if ( ! Detector.webgl ) {
+  // if ( !Detector.webgl ) {
   //   Detector.addGetWebGLMessage();
   //   document.getElementById( 'container' ).innerHTML = "";
   // }
@@ -63,7 +63,6 @@
 
     // Set cursor as crosshair
     container.style.cursor = 'crosshair';
-
 
     /******************************************/
     /*            Camera controls             */
@@ -269,7 +268,9 @@
     });
 
     sphere = new THREE.Mesh( geometry, material );
+    sphere.name = "skyBox";
     sphere.position.set(3500,2500,5500);
+
     scene.add( sphere );
 
     /******************************************/
@@ -292,6 +293,7 @@
       object.rotation.x = degInRad(Math.random() * 90);
       object.rotation.y = degInRad(Math.random() * 90);
       object.rotation.z = degInRad(Math.random() * 90);
+
       // Add each item in scene
       scene.add( object );
     }
@@ -391,8 +393,6 @@
       controls.object.position.y;
       controls.object.position.z;
     }
-
-    // if (controls.object.position.y < 100) controls.moveForward = false;
 
     controls.update(clock.getDelta());
 
