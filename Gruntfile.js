@@ -260,7 +260,6 @@ module.exports = function(grunt) {
         exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/']
       }
     },
-
     // Renames files for browser caching purposes
     rev: {
       dist: {

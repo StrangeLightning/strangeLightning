@@ -1,6 +1,5 @@
 angular.module('thesisApp')
-  .factory('cartFactory', ['$http', 'Auth', function($http, Auth) {
-    // console.log(Auth.getCurrentUser(), "CURRENTUSER")
+  .factory('cartFactory', ['$http', 'Auth', 'localStorageService', '$rootScope', function($http, Auth, localStorageService, $rootScope) {
     var cart = {};
     cart.amazonCart = {};
 
@@ -108,13 +107,14 @@ angular.module('thesisApp')
       var newquantity;
       var emptyCart = true;
       //if find and update quantity in serverside cart
-      console.log("AMAZON CART AT REMOVE", cart.amazonCart)
+      // console.log("AMAZON CART AT REMOVE", cart.amazonCart)
       for (var i = 0; i < cart.amazonCart.items.length; i++) {
         if (cart.amazonCart.items[i]['quantity'] > 0) {
           emptyCart = false
         }
         if (product === cart.amazonCart.items[i]['productId']) {
           if (cart.amazonCart.items[i]['quantity'] > 0) {
+            console.log("LOCAL CART ITEM Q AT REMOBE", cart.amazonCart.items[i]['quantity'])
             newquantity = --cart.amazonCart.items[i]['quantity'];
             break;
           }
@@ -126,14 +126,17 @@ angular.module('thesisApp')
       return $http.post('/api/amazoncarts/modify', {
         'id': product,
         'productId': product,
-        'CartId': amazonCart['CartId'],
-        'HMAC': amazonCart['HMAC'],
+        'CartId': cart.amazonCart['CartId'],
+        'HMAC': cart.amazonCart['HMAC'],
         'Quantity': newquantity
       })
 
 
 
       .success(function(data) {
+          cart.amazonCart['Qty'] --;
+          cart.saveLocally(cart.amazonCart)
+
           console.log('successful res from AMAZON client', data)
         })
         .error(function(err) {
@@ -148,31 +151,36 @@ angular.module('thesisApp')
       cart.amazonCart.items = cart.amazonCart.items || [];
       for (var i = 0; i < cart.amazonCart.items.length; i++) {
         if (product === cart.amazonCart.items[i]['productId']) {
-          console.log(cart.amazonCart.items[i])
-          newquantity = ++cart.amazonCart.items[i]['quantity'];
+          newquantity = cart.amazonCart.items[i]['quantity'] + 1;
+          var currentItem = i;
           var updated = true
           break;
         }
       }
       if (updated !== true) {
         cart.amazonCart.items.push({
-          // "title": data.CartItems[0].CartItem[0].Title[0],
-          // "price": data.CartItems[0].CartItem[0].Price[0].FormattedPrice[0],
           "productId": product,
           "quantity": 1
         });
-
+        currentItem = cart.amazonCart.items.length - 1;
       }
       //console.log('WHEN ADDING ITEM', amazonCart['CartId'], newquantity)
       $http.post('/api/amazoncarts/modify', {
           'id': product,
           'productId': product,
-          'CartId': amazonCart['CartId'],
-          'HMAC': amazonCart['HMAC'],
-          'Quantity': newquantity
+          'CartId': cart.amazonCart['CartId'],
+          'HMAC': cart.amazonCart['HMAC'],
+          'Quantity': newquantity || 1
         })
         .success(function(data) {
-          console.log('successful res from AMAZON client', data)
+          if (data['Quantity'] > cart.amazonCart['Qty']) {
+            if (updated === true) {
+              amazonCart.items[currentItem].quantity++;
+            };
+            cart.amazonCart['Qty'] = data['Quantity'];
+            cart.saveLocally(cart.amazonCart);
+
+          }
         })
         .error(function(err) {
           console.log("ERROR creating Cart ", err)
@@ -190,20 +198,16 @@ angular.module('thesisApp')
           cart.amazonCart = {
             "CartId": data.CartId[0],
             "HMAC": data.HMAC[0],
-            "items": []
+            "items": [],
+            "Qty": 1
           };
 
           cart.amazonCart.items.push({
-            "title": data.CartItems[0].CartItem[0].Title[0],
-            "price": data.CartItems[0].CartItem[0].Price[0].FormattedPrice[0],
             "productId": data.CartItems[0].CartItem[0].ASIN[0],
             "quantity": 1
           });
+          cart.saveLocally(cart.amazonCart)
 
-          // console.log("HMAC", data.HMAC[0])
-          console.log("Title:", data.CartItems[0].CartItem[0].Title[0])
-          console.log("Item Price:", data.CartItems[0].CartItem[0].Price[0].FormattedPrice[0])
-            // console.log()
         })
         .error(function(err) {
           console.log("ERROR creating Cart ", err)
@@ -220,11 +224,18 @@ angular.module('thesisApp')
             "HMAC": data.HMAC[0],
             "items": []
           };
+          cart.saveLocally(cart.amazonCart)
         })
         .error(function(err) {
           console.log("ERROR creating Cart ", err)
         });
     };
-
+    cart.saveLocally = function(Cart) {
+      localStorageService.set('Cart', Cart)
+      $rootScope.$broadcast('changeCartQuantity')
+    };
     return cart;
   }]);
+// cart.updatePils = function() {
+
+// }
