@@ -33,9 +33,13 @@ angular.module('thesisApp')
         // }
       };
       $scope.emptyCart = function() {
-        $scope.items = '$0'
+        $scope.items = 0;
+        // Clears the subTotal from the total if the cart has been emptied.
+        $scope.subTotal = '$0';
+        $rootScope.$broadcast('clearCartQty');
         cartFactory.amazonClearCart();
       };
+
       //returns all items from db schema,
       $scope.getItems = function() {
         cartFactory.amazonGetCart(function(data) {
