@@ -29,6 +29,12 @@
         </ul>
       </li>
 
+      <li class="price-filter">
+        <h5 class="facet-title">Price</h5>
+        $<input type="text" ng-model="startPriceFilter"> to $<input type="text" ng-model="endPriceFilter">
+        <a href='#' ng-click='doPriceSort()' class="show-more-link">Go</a>
+      </li>
+
     </ul>
 
   </div>

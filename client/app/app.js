@@ -56,7 +56,10 @@ angular.module('thesisApp', [
        */
       if (next.url !== '/' || next.url !== '/explore') {
         var el = document.getElementById('three-world');
-        document.body.removeChild(el);
+        
+        if(el){
+          document.body.removeChild(el);
+        }
       }
 
       Auth.isLoggedInAsync(function(loggedIn) {
