@@ -61,7 +61,7 @@ angular.module('thesisApp')
         });
       } else {
         $scope.filterFields.forEach(function (filter, i) {
-          if (filter.value == value) {
+          if (filter.value === value) {
             $scope.filterFields.splice(i, 1);
           }
         })
@@ -91,7 +91,15 @@ angular.module('thesisApp')
 
     // Function to sort by price
     $scope.doPriceSort = function () {
-      $scope.doSearchByFilter('price', [$scope.startPriceFilter, $scope.endPriceFilter]);
+      //remove existing price filter, if exists
+      $scope.filterFields.forEach(function (filter, i) {
+        if (filter.term === 'price') {
+          $scope.filterFields.splice(i, 1);
+        }
+      });
+
+      // filter by price range
+      $scope.doSearchByFilter('price', '[' + $scope.startPriceFilter + ',' + $scope.endPriceFilter + ']');
     };
 
     //ajax call to show more favorite records

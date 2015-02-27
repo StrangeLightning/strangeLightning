@@ -37,7 +37,11 @@ exports.searchCart = function(req, res, next) {
       for(var key in filterHolder) {
         params.filterQuery += "(or ";
         filterHolder[key].forEach(function(value) {
-          params.filterQuery += key + ":'" + value + "' ";
+          if(key === 'price'){
+            params.filterQuery += '( range field=price' + value + ')';
+          } else {
+            params.filterQuery += key + ":'" + value + "' ";
+          }
         });
         params.filterQuery += ") ";
       }
@@ -71,7 +75,7 @@ exports.searchCart = function(req, res, next) {
     }()
   }
 
-  //console.log(params);
+  console.log(params);
   cloudsearchdomain.search(params, function(err, data) {
     if(err) {
       res.json(err);
