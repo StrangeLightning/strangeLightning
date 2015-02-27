@@ -21,8 +21,14 @@ var credentials = {
 };
 
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
+console.log(config.mongo.uri);
+mongoose.connectSet(config.mongo.uri, function(err){
+  if (err) console.log)
+});
 
+mongooose.connection.on('open', function () {
+  console.log("mongodb connection open");
+}
 // Populate DB with sample data
 if (config.seedDB) {
   require('./server/config/seed');
