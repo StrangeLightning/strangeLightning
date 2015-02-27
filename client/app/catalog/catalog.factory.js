@@ -11,7 +11,7 @@ angular.module('thesisApp')
       $rootScope.$broadcast('search-in-progress');
       return $http.post('/api/amazonproducts/', {
         q: searchTerm,
-        facets: 'category,price',
+        facets: 'category',
         start: pageNumber,
         filters: filters
       })
