@@ -15,6 +15,8 @@ angular.module('thesisApp')
     $scope.amazonCart = cartFactory.amazonCart;
     $scope.clickLimit = 5;
     $scope.showMoreFacets = true;
+    $scope.startPriceFilter = 0;
+    $scope.endPriceFilter = 0;
 
     $scope.removeFromCart = function (product) {
       if (cartFactory.amazonCart.items) {
@@ -85,6 +87,11 @@ angular.module('thesisApp')
     $scope.fetchPage = function (searchTerm, pageNumber) {
       pageNumber = (pageNumber - 1) * 12;
       $scope.doSearch(searchTerm, pageNumber);
+    };
+
+    // Function to sort by price
+    $scope.doPriceSort = function () {
+      $scope.doSearchByFilter('price', [$scope.startPriceFilter, $scope.endPriceFilter]);
     };
 
     //ajax call to show more favorite records
