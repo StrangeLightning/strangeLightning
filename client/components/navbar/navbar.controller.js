@@ -9,7 +9,9 @@ angular.module('thesisApp')
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
-      $scope.cartQty = localStorageService.get('Cart')['Qty'] || 0;
+      if(localStorageService.get('Cart')){
+        $scope.cartQty = localStorageService.get('Cart')['Qty'] || 0;
+      }
       $scope.suggestedProducts = [];
 
       $rootScope.$on('changeCartQuantity', function() {
