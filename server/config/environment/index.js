@@ -40,10 +40,10 @@ var all = {
 
   // MongoDB connection options
   mongo: {
-    options: {
-      db: {
-        safe: true
-      }
+    options : {
+      db: { native_parser: true },
+      server: { poolSize: 5 },
+      replset: { rs_name: 'mongo-rs' },
     }
   },
 
