@@ -10,7 +10,7 @@ angular.module('thesisApp')
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
       if(localStorageService.get('Cart')){
-        $scope.cartQty = ['Qty'] || 0;
+        $scope.cartQty = localStorageService.get('Cart')['Qty'] || 0;
       }
       $scope.suggestedProducts = [];
 
