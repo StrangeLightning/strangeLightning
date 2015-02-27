@@ -20,6 +20,9 @@
   var radius = 100;
   var theta = 0;
 
+  var planeMaterial;
+  var globalObject;
+
   var clock = new THREE.Clock();
 
   var container, stats;
@@ -221,66 +224,102 @@
     /*          Object1 - soccer ball         */
     /******************************************/
 
-    var ballTexture = new THREE.Texture();
+    // var ballTexture = new THREE.Texture();
+    // var imgLoader = new THREE.ImageLoader();
+    // imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
+    //   ballTexture.image = image;
+    //   ballTexture.needsUpdate = true;
+    // });
+
+    // // Add OBJ object
+    // var loader = new THREE.OBJLoader();
+    // loader.load( 'assets/images/soccerBall.obj', function ( object ) {
+    //   object.traverse( function ( child ) {
+    //     if( child instanceof THREE.Mesh ) {
+    //       child.material.ambient.setHex(0xFF0000);
+    //       child.material.color.setHex(0x00FF00);
+    //       }
+    //     });
+
+
+    //   object.position.set(
+    //     Math.random() * 500000 - 200000,
+    //     Math.random() * 500000,
+    //     Math.random() * 500000 - 200000
+    //   );
+
+    //   object.scale.set(500, 500, 500);
+
+    //   object.receiveShadow = true;
+    //   object.castShadow = true;
+
+    //   scene.add( object );
+    // });
+
+    /******************************************/
+    /*           Object2 - plane              */
+    /******************************************/
+
+
+    var objTexture = new THREE.Texture();
     var imgLoader = new THREE.ImageLoader();
-    imgLoader.load( 'assets/images/PlatonicSurface_Color.jpg', function (image) {
-      ballTexture.image = image;
-      ballTexture.needsUpdate = true;
+    imgLoader.load( 'assets/images/redTexture.jpg', function (image) {
+      objTexture.image = image;
+      objTexture.needsUpdate = true;
     });
 
     // Add OBJ object
     var loader = new THREE.OBJLoader();
-    loader.load( 'assets/images/soccerBall.obj', function ( object ) {
-      object.traverse( function ( child ) {
-        if( child instanceof THREE.Mesh ) {
-          child.material.ambient.setHex(0xFF0000);
-          child.material.color.setHex(0x00FF00);
-          }
-        });
+    material = new THREE.MeshLambertMaterial({ color: 0xff0000 });
+    loader.load('assets/models/books.obj', function(object){
+      // globalObject = object;
 
-
-      object.position.set(
-        Math.random() * 500000 - 200000,
-        Math.random() * 500000,
-        Math.random() * 500000 - 200000
-      );
-
+      object.traverse(function(child){
+        if( child instanceof THREE.Mesh ){
+          child.material.map = objTexture;
+          child.material.side = THREE.DoubleSide;
+        }
+      });
+      object.rotation.x = degInRad(Math.random() * 90);
+      object.rotation.y = degInRad(Math.random() * 90);
+      object.rotation.z = degInRad(Math.random() * 90);
+    
+      object.position.set(1000, 1000, 1000);
       object.scale.set(500, 500, 500);
 
-      object.receiveShadow = true;
-      object.castShadow = true;
 
       scene.add( object );
     });
 
-    /******************************************/
-    /*           Object2 - character          */
-    /******************************************/
+    // loader.addEventListener( 'load', function ( object ) {
+    //   globalObject = object;
+    //   // object.traverse( function ( child ) {
+    //   //   if ( child instanceof THREE.Mesh ) {
+    //   //     child.material = material;
+    //   //   }
+    //   // });
 
-    // Add OBJ object
-    var loader = new THREE.OBJLoader();
-    loader.load( 'assets/models/eurofighter.obj', function ( eurofighter ) {
-      // eurofighter.traverse( function ( child ) {
-      //   if ( child instanceof THREE.Mesh ) {
-      //     child.material.map = new THREE.MeshLambertMaterial({
-      //       // vertexColors: THREE.FaceColors,
-      //       // shininess: 50,
-      //       // envMap: cubeMap
-      //     });
-      //   }
-      // });
+    
+    // });
 
-      eurofighter.position.set(1000, 1000, 1000);
+    /*
+    //model
+    var loader = new THREE.OBJLoader( manager );
+    loader.load( 'obj/female02/female02.obj', function (object) {
+        //store global reference to .obj
+        globalObject = object;
 
-      eurofighter.scale.set(500, 500, 500);
+      object.traverse( function (child) {
+          if ( child instanceof THREE.Mesh ) {
+              child.material.map = THREE.ImageUtils.loadTexture( 'textures/grid.jpg');
+              child.material.needsUpdate = true;
+          }
+      });
 
-      eurofighter.receiveShadow = true;
-      eurofighter.castShadow = true;
-
-      eurofighter.name = "";
-
-      scene.add( eurofighter );
+      object.position.y = - 80;
+      scene.add( object );
     });
+    */
 
     /******************************************/
     /*          Object3 - disco ball          */
@@ -343,7 +382,7 @@
     var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 ).unproject( camera );
     // Set the raycaster
     var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-    var intersects = raycaster.intersectObjects( scene.children );
+    var intersects = raycaster.intersectObjects( scene.children, true );
 
     SELECTED = intersects[0].object;
 
