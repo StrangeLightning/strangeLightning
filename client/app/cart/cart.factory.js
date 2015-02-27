@@ -219,11 +219,7 @@ angular.module('thesisApp')
 
       $http.post('/api/amazoncarts/clear', {})
         .success(function(data) {
-          cart.amazonCart = {
-            "CartId": data.CartId[0],
-            "HMAC": data.HMAC[0],
-            "items": []
-          };
+          cart.amazonCart = {};
           cart.saveLocally(cart.amazonCart)
         })
         .error(function(err) {

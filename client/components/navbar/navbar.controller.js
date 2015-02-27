@@ -3,18 +3,17 @@
 angular.module('thesisApp')
   .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', '$timeout', 'localStorageService',
 
+
     function($rootScope, $scope, $location, $http, Auth, catalogFactory, $timeout, localStorageService) {
       $scope.isCollapsed = true;
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
       $scope.getCurrentUser = Auth.getCurrentUser;
-      $scope.cartQty = 0;
+      $scope.cartQty = localStorageService.get('Cart')['Qty'] || 0;
       $scope.suggestedProducts = [];
 
       $rootScope.$on('changeCartQuantity', function() {
-        console.log('event Triggered');
         $scope.cartQty = localStorageService.get('Cart')['Qty'];
-        console.log('thisis the cart', $scope.cartQty)
       })
       $scope.logout = function() {
         Auth.logout();
