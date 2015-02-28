@@ -2,6 +2,7 @@ angular.module('thesisApp')
   .directive('threeWorld', function() {
     return {
       restrict: 'E',
+<<<<<<< HEAD
       controller: ['$scope', 'catalogFactory', 'modelData', function($scope, catalogFactory, modelData) {
         $scope.catalogFactory = catalogFactory;
         $scope.modelData = modelData;
@@ -10,6 +11,9 @@ angular.module('thesisApp')
         var groundGeometry;
         var groundMaterial;
         var ground;
+=======
+      link: function (scope) {
+>>>>>>> Have books in 3D world
 
         var raycaster;
         var mouse = new THREE.Vector2();
@@ -23,6 +27,7 @@ angular.module('thesisApp')
         var camera, scene, renderer;
         var sphere;
         var waterNormals;
+        var redTexture;
 
         var WATER_WIDTH = 1000000;
 
@@ -35,6 +40,8 @@ angular.module('thesisApp')
           param: 4,
           filterparam: 1
         };
+
+        var globalObject;
 
         init();
         animate();
@@ -109,26 +116,6 @@ angular.module('thesisApp')
           light.shadowCameraVisible = true;
 
           scene.add(light);
-
-          /******************************************/
-          /*           Alternative ground           */
-          /******************************************/
-
-          /*
-           // Create a ground plane
-           groundGeometry = new THREE.PlaneBufferGeometry(1000000, 1000000);
-           groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
-           groundMaterial.color.setHSL( 0.095, 1, 0.75 );
-           // groundMaterial.side = THREE.DoubleSide;
-
-           ground = new THREE.Mesh( groundGeometry, groundMaterial );
-           ground.rotation.x = -Math.PI/2;
-           ground.position.y = 10000;
-
-           ground.receiveShadow = true;
-
-           scene.add( ground );
-           */
 
           /******************************************/
           /*             Water surface              */
@@ -215,6 +202,7 @@ angular.module('thesisApp')
           scene.add(skyBox);
 
           /******************************************/
+<<<<<<< HEAD
           /*            Products                    */
           /******************************************/
 
@@ -229,14 +217,84 @@ angular.module('thesisApp')
                 scope.createObject(modelMap, product);
               }
             });
+=======
+          /*           Object2 - character          */
+          /******************************************/
+
+          var texture = new THREE.Texture();
+          var loader = new THREE.ImageLoader();
+          loader.load( 'assets/images/redTexture.jpg', function ( image ) {
+            texture.image = image;
+            texture.needsUpdate = true;
+>>>>>>> Have books in 3D world
           });
         }
 
+<<<<<<< HEAD
         // create product 3D object
         scope.createObject = function(modelMap, product){
           // load correct model based on product's category
           var loader = new THREE.OBJLoader();
           loader.load('assets/models/'+  modelMap[product.category] + '.obj', function(object) {
+=======
+          // Add OBJ object
+          var loader = new THREE.OBJLoader();
+          loader.load( 'assets/models/books2.obj', function ( object ) {
+            object.traverse( function ( child ) {
+              if ( child instanceof THREE.Mesh ) {
+                child.material.map = texture;
+              }
+            });
+
+            object.position.set(1000, 1000, 1000);
+
+            object.scale.set(500, 500, 500);
+
+            object.receiveShadow = true;
+            object.castShadow = true;
+
+            globalObject = object;
+
+            scene.add( object );
+          });
+
+          /******************************************/
+          /*          Object3 - disco ball          */
+          /******************************************/
+
+          var geometry = new THREE.IcosahedronGeometry( 2000, 4 );
+
+          for ( var i = 0, j = geometry.faces.length; i < j; i ++ ) {
+            geometry.faces[ i ].color.setHex( 0xffffff );
+          }
+
+          var material = new THREE.MeshLambertMaterial({
+            vertexColors: THREE.FaceColors,
+            shininess: 50,
+            envMap: cubeMap
+          });
+
+          sphere = new THREE.Mesh( geometry, material );
+          sphere.name = "centerSphere";
+          sphere.position.set(3500,2500,5500);
+
+          scene.add( sphere );
+
+          /******************************************/
+          /*            Multiple cubes              */
+          /******************************************/
+
+          // Add multiple objects
+          for (var i = 0; i < 100; i++) {
+            // Set a geometry for the object
+            var geometry = new THREE.BoxGeometry(5000, 5000, 5000);
+            //  Mesh the created geometry
+            var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: 0xff0000 }) );
+
+            object.castShadow = true;
+            object.receiveShadow = true;
+
+>>>>>>> Have books in 3D world
             object.position.x = Math.random() * 500000 - 200000;
             object.position.y = Math.random() * 500000 - 50000;
             object.position.z = Math.random() * 500000 - 200000;
