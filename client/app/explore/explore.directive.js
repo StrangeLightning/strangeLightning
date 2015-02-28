@@ -362,8 +362,7 @@ angular.module('thesisApp')
 
             controls.enabled = true;
 
-            console.log("object", selected.product);
-            $state.transitionTo('product', selected.product);
+            scope.showcaseProduct(selected.product);
           }
         }
 
@@ -446,18 +445,24 @@ angular.module('thesisApp')
         // hide the showcase by default
         $('#showcase-container').css('margin-right', '-1000px');
 
-        scope.showcaseProdudct = function () {
-          scope.showcase = {"id":"B002PNV6YE","price":"69.0","title":"Darice 120-Piece Deluxe Art Set","mediumImage":"http://ecx.images-amazon.com/images/I/51yN6cH-OfL._SL160_.jpg","category":"Art and Craft Supply","prodAttributes":{"Binding":["Office Product"],"Brand":["Darice"],"CatalogNumberList":[{"CatalogNumberListElement":["445060","NMC445060","110302","1103-02","FPS-298095"]}],"Color":["Multi"],"Department":["unisex-child"],"EAN":["0652695514296"],"EANList":[{"EANListElement":["0652695514296"]}],"Feature":["120-Piece deluxe art set with lots of art supplies for drawing, painting and more.","Includes markers, pencils, pastels, watercolors and plenty of accessories","Provides excellent way for kids and adults to experiment with a variety of artistic media","All in a black, snap-shut portable case","Small parts, not for children under 3 years"],"IsAdultProduct":["0"],"ItemDimensions":[{"Height":[{"_":"160","$":{"Units":"hundredths-inches"}}],"Length":[{"_":"1480","$":{"Units":"hundredths-inches"}}],"Weight":[{"_":"160","$":{"Units":"hundredths-pounds"}}],"Width":[{"_":"1100","$":{"Units":"hundredths-inches"}}]}],"ItemPartNumber":["1103-02"],"Label":["Darice"],"ListPrice":[{"Amount":["6995"],"CurrencyCode":["USD"],"FormattedPrice":["$69.95"]}],"Manufacturer":["Darice"],"ManufacturerMinimumAge":[{"_":"96","$":{"Units":"months"}}],"Model":["1103-02"],"MPN":["1103-02"],"NumberOfItems":["1"],"PackageDimensions":[{"Height":[{"_":"161","$":{"Units":"hundredths-inches"}}],"Length":[{"_":"1500","$":{"Units":"hundredths-inches"}}],"Weight":[{"_":"160","$":{"Units":"hundredths-pounds"}}],"Width":[{"_":"1110","$":{"Units":"hundredths-inches"}}]}],"PackageQuantity":["1"],"PartNumber":["1103-02"],"ProductGroup":["Art and Craft Supply"],"ProductTypeName":["OFFICE_PRODUCTS"],"Publisher":["Darice"],"ReleaseDate":["2013-07-28"],"Size":["120 Piece Set"],"Studio":["Darice"],"Title":["Darice 120-Piece Deluxe Art Set"],"UPC":["652695514296"],"UPCList":[{"UPCListElement":["652695514296"]}]}};
+        scope.showcaseProduct = function (product) {
+          var pastProduct = scope.showcase;
+          scope.showcase = product;
           scope.$apply();
-          $('#showcase-container').animate({
-            'margin-right': '+=1000'
-          }, 500);
-        }
+
+          // if no product previously showing, animate window out
+          if(!pastProduct){
+            $('#showcase-container').animate({
+              'margin-right': '+=1000'
+            }, 500);
+          }
+        };
 
         scope.close = function () {
           $('#showcase-container').animate({
             'margin-right': '-=1000'
           }, 500);
+          scope.showcase = null;
         }
       }
     };
