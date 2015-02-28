@@ -75,7 +75,7 @@ angular.module('thesisApp')
       filterFields = filterFields || null;
       $scope.searchTerm = searchTerm;
       $location.path("/catalog");
-      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, function (newProducts) {
+      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, null, function (newProducts) {
         newProducts = catalogFactory.processFacets(newProducts);
         $rootScope.$broadcast('products-updated', {
           newProducts: newProducts
