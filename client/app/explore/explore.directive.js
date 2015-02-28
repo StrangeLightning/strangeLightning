@@ -212,7 +212,7 @@ angular.module('thesisApp')
           scene.add(skyBox);
 
           /******************************************/
-          /*            Products                    */
+          /*                Products                */
           /******************************************/
 
           // use model data to get modelToCategoryMap.json
