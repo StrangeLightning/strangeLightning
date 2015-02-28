@@ -239,14 +239,14 @@ angular.module('thesisApp')
 =======
           // Add OBJ object
           var loader = new THREE.OBJLoader();
-          loader.load( 'assets/models/books2.obj', function ( object ) {
+          loader.load( 'assets/models/character.obj', function ( object ) {
             object.traverse( function ( child ) {
               if ( child instanceof THREE.Mesh ) {
                 child.material.map = texture;
               }
             });
 
-            object.position.set(1000, 1000, 1000);
+            object.position.set(1000, 20000, 1000);
 
             object.scale.set(500, 500, 500);
 
