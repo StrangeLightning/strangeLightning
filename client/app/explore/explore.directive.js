@@ -120,13 +120,10 @@ angular.module('thesisApp')
            groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
            groundMaterial.color.setHSL( 0.095, 1, 0.75 );
            // groundMaterial.side = THREE.DoubleSide;
-
            ground = new THREE.Mesh( groundGeometry, groundMaterial );
            ground.rotation.x = -Math.PI/2;
            ground.position.y = 10000;
-
            ground.receiveShadow = true;
-
            scene.add( ground );
            */
 

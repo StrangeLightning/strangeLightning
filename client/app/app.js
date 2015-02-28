@@ -51,7 +51,7 @@ angular.module('thesisApp', [
     $rootScope.$on('$stateChangeStart', function (event, next) {
       /*
         The 3D world was overriding the page views after it was appended
-        to the DOM. This line here checks whether the viwer is requesting
+        to the DOM. This line here checks whether the viewer is requesting
         the page or not. If they are not, simply remove the DIV from the DOM.
        */
       if (next.url !== '/' || next.url !== '/explore') {
