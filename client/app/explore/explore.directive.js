@@ -104,28 +104,11 @@ angular.module('thesisApp')
           /******************************************/
 
           var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-          light.position.set(-1, 1000000, -1);
+          light.position.set(-1, WATER_WIDTH, -1);
 
           light.shadowCameraVisible = true;
 
           scene.add(light);
-
-          /******************************************/
-          /*           Alternative ground           */
-          /******************************************/
-
-          /*
-           // Create a ground plane
-           groundGeometry = new THREE.PlaneBufferGeometry(1000000, 1000000);
-           groundMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
-           groundMaterial.color.setHSL( 0.095, 1, 0.75 );
-           // groundMaterial.side = THREE.DoubleSide;
-           ground = new THREE.Mesh( groundGeometry, groundMaterial );
-           ground.rotation.x = -Math.PI/2;
-           ground.position.y = 10000;
-           ground.receiveShadow = true;
-           scene.add( ground );
-           */
 
           /******************************************/
           /*             Water surface              */
@@ -203,10 +186,10 @@ angular.module('thesisApp')
           });
 
           var skyBox = new THREE.Mesh(
-            new THREE.BoxGeometry(1000000, 1000000, 1000000), skyBoxMaterial
+            new THREE.BoxGeometry(WATER_WIDTH, WATER_WIDTH, WATER_WIDTH), skyBoxMaterial
           );
 
-          skyBox.position.y += 1000000 / 2;
+          skyBox.position.y += WATER_WIDTH / 2;
           skyBox.name = "skyBox";
 
           scene.add(skyBox);
@@ -229,11 +212,26 @@ angular.module('thesisApp')
           });
         }
 
+        var objTexture = new THREE.Texture();
+        var imgLoader = new THREE.ImageLoader();
+        imgLoader.load( 'assets/images/redTexture.jpg', function (image) {
+          objTexture.image = image;
+          objTexture.needsUpdate = true;
+        });
+
         // create product 3D object
         scope.createObject = function(modelMap, product){
           // load correct model based on product's category
           var loader = new THREE.OBJLoader();
           loader.load('assets/models/'+  modelMap[product.category] + '.obj', function(object) {
+
+            object.traverse(function(child){
+              if( child instanceof THREE.Mesh ){
+                child.material.map = objTexture;
+                child.material.side = THREE.DoubleSide;
+              }
+            });
+
             object.position.x = Math.random() * 500000 - 200000;
             object.position.y = Math.random() * 500000 - 50000;
             object.position.z = Math.random() * 500000 - 200000;
