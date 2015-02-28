@@ -163,3 +163,7 @@ exports.suggest = function(req, res) {
     }));
   }
 };
+
+exports.explore = function(req, res) {
+  
+};
