@@ -242,7 +242,7 @@ angular.module('thesisApp')
             });
 
             object.position.x = Math.random() * 500000 - 200000;
-            object.position.y = Math.random() * 500000 - 50000;
+            object.position.y = Math.random() * 300000 - 50000;
             object.position.z = Math.random() * 500000 - 200000;
             object.rotation.x = degInRad(Math.random() * 90);
             object.rotation.y = degInRad(Math.random() * 90);
