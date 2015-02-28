@@ -3,6 +3,7 @@ angular.module('thesisApp')
     return {
       restrict: 'E',
 <<<<<<< HEAD
+<<<<<<< HEAD
       controller: ['$scope', 'catalogFactory', 'modelData', function($scope, catalogFactory, modelData) {
         $scope.catalogFactory = catalogFactory;
         $scope.modelData = modelData;
@@ -14,6 +15,9 @@ angular.module('thesisApp')
 =======
       link: function (scope) {
 >>>>>>> Have books in 3D world
+=======
+      link: function (scope) {
+>>>>>>> d342fe4198d9c6bbfd3b492a35f62e31fe8361fe
 
         var raycaster;
         var mouse = new THREE.Vector2();
@@ -115,7 +119,11 @@ angular.module('thesisApp')
 
           light.shadowCameraVisible = true;
 
+<<<<<<< HEAD
           scene.add(light);
+=======
+          scene.add( light );
+>>>>>>> d342fe4198d9c6bbfd3b492a35f62e31fe8361fe
 
           /******************************************/
           /*             Water surface              */
@@ -203,6 +211,7 @@ angular.module('thesisApp')
 
           /******************************************/
 <<<<<<< HEAD
+<<<<<<< HEAD
           /*            Products                    */
           /******************************************/
 
@@ -221,12 +230,20 @@ angular.module('thesisApp')
           /*           Object2 - character          */
           /******************************************/
 
+=======
+          /*           Object2 - character          */
+          /******************************************/
+
+>>>>>>> d342fe4198d9c6bbfd3b492a35f62e31fe8361fe
           var texture = new THREE.Texture();
           var loader = new THREE.ImageLoader();
           loader.load( 'assets/images/redTexture.jpg', function ( image ) {
             texture.image = image;
             texture.needsUpdate = true;
+<<<<<<< HEAD
 >>>>>>> Have books in 3D world
+=======
+>>>>>>> d342fe4198d9c6bbfd3b492a35f62e31fe8361fe
           });
         }
 
@@ -325,7 +342,15 @@ angular.module('thesisApp')
           renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
+<<<<<<< HEAD
         function onDocumentMouseDown(event) {
+=======
+        /******************************************/
+        /*            Selecting objects           */
+        /******************************************/
+
+        function onDocumentMouseDown( event ) {
+>>>>>>> d342fe4198d9c6bbfd3b492a35f62e31fe8361fe
 
           event.preventDefault();
 
@@ -334,7 +359,21 @@ angular.module('thesisApp')
           var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
           var intersects = raycaster.intersectObjects(scene.children, true);
 
+<<<<<<< HEAD
           var selected = intersects[0].object;
+=======
+          if (SELECTED.type === '') {
+            $state.transitionTo('product', {"id":"B002PNV6YE","price":"69.0","title":"Darice 120-Piece Deluxe Art Set","mediumImage":"http://ecx.images-amazon.com/images/I/51yN6cH-OfL._SL160_.jpg","category":"Art and Craft Supply","prodAttributes":{"Binding":["Office Product"],"Brand":["Darice"],"CatalogNumberList":[{"CatalogNumberListElement":["445060","NMC445060","110302","1103-02","FPS-298095"]}],"Color":["Multi"],"Department":["unisex-child"],"EAN":["0652695514296"],"EANList":[{"EANListElement":["0652695514296"]}],"Feature":["120-Piece deluxe art set with lots of art supplies for drawing, painting and more.","Includes markers, pencils, pastels, watercolors and plenty of accessories","Provides excellent way for kids and adults to experiment with a variety of artistic media","All in a black, snap-shut portable case","Small parts, not for children under 3 years"],"IsAdultProduct":["0"],"ItemDimensions":[{"Height":[{"_":"160","$":{"Units":"hundredths-inches"}}],"Length":[{"_":"1480","$":{"Units":"hundredths-inches"}}],"Weight":[{"_":"160","$":{"Units":"hundredths-pounds"}}],"Width":[{"_":"1100","$":{"Units":"hundredths-inches"}}]}],"ItemPartNumber":["1103-02"],"Label":["Darice"],"ListPrice":[{"Amount":["6995"],"CurrencyCode":["USD"],"FormattedPrice":["$69.95"]}],"Manufacturer":["Darice"],"ManufacturerMinimumAge":[{"_":"96","$":{"Units":"months"}}],"Model":["1103-02"],"MPN":["1103-02"],"NumberOfItems":["1"],"PackageDimensions":[{"Height":[{"_":"161","$":{"Units":"hundredths-inches"}}],"Length":[{"_":"1500","$":{"Units":"hundredths-inches"}}],"Weight":[{"_":"160","$":{"Units":"hundredths-pounds"}}],"Width":[{"_":"1110","$":{"Units":"hundredths-inches"}}]}],"PackageQuantity":["1"],"PartNumber":["1103-02"],"ProductGroup":["Art and Craft Supply"],"ProductTypeName":["OFFICE_PRODUCTS"],"Publisher":["Darice"],"ReleaseDate":["2013-07-28"],"Size":["120 Piece Set"],"Studio":["Darice"],"Title":["Darice 120-Piece Deluxe Art Set"],"UPC":["652695514296"],"UPCList":[{"UPCListElement":["652695514296"]}]}});
+          }
+
+          if ( intersects.length > 0 && SELECTED.name === "" ) {
+
+            controls.enabled = false;
+
+            SELECTED.scale.x *= 5;
+            SELECTED.scale.y *= 5;
+            SELECTED.scale.z *= 5;
+>>>>>>> d342fe4198d9c6bbfd3b492a35f62e31fe8361fe
 
           if(intersects.length > 0 && selected.name === "") {
             scope.showcaseProduct(selected.parent.product);
@@ -409,6 +448,7 @@ angular.module('thesisApp')
           return deg * Math.PI / 180;
         }
 
+<<<<<<< HEAD
         // hide the showcase by default
         $('#showcase-container').css('margin-right', '-1000px');
 
@@ -431,6 +471,8 @@ angular.module('thesisApp')
           }, 500);
           scope.showcase = null;
         }
+=======
+>>>>>>> d342fe4198d9c6bbfd3b492a35f62e31fe8361fe
       }
     };
   });
