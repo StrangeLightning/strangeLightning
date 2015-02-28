@@ -51,6 +51,8 @@ angular.module('thesisApp')
           renderer = new THREE.WebGLRenderer();
           renderer.setPixelRatio(window.devicePixelRatio);
           renderer.setSize(window.innerWidth, window.innerHeight);
+          // Show shadows
+          renderer.shadowMapEnabled = true;
 
           renderer.domElement.addEventListener('mousedown', onDocumentMouseDown, false);
 
@@ -86,16 +88,18 @@ angular.module('thesisApp')
           var spotLight = new THREE.SpotLight(0xffffff);
           spotLight.position.set(-10000, 10000, -10000);
 
+          // Show shadows and show light source
           spotLight.castShadow = true;
-
           spotLight.shadowCameraVisible = true;
 
           spotLight.shadowMapWidth = 1024;
           spotLight.shadowMapHeight = 1024;
 
-          spotLight.shadowCameraNear = 500;
-          spotLight.shadowCameraFar = 4000;
-          spotLight.shadowCameraFov = 30;
+          // Where shadow starts and ends
+          spotLight.shadowCameraNear = 1500;
+          spotLight.shadowCameraFar = 20000;
+          // Defines how focused the light is
+          spotLight.shadowCameraFov = 300;
 
           scene.add(spotLight);
 
@@ -108,7 +112,7 @@ angular.module('thesisApp')
 
           light.shadowCameraVisible = true;
 
-          scene.add(light);
+          // scene.add(light);
 
           /******************************************/
           /*             Water surface              */
@@ -194,6 +198,52 @@ angular.module('thesisApp')
 
           scene.add(skyBox);
 
+
+
+          // TEST
+          
+          cube = new THREE.Mesh( new THREE.CubeGeometry( 2000, 2000, 2000 ), new THREE.MeshLambertMaterial() );
+          cube.position.set(0, 1500, 0);
+          cube.castShadow = true;
+          cube.receiveShadow = true;
+          scene.add(cube);
+
+          cube2 = new THREE.Mesh( new THREE.CubeGeometry( 2000, 2000, 2000 ), new THREE.MeshLambertMaterial() );
+          cube2.position.set(2000, 1500, 2000);
+          cube2.castShadow = true;
+          cube2.receiveShadow = true;
+          scene.add(cube2);
+
+          cube3 = new THREE.Mesh( new THREE.CubeGeometry( 2000, 2000, 2000 ), new THREE.MeshLambertMaterial() );
+          cube3.position.set(-2000, 1500, -2000);
+          cube3.castShadow = true;
+          cube3.receiveShadow = true;
+          scene.add(cube3);
+
+          cube4 = new THREE.Mesh( new THREE.CubeGeometry( 2000, 2000, 2000 ), new THREE.MeshLambertMaterial() );
+          cube4.position.set(-2000, 1500, 2000);
+          cube4.castShadow = true;
+          cube4.receiveShadow = true;
+          scene.add(cube4);
+
+          cube5 = new THREE.Mesh( new THREE.CubeGeometry( 2000, 2000, 2000 ), new THREE.MeshLambertMaterial() );
+          cube5.position.set(2000, 1500, -2000);
+          cube5.castShadow = true;
+          cube5.receiveShadow = true;
+          scene.add(cube5);
+
+          cube6 = new THREE.Mesh( new THREE.CubeGeometry( 2000, 2000, 2000 ), new THREE.MeshLambertMaterial() );
+          cube6.position.set(0, 6000, -1000);
+          cube6.castShadow = true;
+          cube6.receiveShadow = true;
+          scene.add(cube6);
+
+          cube7 = new THREE.Mesh( new THREE.CubeGeometry( 2000, 2000, 2000 ), new THREE.MeshLambertMaterial() );
+          cube7.position.set(0, 5000, 0);
+          cube7.castShadow = true;
+          cube7.receiveShadow = true;
+          scene.add(cube7);
+
           /******************************************/
           /*                Products                */
           /******************************************/
@@ -229,6 +279,7 @@ angular.module('thesisApp')
               if( child instanceof THREE.Mesh ){
                 child.material.map = objTexture;
                 child.material.side = THREE.DoubleSide;
+                child.material.wireframe = true;
               }
             });
 
@@ -249,7 +300,7 @@ angular.module('thesisApp')
             object.product = product;
 
             // Add each item in scene
-            scene.add(object);
+            // scene.add(object);
           })
         };
 
@@ -295,7 +346,7 @@ angular.module('thesisApp')
           water.render();
 
           // Bounding box for navigation in all axes
-          if(controls.object.position.y > 22000) {
+          if(controls.object.position.y > 2200000) {
 
             controls.moveForward = false;
             controls.moveBackward = false;
