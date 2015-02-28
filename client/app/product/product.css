@@ -8,6 +8,7 @@
   padding: 10px;
   margin-right: -15px;
   padding: 20px;
+  z-index: 1;
 }
 
 #product-container img {
