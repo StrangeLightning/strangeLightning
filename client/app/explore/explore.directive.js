@@ -1,7 +1,10 @@
 angular.module('thesisApp')
-  .directive('threeWorld', ['$rootScope', '$state', function ($rootScope, $state) {
+  .directive('threeWorld', ['$rootScope', '$state', function ($rootScope, $state, catalogFactory) {
     return {
       restrict: 'E',
+      controller: function($scope,catalogFactory){
+        $scope.catalogFactory = catalogFactory;
+      },
       link: function (scope) {
         var groundGeometry;
         var groundMaterial;
@@ -302,25 +305,34 @@ angular.module('thesisApp')
           /******************************************/
 
           // Add multiple objects
-          for (var i = 0; i < 100; i++) {
-            // Set a geometry for the object
-            var geometry = new THREE.BoxGeometry(5000, 5000, 5000);
-            //  Mesh the created geometry
-            var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: 0xff0000 }) );
+          scope.catalogFactory.doSearch('', 0, null, 100, function (newProducts) {
+            for (var j = 0; j < newProducts.results.length; j++) {
+              // Set a geometry for the object
+              var geometry = new THREE.BoxGeometry(5000, 5000, 5000);
+              //  Mesh the created geometry
+              var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial({ color: 0xff0000 }) );
 
-            object.castShadow = true;
-            object.receiveShadow = true;
+              object.castShadow = true;
+              object.receiveShadow = true;
 
-            object.position.x = Math.random() * 500000 - 200000;
-            object.position.y = Math.random() * 500000 - 50000;
-            object.position.z = Math.random() * 500000 - 200000;
-            object.rotation.x = degInRad(Math.random() * 90);
-            object.rotation.y = degInRad(Math.random() * 90);
-            object.rotation.z = degInRad(Math.random() * 90);
+              object.position.x = Math.random() * 500000 - 200000;
+              object.position.y = Math.random() * 500000 - 50000;
+              object.position.z = Math.random() * 500000 - 200000;
+              object.rotation.x = degInRad(Math.random() * 90);
+              object.rotation.y = degInRad(Math.random() * 90);
+              object.rotation.z = degInRad(Math.random() * 90);
 
-            // Add each item in scene
-            scene.add( object );
-          }
+              // add item to object
+              object.name = "product";
+              object.product = newProducts.results[j];
+
+              // Add each item in scene
+              scene.add( object );
+            }
+          });
+
+          // handles resizing the renderer when the window is resized
+          window.addEventListener('resize', onWindowResize, false);
         }
 
         function onWindowResize() {
@@ -338,21 +350,20 @@ angular.module('thesisApp')
           var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
           var intersects = raycaster.intersectObjects( scene.children );
 
-          SELECTED = intersects[0].object;
+          var selected = intersects[0].object;
 
-          if (SELECTED.type === 'Mesh') {
-            $state.transitionTo('product', {"id":"B002PNV6YE","price":"69.0","title":"Darice 120-Piece Deluxe Art Set","mediumImage":"http://ecx.images-amazon.com/images/I/51yN6cH-OfL._SL160_.jpg","category":"Art and Craft Supply","prodAttributes":{"Binding":["Office Product"],"Brand":["Darice"],"CatalogNumberList":[{"CatalogNumberListElement":["445060","NMC445060","110302","1103-02","FPS-298095"]}],"Color":["Multi"],"Department":["unisex-child"],"EAN":["0652695514296"],"EANList":[{"EANListElement":["0652695514296"]}],"Feature":["120-Piece deluxe art set with lots of art supplies for drawing, painting and more.","Includes markers, pencils, pastels, watercolors and plenty of accessories","Provides excellent way for kids and adults to experiment with a variety of artistic media","All in a black, snap-shut portable case","Small parts, not for children under 3 years"],"IsAdultProduct":["0"],"ItemDimensions":[{"Height":[{"_":"160","$":{"Units":"hundredths-inches"}}],"Length":[{"_":"1480","$":{"Units":"hundredths-inches"}}],"Weight":[{"_":"160","$":{"Units":"hundredths-pounds"}}],"Width":[{"_":"1100","$":{"Units":"hundredths-inches"}}]}],"ItemPartNumber":["1103-02"],"Label":["Darice"],"ListPrice":[{"Amount":["6995"],"CurrencyCode":["USD"],"FormattedPrice":["$69.95"]}],"Manufacturer":["Darice"],"ManufacturerMinimumAge":[{"_":"96","$":{"Units":"months"}}],"Model":["1103-02"],"MPN":["1103-02"],"NumberOfItems":["1"],"PackageDimensions":[{"Height":[{"_":"161","$":{"Units":"hundredths-inches"}}],"Length":[{"_":"1500","$":{"Units":"hundredths-inches"}}],"Weight":[{"_":"160","$":{"Units":"hundredths-pounds"}}],"Width":[{"_":"1110","$":{"Units":"hundredths-inches"}}]}],"PackageQuantity":["1"],"PartNumber":["1103-02"],"ProductGroup":["Art and Craft Supply"],"ProductTypeName":["OFFICE_PRODUCTS"],"Publisher":["Darice"],"ReleaseDate":["2013-07-28"],"Size":["120 Piece Set"],"Studio":["Darice"],"Title":["Darice 120-Piece Deluxe Art Set"],"UPC":["652695514296"],"UPCList":[{"UPCListElement":["652695514296"]}]}});
-          }
-
-          if ( intersects.length > 0 && SELECTED.name === "" ) {
+          if ( intersects.length > 0 && selected.name === "product" ) {
 
             controls.enabled = false;
 
-            SELECTED.scale.x *= 5;
-            SELECTED.scale.y *= 5;
-            SELECTED.scale.z *= 5;
+            selected.scale.x *= 5;
+            selected.scale.y *= 5;
+            selected.scale.z *= 5;
 
             controls.enabled = true;
+
+            console.log("object", selected.product);
+            $state.transitionTo('product', selected.product);
           }
         }
 

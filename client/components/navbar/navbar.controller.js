@@ -3,7 +3,6 @@
 angular.module('thesisApp')
   .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', '$timeout', 'localStorageService',
 
-
     function($rootScope, $scope, $location, $http, Auth, catalogFactory, $timeout, localStorageService) {
       $scope.isCollapsed = true;
       $scope.isLoggedIn = Auth.isLoggedIn;
@@ -16,7 +15,8 @@ angular.module('thesisApp')
 
       $rootScope.$on('changeCartQuantity', function() {
         $scope.cartQty = localStorageService.get('Cart')['Qty'];
-      })
+      });
+
       $scope.logout = function() {
         Auth.logout();
         $scope.cartQty = 0;
@@ -32,7 +32,7 @@ angular.module('thesisApp')
         $scope.searchTerm = searchTerm;
         $location.path("/catalog");
 
-        catalogFactory.doSearch(searchTerm, pageNumber, null, function(newProducts) {
+        catalogFactory.doSearch(searchTerm, pageNumber, null, null, function(newProducts) {
           newProducts = catalogFactory.processFacets(newProducts);
           $rootScope.$broadcast('products-updated', {
             newProducts: newProducts
