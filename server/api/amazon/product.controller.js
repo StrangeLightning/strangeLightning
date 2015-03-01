@@ -2,7 +2,7 @@
 
 var cloudsearchdomain = require(__dirname + "/../../config/endpoints").cloudsearchdomain;
 
-exports.searchCart = function(req, res, next) {
+exports.searchCart = function(req, res) {
   var params = {};
   params.size = req.body.limit || 10;
   params.start = req.body.start || 0;
@@ -37,8 +37,10 @@ exports.searchCart = function(req, res, next) {
       for(var key in filterHolder) {
         params.filterQuery += "(or ";
         filterHolder[key].forEach(function(value) {
-          if(key === 'price'){
-            params.filterQuery += '( range field=price' + value + ')';
+
+          // check if range query or facet filter term query
+          if(key === 'price' || key === 'x' || key === 'y' || key === 'z'){
+            params.filterQuery += '( range field=' + key + ' ' +  value + ')';
           } else {
             params.filterQuery += key + ":'" + value + "' ";
           }
