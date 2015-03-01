@@ -252,8 +252,8 @@ angular.module('thesisApp')
               objTexture.needsUpdate = true;
             });
 
-            object.traverse(function(child){
-              if( child instanceof THREE.Mesh ){
+            object.traverse(function(child) {
+              if(child instanceof THREE.Mesh) {
                 child.material.map = objTexture;
                 child.material.side = THREE.DoubleSide;
                 child.castShadow = true;
