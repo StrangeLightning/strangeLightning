@@ -1,10 +1,10 @@
 {
   "Apparel": "shoes",
-  "Art and Craft Supply": "girl_doll",
+  "Art and Craft Supply": "doll",
   "Automotive Parts and Accessories": "car",
   "Baby Product": "teddyBear",
   "Book": "books",
-  "DVD": "spacecraft",
+  "DVD": "_spacecraft",
   "Home": "dice",
   "Home Improvement": "toyCube",
   "Kitchen": "duck",
@@ -12,7 +12,7 @@
   "Office Product": "dinosaur",
   "PC Accessory": "legoFigure",
   "Pet Products": "sonicHedgehog",
-  "Sports": "basketball",
+  "Sports": "skateboard",
   "Toy": "balancingHorse",
-  "Video Games": "remoteControl"
+  "Video Games": "remote"
 }

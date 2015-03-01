@@ -217,18 +217,24 @@ angular.module('thesisApp')
           });
         }
 
-        var objTexture = new THREE.Texture();
-        var imgLoader = new THREE.ImageLoader();
-        imgLoader.load( 'assets/images/redTexture.jpg', function (image) {
-          objTexture.image = image;
-          objTexture.needsUpdate = true;
-        });
+
+        var colorTexture = ['blue', 'green', 'pink', 'red', 'yellow'];
+
 
         // create product 3D object
         scope.createObject = function(modelMap, product){
           // load correct model based on product's category
           var loader = new THREE.OBJLoader();
           loader.load('assets/models/'+  modelMap[product.category] + '.obj', function(object) {
+
+            var objTexture = new THREE.Texture();
+            var imgLoader = new THREE.ImageLoader();
+            
+            var idxCol = Math.floor( Math.random() * colorTexture.length );
+            imgLoader.load( 'assets/images/' + colorTexture[idxCol] + 'Texture.jpg', function (image) {
+              objTexture.image = image;
+              objTexture.needsUpdate = true;
+            });
 
             object.traverse(function(child){
               if( child instanceof THREE.Mesh ){
