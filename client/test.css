@@ -1,0 +1,14 @@
+#hero {
+z-index: -1;
+position: absolute;
+right: 0;
+left: 0;
+top: 0;
+height: 600px;
+overflow: hidden;
+min-width: 1045px;
+}
+
+video {
+display: inline-block;
+}
