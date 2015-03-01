@@ -23,3 +23,19 @@
 #loadScreen {
   overflow: hidden !important;
 }
+
+#loadTitle {
+  color: white;
+  position: absolute;
+  top: 100px;
+  left: 35%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#keys{
+  position: absolute;
+  top: 280px;
+  left: 70%;
+  height: 30%;
+}
