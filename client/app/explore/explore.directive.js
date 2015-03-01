@@ -5,6 +5,24 @@ angular.module('thesisApp')
       controller: ['$scope', 'catalogFactory', 'modelData', function($scope, catalogFactory, modelData) {
         $scope.catalogFactory = catalogFactory;
         $scope.modelData = modelData;
+
+        // Do range query to find 100 products with nearest x, y, z coordinates to camera
+        $scope.doCoordinatesSearch = function(coordinatesObject, modelMap) {
+          var coordinateFilters = [];
+          for(var key in coordinatesObject) {
+            coordinateFilters.push({
+              term: key,
+              value: coordinatesObject[key]
+            });
+          }
+
+          $scope.catalogFactory.doSearch('', 0, coordinateFilters, 100, function(newProducts) {
+            for(var j = 0; j < newProducts.results.length; j++) {
+              var product = newProducts.results[j];
+              $scope.createObject(modelMap, product);
+            }
+          });
+        };
       }],
       link: function(scope) {
         var groundGeometry;
@@ -217,19 +235,17 @@ angular.module('thesisApp')
           });
         }
 
-
         var colorTexture = ['blue', 'green', 'pink', 'red', 'yellow'];
 
-
         // create product 3D object
-        scope.createObject = function(modelMap, product){
+        scope.createObject = function(modelMap, product) {
           // load correct model based on product's category
           var loader = new THREE.OBJLoader();
-          loader.load('assets/models/'+  modelMap[product.category] + '.obj', function(object) {
+          loader.load('assets/models/' + modelMap[product.category] + '.obj', function(object) {
 
             var objTexture = new THREE.Texture();
             var imgLoader = new THREE.ImageLoader();
-            
+
             var idxCol = Math.floor( Math.random() * colorTexture.length );
             imgLoader.load( 'assets/images/' + colorTexture[idxCol] + 'Texture.jpg', function (image) {
               objTexture.image = image;
