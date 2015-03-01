@@ -15,3 +15,11 @@
   padding-left: 40px;
   padding-right: 25px;
 }
+#theImg {
+  height: 100%;
+  width: 100% !important;
+}
+
+#loadScreen {
+  overflow: hidden !important;
+}
