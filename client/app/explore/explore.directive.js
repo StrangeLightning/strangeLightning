@@ -5,6 +5,24 @@ angular.module('thesisApp')
       controller: ['$scope', 'catalogFactory', 'modelData', function($scope, catalogFactory, modelData) {
         $scope.catalogFactory = catalogFactory;
         $scope.modelData = modelData;
+
+        // Do range query to find 100 products with nearest x, y, z coordinates to camera
+        $scope.doCoordinatesSearch = function(coordinatesObject, modelMap) {
+          var coordinateFilters = [];
+          for(var key in coordinatesObject) {
+            coordinateFilters.push({
+              term: key,
+              value: coordinatesObject[key]
+            });
+          }
+
+          $scope.catalogFactory.doSearch('', 0, coordinateFilters, 100, function(newProducts) {
+            for(var j = 0; j < newProducts.results.length; j++) {
+              var product = newProducts.results[j];
+              $scope.createObject(modelMap, product);
+            }
+          });
+        };
       }],
       link: function(scope) {
         var groundGeometry;
@@ -219,19 +237,19 @@ angular.module('thesisApp')
 
         var objTexture = new THREE.Texture();
         var imgLoader = new THREE.ImageLoader();
-        imgLoader.load( 'assets/images/redTexture.jpg', function (image) {
+        imgLoader.load('assets/images/redTexture.jpg', function(image) {
           objTexture.image = image;
           objTexture.needsUpdate = true;
         });
 
         // create product 3D object
-        scope.createObject = function(modelMap, product){
+        scope.createObject = function(modelMap, product) {
           // load correct model based on product's category
           var loader = new THREE.OBJLoader();
-          loader.load('assets/models/'+  modelMap[product.category] + '.obj', function(object) {
+          loader.load('assets/models/' + modelMap[product.category] + '.obj', function(object) {
 
-            object.traverse(function(child){
-              if( child instanceof THREE.Mesh ){
+            object.traverse(function(child) {
+              if(child instanceof THREE.Mesh) {
                 child.material.map = objTexture;
                 child.material.side = THREE.DoubleSide;
                 child.castShadow = true;
