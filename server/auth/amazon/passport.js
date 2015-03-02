@@ -1,15 +1,15 @@
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+var AmazonStrategy = require('passport-amazon').Strategy;
 
 exports.setup = function(User, config) {
-  passport.use(new FacebookStrategy({
-      clientID: config.facebook.clientID,
-      clientSecret: config.facebook.clientSecret,
-      callbackURL: config.facebook.callbackURL
+  passport.use(new AmazonStrategy({
+      clientID: config.amazonOAuth.clientID,
+      clientSecret: config.amazonOAuth.clientSecret,
+      callbackURL: config.amazonOAuth.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
       User.findOne({
-          'facebook.id': profile.id
+          'amazon.id': profile.id
         },
         function(err, user) {
           if (err) {
@@ -21,7 +21,7 @@ exports.setup = function(User, config) {
               email: profile.emails[0].value,
               role: 'user',
               username: profile.username,
-              provider: 'facebook',
+              provider: 'amazon',
               facebook: profile._json
             });
             user.save(function(err) {

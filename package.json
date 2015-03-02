@@ -95,6 +95,7 @@
     "karma-script-launcher": "~0.1.0",
     "mocha": "^2.1.0",
     "open": "~0.0.4",
+    "passport-amazon": "^0.1.0",
     "phantomjs": "^1.9.15",
     "requirejs": "~2.1.11",
     "should": "~3.3.1",

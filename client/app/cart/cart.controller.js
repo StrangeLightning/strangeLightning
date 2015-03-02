@@ -50,18 +50,6 @@ angular.module('thesisApp')
           }
         });
       };
-
-      //add item to db
-      $scope.addItem = function(item) {
-
-      };
-
-      //remove item locally and from db
-      $scope.removeItem = function(items, item) {
-
-      };
-
-      //clear items locally and drop schema
       $scope.dropSchema = function() {
         $scope.items = 0;
         $scope.subTotal = "$0.00";

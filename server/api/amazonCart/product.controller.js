@@ -18,6 +18,7 @@ exports.createCart = function(req, res, next) {
   }, function(err, results) {
     var cart = results.CartCreateResponse.Cart[0];
     if (cart.Request && cart.Request[0].Errors) {
+      console.log("hitting 20")
       console.log('Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors));
       res.end({
         error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors)

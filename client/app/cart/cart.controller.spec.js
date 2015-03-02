@@ -1,19 +1,40 @@
-'use strict';
+describe('CartCtrl', function() {
+  var CartCtrl, $scope, $rootScope, $controller, $httpBackend, $localStorageService;
 
-describe('Controller: CartCtrl', function() {
+  beforeEach(function() {
+    module('thesisApp');
 
-  // load the controller's module
-  beforeEach(module('thesisApp'));
+    inject(function($rootScope, $controller, _$httpBackend_, _$localStorageService_) {
+      $scope = $rootScope.$new();
+      $httpBackend = _$httpBackend_;
+      $localStorageService = _$localStorageService_;
+      createCartCtrl = function() {
+        $controller('CartCtrl', {
+          $scope: $scope,
+        })
+      };
+      createLoginCtrl()
+    })
+  });
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
 
-  var CartCtrl, scope;
+  describe('controller functionality', function() {
+    it("should have a scope variable", function() {
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope) {
-    scope = $rootScope.$new();
-    CartCtrl = $controller('CartCtrl', {
-      $scope: scope
+      expect($scope).toBeDefined();
     });
-  }));
 
+    it("should have a loginOauth function", function() {
+      // expect(()).toBe()
+    });
 
+    it('should redirect to /auth/facebook ', function() {
+      with(localContext) {}
+      expect(1).toEqual(1);
+    })
+  });
+  describe('login authentication functionality', function() {})
 });

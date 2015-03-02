@@ -18,7 +18,31 @@ angular.module('thesisApp')
     //   }, 500);
     // }
 
-    $scope.login = function(form) {
+
+
+  // $window.onAmazonLoginReady = function() {
+  //   amazon.Login.setClientId('YOUR-CLIENT-ID');
+  // };
+  // (function(d) {
+  //   var a = d.createElement('script');
+  //   a.type = 'text/javascript';
+  //   a.async = true;
+  //   a.id = 'amazon-login-sdk';
+  //   a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+  //   d.getElementById('amazon-root').appendChild(a);
+  // })(document);
+
+
+
+  // $scope.LoginWithAmazon = function() {
+  //   var options = {
+  //     scope: 'profile'
+  //   };
+  //   amazon.Login.authorize(options,
+  //     'https://sphereable.com/handle_login.php');
+  //   return false;
+  // };
+  $scope.login = function(form) {
       $scope.submitted = true;
 
       if (form.$valid) {

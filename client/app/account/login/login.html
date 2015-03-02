@@ -2,6 +2,11 @@
   <div id="loginBackground">
     <div id="innerBox">
       <h2 id="loginTxt">Login</h2>
+      <a ng-click = "loginOauth('amazon')" href id="LoginWithAmazon">
+          <img border="0" alt="Login with Amazon"
+            src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png" width="156" height="32" />
+          <div id = 'amazon-root'></div>
+      </a>
       <button type="button" class="btn btn-default facebook" href="" ng-click="loginOauth('facebook')">
         <i class="fa fa-facebook fa-fw"></i> Sign in with Facebook
       </button>
