@@ -388,14 +388,14 @@ angular.module('thesisApp')
           // if no product previously showing, animate window out
           if(!pastProduct) {
             $('#showcase-container').animate({
-              'margin-right': '+=1000'
+              'margin-right': '+=1000px'
             }, 500);
           }
         };
 
         scope.close = function() {
           $('#showcase-container').animate({
-            'margin-right': '-=1000'
+            'margin-right': '-=1000px'
           }, 500);
           scope.showcase = null;
         }
