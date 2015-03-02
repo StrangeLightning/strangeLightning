@@ -7,7 +7,7 @@ angular.module('thesisApp')
     facet.getFacets = function(searchTerm, callback) {
       return $http.post('/api/amazonproducts/', {
         q: searchTerm,
-        facets: 'category,price',
+        facets: 'category',
         limit: 0
       })
         .success(function(results) {

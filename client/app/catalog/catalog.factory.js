@@ -7,13 +7,14 @@ angular.module('thesisApp')
       $location.path('/product');
     };
 
-    catalog.doSearch = function(searchTerm, pageNumber, filters, callback) {
+    catalog.doSearch = function(searchTerm, pageNumber, filters, limit, callback) {
       $rootScope.$broadcast('search-in-progress');
       return $http.post('/api/amazonproducts/', {
         q: searchTerm,
-        facets: 'category,price',
+        facets: 'category',
         start: pageNumber,
-        filters: filters
+        filters: filters,
+        limit: limit
       })
         .success(function(results) {
           callback(results.data);

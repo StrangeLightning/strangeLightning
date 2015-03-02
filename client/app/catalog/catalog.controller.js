@@ -15,6 +15,8 @@ angular.module('thesisApp')
     $scope.amazonCart = cartFactory.amazonCart;
     $scope.clickLimit = 5;
     $scope.showMoreFacets = true;
+    $scope.startPriceFilter = 0;
+    $scope.endPriceFilter = 0;
 
     $scope.removeFromCart = function (product) {
       if (cartFactory.amazonCart.items) {
@@ -59,7 +61,7 @@ angular.module('thesisApp')
         });
       } else {
         $scope.filterFields.forEach(function (filter, i) {
-          if (filter.value == value) {
+          if (filter.value === value) {
             $scope.filterFields.splice(i, 1);
           }
         })
@@ -73,7 +75,7 @@ angular.module('thesisApp')
       filterFields = filterFields || null;
       $scope.searchTerm = searchTerm;
       $location.path("/catalog");
-      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, function (newProducts) {
+      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, null, function (newProducts) {
         newProducts = catalogFactory.processFacets(newProducts);
         $rootScope.$broadcast('products-updated', {
           newProducts: newProducts
@@ -85,6 +87,19 @@ angular.module('thesisApp')
     $scope.fetchPage = function (searchTerm, pageNumber) {
       pageNumber = (pageNumber - 1) * 12;
       $scope.doSearch(searchTerm, pageNumber);
+    };
+
+    // Function to sort by price
+    $scope.doPriceSort = function () {
+      //remove existing price filter, if exists
+      $scope.filterFields.forEach(function (filter, i) {
+        if (filter.term === 'price') {
+          $scope.filterFields.splice(i, 1);
+        }
+      });
+
+      // filter by price range
+      $scope.doSearchByFilter('price', '[' + $scope.startPriceFilter + ',' + $scope.endPriceFilter + ']');
     };
 
     //ajax call to show more favorite records

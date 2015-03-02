@@ -1,11 +1,7 @@
-html {
-  overflow: scroll;
-}
-
 .imgBkg {
   padding: 15px;
   height: 200px;
-  background-color: #fff;
+  /*background-color: #fff;*/
   text-align: center;
   overflow: hidden;
   cursor: pointer;
@@ -14,6 +10,7 @@ html {
 .centerImg {
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid black;
 }
 
 /* Custom buttons for catalog */
@@ -50,6 +47,7 @@ html {
 
 #sidebar-wrapper {
   height: 1000px;
+  overflow: scroll;
   background-color: rgba(255, 255, 255, 0.2);
   margin-left: 0px;
 }
@@ -65,7 +63,7 @@ html {
 }
 
 .sidebar-nav li {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 40px;
 }
 
@@ -105,6 +103,7 @@ html {
   margin: 0px;
 }
 
+/*facet filter styling*/
 .ui-select-bootstrap .ui-select-choices-row.active>a {
   background-color: #999;
 }
@@ -121,4 +120,14 @@ html {
 
 .show-more-link{
   text-decoration: underline!important;
+}
+
+.price-filter input {
+  width:50px;
+  height: 30px;
+}
+
+.price-filter {
+  font-size:22px!important;
+  line-height: 30px!important;
 }

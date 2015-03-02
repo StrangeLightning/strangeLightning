@@ -1,18 +1,41 @@
-/* #load {
-  width: 50%;
-  margin: 0 auto;
-  font-size: 24px;
-  background-color: black;
-  text-align: center;
-  position: relative;
-  top: 350px;
-  color: white;
-  border: 1px solid #999;
-  padding: 5px;
+#showcase-container {
+  position: absolute;
+  right: 0;
+  width: 30%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.4);
+  padding-right: 30px;
+  padding-bottom: 100px;
+  padding-left: 50px;
+  padding-top: 50px;
+  margin-top: 0px;
 }
 
-#load:hover {
-  color: black;
-  border: 1px solid #999;
-  background-color: #D7F5F5;
-} */
+#showcase {
+  padding-left: 40px;
+  padding-right: 25px;
+}
+#theImg {
+  height: 100%;
+  width: 100% !important;
+}
+
+#loadScreen {
+  overflow: hidden !important;
+}
+
+#loadTitle {
+  color: white;
+  position: absolute;
+  top: 100px;
+  left: 35%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#keys{
+  position: absolute;
+  top: 280px;
+  left: 70%;
+  height: 30%;
+}

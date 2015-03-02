@@ -16,14 +16,14 @@
   </table>
 
   <table class="table table-bordered table-hover">
-     <span ng-if="!(items.length > 0)"> No items in cart. </span>
+     <span ng-if="(!items.length > 0)"> No items in cart. </span>
 
     <tr ng-if="items.length > 0" ng-repeat="item in items">
       <td>{{item.Title[0]}}</td>
       <td>{{item.ItemTotal[0].FormattedPrice[0]}}</td>
       <td>{{item.Quantity[0]}}</td>
       <td>
-        <button type="button" ng-click="removeFromCart(item.ASIN[0])"  class="btn btn-md cartBtn">x
+        <button type="button" ng-click="removeFromCart(item.ASIN[0])"  aria-label="Close" class="btn btn-md cartBtn">x
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
       </td>
