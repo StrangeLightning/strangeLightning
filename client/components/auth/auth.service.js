@@ -126,10 +126,6 @@ angular.module('thesisApp')
         }
       },
 
-      isAuth: function() {
-        return !!$cookieStore.get('token');
-      },
-
       /**
        * Check if a user is an admin
        *
@@ -137,13 +133,6 @@ angular.module('thesisApp')
        */
       isAdmin: function() {
         return currentUser.role === 'admin';
-      },
-
-      /**
-       * Get auth token
-       */
-      getToken: function() {
-        return $cookieStore.get('token');
       }
     };
   });
