@@ -2,13 +2,32 @@
   <div id="loginBackground">
     <div id="innerBox">
       <h2 id="loginTxt">Login</h2>
-      <a ng-click = "loginOauth('amazon')" href id="LoginWithAmazon">
+      <a ng-click = "amazonLogin()" id="amazonLogin">
           <img border="0" alt="Login with Amazon"
             src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png" width="156" height="32" />
-          <div id = 'amazon-root'></div>
+            <div id = 'amazon-root'></div>
       </a>
+      <button id = 'Logout'>Logout</button>
+      <script type="text/javascript">
+
+      //   document.getElementById('LoginWithAmazon').onclick = function() {
+      //     options = { scope : 'profile' };
+      //     amazon.Login.authorize(options, 'https://localhost:4430/handle_login.php');
+      //     return false;
+      // };
+     
+      document.getElementById('Logout').onclick = function(){
+        amazon.Login.logout();
+        console.log('successfully logged out')
+      }      
+
+
+      </script>
       <button type="button" class="btn btn-default facebook" href="" ng-click="loginOauth('facebook')">
         <i class="fa fa-facebook fa-fw"></i> Sign in with Facebook
+      <script type='text/javascript'
+        src='https://static-na.payments-amazon.com/OffAmazonPayments/us/sandbox/js/Widgets.js'>
+       </script>
       </button>
       <br /><br />
       Use a <a href="www.facebook.com">Facebook account</a> to login, subject to

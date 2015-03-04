@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('LoginCtrl', function($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', function($scope, Auth, $location, $window, $http) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -19,30 +19,46 @@ angular.module('thesisApp')
     // }
 
 
+    //verifies public client key to amazon API
+    $window.onAmazonLoginReady = function() {
+      $http.get('auth/amazon/publicClientAuth').success(function(data) {
+        amazon.Login.setClientId(data)
+          //Loads Amazon SDK
+          (function(d) {
+            var authenticate = d.createElement('script');
+            authenticate.type = 'text/javascript';
+            authenticate.async = true;
+            authenticate.id = 'amazon-login-sdk';
+            authenticate.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+            d.getElementById('amazon-root').appendChild(authenticate);
+          })(document);
+      })
 
-  // $window.onAmazonLoginReady = function() {
-  //   amazon.Login.setClientId('YOUR-CLIENT-ID');
-  // };
-  // (function(d) {
-  //   var a = d.createElement('script');
-  //   a.type = 'text/javascript';
-  //   a.async = true;
-  //   a.id = 'amazon-login-sdk';
-  //   a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
-  //   d.getElementById('amazon-root').appendChild(a);
-  // })(document);
-
-
-
-  // $scope.LoginWithAmazon = function() {
-  //   var options = {
-  //     scope: 'profile'
-  //   };
-  //   amazon.Login.authorize(options,
-  //     'https://sphereable.com/handle_login.php');
-  //   return false;
-  // };
-  $scope.login = function(form) {
+    }
+    $scope.amazonLogin = function() {
+        var options = {
+          scope: 'profile'
+        };
+        amazon.Login.authorize(options, function(response) {
+          if (response.error) {
+            alert('oauth error ' + response.error);
+            return;
+          }
+          amazon.Login.retrieveProfile(response.access_token, function(response) {
+            console.log(response);
+          })
+        });
+        // return false;
+      }
+      // $scope.LoginWithAmazon = function() {
+      //   var options = {
+      //     scope: 'profile'
+      //   };
+      //   amazon.Login.authorize(options,
+      //     'https://sphereable.com/handle_login.php');
+      //   return false;
+      // };
+    $scope.login = function(form) {
       $scope.submitted = true;
 
       if (form.$valid) {

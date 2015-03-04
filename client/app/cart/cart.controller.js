@@ -9,7 +9,6 @@ angular.module('thesisApp')
       // $scope.rem
       $scope.removeFromCart = function(product) {
         if (cartFactory.amazonCart) {
-          console.log("cart state at remove", product)
           cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
             .success(function(data) {
               if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
