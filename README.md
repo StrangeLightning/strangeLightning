@@ -1,5 +1,5 @@
 # Sphereable
-[![Stories In Progress](https://badge.waffle.io/strangelightning/strangelightning.svg?label=In%20Progress&title=In%20Progress)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning) [![Coverage Status](https://coveralls.io/repos/StrangeLightning/strangeLightning/badge.svg?branch=master)](https://coveralls.io/r/StrangeLightning/strangeLightning?branch=master)
+[![Stories In Progress](https://badge.waffle.io/strangelightning/strangelightning.svg?label=In%20Progress&title=In%20Progress)](http://waffle.io/strangelightning/strangelightning) [![Circle CI](https://circleci.com/gh/StrangeLightning/strangeLightning.svg?style=svg)](https://circleci.com/gh/StrangeLightning/strangeLightning) 
 
 ## Mission Statement
 To create an intuitive 3D shopping experience that smartly recommends products to users.
