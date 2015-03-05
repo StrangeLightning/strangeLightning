@@ -20,12 +20,43 @@ var credentials = {
   cert: process.env.NODE_ENV === 'production' ? fs.readFileSync(path.join(__dirname, '/../../shared/config/ssl.crt'), 'utf-8') : fs.readFileSync('./shared/config/ssl.crt', 'utf-8')
 };
 
-// Connect to database
-mongoose.connect(config.mongo.uri);
 
-mongooose.connection.on('open', function () {
-  console.log("mongodb connection open");
+var insertDocuments = function(db, callback) {
+  // Get the documents collection
+  var collection = db.collection('documents');
+  // Insert some documents
+  collection.insert([
+    {a : 1}, {a : 2}, {a : 3}
+  ], function(err, result) {
+    console.log("Inserted 3 documents into the document collection");
+    callback(result);
+  });
+}
+
+var MongoClient = require('mongodb').MongoClient
+  , assert = require('assert');
+
+// Connection URL
+var url = 'mongodb://localhost:27017/thesis-app';
+// Use connect method to connect to the Server
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected correctly to server");
+
+  insertDocuments(db, function() {
+    db.close();
+  });
 });
+
+// Connect to database
+// mongoose.connect(config.mongo.uri);
+
+// mongooose.connection.on('open', function () {
+//   console.log("mongodb connection open");
+// });
+
+
+
 // Populate DB with sample data
 if (config.seedDB) {
   require('./server/config/seed');
@@ -90,7 +121,7 @@ var socketio = require('socket.io')(serverHTTPS, {
 });
 
 require('./server/config/socketio')(socketio);
-require('./server/config/express')(app);
+// require('./server/config/express')(app);
 require('./server/routes')(app);
 
 // Expose app
