@@ -23,6 +23,7 @@
     "lodash": "~2.4.1",
     "method-override": "~1.0.0",
     "mocha-lcov-reporter": "0.0.1",
+    "mongodb": "^1.4.31",
     "mongoose": "~3.8.8",
     "morgan": "~1.0.0",
     "node-schedule": "^0.1.16",
