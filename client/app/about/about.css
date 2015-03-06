@@ -1,14 +1,41 @@
+hr {
+  border-top: 1px solid #000;
+}
+
 #aboutDiv {
   position: relative;
   top: 100px;
   margin-left: 15%;
+  height: 500px;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+}
+
+#systemArch {
+  margin: 50px;
+  width: 800px;
 }
 
 .roundCorner {
   border-radius: 5px;
-  border: 1px solid white;
+  border: 1px solid black;
 }
 
 .bold {
   font-weight: 600;
+}
+
+.stackLogo:hover {
+  position: relative;
+  top: 10px;
+}
+
+.fa {
+  color: black;
+  font-size: 24px;
+}
+
+.fa:hover{
+  position: relative;
+  top: 5px;
 }
