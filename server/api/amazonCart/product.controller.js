@@ -16,31 +16,43 @@ exports.createCart = function(req, res, next) {
     'Item.1.ASIN': req.body.id,
     'Item.1.Quantity': '1'
   }, function(err, results) {
-    var cart = results.CartCreateResponse.Cart[0];
-    if (cart.Request && cart.Request[0].Errors) {
-      console.log('Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors));
+    if(err){
+      console.log(err);
       res.end({
-        error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors)
+        error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(err)
       });
-    } else if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
-      if (req.user) {
-        var user = req.user;
-        user.cart = cart;
-        user.cart.items = {};
-        user.cart.items[req.body.id] = 1;
-        user.cart.Quantity = 1;
-        user.cart.ASIN2CART = {};
-        user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-        user.ASIN2CART = {};
-        user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
-        user.save(function(err, u) {
-          if (!err) res.end(JSON.stringify(cart));
-        });
-      } else {
-        res.end(JSON.stringify(cart));
-      }
+    } else if(results.CartCreateErrorResponse) {
+      console.log(results.CartCreateErrorResponse.Error[0]);
+      res.end({
+        error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(results.CartCreateErrorResponse.Error[0])
+      });
     } else {
-      res.end('Something went wrong!')
+      var cart = results.CartCreateResponse.Cart[0];
+      if (cart.Request && cart.Request[0].Errors) {
+        console.log('Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors));
+        res.end({
+          error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(cart.Request[0].Errors)
+        });
+      } else if (results.CartCreateResponse && results.CartCreateResponse.Cart) {
+        if (req.user) {
+          var user = req.user;
+          user.cart = cart;
+          user.cart.items = {};
+          user.cart.items[req.body.id] = 1;
+          user.cart.Quantity = 1;
+          user.cart.ASIN2CART = {};
+          user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          user.ASIN2CART = {};
+          user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[0].CartItemId[0];
+          user.save(function(err, u) {
+            if (!err) res.end(JSON.stringify(cart));
+          });
+        } else {
+          res.end(JSON.stringify(cart));
+        }
+      } else {
+        res.end('Something went wrong!')
+      }
     }
   });
 };
@@ -98,35 +110,47 @@ exports.modifyCart = function(req, res, next) {
         'Item.1.ASIN': req.body.id,
         'Item.1.Quantity': '1'
       }, function(err, results) {
-
-        var cart = results.CartAddResponse.Cart[0];
-        if (user) {
-          user.cart = cart;
-          user.cart.items = items;
-          user.cart.items[req.body.id] = 1;
-          user.cart.ASIN2CART = ASIN2CART;
-          user.ASIN2CART = ASIN2CART;
-          user.cart.Quantity = calcQuantity(cart);
-          var flag = true;
-          for (var i = 0; i < cart.CartItems[0].CartItem.length; i++) {
-            if (cart.CartItems[0].CartItem[i].ASIN[0] === req.body.id) {
-              user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
-              user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
-              flag = false;
-              break;
-            }
-          }
-          if (flag) throw new Error('Cannot add id to ASIN2CART 129');
-          user.save(function(err, _user) {
-            if (err) {
-              console.log(err)
-            }
-            if (!err) {
-              res.end(JSON.stringify(cart))
-            }
+        if(err){
+          console.log(err);
+          res.end({
+            error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(err)
+          });
+        } else if(results.CartCreateErrorResponse) {
+          console.log(results.CartCreateErrorResponse.Error[0]);
+          res.end({
+            error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(results.CartCreateErrorResponse.Error[0])
           });
         } else {
-          res.end(JSON.stringify(cart));
+          var cart = results.CartAddResponse.Cart[0];
+          if (user) {
+            user.cart = cart;
+            user.cart.items = items;
+            user.cart.items[req.body.id] = 1;
+            user.cart.ASIN2CART = ASIN2CART;
+            user.ASIN2CART = ASIN2CART;
+            user.cart.Quantity = calcQuantity(cart);
+            var flag = true;
+            for (var i = 0; i < cart.CartItems[0].CartItem.length; i++) {
+              if (cart.CartItems[0].CartItem[i].ASIN[0] === req.body.id) {
+                user.cart.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
+                user.ASIN2CART[req.body.id] = cart.CartItems[0].CartItem[i].CartItemId[0];
+                flag = false;
+                break;
+              }
+            }
+            if (flag) throw new Error('Cannot add id to ASIN2CART 129');
+            user.save(function(err, _user) {
+              if (err) {
+                console.log(err)
+              }
+              if (!err) {
+                res.end(JSON.stringify(cart))
+              }
+            });
+
+          } else {
+            res.end(JSON.stringify(cart));
+          }
         }
       });
     }
