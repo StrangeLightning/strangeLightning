@@ -11,6 +11,11 @@ hr {
   overflow-y: scroll !important;
 }
 
+.centerCol {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #systemArch {
   margin: 50px;
   width: 800px;
