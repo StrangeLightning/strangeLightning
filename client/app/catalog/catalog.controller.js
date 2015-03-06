@@ -135,7 +135,7 @@ angular.module('thesisApp')
     });
 
     $scope.$on('search-in-progress', function (event, args) {
-      $scope.products.results.length = [];
+      $scope.products.results = [];
       $scope.products.totalCount = 0;
       $scope.searchInProgress = true;
     })
