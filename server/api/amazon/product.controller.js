@@ -105,6 +105,10 @@ exports.searchCart = function(req, res) {
           product.mediumImage = result.fields.img_url[0];
           product.category = result.fields.category[0];
           product.prodAttributes = JSON.parse(result.fields.prod_attributes[0]);
+          product.x = result.fields.x[0];
+          product.y = result.fields.y[0];
+          product.z = result.fields.z[0];
+          product.depth = result.fields.depth[0];
 
           _results.results.push(product);
 
