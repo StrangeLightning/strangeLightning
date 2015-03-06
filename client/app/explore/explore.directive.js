@@ -25,21 +25,14 @@ angular.module('thesisApp')
         };
       }],
       link: function(scope) {
-        var groundGeometry;
-        var groundMaterial;
-        var ground;
 
         var raycaster;
         var mouse = new THREE.Vector2();
-        var collision;
-        var radius = 100;
-        var theta = 0;
 
         var clock = new THREE.Clock();
 
-        var container, stats;
+        var container;
         var camera, scene, renderer;
-        var sphere;
         var waterNormals;
 
         var WATER_WIDTH = 1000000;
@@ -223,15 +216,14 @@ angular.module('thesisApp')
 
           // use model data to get modelToCategoryMap.json
           scope.modelData.get({}, function(modelMap) {
-            var modelMap = modelMap;
+            var coordinatesObject = {
+              x: '[-1000000,1000000]',
+              y: '[-1000000,1000000]',
+              z: '[-1000000,1000000]'
+            };
 
             // Add multiple objects from cloudsearch product index
-            scope.catalogFactory.doSearch('', 0, null, 100, function(newProducts) {
-              for(var j = 0; j < newProducts.results.length; j++) {
-                var product = newProducts.results[j];
-                scope.createObject(modelMap, product);
-              }
-            });
+            scope.doCoordinatesSearch(coordinatesObject, modelMap);
           });
         }
 
@@ -322,9 +314,6 @@ angular.module('thesisApp')
         /******************************************/
 
         function render() {
-
-          var time = performance.now() * 0.001;
-
           water.material.uniforms.time.value += 1.0 / 60.0;
           water.render();
 
