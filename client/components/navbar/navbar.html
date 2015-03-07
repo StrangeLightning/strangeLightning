@@ -1,8 +1,8 @@
 
   <!--
-    --------------------------------------------------------
-    -                        Menu                          -
-    --------------------------------------------------------
+    ========================================================
+    =                        Menu                          =
+    ========================================================
    -->
 
   <nav class="navbar navbar-default navbar-fixed-bottom" ng-controller="NavbarCtrl">
@@ -65,7 +65,7 @@
                        reset-search-input="true"
                        on-select="doSearch($item.title)"
                        title="Search">
-              <ui-select-match placeholder="Search...">{{$select.selected.value}}</ui-select-match>
+              <ui-select-match placeholder="Search">{{$select.selected.value}}</ui-select-match>
               <ui-select-choices repeat="suggestedProduct.title as suggestedProduct in suggestedProducts track by $index"
                                  refresh="doSuggestor($select.search)"
                                  refresh-delay="0">

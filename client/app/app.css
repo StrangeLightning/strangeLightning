@@ -13,11 +13,6 @@ a:hover, a:visited {
   text-decoration: none;
 }
 
-.col-sm-4 {
-  border-radius: 0;
-  padding: 0px;
-}
-
 .thumbnail {
   border: 0;
   border-radius: 0;
