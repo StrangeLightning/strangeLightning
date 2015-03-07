@@ -11,6 +11,10 @@
   margin-top: 0px;
 }
 
+#clickMsg {
+  color: rgba(255,255,255, 0.8);
+}
+
 #showcase {
   padding-left: 40px;
   padding-right: 25px;
