@@ -1,18 +1,18 @@
 {
-  "Apparel": "shoes",
-  "Art and Craft Supply": "doll",
+  "Apparel": "hat_obj",
+  "Art and Craft Supply": "teddyBear",
   "Automotive Parts and Accessories": "car",
-  "Baby Product": "teddyBear",
+  "Baby Product": "balancingHorse",
   "Book": "books",
-  "DVD": "_spacecraft",
+  "DVD": "globe",
   "Home": "dice",
-  "Home Improvement": "toyCube",
+  "Home Improvement": "rabbid",
   "Kitchen": "duck",
   "Music": "camera",
   "Office Product": "dinosaur",
-  "PC Accessory": "legoFigure",
-  "Pet Products": "sonicHedgehog",
+  "PC Accessory": "remote",
+  "Pet Products": "character",
   "Sports": "skateboard",
-  "Toy": "balancingHorse",
-  "Video Games": "remote"
+  "Toy": "legoFigure",
+  "Video Games": "xbox"
 }

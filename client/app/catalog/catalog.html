@@ -1,4 +1,4 @@
-<div class="row-fluid">
+<div class="row-fluid catalogPage">
 
   <!-- Sidebar wrapper -->
   <div id="sidebar-wrapper" class="col-md-2" s>
@@ -30,13 +30,12 @@
       </li>
 
       <li class="price-filter">
-        <h5 class="facet-title">Price</h5>
+        <h5 class="facet-title">PRICE RANGE</h5>
         $<input type="text" ng-model="startPriceFilter"> to $<input type="text" ng-model="endPriceFilter">
         <a href='#' ng-click='doPriceSort()' class="show-more-link">Go</a>
       </li>
 
     </ul>
-
   </div>
   <!-- End sidebar wrapper -->
 
@@ -48,17 +47,18 @@
          dir-paginate="product in products.results | itemsPerPage: 12 track by $index" total-items="products.totalCount">
       <div class="thumbnail">
         <div class="imgBkg" ng-click="viewItem(product)">
-          <img class="centerImg" src="{{product.mediumImage}}"/>
+          <img class="centerImg" src="{{ product.mediumImage }}"/>
         </div>
 
         <div class="caption">
-          <h4 ng-if="product.title.length >= 100">{{product.title.substr(0,75)}}...</h4>
-          <h4 ng-if="product.title.length < 100">{{product.title}}</h4>
+          <h4 ng-if="product.title.length >= 75">{{product.title.substr(0,75)}}...</h4>
+          <h4 ng-if="product.title.length < 75">{{product.title}}</h4>
 
           <p>Price: {{product.price | currency:"$"}}</p>
-          <a ng-click="addToCart(product.id)" class="btn btn-primary" role="button">Add to Cart</a>
+          
           </p>
         </div>
+        <a ng-click="addToCart(product.id)" class="btn btn-primary addToCart" role="button">Add to Cart</a>
       </div>
     </div>
 
@@ -70,7 +70,7 @@
       * Try more general keywords.
     </div>
 
-    <!--pagination-->
+    <!-- Pagination -->
     <dir-pagination-controls on-page-change="fetchPage(searchTerm, newPageNumber)"
                              template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">
     </dir-pagination-controls>

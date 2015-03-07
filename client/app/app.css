@@ -3,12 +3,6 @@ html, body {
   width: 100%;
   overflow: hidden;
   font-family: 'PT Sans Narrow', sans-serif;
-
-  /* Background gradient */
-  background: -webkit-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#A8DED8, #D7F5F5, #C6B7B2); /* Standard syntax (must be last) */
 }
 
 #ajax-loader {
