@@ -38,10 +38,10 @@ describe('CartCtrl', function() {
     });
 
     it('should have a removeFromCart function ', function() {
-      // with(localContext) {}
       expect($scope.removeFromCart).toBeDefined();
+    });
+    it('should have a checkout (goToAmazonCart) function', function() {
+      expect($scope.goToAmazonCart).toBeDefined();
     })
-    it('should have ')
   });
-  describe('login authentication functionality', function() {})
 });
