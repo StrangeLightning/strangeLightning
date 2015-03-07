@@ -2,6 +2,9 @@ angular.module('thesisApp')
   .factory('cartFactory', ['$http', 'Auth', 'localStorageService', '$rootScope', function($http, Auth, localStorageService, $rootScope) {
     var cart = {};
     cart.amazonCart = {};
+    //all local storage of amazonItems will be on this object.
+    //due to the throttle limit on the Amazon Product API (40 calls/minute)
+    //and the cronjobs running from the product server this is neccesisary
 
     //add item to db
     cart.addItem = function(items, item, user) {

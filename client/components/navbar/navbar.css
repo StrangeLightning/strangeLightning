@@ -1,9 +1,10 @@
 .nav-search {
   width: 100%;
+  border-radius: 10px;
 }
 
 .nav-search-container {
-  width: 386px;
+  /*width: 386px;*/
 }
 
 .ui-select-choices-row-inner {
@@ -29,6 +30,6 @@
 
 @media (max-width: 1200px) {
   .nav-search-container {
-    float: left!important;
+    /*float: left!important;*/
   }
 }

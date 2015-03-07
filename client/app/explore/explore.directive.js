@@ -1,5 +1,5 @@
 angular.module('thesisApp')
-  .directive('threeWorld', function() {
+  .directive('threeWorld', function($rootScope) {
     return {
       restrict: 'E',
       controller: ['$scope', 'catalogFactory', 'modelData', function($scope, catalogFactory, modelData) {
@@ -23,9 +23,9 @@ angular.module('thesisApp')
             }
           });
         };
+
       }],
       link: function(scope) {
-
         var raycaster;
         var mouse = new THREE.Vector2();
 
@@ -103,6 +103,7 @@ angular.module('thesisApp')
           spotLight.castShadow = true;
           spotLight.shadowCameraVisible = false;
 
+          // Resolution of shadows
           spotLight.shadowMapWidth = 4096;
           spotLight.shadowMapHeight = 4096;
 
@@ -133,9 +134,10 @@ angular.module('thesisApp')
           waterNormals = new THREE.ImageUtils.loadTexture('assets/images/waternormals.jpg');
           waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
+          // Set the water texture and calculate according to the camera position
           water = new THREE.Water(renderer, camera, scene, {
-            textureWidth: 512,
-            textureHeight: 512,
+            textureWidth: 256,
+            textureHeight: 256,
             waterNormals: waterNormals,
             alpha: 1.0,
             sunDirection: light.position.clone().normalize(),
@@ -148,6 +150,7 @@ angular.module('thesisApp')
             new THREE.PlaneBufferGeometry(parameters.width * 500, parameters.height * 500),
             water.material
           );
+
           waterMesh.add(water);
           waterMesh.rotation.x = -Math.PI * 0.5;
 
@@ -255,16 +258,17 @@ angular.module('thesisApp')
               }
             });
 
-            object.position.x = product.x - 200000;
-            object.position.y = product.y - 50000;
-            object.position.z = product.z - 200000;
-            // object.position.x = Math.random() * 500000 - 200000;
-            // object.position.y = Math.random() * 300000 - 50000;
-            // object.position.z = Math.random() * 500000 - 200000;
+            // Position each object according to the graph functions
+            object.position.x = product.x - 300000;
+            object.position.y = product.y * 0.5 - 50000;
+            object.position.z = product.z - 300000;
+
+            // Rotate randomly each object
             object.rotation.x = degInRad(Math.random() * 90);
             object.rotation.y = degInRad(Math.random() * 90);
             object.rotation.z = degInRad(Math.random() * 90);
 
+            // Increase the scale of the object by 500x
             object.scale.set(500, 500, 500);
 
             object.castShadow = true;
@@ -282,12 +286,14 @@ angular.module('thesisApp')
         // handles resizing the renderer when the window is resized
         window.addEventListener('resize', onWindowResize, false);
 
+        // Resize image when window is resized
         function onWindowResize() {
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
           renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
+        // Clicking on objects creates a ray between cursor and perpendicular back-plane
         function onDocumentMouseDown(event) {
 
           event.preventDefault();
@@ -297,6 +303,7 @@ angular.module('thesisApp')
           var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
           var intersects = raycaster.intersectObjects(scene.children, true);
 
+          // Get the first object from the 'intersects' array
           var selected = intersects[0].object;
 
           if(intersects.length > 0 && selected.name === "") {
@@ -318,7 +325,7 @@ angular.module('thesisApp')
           water.render();
 
           // Bounding box for navigation in all axes
-          if(controls.object.position.y > 2200000) {
+          if(controls.object.position.y > 80000) {
 
             controls.moveForward = false;
             controls.moveBackward = false;
@@ -370,27 +377,12 @@ angular.module('thesisApp')
         }
 
         // hide the showcase by default
-        $('#showcase-container').css('margin-right', '-1000px');
+        $('.showcase-container').css('margin-right', '-1000px');
 
         scope.showcaseProduct = function(product) {
-          var pastProduct = scope.showcase;
-          scope.showcase = product;
+          $rootScope.$broadcast('showcaseProduct', product);
           scope.$apply();
-
-          // if no product previously showing, animate window out
-          if(!pastProduct) {
-            $('#showcase-container').animate({
-              'margin-right': '+=1000px'
-            }, 500);
-          }
         };
-
-        scope.close = function() {
-          $('#showcase-container').animate({
-            'margin-right': '-=1000px'
-          }, 500);
-          scope.showcase = null;
-        }
       }
     };
   });

@@ -1,4 +1,4 @@
-#showcase-container {
+.showcase-container {
   position: absolute;
   right: 0;
   width: 30%;
@@ -9,6 +9,10 @@
   padding-left: 50px;
   padding-top: 50px;
   margin-top: 0px;
+}
+
+#clickMsg {
+  color: rgba(255,255,255, 0.8);
 }
 
 #showcase {

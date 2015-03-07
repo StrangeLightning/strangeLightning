@@ -3,6 +3,7 @@
 angular.module('thesisApp')
   .factory('catalogFactory', ['$location', '$http', '$rootScope', 'localStorageService', function($location, $http, $rootScope, localStorageService) {
     var catalog = {};
+
     catalog.viewItem = function() {
       $location.path('/product');
     };

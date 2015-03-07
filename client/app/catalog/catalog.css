@@ -1,3 +1,7 @@
+.catalogPage {
+  background-color: #fff;
+}
+
 .imgBkg {
   padding: 15px;
   height: 200px;
@@ -7,10 +11,30 @@
   cursor: pointer;
 }
 
+.showcase-catalog {
+  position: absolute;
+  right: 0;
+  width: 30%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.4);
+  padding-right: 30px;
+  padding-bottom: 100px;
+  padding-left: 50px;
+  padding-top: 50px;
+  margin-top: 0px;
+}
+
+.addToCart{
+  width: 80%;
+  position: absolute;
+  margin-bottom: 30px;
+  bottom: 0;
+  left: 10%;
+}
+
 .centerImg {
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid black;
 }
 
 /* Custom buttons for catalog */
@@ -22,7 +46,7 @@
   margin-top: 10px;
   margin-left: 1px;
   margin-right: 1px;
-}
+  }
 
 .btn:hover {
   color: black;
@@ -43,13 +67,15 @@
 #catalog-photos {
   overflow: scroll;
   margin-top: 20px;
+  text-align: center;
 }
 
 #sidebar-wrapper {
   height: 1000px;
   overflow: scroll;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.02);
   margin-left: 0px;
+
 }
 
 /* Sidebar for search filters */
@@ -58,21 +84,24 @@
   position: relative;
   top: 140px;
   padding: 0;
+  padding-left: 5px; 
   list-style: none;
   overflow: scroll;
 }
 
 .sidebar-nav li {
-  font-size: 12px;
-  line-height: 40px;
+  font-size: 14px;
+  line-height: 30px;
 }
 
 .sidebar-nav li a {
   /* display: block; */
   text-decoration: none;
   color: #999;
-  /* padding-left: 30px; */
-  padding-right: 30px;
+  padding: 3px;
+  padding-left: 10px; 
+  padding-right: 10px; 
+
 }
 
 .sidebar-nav li a:hover {
@@ -128,6 +157,12 @@
 }
 
 .price-filter {
-  font-size:22px!important;
   line-height: 30px!important;
+  margin-bottom: 20px;
 }
+
+#pagination{
+  background-color: #000;
+}
+
+

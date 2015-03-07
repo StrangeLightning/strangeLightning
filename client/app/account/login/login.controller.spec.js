@@ -1,5 +1,5 @@
 describe('LoginCtrl', function() {
-  var LoginCtrl, createLoginCtrl, $scope, $rootScope, $controller, $httpBackend, $location, $q, $window;
+  var LoginCtrl, createLoginCtrl, $scope, $rootScope, $controller, $httpBackend, $location, $window;
 
   beforeEach(function() {
     module('thesisApp');
@@ -48,18 +48,18 @@ describe('LoginCtrl', function() {
 
       // simulated context
       with(localContext) {
-        // console.log(window.location.href);
-        // $scope.loginOauth('facebook')
-        // console.log(window.location.href);
+          // console.log(window.location.href);
+          // $scope.loginOauth('facebook')
+          // console.log(window.location.href);
 
-        // http://www.website.com?varName=foo
-      }
-      // console.
-      // SpyOn($window.location, 'href').toEqual('/auth/facebook')
-      // $httpBackend.whenGET('/auth/facebook').respond(200)
-      // scope.loginOauth('faker')
-      // console.log("SCOPE", scope)
-      // console.log("LoginCtrl: ", LoginCtrl)
+          // http://www.website.com?varName=foo
+        }
+        // console.
+        // SpyOn($window.location, 'href').toEqual('/auth/facebook')
+        // $httpBackend.whenGET('/auth/facebook').respond(200)
+        // scope.loginOauth('faker')
+        // console.log("SCOPE", scope)
+        // console.log("LoginCtrl: ", LoginCtrl)
       expect(1).toEqual(1);
     })
   });

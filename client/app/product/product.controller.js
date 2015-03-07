@@ -39,10 +39,4 @@ angular.module('thesisApp')
       $('#product-container').css({
         height: block - navbar
       });
-
-      $scope.close = function() {
-        $('#product-container').animate({
-          'margin-right': '-=1000'
-        }, 500);
-      }
     }]);

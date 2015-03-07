@@ -20,10 +20,9 @@ angular.module('thesisApp')
 
     $scope.removeFromCart = function (product) {
       if (cartFactory.amazonCart.items) {
-        console.log("Product FROM REmove on catalog", product);
         cartFactory.amazonRemoveProduct(product.id, cartFactory.amazonCart)
       } else {
-        console.log("item not in cart");
+        console.log("Item not in cart");
       }
     };
 
@@ -38,7 +37,8 @@ angular.module('thesisApp')
 
     $scope.viewItem = function (product) {
       catalogFactory.product = product;
-      catalogFactory.viewItem(product);
+      $rootScope.$broadcast('showcaseProduct', product);
+      //catalogFactory.viewItem(product);
     };
 
     $scope.getImage = function (product) {
@@ -102,7 +102,7 @@ angular.module('thesisApp')
       $scope.doSearchByFilter('price', '[' + $scope.startPriceFilter + ',' + $scope.endPriceFilter + ']');
     };
 
-    //ajax call to show more favorite records
+    // ajax call to show more favorite records
     $scope.showMoreFacetLinks = function (numberToShow) {
       // toggle to "Show Less"
       $scope.showMoreFacets = false;
@@ -111,7 +111,7 @@ angular.module('thesisApp')
       $scope.clickLimit = numberToShow;
     };
 
-    //ajax call to show less favorite records
+    // ajax call to show less favorite records
     $scope.showLessFacetLinks = function () {
       // toggle to "Show More"
       $scope.showMoreFacets = true;
@@ -120,15 +120,15 @@ angular.module('thesisApp')
       $scope.clickLimit = 5;
     };
 
-    //INIT
-    //initially, if products empty, then call search to show items
+    // Initialize
+    // if products empty, then call search to show items
     if (!$scope.products) {
       $scope.doSearch('', 0, function (newProducts) {
         $scope.products = newProducts;
       });
     }
 
-    //listen for products-updated event, which is broadcasted from navbar.controller.js
+    // listen for products-updated event, which is broadcasted from navbar.controller.js
     $scope.$on('products-updated', function (event, args) {
       $scope.products = args.newProducts;
       $scope.searchInProgress = false;
