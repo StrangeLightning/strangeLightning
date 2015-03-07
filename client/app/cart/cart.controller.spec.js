@@ -1,19 +1,47 @@
-'use strict';
+describe('CartCtrl', function() {
+  var CartCtrl, createCartCtrl, cartFactory, $scope, $rootScope, $controller, $httpBackend;
 
-describe('Controller: CartCtrl', function() {
+  beforeEach(function() {
+    module('thesisApp');
 
-  // load the controller's module
-  beforeEach(module('thesisApp'));
+    inject(function($rootScope, $controller, _$httpBackend_, cartFactory) {
+      $scope = $rootScope.$new();
+      $httpBackend = _$httpBackend_;
+      cartFactory = cartFactory
+        // $localStorageService = _$localStorageService_;
+      createCartCtrl = function() {
+        $controller('CartCtrl', {
+          $scope: $scope,
+        })
+      };
+      createCartCtrl()
 
-  var CartCtrl, scope;
+    })
+    $httpBackend.whenPOST('/api/amazoncarts/get').respond('200')
+  });
+  afterEach(function() {
+    $httpBackend.whenPOST('/api/amazoncarts/get').respond('200')
+    $httpBackend.whenGET('app/explore/explore.html').respond('301')
+    $httpBackend.flush()
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller, $rootScope) {
-    scope = $rootScope.$new();
-    CartCtrl = $controller('CartCtrl', {
-      $scope: scope
+  describe('controller functions in place', function() {
+    it("should have a scope variable", function() {
+
+      expect($scope).toBeDefined();
     });
-  }));
 
+    it("should have a getItems function function", function() {
+      expect($scope.getItems).toBeDefined();
+    });
 
+    it('should have a removeFromCart function ', function() {
+      expect($scope.removeFromCart).toBeDefined();
+    });
+    it('should have a checkout (goToAmazonCart) function', function() {
+      expect($scope.goToAmazonCart).toBeDefined();
+    })
+  });
 });

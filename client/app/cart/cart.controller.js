@@ -9,7 +9,6 @@ angular.module('thesisApp')
       // $scope.rem
       $scope.removeFromCart = function(product) {
         if (cartFactory.amazonCart) {
-          console.log("cart state at remove", product)
           cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
             .success(function(data) {
               if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
@@ -50,19 +49,7 @@ angular.module('thesisApp')
           }
         });
       };
-
-      //add item to db
-      $scope.addItem = function(item) {
-
-      };
-
-      //remove item locally and from db
-      $scope.removeItem = function(items, item) {
-
-      };
-
-      //clear items locally and drop schema
-      $scope.dropSchema = function() {
+      $scope.clearCart = function() {
         $scope.items = 0;
         $scope.subTotal = "$0.00";
         cartFactory.amazonClearCart();

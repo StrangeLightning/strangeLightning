@@ -16,12 +16,12 @@ exports.createCart = function(req, res, next) {
     'Item.1.ASIN': req.body.id,
     'Item.1.Quantity': '1'
   }, function(err, results) {
-    if(err){
+    if (err) {
       console.log(err);
       res.end({
         error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(err)
       });
-    } else if(results.CartCreateErrorResponse) {
+    } else if (results.CartCreateErrorResponse) {
       console.log(results.CartCreateErrorResponse.Error[0]);
       res.end({
         error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(results.CartCreateErrorResponse.Error[0])
@@ -110,12 +110,12 @@ exports.modifyCart = function(req, res, next) {
         'Item.1.ASIN': req.body.id,
         'Item.1.Quantity': '1'
       }, function(err, results) {
-        if(err){
+        if (err) {
           console.log(err);
           res.end({
             error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(err)
           });
-        } else if(results.CartCreateErrorResponse) {
+        } else if (results.CartCreateErrorResponse) {
           console.log(results.CartCreateErrorResponse.Error[0]);
           res.end({
             error: 'Something went wrong! Here is a snippet: ' + JSON.stringify(results.CartCreateErrorResponse.Error[0])
