@@ -8,10 +8,6 @@ angular.module('thesisApp')
       $location.path('/product');
     };
 
-    catalog.showcaseUpdate = function () {
-      $rootScope.$broadcaset('change');
-    };
-
     catalog.doSearch = function(searchTerm, pageNumber, filters, limit, callback) {
       $rootScope.$broadcast('search-in-progress');
       return $http.post('/api/amazonproducts/', {
