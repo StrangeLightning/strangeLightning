@@ -1,5 +1,5 @@
 angular.module('thesisApp')
-  .directive('threeWorld', function() {
+  .directive('threeWorld', function($rootScope) {
     return {
       restrict: 'E',
       controller: ['$scope', 'catalogFactory', 'modelData', function($scope, catalogFactory, modelData) {
@@ -23,9 +23,9 @@ angular.module('thesisApp')
             }
           });
         };
+
       }],
       link: function(scope) {
-
         var raycaster;
         var mouse = new THREE.Vector2();
 
@@ -370,27 +370,12 @@ angular.module('thesisApp')
         }
 
         // hide the showcase by default
-        $('#showcase-container').css('margin-right', '-1000px');
+        $('.showcase-container').css('margin-right', '-1000px');
 
         scope.showcaseProduct = function(product) {
-          var pastProduct = scope.showcase;
-          scope.showcase = product;
+          $rootScope.$broadcast('showcaseProduct', product);
           scope.$apply();
-
-          // if no product previously showing, animate window out
-          if(!pastProduct) {
-            $('#showcase-container').animate({
-              'margin-right': '+=1000px'
-            }, 500);
-          }
         };
-
-        scope.close = function() {
-          $('#showcase-container').animate({
-            'margin-right': '-=1000px'
-          }, 500);
-          scope.showcase = null;
-        }
       }
     };
   });
