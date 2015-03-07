@@ -49,7 +49,7 @@ angular.module('thesisApp')
           }
         });
       };
-      $scope.dropSchema = function() {
+      $scope.clearCart = function() {
         $scope.items = 0;
         $scope.subTotal = "$0.00";
         cartFactory.amazonClearCart();
