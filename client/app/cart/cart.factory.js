@@ -104,41 +104,43 @@ angular.module('thesisApp')
     };
 
     cart.amazonRemoveProduct = function(product, amazonCart) {
-
       var newquantity;
-      var emptyCart = true;
-      //if find and update quantity in serverside cart
-      // console.log("AMAZON CART AT REMOVE", cart.amazonCart)
+      //look for the product id of being updated item in the cart
       for (var i = 0; i < cart.amazonCart.items.length; i++) {
-        if (cart.amazonCart.items[i]['quantity'] > 0) {
-          emptyCart = false
-        }
         if (product === cart.amazonCart.items[i]['productId']) {
-          if (cart.amazonCart.items[i]['quantity'] > 0) {
-            console.log("LOCAL CART ITEM Q AT REMOBE", cart.amazonCart.items[i]['quantity'])
-            newquantity = --cart.amazonCart.items[i]['quantity'];
-            break;
-          }
+          //save new desired value to be set to by the
+          newquantity = cart.amazonCart.items[i]['quantity'] - 1;
+          //save the place in the cart to follow DRY pattern
+          var currentItem = i;
+          break;
         }
-        newquantity = newquantity || 0;
-
-
       }
+      //call to the API to removes 1 quantity of the item
+
       return $http.post('/api/amazoncarts/modify', {
-        'id': product,
-        'productId': product,
-        'CartId': cart.amazonCart['CartId'],
-        'HMAC': cart.amazonCart['HMAC'],
-        'Quantity': newquantity
-      })
+          'id': product,
+          'productId': product,
+          'CartId': cart.amazonCart['CartId'],
+          'HMAC': cart.amazonCart['HMAC'],
+          'Quantity': newquantity
+        })
+        .success(function(data) {
+          //success indicates a call to the API had no error,
+          //WARNING: success only means that a call was made
+          //due to the limit of API calls/minute it might
+          //not update the cart so we run the check
+          if (data['Quantity'] < cart.amazonCart['Qty']) {
+            if (newquantity === 0) {
+              //remove item from local cart
+              cart.amazonCart.items.splice(currentItem, 1)
+            } else {
+              cart.amazonCart.currentItem = newquantity;
+            }
+            cart.amazonCart['Qty'] = data['Quantity'];
+            //update local quantity
+            cart.saveLocally(cart.amazonCart);
+          }
 
-
-
-      .success(function(data) {
-          cart.amazonCart['Qty'] --;
-          cart.saveLocally(cart.amazonCart)
-
-          console.log('successful res from AMAZON client', data)
         })
         .error(function(err) {
           console.log("ERROR creating Cart ", err)
