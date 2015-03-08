@@ -131,6 +131,7 @@ angular.module('thesisApp')
           if (data['Quantity'] < cart.amazonCart['Qty']) {
             if (newquantity === 0) {
               //remove item from local cart
+              console.log('item being spliced')
               cart.amazonCart.items.splice(currentItem, 1)
             } else {
               cart.amazonCart.items[currentItem]['quantity'] --;
@@ -140,6 +141,7 @@ angular.module('thesisApp')
 
             //update local quantity
           } else if (data['Quantity'] === undefined) {
+
             cart.amazonClearCart()
           }
 
