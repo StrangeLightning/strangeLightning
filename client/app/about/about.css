@@ -4,9 +4,7 @@ hr {
 
 #aboutDiv {
   position: relative;
-  top: 100px;
   margin-left: 15%;
-  height: 500px;
   overflow-x: hidden !important;
   overflow-y: scroll !important;
 }
