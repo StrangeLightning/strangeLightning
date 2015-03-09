@@ -20,7 +20,6 @@ angular.module('thesisApp')
       $scope.logout = function() {
         Auth.logout();
         if (localStorageService.get('Cart')) {
-          localStorageService.get('Cart')['Qty'] || 0;
           localStorageService.set('Cart', null)
         }
         $scope.cartQty = 0;
