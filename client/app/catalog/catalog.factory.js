@@ -1,14 +1,17 @@
 'use strict';
 
 angular.module('thesisApp')
-  .factory('catalogFactory', ['$location', '$http', '$rootScope', 'localStorageService', function($location, $http, $rootScope, localStorageService) {
+  .factory('catalogFactory', ['$location', '$http', '$rootScope', '$state', 'localStorageService', function($location, $http, $rootScope, $state, localStorageService) {
     var catalog = {};
+    catalog.newSearch = true;
+    catalog.products = [];
 
     catalog.viewItem = function() {
       $location.path('/product');
     };
 
-    catalog.doSearch = function(searchTerm, pageNumber, filters, limit, callback) {
+    catalog.doSearch = function(searchTerm, pageNumber, filters, limit) {
+
       $rootScope.$broadcast('search-in-progress');
       return $http.post('/api/amazonproducts/', {
         q: searchTerm,
@@ -17,12 +20,6 @@ angular.module('thesisApp')
         filters: filters,
         limit: limit
       })
-        .success(function(results) {
-          callback(results.data);
-        })
-        .error(function(err) {
-          console.log(err);
-        });
     };
 
     catalog.doSuggestor = function(searchTerm, callback) {

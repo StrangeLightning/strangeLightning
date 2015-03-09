@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('CatalogCtrl', ['$scope', '$rootScope', 'cartFactory', 'catalogFactory', '$http', '$location', function ($scope, $rootScope, cartFactory, catalogFactory, $http, $location) {
-    $scope.facetFields = "";
-    $scope.filterFields = "";
+  .controller('CatalogCtrl', ['$scope', '$rootScope', 'cartFactory', 'catalogFactory', '$http', '$location', '$stateParams', function ($scope, $rootScope, cartFactory, catalogFactory, $http, $location, $stateParams) {
     $scope.selectedItems = [];
     $scope.from = 0;
     $scope.page = 1;
@@ -17,6 +15,7 @@ angular.module('thesisApp')
     $scope.showMoreFacets = true;
     $scope.startPriceFilter = 0;
     $scope.endPriceFilter = 0;
+    $scope.products = {};
 
     $scope.removeFromCart = function (product) {
       if (cartFactory.amazonCart.items) {
@@ -67,26 +66,28 @@ angular.module('thesisApp')
         })
       }
 
-      $scope.doSearch($scope.searchTerm, 0, $scope.filterFields);
+      $scope.doSearch($scope.searchTerm, 0, $scope.filterFields, null, null);
     };
 
     $scope.doSearch = function (searchTerm, pageNumber, filterFields) {
       pageNumber = pageNumber || 0;
-      filterFields = filterFields || null;
+      $scope.filterFields = filterFields || null;
       $scope.searchTerm = searchTerm;
-      $location.path("/catalog");
-      catalogFactory.doSearch(searchTerm, pageNumber, filterFields, null, function (newProducts) {
-        newProducts = catalogFactory.processFacets(newProducts);
-        $rootScope.$broadcast('products-updated', {
-          newProducts: newProducts
+      catalogFactory.doSearch(searchTerm, pageNumber, $scope.filterFields, null, null, null)
+        .success(function(results) {
+          catalogFactory.newSearch = false;
+          $rootScope.$broadcast('products-updated');
+          $scope.products = results.data;
+        })
+        .error(function(err) {
+          console.log(err);
         });
-      });
     };
 
     // Function for fetch page results.
     $scope.fetchPage = function (searchTerm, pageNumber) {
       pageNumber = (pageNumber - 1) * 12;
-      $scope.doSearch(searchTerm, pageNumber);
+      $scope.doSearch(searchTerm, pageNumber, null, null, null);
     };
 
     // Function to sort by price
@@ -122,15 +123,17 @@ angular.module('thesisApp')
 
     // Initialize
     // if products empty, then call search to show items
-    if (!$scope.products) {
-      $scope.doSearch('', 0, function (newProducts) {
-        $scope.products = newProducts;
-      });
+    if (catalogFactory.newSearch) {
+      $scope.doSearch('', 0, null, null, null);
+    }
+
+    if($stateParams.products.results){
+      $scope.products = $stateParams.products;
+      $scope.searchInProgress = false;
     }
 
     // listen for products-updated event, which is broadcasted from navbar.controller.js
     $scope.$on('products-updated', function (event, args) {
-      $scope.products = args.newProducts;
       $scope.searchInProgress = false;
     });
 

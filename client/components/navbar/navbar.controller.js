@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('thesisApp')
-  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', '$timeout', 'localStorageService',
+  .controller('NavbarCtrl', ['$rootScope', '$scope', '$location', '$http', 'Auth', 'catalogFactory', '$timeout', '$state', 'localStorageService',
 
-    function($rootScope, $scope, $location, $http, Auth, catalogFactory, $timeout, localStorageService) {
+    function($rootScope, $scope, $location, $http, Auth, catalogFactory, $timeout, $state, localStorageService) {
       $scope.isCollapsed = true;
       $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.isAdmin = Auth.isAdmin;
@@ -22,6 +22,7 @@ angular.module('thesisApp')
         if (localStorageService.get('Cart')) {
           localStorageService.set('Cart', null)
         }
+
         $scope.cartQty = 0;
         $location.path('/login');
       };
@@ -33,14 +34,15 @@ angular.module('thesisApp')
       $scope.doSearch = function(searchTerm, pageNumber) {
         pageNumber = pageNumber || 0;
         $scope.searchTerm = searchTerm;
-        $location.path("/catalog");
-
-        catalogFactory.doSearch(searchTerm, pageNumber, null, null, function(newProducts) {
-          newProducts = catalogFactory.processFacets(newProducts);
-          $rootScope.$broadcast('products-updated', {
-            newProducts: newProducts
+        catalogFactory.doSearch(searchTerm, pageNumber, null, null, true)
+          .success(function(results) {
+            catalogFactory.newSearch = false;
+            $rootScope.$broadcast('products-updated');
+            $state.go('catalog', { products : results.data});
+          })
+          .error(function(err) {
+            console.log(err);
           });
-        });
       };
 
       $scope.doSuggestor = function(searchTerm) {

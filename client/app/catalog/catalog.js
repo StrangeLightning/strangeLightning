@@ -6,6 +6,7 @@ angular.module('thesisApp')
       .state('catalog', {
         url: '/catalog',
         templateUrl: 'app/catalog/catalog.html',
-        controller: 'CatalogCtrl'
+        controller: 'CatalogCtrl',
+        params: { products: [] }
       });
   });
