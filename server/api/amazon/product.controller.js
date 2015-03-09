@@ -112,7 +112,7 @@ exports.searchCart = function(req, res) {
 
           _results.results.push(product);
 
-          if(_results.results.length === data.hits.hit.length - 1) {
+          if(_results.results.length === data.hits.hit.length) {
             res.end(JSON.stringify({
               data: _results
             }));
