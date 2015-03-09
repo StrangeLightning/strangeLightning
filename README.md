@@ -15,7 +15,7 @@ To create an intuitive 3D shopping experience that smartly recommends products t
 ## Demo
 
 View [Sphereable](http://sphereable.com).
-![](https://raw.githubusercontent.com/StrangeLightning/Documentation/master/designProcess/screenshotExplore.png)
+![](https://s3-us-west-2.amazonaws.com/sphereable-images/screenshot2.png)
 
 ## Roadmap
 
@@ -29,7 +29,3 @@ See [CONTRIBUTING.md](https://github.com/StrangeLightning/strangeLightning/blob/
 ```BASH
 grunt test 
 ```
-
-## Throughput
-
-[![Throughput Graph](https://graphs.waffle.io/strangelightning/strangelightning/throughput.svg)](https://waffle.io/strangelightning/strangelightning/metrics)

@@ -1,8 +1,9 @@
 angular.module('thesisApp')
-  .directive('showcaseProduct', function (catalogFactory) {
+  .directive('showcaseProduct', function () {
     return {
       restrict: 'E',
       templateUrl: 'app/product/product.html',
+      controller: 'ProductCtrl',
       link: function (scope) {
         // hide the showcase by default
         $('.showcase-catalog').css('margin-right', '-1000px');
@@ -40,4 +41,4 @@ angular.module('thesisApp')
         }
       }
     }
-  })
+  });

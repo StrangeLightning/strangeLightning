@@ -16,12 +16,17 @@ angular.module('thesisApp')
             });
           }
 
-          $scope.catalogFactory.doSearch('', 0, coordinateFilters, 100, function(newProducts) {
-            for(var j = 0; j < newProducts.results.length; j++) {
-              var product = newProducts.results[j];
-              $scope.createObject(modelMap, product);
-            }
-          });
+          $scope.catalogFactory.doSearch('', 0, coordinateFilters, 100, false)
+            .success(function(results) {
+              var products = results.data.results;
+              for(var j = 0; j < products.length; j++) {
+                var product = products[j];
+                $scope.createObject(modelMap, product);
+              }
+            })
+            .error(function(err) {
+              console.log(err);
+            });
         };
 
       }],

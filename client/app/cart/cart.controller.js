@@ -8,28 +8,21 @@ angular.module('thesisApp')
       $scope.items = 0;
       // $scope.rem
       $scope.removeFromCart = function(product) {
-        if (cartFactory.amazonCart) {
-          cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
-            .success(function(data) {
-              if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
-                $scope.purchaseUrl = data.PurchaseURL[0];
-                $scope.subTotal = data.SubTotal[0].FormattedPrice[0];
-                $scope.items = data.CartItems[0].CartItem || [];
-              } else {
-                $scope.purchaseUrl = '';
-                $scope.subTotal = '$0';
-                $scope.items = [];
-              }
-            })
-            .error(function(err) {
-              console.log("ERROR removing Cart ", err)
-            });
-          // function(cartFactory.amazonRemoveProduct(product, crartFactory.amazonCart), function($scope.getItems()))()
-
-        }
-        // else {
-        //   console.log("item not in cart");
-        // }
+        cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
+          .success(function(data) {
+            if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
+              $scope.purchaseUrl = data.PurchaseURL[0];
+              $scope.subTotal = data.SubTotal[0].FormattedPrice[0];
+              $scope.items = data.CartItems[0].CartItem || [];
+            } else {
+              $scope.purchaseUrl = '';
+              $scope.subTotal = '$0';
+              $scope.items = [];
+            }
+          })
+          .error(function(err) {
+            console.log("ERROR removing Cart ", err)
+          });
       };
       $scope.emptyCart = function() {
         $scope.items = 0;

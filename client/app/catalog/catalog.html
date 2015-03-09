@@ -10,7 +10,10 @@
           <li ng-repeat="item in object.buckets | limitTo: clickLimit">
             <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
               <input type="checkbox" ng-model="checked[item.value]">
-              <span ng-if="facet !=='price'" ng-bind-html="item.value | trust" class="facetText"></span>
+
+              <span ng-if="facet !=='price' && item.value.length >= 20" ng-bind-html="item.value.substr(0,20) + '...' | trust" class="facetText"></span>
+              <span ng-if="facet !=='price' && item.value.length < 20" ng-bind-html="item.value | trust" class="facetText"></span>
+
               <span ng-if="facet ==='price'" class="facetText">{{item.value | currency:'$'}}</span>
               ({{item.count | number}})
             </a>
@@ -55,7 +58,7 @@
           <h4 ng-if="product.title.length < 75">{{product.title}}</h4>
 
           <p>Price: {{product.price | currency:"$"}}</p>
-          
+
           </p>
         </div>
         <a ng-click="addToCart(product.id)" class="btn btn-primary addToCart" role="button">Add to Cart</a>
