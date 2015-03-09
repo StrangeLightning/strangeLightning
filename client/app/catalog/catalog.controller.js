@@ -71,13 +71,13 @@ angular.module('thesisApp')
 
     $scope.doSearch = function (searchTerm, pageNumber, filterFields) {
       pageNumber = pageNumber || 0;
-      $scope.filterFields = filterFields || null;
+      $scope.filterFields = filterFields || [];
       $scope.searchTerm = searchTerm;
       catalogFactory.doSearch(searchTerm, pageNumber, $scope.filterFields, null, null, null)
         .success(function(results) {
           catalogFactory.newSearch = false;
           $rootScope.$broadcast('products-updated');
-          $scope.products = results.data;
+          $scope.products = catalogFactory.processFacets(results.data);
         })
         .error(function(err) {
           console.log(err);

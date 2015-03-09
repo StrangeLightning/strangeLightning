@@ -38,7 +38,8 @@ angular.module('thesisApp')
           .success(function(results) {
             catalogFactory.newSearch = false;
             $rootScope.$broadcast('products-updated');
-            $state.go('catalog', { products : results.data});
+            var productResults = catalogFactory.processFacets(results.data);
+            $state.go('catalog', { products : productResults});
           })
           .error(function(err) {
             console.log(err);
