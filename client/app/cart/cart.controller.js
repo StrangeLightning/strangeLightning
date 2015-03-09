@@ -10,7 +10,6 @@ angular.module('thesisApp')
       $scope.removeFromCart = function(product) {
         cartFactory.amazonRemoveProduct(product, cartFactory.amazonCart)
           .success(function(data) {
-            console.log("data from cat contriller", data)
             if (data.CartItems && data.CartItems[0] && data.CartItems[0].CartItem) {
               $scope.purchaseUrl = data.PurchaseURL[0];
               $scope.subTotal = data.SubTotal[0].FormattedPrice[0];

@@ -52,7 +52,6 @@ angular.module('thesisApp')
           console.log("ERROR REMOVING ITEM: ", err)
         });
 
-      console.log(items);
       return items;
     };
     //calculate price of items in local cart
@@ -94,7 +93,6 @@ angular.module('thesisApp')
 
       $http.post('/api/amazoncarts/get', {})
         .success(function(data) {
-          console.log('cart from AMAZON:  ', data);
           callback(data);
         })
         .error(function(err) {
@@ -128,10 +126,12 @@ angular.module('thesisApp')
           //WARNING: success only means that a call was made
           //due to the limit of API calls/minute it might
           //not update the cart so we run the check
-          if (data['Quantity'] < cart.amazonCart['Qty']) {
+          if (data['Quantity'] === undefined) {
+            //should be clearing cart
+            cart.amazonClearCart()
+          } else if (data['Quantity'] < cart.amazonCart['Qty']) {
             if (newquantity === 0) {
               //remove item from local cart
-              console.log('item being spliced')
               cart.amazonCart.items.splice(currentItem, 1)
             } else {
               cart.amazonCart.items[currentItem]['quantity'] --;
@@ -140,9 +140,6 @@ angular.module('thesisApp')
             cart.saveLocally(cart.amazonCart);
 
             //update local quantity
-          } else if (data['Quantity'] === undefined) {
-
-            cart.amazonClearCart()
           }
 
         })
@@ -154,8 +151,9 @@ angular.module('thesisApp')
 
     cart.amazonAddProduct = function(product, amazonCart) {
       var newquantity;
-      cart.amazonCart.items = cart.amazonCart.items || [];
-      //look for the product id of being updated item in the cart
+      cart.amazonCart = cart.amazonCart
+        // cart.amazonCart.items = cart.amazonCart.items;
+        //look for the product id of being updated item in the cart
       for (var i = 0; i < cart.amazonCart.items.length; i++) {
         if (product === cart.amazonCart.items[i]['productId']) {
           //add one to the quantity of that item
@@ -182,6 +180,7 @@ angular.module('thesisApp')
           //WARNING: success only means that a call was made
           //due to the limit of API calls/minute it might
           //not update the cart so we run the check
+
           if (data['Quantity'] > cart.amazonCart['Qty']) {
             if (updated === true) {
               cart.amazonCart.items[currentItem].quantity++;
@@ -197,13 +196,13 @@ angular.module('thesisApp')
           }
         })
         .error(function(err) {
-          console.log("ERROR creating Cart ", err)
+
+          console.log("ERROR adding data Cart ", err)
         });
 
     };
 
     cart.amazonCreateCart = function(itemId) {
-      console.log("CREATING CART")
       $http.post('/api/amazoncarts/create', {
           'id': itemId
         })
@@ -223,29 +222,23 @@ angular.module('thesisApp')
 
         })
         .error(function(err) {
-          console.log("ERROR creating Cart ", err)
+      console.log("ERROR creating Cart ", err)
         });
     };
 
     cart.amazonClearCart = function() {
-
       $http.post('/api/amazoncarts/clear', {})
         .success(function(data) {
           cart.amazonCart = {};
           cart.saveLocally(cart.amazonCart)
-            // $rootScope.$broadcast('changeCartQty');
         })
         .error(function(err) {
           console.log("ERROR creating Cart ", err)
         });
     };
     cart.saveLocally = function(Cart) {
-      console.log('event broadcasting to change qunality', Cart)
       localStorageService.set('Cart', Cart)
       $rootScope.$broadcast('changeCartQuantity')
     };
     return cart;
   }]);
-// cart.updatePils = function() {
-
-// }
