@@ -40,9 +40,11 @@ a:hover, a:visited {
 }
 
 .btn-primary,
-.btn-primary:active {
+.btn-primary:active,
+.btn-primary:focus {
   background-color: #999;
   border-color: #999;
+  color: #000;
 }
 
 @media (max-width: 797px) {
