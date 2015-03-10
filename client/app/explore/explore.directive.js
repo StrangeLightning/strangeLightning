@@ -29,6 +29,14 @@ angular.module('thesisApp')
             });
         };
 
+        // enable / disable moving in the 3D environment
+        $scope.freeze3Dcontrols = function(){
+          $scope.controls.enabled = false;
+        };
+
+        $scope.enable3Dcontrols = function(){
+          $scope.controls.enabled = true;
+        };
       }],
       link: function(scope) {
         var raycaster;
@@ -71,6 +79,8 @@ angular.module('thesisApp')
           renderer.shadowMapEnabled = true;
 
           renderer.domElement.addEventListener('mousedown', onDocumentMouseDown, false);
+          renderer.domElement.addEventListener('mouseenter', scope.enable3Dcontrols, false);
+          renderer.domElement.addEventListener('mouseleave', scope.freeze3Dcontrols, false);
 
           scene = new THREE.Scene();
 
@@ -86,9 +96,9 @@ angular.module('thesisApp')
           camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.5, 3000000);
           camera.position.set(2000, 750, 2000);
 
-          controls = new THREE.FirstPersonControls(camera, renderer.domElement);
-          controls.movementSpeed = 30000;
-          controls.lookSpeed = 0.1;
+          scope.controls = new THREE.FirstPersonControls(camera, renderer.domElement);
+          scope.controls.movementSpeed = 30000;
+          scope.controls.lookSpeed = 0.1;
 
           /******************************************/
           /*               Raycaster                */
@@ -330,45 +340,45 @@ angular.module('thesisApp')
           water.render();
 
           // Bounding box for navigation in all axes
-          if(controls.object.position.y > 80000) {
+          if(scope.controls.object.position.y > 80000) {
 
-            controls.moveForward = false;
-            controls.moveBackward = false;
-            controls.object.position.y -= 50;
+            scope.controls.moveForward = false;
+            scope.controls.moveBackward = false;
+            scope.controls.object.position.y -= 50;
 
-          } else if(controls.object.position.y < 100) {
+          } else if(scope.controls.object.position.y < 100) {
 
-            controls.moveForward = false;
-            controls.moveBackward = false;
-            controls.object.position.y += 2;
+            scope.controls.moveForward = false;
+            scope.controls.moveBackward = false;
+            scope.controls.object.position.y += 2;
 
-          } else if(controls.object.position.x > (WATER_WIDTH / 2 - 300000)) {
+          } else if(scope.controls.object.position.x > (WATER_WIDTH / 2 - 300000)) {
 
-            controls.moveForward = false;
-            controls.moveBackward = false;
-            controls.object.position.x -= 100;
+            scope.controls.moveForward = false;
+            scope.controls.moveBackward = false;
+            scope.controls.object.position.x -= 100;
 
-          } else if(controls.object.position.x < -(WATER_WIDTH / 2 - 300000)) {
+          } else if(scope.controls.object.position.x < -(WATER_WIDTH / 2 - 300000)) {
 
-            controls.moveForward = false;
-            controls.moveBackward = false;
-            controls.object.position.x += 100;
+            scope.controls.moveForward = false;
+            scope.controls.moveBackward = false;
+            scope.controls.object.position.x += 100;
 
-          } else if(controls.object.position.z > (WATER_WIDTH / 2 - 300000)) {
+          } else if(scope.controls.object.position.z > (WATER_WIDTH / 2 - 300000)) {
 
-            controls.moveForward = false;
-            controls.moveBackward = false;
-            controls.object.position.z -= 100;
+            scope.controls.moveForward = false;
+            scope.controls.moveBackward = false;
+            scope.controls.object.position.z -= 100;
 
-          } else if(controls.object.position.z < -(WATER_WIDTH / 2 - 300000)) {
+          } else if(scope.controls.object.position.z < -(WATER_WIDTH / 2 - 300000)) {
 
-            controls.moveForward = false;
-            controls.moveBackward = false;
-            controls.object.position.z += 100;
+            scope.controls.moveForward = false;
+            scope.controls.moveBackward = false;
+            scope.controls.object.position.z += 100;
 
           }
 
-          controls.update(clock.getDelta());
+          scope.controls.update(clock.getDelta());
           renderer.render(scene, camera);
         }
 
