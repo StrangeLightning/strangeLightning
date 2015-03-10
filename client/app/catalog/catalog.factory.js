@@ -3,7 +3,6 @@
 angular.module('thesisApp')
   .factory('catalogFactory', ['$location', '$http', '$rootScope', '$state', 'localStorageService', function($location, $http, $rootScope, $state, localStorageService) {
     var catalog = {};
-    catalog.newSearch = true;
     catalog.products = [];
 
     catalog.viewItem = function() {
