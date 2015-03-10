@@ -52,6 +52,11 @@ angular.module('thesisApp')
         });
       };
 
+      // have container slide in when clicking on cart menu option
+      $scope.showCatalog = function(){
+        $rootScope.$broadcast('showcaseCart');
+      };
+
       //when enter pressed, trigger search if no suggestions given
       $rootScope.$on('keypress', function(onEvent, keypressEvent) {
         var keyCode = keypressEvent.which;
