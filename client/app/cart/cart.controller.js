@@ -24,6 +24,7 @@ angular.module('thesisApp')
             console.log("ERROR removing Cart ", err)
           });
       };
+
       $scope.emptyCart = function() {
         $scope.items = 0;
         // Clears the subTotal from the total if the cart has been emptied.
@@ -42,13 +43,13 @@ angular.module('thesisApp')
           }
         });
       };
+
       $scope.clearCart = function() {
         $scope.items = 0;
         $scope.subTotal = "$0.00";
         cartFactory.amazonClearCart();
         $rootScope.$broadcast('clearCartQty');
       };
-
 
       /* Set height of window */
       var block = $(window).height();
