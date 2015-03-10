@@ -36,7 +36,6 @@ angular.module('thesisApp')
         $scope.searchTerm = searchTerm;
         catalogFactory.doSearch(searchTerm, pageNumber, null, null, true)
           .success(function(results) {
-            catalogFactory.newSearch = false;
             $rootScope.$broadcast('products-updated');
             var productResults = catalogFactory.processFacets(results.data);
             $state.go('catalog', { products : productResults});

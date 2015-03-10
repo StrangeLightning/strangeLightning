@@ -64,7 +64,7 @@ angular.module('thesisApp')
           container = document.createElement('div');
           container.id = 'three-world';
           document.body.appendChild(container);
-          renderer = new THREE.WebGLRenderer();
+          renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true });
           renderer.setPixelRatio(window.devicePixelRatio);
           renderer.setSize(window.innerWidth, window.innerHeight);
           // Show shadows
@@ -366,10 +366,6 @@ angular.module('thesisApp')
             controls.moveBackward = false;
             controls.object.position.z += 100;
 
-          } else {
-            controls.object.position.x;
-            controls.object.position.y;
-            controls.object.position.z;
           }
 
           controls.update(clock.getDelta());

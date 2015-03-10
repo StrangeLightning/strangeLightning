@@ -3,7 +3,17 @@ angular.module('thesisApp')
     return {
       restrict: 'E',
       templateUrl: 'app/product/product.html',
-      controller: 'ProductCtrl',
+      controller: function($rootScope, $scope, cartFactory){
+        // Call add product method from cart factor, and broadcast addToCart message to listeners
+        $scope.addToCart = function(product) {
+          $rootScope.$broadcast('addToCart');
+          if(cartFactory.amazonCart.items) {
+            cartFactory.amazonAddProduct(product, cartFactory.amazonCart)
+          } else {
+            cartFactory.amazonCreateCart(product);
+          }
+        };
+      },
       link: function (scope) {
         // hide the showcase by default
         $('.showcase-catalog').css('margin-right', '-1000px');
