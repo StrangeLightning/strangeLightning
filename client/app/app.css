@@ -59,12 +59,17 @@ a:hover, a:visited {
   color: #000;
 }
 
+.page-header {
+  border-bottom: 1px solid #000;
+}
+
 @media (max-width: 797px) {
   body {
     padding-left: 0px;
     padding-right: 0px;
   }
 }
+
 
 /**
  *
