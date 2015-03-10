@@ -2,7 +2,7 @@
   <h3 class="pull-left">Shopping Cart</h3>
   <br/>
   <br/>
-  <button type="button" class="close pull-left" aria-label="Close" ng-click="close()">
+  <button type="button" class="close pull-left" aria-label="Close" ng-click="closeCart()">
     <span aria-hidden="true">&times;</span>
   </button>
 
@@ -22,9 +22,9 @@
       <td>{{item.Title[0]}}</td>
       <td>{{item.ItemTotal[0].FormattedPrice[0]}}</td>
       <td>{{item.Quantity[0]}}</td>
-      <td>
-        <button type="button" ng-click="removeFromCart(item.ASIN[0])"  aria-label="Close" class="btn btn-md cartBtn">x
-          <!-- <span aria-hidden="true">&times;</span> -->
+      <td style="width:30px;" ng-click="removeFromCart(item.ASIN[0])">
+        <button type="button" class="close pull-left cart-btn" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
       </td>
     </tr>
@@ -42,8 +42,8 @@
       </button>
     </div>
     <div class="col-md-6">
-      <button ng-click="emptyCart()" type ="button" class="btn btn-lg cartBtn">
-        <a href="#">Empty Cart</a>
+      <button type ="button" class="btn btn-lg cartBtn" ng-click="emptyCart()">
+        Empty Cart
       </button>
     </div>
   </div>

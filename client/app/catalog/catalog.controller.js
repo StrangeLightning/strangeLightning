@@ -37,7 +37,6 @@ angular.module('thesisApp')
     $scope.viewItem = function (product) {
       catalogFactory.product = product;
       $rootScope.$broadcast('showcaseProduct', product);
-      //catalogFactory.viewItem(product);
     };
 
     $scope.getImage = function (product) {

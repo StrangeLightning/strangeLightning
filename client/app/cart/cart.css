@@ -2,8 +2,11 @@
   fieldset { display: table-cell; }
 }
 
-.cartBtn {
-  width: 100%;
+.cart-btn {
+  position: relative!important;
+  margin-left: -18px;
+  float: left!important;
+  margin-bottom: 10px;
 }
 
 .label {
@@ -28,11 +31,7 @@
 }
 
 #cart {
-  position: absolute;
   right: 0;
-  width: 40%;
-  height: 70%;
-  background-color: rgba(255,255,255,0.4);
   padding-right: 30px;
   padding-bottom: 100px;
   padding-left: 50px;
