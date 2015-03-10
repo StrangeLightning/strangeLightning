@@ -47,7 +47,7 @@
     <img ng-show="searchInProgress" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive"/>
 
     <div class="col-md-4" ng-repeat="product in products.results track by $index"
-         dir-paginate="product in products.results | itemsPerPage: 12 track by $index" total-items="products.totalCount">
+         dir-paginate="product in products.results | itemsPerPage: 9 track by $index" total-items="products.totalCount">
       <div class="thumbnail">
         <div class="imgBkg" ng-click="viewItem(product)">
           <img class="centerImg" src="{{ product.mediumImage }}"/>

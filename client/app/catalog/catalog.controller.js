@@ -75,7 +75,6 @@ angular.module('thesisApp')
       $scope.searchTerm = searchTerm;
       catalogFactory.doSearch(searchTerm, pageNumber, $scope.filterFields, null, null, null)
         .success(function(results) {
-          catalogFactory.newSearch = false;
           $rootScope.$broadcast('products-updated');
           $scope.products = catalogFactory.processFacets(results.data);
         })
@@ -123,13 +122,11 @@ angular.module('thesisApp')
 
     // Initialize
     // if products empty, then call search to show items
-    if (catalogFactory.newSearch) {
-      $scope.doSearch('', 0, null, null, null);
-    }
-
     if($stateParams.products.results){
       $scope.products = $stateParams.products;
       $scope.searchInProgress = false;
+    } else {
+      $scope.doSearch('', 0, null, null, null);
     }
 
     // listen for products-updated event, which is broadcasted from navbar.controller.js
